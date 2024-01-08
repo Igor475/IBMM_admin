@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+:root {
+    --fonte-menu-dropdown: #ffff;
+    --fundo: #f9f9f9;
+    --fundo-navbar: #f0f0f0;
+    --border-color: #ececec;
+    --fundo-ea: #eaeaea;
+    --fundo-profile: #f5f5f5;
+    --border-bottom: #e7e7e7;
+    --color-grey: #ddd;
+    --preto: #3f3f40;
+    --red: #e43535;
+    --preto-claro: #3b3b3b;
+    --preto-hover: #3a3a3a;
+    --black-sans: #4c4c4c;
+    --preto-cinza: #4c4c4c;
+    --preto-cinza-claro: #575757;
+    --black-grey: #707070;
+    --preto-light: #2e2e2e;
+    --close: #999;
+    --black-hover: #2d2d2d;
+    --preto-cinza-mais-claro: #8b8b8b;
+    --verde-musgo: #19A993;
+    --verde: #007f5f;
+    --btn-hover: #007356;
+    --verde-border: #109977b2;
+    --verde-light-border: #0CAF60;
+    --verde-claro: #2b9348;
+    --verde-mais-claro: #55a630;
+    --verde-lima: #80b918;
+    --verde-lima-claro: #aacc00;
+}
+
+body {
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.container-login {
+    max-width: 520px;
+    padding: 0 20px;
+    margin: 170px auto;
+    box-shadow: 0 5px 10px rgba(72, 72, 72, 0.13);
+}
+
+.wrapper {
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.wrapper .wrapper-login {
+    max-width: 100px;
+    height: auto;
+    margin: 35px auto;
+    padding-top: 20px;
+}
+
+.wrapper .wrapper-login .img_wrapper {
+    width: 100%;
+}
+
+.wrapper .login-form {
+    padding: 0px 25px 25px 25px;
+}
+
+.wrapper .login-form .row {
+    height: 45px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.wrapper .login-form .row .inputs-login {
+    width: 100%;
+    height: 100%;
+    padding-left: 60px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    outline: none;
+    font-size: 13px;
+    transition: all .3s ease;
+}
+
+.login-form .row .inputs-login:focus {
+    border-color: var(--black-hover);
+    box-shadow: 0 0 0 0.2rem rgba(45, 45, 45, 0.25);
+}
+
+.wrapper .login-form .row .btn-login {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.wrapper .login-form .row .icon-log {
+    position: absolute;
+    width: 47px;
+    font-size: 18px;
+    color: #fff;
+    height: 100%;
+    background-color: var(--black-hover);
+    border: 1px solid var(--black-hover);
+    display: flex;
+    border-radius: 5px 0 0 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .login-form .recovery {
+    margin: -10px 0 15px 0;
+    text-align: right;
+}
+
+.wrapper .login-form .recovery .btn-recovery-senha {
+    color: var(--verde);
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.wrapper .login-form .button .btn-login {
+    font-size: 16px;
+    font-weight: 500;
+    background-color: var(--black-hover);
+    border: 1px solid var(--black-hover);
+    cursor: pointer;
+    color: #fff;
+    transition: all .3s ease;
+}
+
+.wrapper .login-form .button .btn-login:hover {
+    background-color: var(--preto);
+}
+
+.btn-close {
+    font-size: 35px;
+    color: var(--close);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-close:hover {
+    color: var(--black-hover);
+}
