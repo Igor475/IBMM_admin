@@ -1,3 +1,6 @@
+<?php
+@session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -47,7 +50,7 @@
                         </div>
                         <span class="name_profile">
                             Olá<br/>
-                            <b>Igor Matos</b>
+                            <b><?php $_SESSION['nome_usuario'] ?></b>
                         </span>
                         <i class="bx bxs-chevron-down icon_profile_down"></i>
                     </div>
