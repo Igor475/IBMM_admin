@@ -1,5 +1,6 @@
 <?php
 @session_start();
+require_once("verificar.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -50,7 +51,7 @@
                         </div>
                         <span class="name_profile">
                             Olá<br/>
-                            <b><?php $_SESSION['nome_usuario'] ?></b>
+                            <b><?php echo $_SESSION['nome_usuario'] ?></b>
                         </span>
                         <i class="bx bxs-chevron-down icon_profile_down"></i>
                     </div>
@@ -69,7 +70,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="../logout.php">
                                 <i class='bxi bi-box-arrow-right icon'></i>
                                 Sair
                             </a>
