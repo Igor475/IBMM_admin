@@ -1,0 +1,225 @@
+/* ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
+.container-form {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 0;
+    margin: 0 15px;
+    background-color: var(--fonte-menu-dropdown);
+    box-sizing: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-form .header-add {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid var(--fundo-ea);
+    padding: 0 20px 10px 20px;
+    font-size: 20px;
+}
+
+.modal-content .modal-header .mod_close {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--close);
+    transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.modal-content .modal-header .mod_close:hover {
+    color: var(--black-hover);
+}
+
+.form-modal {
+    position: relative;
+    margin-top: 16px;
+    min-height: auto;
+    background-color: var(--fonte-menu-dropdown);
+}
+
+.details {
+    margin-top: 10px;
+}
+
+.details.ID {
+    margin-top: 20px;
+}
+
+.title-modal {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px 0;  
+    color: var(--preto);
+    margin-bottom: 8px;
+}
+
+.form-modal .title-modal {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: var(--preto);
+}
+
+.form-modal .fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.fields .input-field {
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 5px;
+    flex: 1 1 200px;
+}
+
+.input-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--preto-light);
+}
+
+.input-field input {
+    height: 40px;
+    margin: 8px 0;
+}
+
+.field_senha_1 {
+    flex: .8 !important;
+}
+
+.field_cpf_1 {
+    flex: .5 !important;
+}
+
+.input-field input {
+    outline: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--preto);
+    border-radius: 5px;
+    border: 1px solid var(--fundo-ea);
+    padding: 0 10px;
+    margin: 8px 0;
+    transition: all .3s ease;
+}
+
+.input-field input:focus {
+    border-color: var(--verde-light-border);
+    box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
+}
+
+.input-field input[type="date"] {
+    color: var(--black-grey);
+}
+
+.input-field input[type="date"]:valid {
+    color: var(--preto);
+}
+
+.area-buttons {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    grid-gap: 15px;
+}
+
+.btn-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 10px 7px 15px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: var(--fonte-menu-dropdown);
+    background-color: var(--verde);
+    transition: all .3s linear;
+    cursor: pointer;
+}
+
+.btn-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 15px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: var(--fonte-menu-dropdown);
+    background-color: var(--black-sans);
+    transition: all .3s linear;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn-close:hover {
+    background-color: var(--preto-hover);
+}
+
+.icon-btn-form {
+    margin-left: 8px;
+    font-size: 15px;
+}
+
+#msg_usu {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 750px) {
+
+    .form-modal {
+        overflow-y: scroll;
+        height: 400px;
+    }
+
+    .form-modal::-webkit-scrollbar {
+        display: none;
+    }
+
+    .fields .input-field {
+        width: calc(100% / 2 - 15px);
+    }
+
+    .field_senha_1 {
+        flex: 1 !important;
+    }
+    
+    .field_cpf_1 {
+        flex: 1 !important;
+    }
+
+    .input-field input {
+        height: 50px;
+        font-size: 14px;
+    }
+
+    /*============================================= BOTÕES DAS MODAIS =========================================*/
+    .btn-close {
+        padding: 10px 18px !important;
+    }
+
+    .btn-add {
+        padding: 10px 18px !important;
+    }
+    /*============================================= FIM BOTÕES DAS MODAIS =========================================*/
+}
+
+@media (max-width: 550px) {
+    .fields .input-field {
+        width: 100%
+    }
+}
+
+/* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */

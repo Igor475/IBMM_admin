@@ -1,20 +1,41 @@
 <?php
 @session_start();
 require_once("verificar.php");
+require_once("../conexao.php");
+
+$id_usuario = @$_SESSION['id_usuario'];
+
+$query = $pdo->query("SELECT *FROM usuarios WHERE id = '$id_usuario'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$nome_usu = $res[0]['nome'];
+$email_usu = $res[0]['email'];
+$cpf_usu = $res[0]['cpf'];
+$senha_usu = $res[0]['senha'];
+$nivel_usu = $res[0]['nivel'];
+
+
+//MENU DO PAINEL 
+$pag = @$_GET['pag'];
+$menu1 = "pastores_presidentes";
+$menu2 = "usuarios";
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logo-IBMM-preta.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap_style.css">
     <link rel="stylesheet" type="text/css" href="css/menu_action_table.css">
+    <link rel="stylesheet" type="text/css" href="css/styles_modais.css">
     <title>Painel Administrativo</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <script src="js/script.js" defer></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="grid-container">
@@ -51,16 +72,16 @@ require_once("verificar.php");
                         </div>
                         <span class="name_profile">
                             Olá<br/>
-                            <b><?php echo $_SESSION['nome_usuario'] ?></b>
+                            <b><?php echo @$nome_usu ?></b>
                         </span>
                         <i class="bx bxs-chevron-down icon_profile_down"></i>
                     </div>
 
                     <ul class="profile-link">
                         <li>
-                            <a href="#">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class='bi bi-person-gear icon'></i>
-                                Perfil
+                                Editar Dados
                             </a>
                         </li>
                         <li>
@@ -103,7 +124,7 @@ require_once("verificar.php");
                         <li>
                             <a href="#" class="font_main_index"><i class='bi bi-person-plus icon'></i> Pessoas <i class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
-                                <li><a href="#">Pastor Presidente</a></li>
+                                <li><a href="index.php?pag=<?php echo $menu1 ?>">Pastor Presidente</a></li>
                                 <li><a href="#">Pastores</a></li>
                                 <li><a href="#">Tesoureiros</a></li>
                                 <li><a href="#">Secretários(as)</a></li>
@@ -217,5 +238,120 @@ require_once("verificar.php");
         </aside>
         <!----------------------------------- FIM ASIDE --------------------------------------->
 
+        <main id="container">
+            <?php
+              require_once($pag.'.php');
+            ?>
+        </main>
+
 </body>
 </html>
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="Cadastro">Editar Dados</h3>
+          <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+        </div>
+        <form id="form-usu" method="post">
+            <div class="modal-body">
+                <div action="#" class="form-modal">
+                    <div class="form first">
+                        <div class="details personal">
+                            <span class="title-modal">Personalizar detalhes</span>
+        
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Nome</label>
+                                    <input type="text" name="nome_usu" id="nome_usu" placeholder="Insira o Nome" value="<?php echo $nome_usu ?>" required>
+                                </div>
+            
+                                <div class="input-field field_cpf_1">
+                                    <label>CPF</label>
+                                    <input type="text" name="cpf_usu" id="cpf_usu" placeholder="Insira o CPF" value="<?php echo $cpf_usu ?>" required>
+                                </div>
+            
+                                <div class="input-field">
+                                    <label>Email</label>
+                                    <input type="email" name="email_usu" id="email_usu" placeholder="Insira o Email" value="<?php echo $email_usu ?>" required>
+                                </div>
+            
+                                <div class="input-field field_senha_1">
+                                    <label>Senha</label>
+                                    <input type="text" name="senha_usu" id="senha_usu" placeholder="Insira a Senha" value="<?php echo $senha_usu ?>" required>
+                                </div>
+                                
+                                <input type="hidden" name="id_usu" value="<?php echo $id_usuario ?>">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="msg_usu"></div>
+            <div class="modal-footer">
+                <div class="area-buttons">
+                    <button id="btn-fechar-usu" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+
+                    <button type="submit" class="btn-add">
+                        Editar
+                        <i class="bi bi-pencil-square icon-btn-form"></i>
+                    </button>
+                </div>
+            </div>
+          </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="js/mascaras.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    $("#form-usu").submit(function () {
+	event.preventDefault();
+	var formData = new FormData(this);
+
+	$.ajax({
+		url: "editar-dados.php",
+		type: 'POST',
+		data: formData,
+
+		success: function (mensagem) {
+            $('#msg-usu').text('');
+            $('#msg_usu').removeClass()
+            if (mensagem.trim() == "Salvo com Sucesso") {
+
+                    $('#btn-fechar-usu').click();
+                    window.location="index.php";
+                    
+                } else {
+
+                	$('#msg_usu').addClass('text-danger')
+                    $('#msg_usu').text(mensagem)
+                }
+
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            
+        });
+
+});
+</script>
