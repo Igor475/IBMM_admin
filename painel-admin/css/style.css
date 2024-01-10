@@ -44,6 +44,32 @@
     --verde-lima-claro: #aacc00;
 }
 
+
+/* BOTÕES DE ADICIONAR NOVO REGISTROS NAS TABELAS DE TODAS AS PÁGINAS */
+.buttons_register {
+    margin-top: 50px;
+}
+
+.button_tables_register {
+    padding: 10px 12px;
+    background-color: var(--verde);
+    border-radius: 5px;
+    color: var(--fonte-menu-dropdown);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all ease .3s;
+}
+
+.button_tables_register:hover{
+    filter: brightness(90%);
+}
+
+.icon_tables_registers {
+    font-size: 16px;
+    margin-left: 5px;
+}
+/* FIM BOTÕES DE ADICIONAR NOVO REGISTROS NAS TABELAS DE TODAS AS PÁGINAS */
+
 /*============================= GRID CONTAINER ================================*/
 
 .grid-container {

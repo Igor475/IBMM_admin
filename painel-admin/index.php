@@ -16,9 +16,9 @@ $nivel_usu = $res[0]['nivel'];
 
 //MENU DO PAINEL 
 $pag = @$_GET['pag'];
-$menu1 = "pastores_presidentes";
-$menu2 = "usuarios";
-
+if($pag == "") {
+    $pag = 'home';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -79,7 +79,7 @@ $menu2 = "usuarios";
 
                     <ul class="profile-link">
                         <li>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalPerfil">
                                 <i class='bi bi-person-gear icon'></i>
                                 Editar Dados
                             </a>
@@ -103,7 +103,7 @@ $menu2 = "usuarios";
         <!----------------------------------- FIM HEADER --------------------------------------->
 
         <!----------------------------------- ASIDE --------------------------------------->
-        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <aside class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
                 <span type="button" class="bi bi-x icon_close_side" data-bs-dismiss="offcanvas" aria-label="Close"></span>
@@ -118,13 +118,13 @@ $menu2 = "usuarios";
                     </div>
                     <ul class="side-menu">
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-house-door icon'></i>Home</a>
+                            <a href="index.php" class="font_main_index"><i class='bi bi-house-door icon'></i>Home</a>
                         </li>
                         <li class="divider" data-text="Principal">Principal</li>
                         <li>
                             <a href="#" class="font_main_index"><i class='bi bi-person-plus icon'></i> Pessoas <i class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
-                                <li><a href="index.php?pag=<?php echo $menu1 ?>">Pastor Presidente</a></li>
+                                <li><a href="index.php?pag=pastores_presidentes">Pastor Presidente</a></li>
                                 <li><a href="#">Pastores</a></li>
                                 <li><a href="#">Tesoureiros</a></li>
                                 <li><a href="#">Secretários(as)</a></li>
@@ -170,79 +170,15 @@ $menu2 = "usuarios";
                     </ul>
                 </div>
             </div>
-        </div>
-        <aside id="sidebar">
-            <div class="sidebar-title">
-                <span class="bx bx-x icon_close_side" onclick="closeSidebar()"></span>
-            </div>
-            <div class="sidebar_area">
-                <div class="sidebar_sys">
-                    <a class="brand">
-                        <img class="img_logo" src="logo-IBMM-preta.png" alt="" title="Igreja Batista Missão Multiplicar">
-                    </a>
-                    <h4 class="title_sys">Sistema <span class="">IBMM</span></h4>
-                </div>
-                <ul class="side-menu">
-                    <li>
-                        <a href="#" class="active"><i class='bx bxs-home icon'></i>Home</a>
-                    </li>
-                    <li class="divider" data-text="Principal">Principal</li>
-                    <li>
-                        <a href="#"><i class='bx bxs-user icon'></i> Pessoas <i class='bx bx-chevron-right icon-right'></i></a>
-                        <ul class="side-dropdown">
-                            <li><a href="#">Pastor Presidente</a></li>
-                            <li><a href="#">Pastores</a></li>
-                            <li><a href="#">Tesoureiros</a></li>
-                            <li><a href="#">Secretários(as)</a></li>
-                            <li><a href="#">Usuários</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class='bx bx-pencil icon'></i> Cadastros <i class='bx bx-chevron-right icon-right'></i></a>
-                        <ul class="side-dropdown">
-                            <li><a href="#">Igrejas</a></li>
-                            <li><a href="#">Ministérios</a></li>
-                            <li><a href="#">Frequências (Contas)</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class='bx bx-folder icon'></i> Consultas <i class='bx bx-chevron-right icon-right'></i></a>
-                        <ul class="side-dropdown">
-                            <li><a href="#">Anexos / Arquivos</a></li>
-                            <li><a href="#">Patrimônios</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class='bx bxs-file-pdf icon' ></i> Relatórios <i class='bx bx-chevron-right icon-right'></i></a>
-                        <ul class="side-dropdown">
-                            <li><a href="#">Membros</a></li>
-                            <li><a href="#">Patrimônios</a></li>
-                            <li><a href="#">Financeiros</a></li>
-                            <li><a href="#">Auditoria e Logs</a></li>
-                            <li><a href="#">Tranferência de Membros</a></li>
-                            <li><a href="#">Fechamentos Mensais</a></li>
-                        </ul>
-                    </li>
-                    <li class="divider" data-text="Outros">Outros</li>
-                    <li>
-                        <a href="#"><i class='bx bxs-bell icon'></i>Notificações</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class='bx bx-cog icon'></i>Configuração Geral</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class='bx bxs-data icon'></i>Backup Banco</a>
-                    </li>
-                </ul>
-            </div>
         </aside>
         <!----------------------------------- FIM ASIDE --------------------------------------->
 
-        <main id="container">
-            <?php
-              require_once($pag.'.php');
+        <div class="container">
+            <?php 
+                require_once($pag.'.php');
             ?>
-        </main>
+        </div>
+    </div>
 
 </body>
 </html>
@@ -251,7 +187,7 @@ $menu2 = "usuarios";
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalPerfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -312,7 +248,7 @@ $menu2 = "usuarios";
 
 
 
-<script type="text/javascript" src="js/mascaras.js"></script>
+<script src="../js/mascaras.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 
