@@ -24,7 +24,7 @@
     --font-color: #777777;
     --preto: #3f3f40;
     --text-error-color: #721c24;
-    --btn-remove: #df0026;
+    --btn-remove: #f92536;
     --background-message-error: #f8d7da;
     --preto-claro: #3b3b3b;
     --preto-hover: #3a3a3a;
@@ -46,6 +46,11 @@
     --verde-mais-claro: #55a630;
     --verde-lima: #80b918;
     --verde-lima-claro: #aacc00;
+}
+
+::-webkit-scrollbar-track {
+    background: #888;
+    width: 2px;
 }
 
 
@@ -395,11 +400,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 1.2rem;
+    padding-right: 1.1rem;
+    padding: 5px;
     font-size: 13px;
     border: 1px solid var(--fundo);
     border-radius: 50px;
-    width: 160px;
+    width: 210px;
     cursor: pointer;
     transition: box-shadow 0.2s, background-color 0.2s;
 }
@@ -426,6 +432,8 @@
 
 .profile-dropdown .profile-dropdown-btn .name_profile b {
     color: var(--verde-light-border);
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .profile-dropdown .profile-dropdown-btn .icon_profile_down {
@@ -613,7 +621,7 @@
 /*============================== TABELA ==================================*/
 
 .table-container {
-    margin: 90px 0;
+    margin: 40px 0;
 }
 
 .content-table {
@@ -649,7 +657,7 @@
     font-weight: 400;
     color: #4F4F4F;
     /* background-color: #ffff; */
-    padding: 8px;
+    padding: 10px;
     text-align: center;
     border: 1px solid var(--border-table);
     position: relative;
@@ -871,7 +879,7 @@
 
     .header {
         padding: 0 20px 0 20px;
-        height: 55px;
+        height: 75px;
     }
 
     .nav-link {

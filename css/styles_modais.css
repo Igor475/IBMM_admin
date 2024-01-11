@@ -59,6 +59,11 @@
     color: var(--black-hover);
 }
 
+#nome-excluido {
+    color: var(--btn-remove);
+    font-weight: 600;
+}
+
 .form-modal .title-modal {
     display: block;
     margin-bottom: 8px;
