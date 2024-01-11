@@ -35,13 +35,8 @@
 
 .form-modal {
     position: relative;
-    margin-top: 16px;
     min-height: auto;
     background-color: var(--fonte-menu-dropdown);
-}
-
-.details {
-    margin-top: 10px;
 }
 
 .details.ID {
@@ -54,6 +49,14 @@
     margin: 6px 0;  
     color: var(--preto);
     margin-bottom: 8px;
+}
+
+.Cadastro {
+    color: var(--black-hover);
+}
+
+.text_excluir {
+    color: var(--black-hover);
 }
 
 .form-modal .title-modal {
@@ -91,7 +94,7 @@
     margin: 8px 0;
 }
 
-.field_senha_1 {
+.field_area_1 {
     flex: .8 !important;
 }
 
@@ -145,6 +148,20 @@
     cursor: pointer;
 }
 
+.btn-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 10px 7px 15px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: var(--fonte-menu-dropdown);
+    background-color: var(--btn-remove);
+    transition: all .3s linear;
+    cursor: pointer;
+}
+
 .btn-close {
     display: flex;
     align-items: center;
@@ -172,9 +189,15 @@
     font-size: 15px;
 }
 
-#msg_usu {
+.message_error {
     text-align: center;
-    margin-bottom: 10px;
+    margin: 15px auto;
+    color: var(--text-error-color);
+    background-color: var(--background-message-error);
+    border-radius: 4px;
+    border: 1px solid var(--text-error-color);
+    padding: 10px;
+    width: 91.8%;
 }
 
 @media (max-width: 750px) {
@@ -192,7 +215,7 @@
         width: calc(100% / 2 - 15px);
     }
 
-    .field_senha_1 {
+    .field_area_1 {
         flex: 1 !important;
     }
     
@@ -219,6 +242,10 @@
 @media (max-width: 550px) {
     .fields .input-field {
         width: 100%
+    }
+
+    .fields .input-field {
+        flex: 1 1 280px;
     }
 }
 

@@ -20,8 +20,12 @@
     --fundo-profile: #f5f5f5;
     --border-bottom: #e7e7e7;
     --color-grey: #ddd;
+    --border-table: #ececec;
+    --font-color: #777777;
     --preto: #3f3f40;
-    --red: #e43535;
+    --text-error-color: #721c24;
+    --btn-remove: #df0026;
+    --background-message-error: #f8d7da;
     --preto-claro: #3b3b3b;
     --preto-hover: #3a3a3a;
     --black-sans: #4c4c4c;
@@ -53,7 +57,7 @@
 .button_tables_register {
     padding: 10px 12px;
     background-color: var(--verde);
-    border-radius: 5px;
+    border-radius: 4px;
     color: var(--fonte-menu-dropdown);
     font-size: 14px;
     font-weight: 500;
@@ -61,7 +65,7 @@
 }
 
 .button_tables_register:hover{
-    filter: brightness(90%);
+    background-color: var(--btn-hover);
 }
 
 .icon_tables_registers {
@@ -90,7 +94,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px 0 30px;
+    padding: 0 40px 0 40px;
     z-index: 10;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.07);
 }
@@ -126,7 +130,7 @@
     -webkit-transition: all 0.4s;
 }
 
-#container {
+#container_painel {
     grid-area: main;
     background-color: var(--fonte-menu-dropdown);
     padding: 20px 20px;
@@ -473,39 +477,39 @@
 
 /*=============================== MAIN CONTAINER ===============================*/
 
-#container {
+#container_painel {
     width: 100%;
-    padding: 24px 20px 20px 40px;
+    padding: 24px 40px 20px 40px;
 }
 
-#container .title {
+#container_painel .title {
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 10px;
     color: var(--preto);
 }
 
-#container .breadcrumbs {
+#container_painel .breadcrumbs {
     display: flex;
     grid-gap: 6px;
 }
 
-#container .breadcrumbs li, 
-#container .breadcrumbs li a {
+#container_painel .breadcrumbs li, 
+#container_painel .breadcrumbs li a {
     font-size: 14px;
 }
 
-#container .breadcrumbs li a {
+#container_painel .breadcrumbs li a {
     color: var(--verde-claro);
 }
 
-#container .breadcrumbs li a.active,
-#container .breadcrumbs li.divider {
+#container_painel .breadcrumbs li a.active,
+#container_painel .breadcrumbs li.divider {
     color: var(--preto-cinza);
     pointer-events: none;
 }
 
-#container .info-data {
+#container_painel .info-data {
     margin-top: 36px;
     margin-bottom: 66px;
     display: grid;
@@ -513,7 +517,7 @@
     grid-gap: 20px;
 }
 
-#container .info-data .card {
+#container_painel .info-data .card {
     padding: 25px 20px;
     border-radius: 5px;
     border: 1px solid var(--border-color);
@@ -522,17 +526,17 @@
     position: relative;
 }
 
-#container .card .head {
+#container_painel .card .head {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#container .card .head .icon {
+#container_painel .card .head .icon {
     width: 50px;
 }
 
-#container .card .head .number {
+#container_painel .card .head .number {
     font-size: 30px;
     display: flex;
     justify-content: end;
@@ -540,25 +544,25 @@
     color: var(--verde);
 }
 
-#container .card .head p {
+#container_painel .card .head p {
     font-size: 15px;
     color: var(--preto-cinza);
 }
 
-#container .churchs {
+#container_painel .churchs {
     font-size: 17px;
     color: #333;
     margin-bottom: 20px;
     font-weight: 600;
 }
 
-#container .widget-church {
+#container_painel .widget-church {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     grid-gap: 20px;
 }
 
-#container .card-church {
+#container_painel .card-church {
     padding: 25px 20px;
     border-radius: 5px;
     border: 1px solid var(--border-color);
@@ -568,39 +572,200 @@
     border-left: 5px solid var(--verde);
 }
 
-#container .card-church .head-church {
+#container_painel .card-church .head-church {
     display: flex;
     justify-content: space-between;
     align-items: center;
     grid-gap: 30px;
 }
 
-#container .card-church .head-church  .info-church .name-brazil {
+#container_painel .card-church .head-church  .info-church .name-brazil {
     color: var(--verde);
     font-size: 15px;
 }
 
-#container .card-church .head-church .more-info .image-church {
+#container_painel .card-church .head-church .more-info .image-church {
     max-width: 80px;
     margin: 0 auto;
 }
 
-#container .card-church .head-church .more-info .image-church .img_card {
+#container_painel .card-church .head-church .more-info .image-church .img_card {
     width: 100%;
 }
 
-#container .card-church .head-church  .info-church .name-sheperd {
+#container_painel .card-church .head-church  .info-church .name-sheperd {
     color: var(--preto-cinza);
     font-size: 15px;
 }
 
-#container .card-church .head-church .text_member {
+#container_painel .card-church .head-church .text_member {
     color: var(--verde);
     font-size: 15px;
     text-align: center;
 }
 
 /*=============================== MAIN CONTAINER ===============================*/
+
+
+
+
+
+/*============================== TABELA ==================================*/
+
+.table-container {
+    margin: 90px 0;
+}
+
+.content-table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.content-table .thead-tabs {
+    background-color: #007f5f;
+    border-radius: 5px 5px 5px 0;
+}
+
+.content-table .thead-tabs .column-table .th-table {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.35px;
+    color: #ffff;
+    opacity: 1;
+    padding: 15px;
+    vertical-align: top;
+    border: 1px solid #028466cc;
+}
+
+.content-table .body-table .column-body:hover {
+    background-color: #ccc !important;
+    transition: all .3s ease;
+}
+
+.content-table .body-table .column-body .td-table {
+    font-size: 14px;
+    letter-spacing: 0.35px;
+    font-weight: 400;
+    color: #4F4F4F;
+    /* background-color: #ffff; */
+    padding: 8px;
+    text-align: center;
+    border: 1px solid var(--border-table);
+    position: relative;
+}
+
+.content-table .thead-tabs .column-table .first_table {
+    width: 120px;
+}
+
+.content-table .thead-tabs .column-table .last_table {
+    width: 120px;
+}
+
+.content-table .body-table .column-body:nth-child(2n + 1) {
+    background-color: var(--fundo);
+}
+
+.content-table .body-table .column-body .td-table .profile_table {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.list_dots {
+    position: relative;
+}
+
+.content-table .body-table .column-body .td-table .area_icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-table .body-table .column-body .td-table .actions_tab {
+    cursor: pointer;
+    background-color: var(--verde-light-border);
+    color: var(--fonte-menu-dropdown);
+    padding: 7px 10px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 5px;
+    transition: all .3s ease;
+}
+
+.content-table .body-table .column-body .td-table .actions_tab .text_tab_act {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.content-table .body-table .column-body .td-table .list_dots .area-icons .actions_tab .actions_dots::before {
+    font-size: 2px;
+    color: var(--preto);
+    transition: all .3s ease;
+}
+
+.content-table .body-table .column-body .td-table .area-icons .actions_dots:hover {
+    color: var(--preto-cinza-claro);
+    background-color: none;
+}
+
+.content-table .body-table .column-body .td-table .list_dots .actions-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 54%;
+    background: var(--fonte-menu-dropdown);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    width: 180px;
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+    transition: all .3s ease;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.content-table .body-table .column-body .td-table .actions-dropdown li .link_dots {
+    font-size: 13px;
+    color: var(--preto);
+    letter-spacing: .5px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    transition: all .3s ease;
+}
+
+.content-table .body-table .column-body .td-table .actions-dropdown li .link_dots:hover {
+    background-color: var(--border-color);
+    color: var(--verde-light-border);
+}
+
+.content-table .body-table .column-body .td-table .actions-dropdown li .link_dots .icon_dots {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.content-table .body-table .column-body .td-table .list_dots .actions-dropdown.ShowList {
+    opacity: 1;
+    pointer-events: all;
+    top: calc(100% - 20px);
+}
+
+.icon {
+    margin-right: 5px;
+    font-size: 23px;
+}
+
+/*============================== FIM TABELA ==================================*/
+
+
+
+
+
+
 
 
 
@@ -718,7 +883,7 @@
 
     /*=================== CONTAINER DOS CARDS ====================*/
 
-    #container { 
+    #container_painel { 
        padding: 20px 20px 20px 20px;
     }
 
@@ -751,5 +916,58 @@
 @media screen and (max-width: 576px) {
     .header-left {
         display: none;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .content-table .body-table .column-body .td-table {
+        display: block;
+        padding: 10px 0;
+    }
+
+    .content-table .body-table .column-body .td-table:last-child {
+        padding: 10px 0;
+    }
+
+    /* ========================================= BOTÃO DE AÇÃO DA TABELA ==================================== */
+    .btn-secondary {
+        padding: 9px 17px !important;
+    }
+    /* ========================================= FIM BOTÃO DE AÇÃO DA TABELA ==================================== */
+
+    /* ========================================= ESPAÇAMENTO DO MEU DROPDOWN DAS AÇÕES ==================================== */
+    .dropdown-item {
+        padding: 10px 15px !important;
+    } 
+    /* ========================================= FIM ESPAÇAMENTO DO MEU DROPDOWN DAS AÇÕES ==================================== */
+
+    .content-table .body-table .column-body .td-table .list_dots .actions-dropdown {
+        right: 23%;
+    }
+
+    .content-table .body-table .column-body .td-table .area-icons .actions_dots {
+        rotate: 90deg;
+        font-size: 30px;
+    }
+
+    .content-table .body-table .column-body .td-table .actions-dropdown li .link_dots {
+        font-size: 11.5px;
+        font-weight: 500;
+        color: var(--preto);
+    }
+
+    .content-table .body-table .column-body .td-table .list_dots .actions-dropdown {
+        top: calc(100% + 20px);
+    }
+
+    .content-table .body-table .column-body .td-table .list_dots .actions-dropdown.ShowList {
+        opacity: 1;
+        pointer-events: all;
+        top: 100%
+    }
+
+    .content-table .body-table .column-body .td-table .area_icons {
+        margin: 5px 0;
     }
 }
