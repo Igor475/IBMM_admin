@@ -263,7 +263,7 @@ table.dataTable thead th,
 table.dataTable thead td,
 table.dataTable tfoot th,
 table.dataTable tfoot td {
-  text-align: left;
+  /*text-align: left;*/
 }
 table.dataTable thead th.dt-head-left,
 table.dataTable thead td.dt-head-left,
@@ -320,9 +320,9 @@ table.dataTable {
   margin: 0 auto;
   clear: both;
   border-spacing: 0;
-  -webkit-border-radius: 10px;
+  /*-webkit-border-radius: 10px;
        -moz-border-radius: 10px;
-            border-radius: 10px !important;
+            border-radius: 10px !important;*/
 }
 table.dataTable thead th,
 table.dataTable tfoot th {
@@ -685,6 +685,9 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_paginate {
   color: var(--preto-light);
   margin-bottom: 20px;
+}
+.dataTables_wrapper .dataTables_length:first-child {
+  margin-top: 30px;
 }
 .dataTables_wrapper .dataTables_scroll {
   clear: both;

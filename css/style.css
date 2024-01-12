@@ -405,7 +405,7 @@
     font-size: 13px;
     border: 1px solid var(--fundo);
     border-radius: 50px;
-    width: 210px;
+    width: 170px;
     cursor: pointer;
     transition: box-shadow 0.2s, background-color 0.2s;
 }
@@ -643,7 +643,19 @@
     opacity: 1;
     padding: 15px;
     vertical-align: top;
-    border: 1px solid #028466cc;
+    /* border: 1px solid #028466cc; */
+} 
+
+#radius-name {
+    border-radius: 5px 0 0 0;
+}
+
+#radius-action {
+    border-radius: 0 5px 0 0;
+}
+
+td.td-table#radius-column-name {
+    border-radius: 0 0 0 5px;
 }
 
 .content-table .body-table .column-body:hover {
@@ -657,7 +669,7 @@
     font-weight: 400;
     color: #4F4F4F;
     /* background-color: #ffff; */
-    padding: 10px;
+    padding: 7px;
     text-align: center;
     border: 1px solid var(--border-table);
     position: relative;

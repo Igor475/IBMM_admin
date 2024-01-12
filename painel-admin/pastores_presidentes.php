@@ -22,12 +22,12 @@ $pagina = 'pastores_presidentes';
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
-                        <th class="th-table">NOME</th>
+                        <th class="th-table" id="radius-name">NOME</th>
                         <th class="th-table">CPF</th>
                         <th class="th-table">EMAIL</th>
                         <th class="th-table">TELEFONE</th>
                         <th class="th-table">ENDEREÇO</th>
-                        <th class="th-table last_table">AÇÕES</th>
+                        <th class="th-table last_table" id="radius-action">AÇÕES</th>
                     </tr>
                 </thead>
                 <tbody class="body-table">
@@ -44,7 +44,7 @@ $pagina = 'pastores_presidentes';
                         $id = $res[$i]['id'];
                         ?>
                         <tr class="column-body">
-                            <td data-label="Nome" class="td-table">
+                            <td data-label="Nome" class="td-table" id="radius-column-name">
                                 <?php echo $nome ?>
                             </td>
                             <td data-label="CPF" class="td-table">
@@ -183,7 +183,7 @@ $pagina = 'pastores_presidentes';
                         <div class="form first">
                             <div class="details personal">
 
-                                <span class="text_excluir">Deseja mesmo excluir Este Registro
+                                <span class="text_excluir">Deseja mesmo excluir este Registro
                                     <span id="nome-excluido"></span>?
 
                                     <div id="mensagem-excluir"></div>
