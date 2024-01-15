@@ -33,6 +33,7 @@
     --preto-cinza-claro: #575757;
     --black-grey: #707070;
     --preto-light: #2e2e2e;
+    --preto-text: #151515;
     --close: #999;
     --black-hover: #2d2d2d;
     --preto-cinza-mais-claro: #8b8b8b;
@@ -625,7 +626,7 @@
 }
 
 .content-table {
-    width: 100%;
+    width: 100% !important;
     margin: 0 auto;
     border-collapse: collapse;
 }
@@ -646,7 +647,7 @@
     /* border: 1px solid #028466cc; */
 } 
 
-#radius-name {
+#radius-foto {
     border-radius: 5px 0 0 0;
 }
 
@@ -654,8 +655,12 @@
     border-radius: 0 5px 0 0;
 }
 
-td.td-table#radius-column-name {
+td.td-table#radius-column-foto:last-child {
     border-radius: 0 0 0 5px;
+}
+
+td.td-table#radius-column-action:last-child {
+    border-radius: 0 0 5px 0;
 }
 
 .content-table .body-table .column-body:hover {
@@ -671,8 +676,13 @@ td.td-table#radius-column-name {
     /* background-color: #ffff; */
     padding: 7px;
     text-align: center;
-    border: 1px solid var(--border-table);
+    border-left: 1px solid var(--border-table);
+    border-bottom: 1px solid var(--border-table);
     position: relative;
+}
+
+.content-table .body-table .column-body .td-table:first-child {
+    border-left: none;
 }
 
 .content-table .thead-tabs .column-table .first_table {
@@ -688,8 +698,8 @@ td.td-table#radius-column-name {
 }
 
 .content-table .body-table .column-body .td-table .profile_table {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
@@ -930,6 +940,12 @@ td.td-table#radius-column-name {
     .nav-link {
         display: none !important;
     }
+
+    /*=================== ESCONDER CAMPOS DA TABELA NO MOBILE ====================*/
+    .column-hidden {
+        display: none !important;
+    }
+    /*=================== FIM ESCONDER CAMPOS DA TABELA NO MOBILE ====================*/
 }
 
 

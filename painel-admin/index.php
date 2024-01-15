@@ -12,6 +12,8 @@ $email_usu = $res[0]['email'];
 $cpf_usu = $res[0]['cpf'];
 $senha_usu = $res[0]['senha'];
 $nivel_usu = $res[0]['nivel'];
+$foto_usu = $res[0]['foto'];
+
 
 
 //MENU DO PAINEL 
@@ -73,7 +75,7 @@ if ($pag == "") {
                 <div class="profile-dropdown">
                     <div class="profile-dropdown-btn" onclick="toggle()">
                         <div class="profile-img">
-                            <img class="img_profile" src="images/eu.jpg" alt="">
+                            <img class="img_profile" src="../img/membros/<?php echo $foto_usu ?>" alt="">
                         </div>
                         <span class="name_profile">
                             Olá<br />
@@ -239,6 +241,17 @@ if ($pag == "") {
                                         <label>Senha</label>
                                         <input type="text" name="senha_usu" id="senha_usu" placeholder="Insira a Senha"
                                             value="<?php echo $senha_usu ?>" required>
+                                    </div>
+
+                                    <div class="area_photo">
+                                        <div class="area_photo_flex">
+                                            <label>Foto</label>
+                                            <input type="file" class="input_file" id="imagem-usu"
+                                            name="imagem" onChange="carregarImg2();">
+                                        </div>
+                                        <div class="divImg">
+                                            <img class="photo_file" id="target-usu" src="../img/membros/<?php echo $foto_usu ?>" alt="">
+                                        </div>
                                     </div>
 
                                     <input type="hidden" name="id_usu" value="<?php echo $id_usuario ?>">

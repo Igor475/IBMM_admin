@@ -25,7 +25,7 @@ $total_reg = count($res);
 
 if($total_reg == 0)
 $pdo->query("INSERT INTO pastores_presidentes SET nome = 'Super Administrador', email = '$email_super_adm',
-    cpf = '000.000.000-00', telefone = '(21)998867793' ");
+    cpf = '000.000.000-00', telefone = '(21)998867793', foto = 'sem-foto.jpg' ");
 
 
 // Criando um Usuário Super com nivel de Pastor Presidente padrão
@@ -35,7 +35,7 @@ $total_reg = count($res);
 
 if($total_reg == 0)
 $pdo->query("INSERT INTO usuarios SET nome = 'Super Administrador', email = '$email_super_adm',
-    cpf = '000.000.000-00', senha = '123', nivel = 'Pastor Presidente', id_pessoa = '1' ");
+    cpf = '000.000.000-00', senha = '123', nivel = 'Pastor Presidente', id_pessoa = '1', foto = 'sem-foto.jpg' ");
 
 
 //Criando variáveis padrões do sistema

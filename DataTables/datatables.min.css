@@ -795,6 +795,14 @@ table.dataTable td {
   .dataTables_wrapper .dataTables_filter {
     margin-top: 0.5em;
   }
+
+  .dataTables_wrapper {
+    padding: 20px;
+  }
+
+  .dataTables_wrapper .dataTables_filter input {
+    margin-left: 0;
+  }
 }
 html.dark {
   --dt-row-hover: 255, 255, 255;

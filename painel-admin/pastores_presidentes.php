@@ -22,11 +22,11 @@ $pagina = 'pastores_presidentes';
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
-                        <th class="th-table" id="radius-name">NOME</th>
+                        <th class="th-table first_table" id="radius-foto">FOTO</th>
+                        <th class="th-table">NOME</th>
                         <th class="th-table">CPF</th>
                         <th class="th-table">EMAIL</th>
-                        <th class="th-table">TELEFONE</th>
-                        <th class="th-table">ENDEREÇO</th>
+                        <th class="th-table column-hidden">TELEFONE</th>
                         <th class="th-table last_table" id="radius-action">AÇÕES</th>
                     </tr>
                 </thead>
@@ -41,10 +41,14 @@ $pagina = 'pastores_presidentes';
                         $email = $res[$i]['email'];
                         $telefone = $res[$i]['telefone'];
                         $endereco = $res[$i]['endereco'];
+                        $foto = $res[$i]['foto'];
                         $id = $res[$i]['id'];
                         ?>
                         <tr class="column-body">
-                            <td data-label="Nome" class="td-table" id="radius-column-name">
+                            <td data-label="Foto" class="td-table" id="radius-column-foto">
+                                <img class="profile_table" src="../img/membros/<?php echo $foto ?>" alt="Perfil" title="Perfil">
+                            </td>
+                            <td data-label="Nome" class="td-table">
                                 <?php echo $nome ?>
                             </td>
                             <td data-label="CPF" class="td-table">
@@ -53,13 +57,10 @@ $pagina = 'pastores_presidentes';
                             <td data-label="Email" class="td-table">
                                 <?php echo $email ?>
                             </td>
-                            <td data-label="Telefone" class="td-table">
+                            <td data-label="Telefone" class="td-table column-hidden">
                                 <?php echo $telefone ?>
                             </td>
-                            <td data-label="endereço" class="td-table">
-                                <?php echo $endereco ?>
-                            </td>
-                            <td class="td-table">
+                            <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,7 +70,7 @@ $pagina = 'pastores_presidentes';
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>')">
+                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -79,6 +80,12 @@ $pagina = 'pastores_presidentes';
                                                 <i class="bi bi-trash3 icons_actions"></i>
                                                 Excluir
                                             </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
+                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
+                                                <i class="bi bi-info-circle icons_actions"></i>
+                                                Ver Dados</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -141,6 +148,17 @@ $pagina = 'pastores_presidentes';
                                             placeholder="Insira o Endereço">
                                     </div>
 
+                                    <div class="area_photo">
+                                        <div class="area_photo_flex">
+                                            <label>Foto</label>
+                                            <input type="file" class="input_file" id="imagem"
+                                            name="imagem" onChange="carregarImg();">
+                                        </div>
+                                        <div class="divImg">
+                                            <img class="photo_file" id="target" src="../img/membros/sem-foto.jpg" alt="">
+                                        </div>
+                                    </div>
+
                                     <input type="hidden" name="id" id="id">
 
                                 </div>
@@ -179,7 +197,7 @@ $pagina = 'pastores_presidentes';
             </div>
             <form id="form-excluir" method="post">
                 <div class="modal-body">
-                    <div action="#" class="form-modal">
+                    <div action="#" class="form-modal-excluir">
                         <div class="form first">
                             <div class="details personal">
 
@@ -221,6 +239,51 @@ $pagina = 'pastores_presidentes';
 
 
 
+<div class="modal fade" id="modalDados" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Nome: <span id="nome-dados"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <div class="modal-body">
+                <div class="user_area">
+                    <i class="bi bi-person-vcard icon_user"></i>
+                    <span class="user_name">CPF: </span>
+                    <span class="texts_son" id="cpf-dados"></span>
+                </div>
+                <div class="user_area">
+                    <i class="bi bi-envelope-at icon_user"></i>
+                    <span class="user_name">Email:</span>
+                    <span class="texts_son" id="email-dados"></span>
+                </div>
+                <div class="user_area">
+                    <i class="bi bi-phone icon_user"></i>
+                    <span class="user_name">Telefone: </span>
+                    <span class="texts_son" id="telefone-dados"></span>
+                </div>
+                <div class="user_area">
+                    <i class="bi bi-geo-alt icon_user"></i>
+                    <span class="user_name">Endereço: </span>
+                    <span class="texts_son" id="endereco-dados"></span>
+                </div>
+                <div class="user_profile_area">
+                    <img class="img_info_profile" src="eu.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
     var pag = "<?= $pagina ?>" 
 </script>
@@ -230,16 +293,30 @@ $pagina = 'pastores_presidentes';
 
 
 <script type="text/javascript">
-    function editar(id, nome, cpf, email, telefone, endereco) {
+    function editar(id, nome, cpf, email, telefone, endereco, foto) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#email').val(email);
         $('#cpf').val(cpf);
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
+        $('#target').attr('src', '../img/membros/' + foto);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
+        myModal.show();
+        $('#mensagem').text('');
+    }
+
+
+    function dados(nome, cpf, email, telefone, endereco, foto) {
+        $('#nome-dados').text(nome);
+        $('#cpf-dados').text(cpf);
+        $('#email-dados').text(email);
+        $('#telefone-dados').text(telefone);
+        $('#endereco-dados').text(endereco);
+
+        var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
         $('#mensagem').text('');
     }

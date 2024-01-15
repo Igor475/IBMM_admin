@@ -88,6 +88,43 @@
     flex: 1 1 200px;
 }
 
+.area_photo {
+    flex: 1 1 380px;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.area_photo .area_photo_flex {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.area_photo .divImg {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+.area_photo .divImg .photo_file {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.area_photo .area_photo_flex label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--preto-light);
+}
+
+.area_photo .area_photo_flex .input_file {
+    font-size: 13px;
+    color: var(--preto-light);
+}
+
 .input-field label {
     font-size: 13px;
     font-weight: 600;
@@ -205,11 +242,71 @@
     width: 91.8%;
 }
 
+/* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
+
+
+
+
+
+
+
+
+
+
+/* ESTILIZAÇÃO DA MODAL DE "VER DADOS" */
+.user_area {
+    margin: 10px 0;
+    display: block;
+    border-bottom: 1px solid var(--border-bottom);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    grid-gap: 5px;
+    flex-wrap: wrap;
+}
+
+.user_area .user_name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--preto-text);
+}
+
+.user_area .texts_son {
+    font-size: 14px;
+    color: var(--preto-cinza);
+    margin: 5px 0;
+}
+
+.user_area .icon_user {
+    color: var(--verde-lima);
+    font-size: 18px;
+    width: 20px;
+}
+
+.user_profile_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.user_profile_area .img_info_profile {
+    display: block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+/* FIM ESTILIZAÇÃO DA MODAL DE "VER DADOS" */
+
 @media (max-width: 750px) {
 
     .form-modal {
         overflow-y: scroll;
         height: 400px;
+    }
+
+    .form-modal-excluir {
+        height: auto;
     }
 
     .form-modal::-webkit-scrollbar {
@@ -233,6 +330,13 @@
         font-size: 14px;
     }
 
+    /*============================================= FOTOS DAS MODAIS =========================================*/
+    .area_photo { 
+        justify-content: center;
+        gap: 30px;
+    }
+    /*============================================= FIM FOTOS DAS MODAIS =========================================*/
+
     /*============================================= BOTÕES DAS MODAIS =========================================*/
     .btn-close {
         padding: 10px 18px !important;
@@ -249,9 +353,10 @@
         width: 100%
     }
 
+    /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
     .fields .input-field {
         flex: 1 1 280px;
     }
+    /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
 }
 
-/* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
