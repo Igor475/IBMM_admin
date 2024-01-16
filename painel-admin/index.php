@@ -138,10 +138,10 @@ if ($pag == "") {
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=pastores_presidentes">Pastor Presidente</a></li>
-                                <li><a href="#">Pastores</a></li>
-                                <li><a href="#">Tesoureiros</a></li>
-                                <li><a href="#">Secretários(as)</a></li>
-                                <li><a href="#">Usuários</a></li>
+                                <li><a href="index.php?pag=pastores">Pastores</a></li>
+                                <li><a href="index.php?pag=tesoureiros">Tesoureiros</a></li>
+                                <li><a href="index.php?pag=secretarios">Secretários(as)</a></li>
+                                <li><a href="index.php?pag=usuarios">Usuários</a></li>
                             </ul>
                         </li>
                         <li>

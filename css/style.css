@@ -429,6 +429,7 @@
 .profile-dropdown .profile-dropdown-btn .name_profile {
     margin: 0 0.5rem;
     margin-right: 0;
+    flex: 1;
 }
 
 .profile-dropdown .profile-dropdown-btn .name_profile b {
@@ -623,6 +624,10 @@
 
 .table-container {
     margin: 40px 0;
+    color: var(--bs-black);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
 }
 
 .content-table {
@@ -637,7 +642,7 @@
 }
 
 .content-table .thead-tabs .column-table .th-table {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.35px;
     color: #ffff;
@@ -854,6 +859,12 @@ td.td-table#radius-column-action:last-child {
     .area-icons {
         padding: 5px 10px;
     }
+
+    /*=================== ESCONDER CAMPOS DA TABELA NO MOBILE ====================*/
+    .column-hidden {
+        display: none !important;
+    }
+    /*=================== FIM ESCONDER CAMPOS DA TABELA NO MOBILE ====================*/
 }
 
 @media screen and (max-width: 992px) {
@@ -940,12 +951,6 @@ td.td-table#radius-column-action:last-child {
     .nav-link {
         display: none !important;
     }
-
-    /*=================== ESCONDER CAMPOS DA TABELA NO MOBILE ====================*/
-    .column-hidden {
-        display: none !important;
-    }
-    /*=================== FIM ESCONDER CAMPOS DA TABELA NO MOBILE ====================*/
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 require_once('../../conexao.php');
-$pagina = 'pastores_presidentes';
+$pagina = 'secretarios';
 
 $nome = $_POST['nome'];
 $cpf = $_POST['cpf'];
@@ -8,6 +8,11 @@ $email = $_POST['email'];
 $endereco = $_POST['endereco'];
 $telefone = $_POST['telefone'];
 $id = @$_POST['id'];
+$id_igreja = @$_POST['id_igreja'];
+
+if($id_igreja == "") {
+    $id_igreja = 1;
+}
 
 
 $query = $pdo->query("SELECT * FROM $pagina WHERE cpf = '$cpf'");
@@ -55,7 +60,8 @@ if ($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif') {
 
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome, email = :email, 
-        cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem'");
+        cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem', 
+        igreja = '$id_igreja'");
 
     $query->bindValue(":nome", "$nome");
     $query->bindValue(":email", "$email");
@@ -65,10 +71,9 @@ if ($id == "" || $id == 0) {
     $query->execute();
     $ult_id = $pdo->lastInsertId();
 
-
     $query = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, email = :email, 
-        cpf = :cpf, senha = '123', nivel = 'Pastor Presidente', id_pessoa = '$ult_id', 
-        foto = '$imagem'");
+        cpf = :cpf, senha = '123', nivel = 'secretario', id_pessoa = '$ult_id', 
+        foto = '$imagem', igreja = '$id_igreja'");
 
     $query->bindValue(":nome", "$nome");
     $query->bindValue(":email", "$email");
@@ -103,11 +108,11 @@ if ($id == "" || $id == 0) {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE usuarios SET nome = :nome, email = :email, 
             cpf = :cpf WHERE id_pessoa = '$id' 
-            and nivel = 'Pastor Presidente'");
+            and nivel = 'secretario'");
     } else {
         $query = $pdo->prepare("UPDATE usuarios SET nome = :nome, email = :email, 
             cpf = :cpf, foto = '$imagem' WHERE id_pessoa = '$id' 
-            and nivel = 'Pastor Presidente'");
+            and nivel = 'secretario'");
     }
 
     $query->bindValue(":nome", "$nome");

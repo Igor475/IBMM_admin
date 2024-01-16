@@ -1,6 +1,6 @@
 <?php
 require_once("../../conexao.php");
-$pagina = 'pastores_presidentes';
+$pagina = 'secretarios';
 $id = @$_POST['id-excluir'];
 
 //excluir a imagem
@@ -13,7 +13,7 @@ if($foto != "sem-foto.jpg"){
 
 $query = $pdo->query("DELETE FROM $pagina WHERE id = '$id'");
 $query = $pdo->query("DELETE FROM usuarios WHERE id_pessoa = '$id' 
-    and nivel = 'Pastor Presidente'");
+    and nivel = 'secretario'");
 
 echo "Excluído com Sucesso";
 

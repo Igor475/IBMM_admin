@@ -1,11 +1,11 @@
 <?php
 require_once("../conexao.php");
-$pagina = 'pastores_presidentes';
+$pagina = 'secretarios';
 ?>
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Novo Pastor Presidente
+        Novo Secretário
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>

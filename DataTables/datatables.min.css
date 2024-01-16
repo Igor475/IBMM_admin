@@ -533,9 +533,6 @@ table.dataTable td {
 .dataTables_wrapper {
   position: relative;
   clear: both;
-  padding: 40px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
 }
 .dataTables_wrapper .dataTables_length {
   float: left;
@@ -796,7 +793,7 @@ table.dataTable td {
     margin-top: 0.5em;
   }
 
-  .dataTables_wrapper {
+  .table-container {
     padding: 20px;
   }
 

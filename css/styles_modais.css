@@ -131,6 +131,10 @@
     color: var(--preto-light);
 }
 
+.flex_int {
+    flex: 0.5 !important;
+}
+
 .input-field input {
     height: 40px;
     margin: 8px 0;
@@ -242,6 +246,36 @@
     width: 91.8%;
 }
 
+
+/*======================= CAMPO DE OBSERVAÇÕES DOS PASTORES =========================*/
+.txt-obs {
+    height: 200px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid var(--fundo-ea);
+    transition: all .3s ease;
+    padding: 5px 10px;
+    outline: none;
+}
+
+.txt-obs:focus {
+    border-color: var(--verde-light-border);
+    box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
+}
+
+.area_obs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.txt_label_obs {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--preto-light);
+}
+/*======================= FIM CAMPO DE OBSERVAÇÕES DOS PASTORES =========================*/
+
 /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
 
 
@@ -305,6 +339,11 @@
         height: 400px;
     }
 
+    .scroll-modal {
+        overflow-y: scroll;
+        height: 400px;
+    }
+
     .form-modal-excluir {
         height: auto;
     }
@@ -336,6 +375,11 @@
         gap: 30px;
     }
     /*============================================= FIM FOTOS DAS MODAIS =========================================*/
+
+    .user_profile_area .img_info_profile {
+        width: 100px;
+        height: 100px;
+    }
 
     /*============================================= BOTÕES DAS MODAIS =========================================*/
     .btn-close {

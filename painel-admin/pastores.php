@@ -1,11 +1,11 @@
 <?php
 require_once("../conexao.php");
-$pagina = 'pastores_presidentes';
+$pagina = 'pastores';
 ?>
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Novo Pastor Presidente
+        Novo Pastor
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>
@@ -27,6 +27,8 @@ $pagina = 'pastores_presidentes';
                         <th class="th-table">Cpf</th>
                         <th class="th-table">Email</th>
                         <th class="th-table column-hidden">Telefone</th>
+                        <th class="th-table column-hidden">Cadastro</th>
+                        <th class="th-table column-hidden">Nascimento</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -42,7 +44,16 @@ $pagina = 'pastores_presidentes';
                         $telefone = $res[$i]['telefone'];
                         $endereco = $res[$i]['endereco'];
                         $foto = $res[$i]['foto'];
+                        $data_nasc = $res[$i]['data_nasc'];
+                        $data_cad = $res[$i]['data_cad'];
+                        $obs = $res[$i]['obs'];
                         $id = $res[$i]['id'];
+                        
+                        //Retira a quebra do texto das observações
+                        $obs = str_replace(array("\n", "\r"), ' + ', $obs);
+
+                        $data_nascF = implode('/', array_reverse(explode('-', $data_nasc)));
+                        $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         ?>
                         <tr class="column-body">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
@@ -60,6 +71,12 @@ $pagina = 'pastores_presidentes';
                             <td data-label="Telefone" class="td-table column-hidden">
                                 <?php echo $telefone ?>
                             </td>
+                            <td data-label="Cadastro" class="td-table column-hidden">
+                                <?php echo $data_cadF ?>
+                            </td>
+                            <td data-label="Nascimento" class="td-table column-hidden">
+                                <?php echo $data_nascF ?>
+                            </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -70,7 +87,8 @@ $pagina = 'pastores_presidentes';
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
+                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
+                                    '<?php echo $data_nasc ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -83,9 +101,16 @@ $pagina = 'pastores_presidentes';
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
+                                            '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
+                                            '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="obs('<?php echo $id ?>', 
+                                            '<?php echo $nome ?>', '<?php echo $obs ?>')">
+                                                <i class="bi bi-chat-right-text icons_actions"></i>
+                                                Observações</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -148,14 +173,21 @@ $pagina = 'pastores_presidentes';
                                             placeholder="Insira o Endereço">
                                     </div>
 
+                                    <div class="input-field flex_int">
+                                        <label>Data Nascimento</label>
+                                        <input type="date" name="data_nasc" id="data_nasc"
+                                            value="<?php echo date('Y-m-d') ?>">
+                                    </div>
+
                                     <div class="area_photo">
                                         <div class="area_photo_flex">
                                             <label>Foto</label>
-                                            <input type="file" class="input_file" id="imagem"
-                                            name="imagem" onChange="carregarImg();">
+                                            <input type="file" class="input_file" id="imagem" name="imagem"
+                                                onChange="carregarImg();">
                                         </div>
                                         <div class="divImg">
-                                            <img class="photo_file" id="target" src="../img/membros/sem-foto.jpg" alt="">
+                                            <img class="photo_file" id="target" src="../img/membros/sem-foto.jpg"
+                                                alt="">
                                         </div>
                                     </div>
 
@@ -235,10 +267,6 @@ $pagina = 'pastores_presidentes';
 
 
 
-
-
-
-
 <div class="modal fade" id="modalDados" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -267,8 +295,18 @@ $pagina = 'pastores_presidentes';
                     <span class="user_name">Endereço: </span>
                     <span class="texts_son" id="endereco-dados"></span>
                 </div>
+                <div class="user_area">
+                    <i class="bi bi-geo-alt icon_user"></i>
+                    <span class="user_name">Data de Cadastro: </span>
+                    <span class="texts_son" id="cadastro-dados"></span>
+                </div>
+                <div class="user_area">
+                    <i class="bi bi-geo-alt icon_user"></i>
+                    <span class="user_name">Data de nascimento: </span>
+                    <span class="texts_son" id="nasc-dados"></span>
+                </div>
                 <div class="user_profile_area">
-                    <img class="img_info_profile" src="" id="foto-dados" alt="">
+                    <img class="img_info_profile" src="" id="foto-dados">
                 </div>
             </div>
         </div>
@@ -278,6 +316,42 @@ $pagina = 'pastores_presidentes';
 
 
 
+
+<div class="modal fade" id="modalObs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Observações - <span id="nome-obs"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form id="form-obs" method="post">
+                <div class="modal-body">
+                    <div class="area_obs">
+                        <label class="txt_label_obs">Observações (Máximo de 500 Caracteres)</label>
+                        <textarea class="txt-obs" name="obs" id="obs" maxlength="500"></textarea>
+                    </div>
+                
+                    <div id="mensagem-obs"></div>
+
+                    <input type="hidden" name="id-obs" id="id-obs">
+                    
+                </div>
+                <div id="mensagem"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-obs" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Salvar
+                            <i class="bi bi-trash3 icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 
@@ -293,13 +367,14 @@ $pagina = 'pastores_presidentes';
 
 
 <script type="text/javascript">
-    function editar(id, nome, cpf, email, telefone, endereco, foto) {
+    function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#email').val(email);
         $('#cpf').val(cpf);
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
+        $('#data_nasc').val(data_nasc);
         $('#target').attr('src', '../img/membros/' + foto);
 
         $('#tituloModal').text('Editar Registro');
@@ -309,17 +384,37 @@ $pagina = 'pastores_presidentes';
     }
 
 
-    function dados(nome, cpf, email, telefone, endereco, foto) {
+    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad) {
         $('#nome-dados').text(nome);
         $('#cpf-dados').text(cpf);
         $('#email-dados').text(email);
         $('#telefone-dados').text(telefone);
         $('#endereco-dados').text(endereco);
+        $('#cadastro-dados').text(data_cad);
+        $('#nasc-dados').text(data_nasc);
         $('#foto-dados').attr('src', '../img/membros/' + foto);
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
         $('#mensagem').text('');
+    }
+
+
+    function obs(id, nome, obs) {
+
+        for(let letra of obs) {
+            if(letra === '+') {
+                obs = obs.replace(' +  + ', '\n');
+            }
+        }
+
+        $('#nome-obs').text(nome);
+        $('#id-obs').val(id);
+        $('#obs').val(obs);
+
+        var myModal = new bootstrap.Modal(document.getElementById('modalObs'), {});
+        myModal.show();
+        $('#mensagem-obs').text('');
     }
 
 </script>
