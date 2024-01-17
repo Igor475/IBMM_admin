@@ -296,12 +296,12 @@ $pagina = 'pastores';
                     <span class="texts_son" id="endereco-dados"></span>
                 </div>
                 <div class="user_area">
-                    <i class="bi bi-geo-alt icon_user"></i>
+                    <i class="bi bi-calendar4-event icon_user"></i>
                     <span class="user_name">Data de Cadastro: </span>
                     <span class="texts_son" id="cadastro-dados"></span>
                 </div>
                 <div class="user_area">
-                    <i class="bi bi-geo-alt icon_user"></i>
+                    <i class="bi bi-calendar4-event icon_user"></i>
                     <span class="user_name">Data de nascimento: </span>
                     <span class="texts_son" id="nasc-dados"></span>
                 </div>
