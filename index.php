@@ -10,7 +10,7 @@ require_once("conexao.php");
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap_login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
-    <title><?php echo $nome_igreja ?></title>
+    <title><?php echo $nome_igreja_sistema ?></title>
 </head>
 <body>
     <section class="container-login">

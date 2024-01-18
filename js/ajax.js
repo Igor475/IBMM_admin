@@ -1,3 +1,10 @@
+$(document).ready(function() {
+    $('.sel2').select2({
+        placeholder: 'Selecione uma igreja',
+        dropdownParent: $('#modalForm'),
+    });
+});
+
 function inserir(){
 	$('#mensagem').text('');
 	$('#tituloModal').text('Inserir Registro');
@@ -208,6 +215,7 @@ $("#form-obs").submit(function () {
         });
 
 });
+
 
 
     

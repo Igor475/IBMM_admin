@@ -15,6 +15,14 @@ $nivel_usu = $res[0]['nivel'];
 $foto_usu = $res[0]['foto'];
 
 
+// TRAZENDO DADOS DAS CONFIGURAÇÕES DAS IGREJAS
+$query = $pdo->query("SELECT *FROM config");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$email_igr = $res[0]['email'];
+$nome_igr = $res[0]['nome'];
+$end_igr = $res[0]['endereco'];
+$tel_igr = $res[0]['telefone'];
+
 
 //MENU DO PAINEL 
 $pag = @$_GET['pag'];
@@ -24,7 +32,6 @@ if ($pag == "") {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,6 +48,8 @@ if ($pag == "") {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../DataTables/datatables.min.css" />
     <script type="text/javascript" src="../DataTables/datatables.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -145,10 +154,10 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-plus-circle icon'></i> Cadastros <i
+                            <a href="#" class="font_main_index"><i class='bi bi-plus-square icon'></i> Cadastros <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
-                                <li><a href="#">Igrejas</a></li>
+                                <li><a href="index.php?pag=igrejas">Igrejas</a></li>
                                 <li><a href="#">Ministérios</a></li>
                                 <li><a href="#">Frequências (Contas)</a></li>
                             </ul>
@@ -178,7 +187,8 @@ if ($pag == "") {
                             <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-gear icon'></i>Configuração Geral</a>
+                            <a href="#" class="font_main_index" data-bs-toggle="modal" data-bs-target="#modalConfig">
+                            <i class='bi bi-gear icon'></i>Configuração Geral</a>
                         </li>
                         <li>
                             <a href="#" class="font_main_index"><i class='bi bi-database-down icon'></i>Backup Banco</a>
@@ -280,6 +290,73 @@ if ($pag == "") {
 
 
 
+
+
+<div class="modal fade" id="modalConfig" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Configurações do sistema</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form id="form-config" method="post">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="details personal">
+                                <span class="title-modal">Personalizar detalhes</span>
+
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>Nome Igreja</label>
+                                        <input type="text" name="nome_igr" id="nome_igr" placeholder="Nome Igreja"
+                                            value="<?php echo $nome_igr ?>" required>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Email Igreja</label>
+                                        <input type="email" name="email_igr" id="email_igr" placeholder="Insira o Email da Igreja"
+                                            value="<?php echo $email_igr ?>" required>
+                                    </div>
+
+                                    <div class="input-field field_area_1">
+                                        <label>Telefone da Igreja</label>
+                                        <input type="text" name="tel_igr" id="tel_igr" placeholder="Telefone da Igreja"
+                                            value="<?php echo $tel_igr ?>" required>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Endereço da Igreja</label>
+                                        <input type="text" name="end_igr" id="end_igr" placeholder="Telefone da Igreja"
+                                            value="<?php echo $end_igr ?>" required>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Editar
+                            <i class="bi bi-pencil-square icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 <script src="../js/mascaras.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
@@ -312,6 +389,48 @@ if ($pag == "") {
 
                     $('#msg-usu').addClass('message_error')
                     $('#msg-usu').text(mensagem)
+                }
+
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+        });
+
+    });
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    $("#form-config").submit(function () {
+
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "editar-config.php",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+                $('#msg-config').text('');
+                $('#msg-config').removeClass()
+                if (mensagem.trim() == "Salvo com Sucesso") {
+
+                    $('#btn-fechar-config').click();
+                    window.location = "index.php";
+
+                } else {
+
+                    $('#msg-config').addClass('message_error')
+                    $('#msg-config').text(mensagem)
                 }
 
 

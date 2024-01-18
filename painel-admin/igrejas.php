@@ -1,11 +1,11 @@
 <?php
 require_once("../conexao.php");
-$pagina = 'pastores';
+$pagina = 'igrejas';
 ?>
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Novo Pastor
+        Nova Igreja
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>
@@ -22,12 +22,11 @@ $pagina = 'pastores';
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
-                        <th class="th-table first_table" id="radius-foto">Foto</th>
+                        <th class="th-table first_table" id="radius-foto">Imagem</th>
                         <th class="th-table">Nome</th>
-                        <th class="th-table">Cpf</th>
-                        <th class="th-table">Email</th>
                         <th class="th-table column-hidden">Telefone</th>
-                        <th class="th-table column-hidden">Igreja</th>
+                        <th class="th-table column-hidden">Data cadastro</th>
+                        <th class="th-table column-hidden">Membros</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -38,49 +37,34 @@ $pagina = 'pastores';
                         }
 
                         $nome = $res[$i]['nome'];
-                        $cpf = $res[$i]['cpf'];
-                        $email = $res[$i]['email'];
                         $telefone = $res[$i]['telefone'];
                         $endereco = $res[$i]['endereco'];
-                        $foto = $res[$i]['foto'];
-                        $data_nasc = $res[$i]['data_nasc'];
+                        $foto = $res[$i]['imagem'];
+                        $matriz = $res[$i]['matriz'];
                         $data_cad = $res[$i]['data_cad'];
                         $obs = $res[$i]['obs'];
-                        $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
-
-                        $query_con = $pdo->query("SELECT * FROM igrejas WHERE id = '$igreja'");
-                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-                        if(count($res_con) > 0) {
-                            $nome_ig = $res_con[0]['nome'];
-                        } else {
-                            $nome_ig = $nome_igreja_sistema;
-                        }
-
+                        
                         //Retira a quebra do texto das observações
                         $obs = str_replace(array("\n", "\r"), ' + ', $obs);
 
-                        $data_nascF = implode('/', array_reverse(explode('-', $data_nasc)));
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         ?>
                         <tr class="column-body">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
-                                <img class="profile_table" src="../img/membros/<?php echo $foto ?>" alt="Perfil" title="Perfil">
+                                <img class="profile_table" src="../img/igrejas/<?php echo $foto ?>" alt="Logo Igreja" title="Logo Igreja">
                             </td>
                             <td data-label="Nome" class="td-table">
                                 <?php echo $nome ?>
                             </td>
-                            <td data-label="CPF" class="td-table">
-                                <?php echo $cpf ?>
-                            </td>
-                            <td data-label="Email" class="td-table">
-                                <?php echo $email ?>
-                            </td>
-                            <td data-label="Telefone" class="td-table column-hidden">
+                            <td data-label="Telefone" class="td-table">
                                 <?php echo $telefone ?>
                             </td>
-                            <td data-label="Cadastro" class="td-table column-hidden">
-                                <?php echo $nome_ig ?>
+                            <td data-label="Data cadastro" class="td-table">
+                                <?php echo $data_cadF ?>
+                            </td>
+                            <td data-label="Membros" class="td-table column-hidden">
+                                Membros
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
@@ -91,9 +75,8 @@ $pagina = 'pastores';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                    '<?php echo $data_nasc ?>', '<?php echo $igreja ?>', '<?php echo $nome_ig ?>')">
+                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
+                                            '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -105,9 +88,9 @@ $pagina = 'pastores';
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                            '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                            '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>')">
+                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', 
+                                            '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>',
+                                            '<?php echo $data_cadF ?>', '<?php echo $matriz ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -155,55 +138,16 @@ $pagina = 'pastores';
                                         <input type="text" name="nome" id="nome" placeholder="Insira o Nome" required>
                                     </div>
 
-                                    <div class="input-field field_cpf_1">
-                                        <label>CPF</label>
-                                        <input type="text" name="cpf" id="cpf" placeholder="Insira o CPF" required>
-                                    </div>
-
-                                    <div class="input-field">
-                                        <label>Email</label>
-                                        <input type="email" name="email" id="email" placeholder="Insira o Email"
-                                            required>
-                                    </div>
-
                                     <div class="input-field field_area_1">
                                         <label>Telefone</label>
                                         <input type="text" name="telefone" id="telefone" placeholder="Insira o Telefone"
                                             required>
                                     </div>
 
-                                    <div class="input-field field_area_2">
+                                    <div class="input-field">
                                         <label>Endereço</label>
                                         <input type="text" name="endereco" id="endereco"
                                             placeholder="Insira o Endereço">
-                                    </div>
-
-                                    <div class="input-field flex_int">
-                                        <label>Data Nascimento</label>
-                                        <input type="date" name="data_nasc" id="data_nasc"
-                                            value="<?php echo date('Y-m-d') ?>">
-                                    </div>
-
-                                    <div class="input-field field_area_select">
-                                        <label>Igreja</label>
-                                        <select class="sel2" id="igreja" name="igreja">
-                                            <?php
-                                            $query = $pdo->query("SELECT * FROM igrejas order by matriz desc, 
-                                            nome asc");
-                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                                            $total_reg = count($res);
-                                            if ($total_reg > 0) {
-                                                for ($i = 0; $i < $total_reg; $i++) {
-                                                    foreach ($res[$i] as $key => $value) {
-                                                    }
-
-                                                    $nome_reg = $res[$i]['nome'];
-                                                    $id_reg = $res[$i]['id'];
-                                                    ?>
-                                                    <option value="<?php echo $id_reg ?>"><?php echo $nome_reg ?></option>
-                                                <?php }
-                                            } ?>
-                                        </select>
                                     </div>
 
                                     <div class="area_photo">
@@ -213,7 +157,7 @@ $pagina = 'pastores';
                                                 onChange="carregarImg();">
                                         </div>
                                         <div class="divImg">
-                                            <img class="photo_file" id="target" src="../img/membros/sem-foto.jpg"
+                                            <img class="photo_file" id="target" src="../img/igrejas/sem-foto.jpg"
                                                 alt="">
                                         </div>
                                     </div>
@@ -303,16 +247,6 @@ $pagina = 'pastores';
             </div>
             <div class="modal-body scroll-modal">
                 <div class="user_area">
-                    <i class="bi bi-person-vcard icon_user"></i>
-                    <span class="user_name">CPF: </span>
-                    <span class="texts_son" id="cpf-dados"></span>
-                </div>
-                <div class="user_area">
-                    <i class="bi bi-envelope-at icon_user"></i>
-                    <span class="user_name">Email:</span>
-                    <span class="texts_son" id="email-dados"></span>
-                </div>
-                <div class="user_area">
                     <i class="bi bi-phone icon_user"></i>
                     <span class="user_name">Telefone: </span>
                     <span class="texts_son" id="telefone-dados"></span>
@@ -329,13 +263,8 @@ $pagina = 'pastores';
                 </div>
                 <div class="user_area">
                     <i class="bi bi-calendar4-event icon_user"></i>
-                    <span class="user_name">Data de nascimento: </span>
-                    <span class="texts_son" id="nasc-dados"></span>
-                </div>
-                <div class="user_area">
-                    <i class="bi bi-calendar4-event icon_user"></i>
-                    <span class="user_name">Igreja: </span>
-                    <span class="texts_son" id="igreja-dados"></span>
+                    <span class="user_name">Matriz: </span>
+                    <span class="texts_son" id="matriz-dados"></span>
                 </div>
                 <div class="user_profile_area">
                     <img class="img_info_profile" src="" id="foto-dados">
@@ -362,11 +291,11 @@ $pagina = 'pastores';
                         <label class="txt_label_obs">Observações (Máximo de 500 Caracteres)</label>
                         <textarea class="txt-obs" name="obs" id="obs" maxlength="500"></textarea>
                     </div>
-
+                
                     <div id="mensagem-obs"></div>
 
                     <input type="hidden" name="id-obs" id="id-obs">
-
+                    
                 </div>
                 <div id="mensagem"></div>
                 <div class="modal-footer">
@@ -399,16 +328,13 @@ $pagina = 'pastores';
 
 
 <script type="text/javascript">
-    function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig) {
+    function editar(id, nome, telefone, endereco, foto) {
         $('#id').val(id);
         $('#nome').val(nome);
-        $('#email').val(email);
-        $('#cpf').val(cpf);
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
-        $('#data_nasc').val(data_nasc);
-        $('#target').attr('src', '../img/membros/' + foto);
-        $('#igreja').val(igreja).change();
+
+        $('#target').attr('src', '../img/igrejas/' + foto);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -417,16 +343,13 @@ $pagina = 'pastores';
     }
 
 
-    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja) {
+    function dados(nome, telefone, endereco, foto, data_cad, matriz) {
         $('#nome-dados').text(nome);
-        $('#cpf-dados').text(cpf);
-        $('#email-dados').text(email);
         $('#telefone-dados').text(telefone);
         $('#endereco-dados').text(endereco);
         $('#cadastro-dados').text(data_cad);
-        $('#nasc-dados').text(data_nasc);
-        $('#igreja-dados').text(igreja);
-        $('#foto-dados').attr('src', '../img/membros/' + foto);
+        $('#matriz-dados').text(matriz);
+        $('#foto-dados').attr('src', '../img/igrejas/' + foto);
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
@@ -436,8 +359,8 @@ $pagina = 'pastores';
 
     function obs(id, nome, obs) {
 
-        for (let letra of obs) {
-            if (letra === '+') {
+        for(let letra of obs) {
+            if(letra === '+') {
                 obs = obs.replace(' +  + ', '\n');
             }
         }

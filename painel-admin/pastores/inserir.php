@@ -8,6 +8,7 @@ $email = $_POST['email'];
 $endereco = $_POST['endereco'];
 $telefone = $_POST['telefone'];
 $data_nasc = $_POST['data_nasc'];
+$igreja = $_POST['igreja'];
 $id = @$_POST['id'];
 
 
@@ -57,7 +58,7 @@ if ($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif') {
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem', 
-        data_nasc = '$data_nasc', data_cad = curDate()");
+        data_nasc = '$data_nasc', data_cad = curDate(), igreja = '$igreja'");
 
     $query->bindValue(":nome", "$nome");
     $query->bindValue(":email", "$email");
@@ -70,7 +71,7 @@ if ($id == "" || $id == 0) {
 
     $query = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, email = :email, 
         cpf = :cpf, senha = '123', nivel = 'pastor', id_pessoa = '$ult_id', 
-        foto = '$imagem'");
+        foto = '$imagem', igreja = '$igreja'");
 
     $query->bindValue(":nome", "$nome");
     $query->bindValue(":email", "$email");
@@ -80,8 +81,8 @@ if ($id == "" || $id == 0) {
 } else {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, email = :email, 
-        cpf = :cpf, telefone = :telefone, endereco = :endereco, data_nasc = '$data_nasc'
-        WHERE id = '$id'");
+        cpf = :cpf, telefone = :telefone, endereco = :endereco, data_nasc = '$data_nasc',
+        igreja = '$igreja' WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -92,7 +93,7 @@ if ($id == "" || $id == 0) {
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem', 
-        data_nasc = '$data_nasc' WHERE id = '$id'");
+        data_nasc = '$data_nasc', igreja = '$igreja' WHERE id = '$id'");
     }
 
 
@@ -106,11 +107,11 @@ if ($id == "" || $id == 0) {
 
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE usuarios SET nome = :nome, email = :email, 
-            cpf = :cpf WHERE id_pessoa = '$id' 
+            cpf = :cpf, igreja = '$igreja' WHERE id_pessoa = '$id' 
             and nivel = 'pastor'");
     } else {
         $query = $pdo->prepare("UPDATE usuarios SET nome = :nome, email = :email, 
-            cpf = :cpf, foto = '$imagem' WHERE id_pessoa = '$id' 
+            cpf = :cpf, foto = '$imagem', igreja = '$igreja' WHERE id_pessoa = '$id' 
             and nivel = 'pastor'");
     }
 

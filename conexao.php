@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 
 $banco = "igreja";
 $servidor = "localhost";
@@ -6,9 +7,9 @@ $usuario = "root";
 $senha = "";
 
 $email_super_adm = "contato@ibmissaomultiplicar.com.br";
-$nome_igreja = "Igreja Batista Missão Multiplicar";
-
-date_default_timezone_set('America/Sao_Paulo');
+$nome_igreja_sistema = "Igreja Batista Missão Multiplicar";
+$telefone_igreja_sistema = "(00) 00000-0000";
+$endereco_igreja_sistema = "Avenida Brasil, 33.815 Bangu , Rio de Janeiro, RJ, Brazil";
 
 try {
     $pdo = new PDO("mysql:dbname=$banco;host=$servidor", "$usuario", "$senha");
@@ -38,24 +39,35 @@ $pdo->query("INSERT INTO usuarios SET nome = 'Super Administrador', email = '$em
     cpf = '000.000.000-00', senha = '123', nivel = 'Pastor Presidente', id_pessoa = '1', foto = 'sem-foto.jpg' ");
 
 
+// Criando a igreja matriz
+$query = $pdo->query("SELECT * FROM igrejas");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = count($res);
+
+if($total_reg == 0)
+$pdo->query("INSERT INTO igrejas SET nome = '$nome_igreja', telefone = '$telefone_igreja',
+    endereco = '$endereco_igreja', matriz = 'Sim', imagem = 'sem-foto.jpg',
+    data_cad = curDate() ");
+
+
+
 //Criando variáveis padrões do sistema
 $query = $pdo->query("SELECT * FROM config");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
 if($total_reg == 0) {
-    $pdo->query("INSERT INTO config SET nome = 'email_super_adm', valor = '$email_super_adm' ");
-    $pdo->query("INSERT INTO config SET nome = 'nome_igreja', valor = '$nome_igreja' ");
+    $pdo->query("INSERT INTO config SET nome = '$nome_igreja_sistema', email = '$email_super_adm',
+        endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema' ");
 }
 
 
 // BUSCANDO INFORMAÇÕES DE CONFIGURAÇÕES NO BANCO DE DADOS
-$query = $pdo->query("SELECT * FROM config where nome = 'email_super_adm'");
+$query = $pdo->query("SELECT * FROM config");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
-$email_super_adm = $res[0]['valor'];
-
-$query = $pdo->query("SELECT * FROM config where nome = 'nome_igreja'");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-$nome_igreja = $res[0]['valor'];
+$email_super_adm = $res[0]['email'];
+$nome_igreja_sistema = $res[0]['nome'];
+$telefone_igreja_sistema = $res[0]['telefone'];
+$endereco_igreja_sistema = $res[0]['endereco'];;
 
 ?>

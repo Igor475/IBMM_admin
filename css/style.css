@@ -34,13 +34,14 @@
     --black-grey: #707070;
     --preto-light: #2e2e2e;
     --preto-text: #151515;
+    --text-select_2: #212529;
     --close: #999;
     --black-hover: #2d2d2d;
     --preto-cinza-mais-claro: #8b8b8b;
     --verde-musgo: #19A993;
-    --verde: #007f5f;
+    --verde: #198754;
     --hover-side-menu: #007f5f12;
-    --btn-hover: #007356;
+    --btn-hover: #157347;
     --verde-border: #109977b2;
     --verde-light-border: #0CAF60;
     --verde-claro: #2b9348;
@@ -568,7 +569,7 @@
 
 #container_painel .widget-church {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     grid-gap: 20px;
 }
 
@@ -579,7 +580,22 @@
     background-color: var(--fonte-menu-dropdown);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, .07);
     position: relative;
-    border-left: 5px solid var(--verde);
+}
+
+.bordacardsede {
+    border-left: 5px solid var(--btn-remove) !important;
+}
+
+.bordacard {
+    border-left: 5px solid var(--verde-musgo) !important;
+}
+
+.text_matriz {
+    color: var(--btn-remove) !important;
+}
+
+.text_filiais {
+    color: var(--verde-musgo) !important;
 }
 
 #container_painel .card-church .head-church {
@@ -592,6 +608,9 @@
 #container_painel .card-church .head-church  .info-church .name-brazil {
     color: var(--verde);
     font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: .5px;
 }
 
 #container_painel .card-church .head-church .more-info .image-church {
@@ -637,7 +656,7 @@
 }
 
 .content-table .thead-tabs {
-    background-color: #007f5f;
+    background-color: var(--verde);
     border-radius: 5px 5px 5px 0;
 }
 
