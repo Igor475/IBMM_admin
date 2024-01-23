@@ -49,9 +49,10 @@ $pagina = 'pastores';
                         $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
 
-                        $query_con = $pdo->query("SELECT * FROM igrejas WHERE id = '$igreja'");
+
+                        $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-                        if(count($res_con) > 0) {
+                        if (count($res_con) > 0) {
                             $nome_ig = $res_con[0]['nome'];
                         } else {
                             $nome_ig = $nome_igreja_sistema;
@@ -91,9 +92,10 @@ $pagina = 'pastores';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                    '<?php echo $data_nasc ?>', '<?php echo $igreja ?>', '<?php echo $nome_ig ?>')">
+                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
+                                            '<?php echo $nome ?>', '<?php echo $cpf ?>', '<?php echo $email ?>', 
+                                            '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
+                                            '<?php echo $data_nasc ?>', '<?php echo $igreja ?>', '<?php echo $nome_ig ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -105,7 +107,8 @@ $pagina = 'pastores';
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
+                                            <a class="dropdown-item" href="#"
+                                                onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
                                             '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
                                             '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
@@ -200,7 +203,9 @@ $pagina = 'pastores';
                                                     $nome_reg = $res[$i]['nome'];
                                                     $id_reg = $res[$i]['id'];
                                                     ?>
-                                                    <option value="<?php echo $id_reg ?>"><?php echo $nome_reg ?></option>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
                                                 <?php }
                                             } ?>
                                         </select>
@@ -408,6 +413,7 @@ $pagina = 'pastores';
         $('#endereco').val(endereco);
         $('#data_nasc').val(data_nasc);
         $('#target').attr('src', '../img/membros/' + foto);
+
         $('#igreja').val(igreja).change();
 
         $('#tituloModal').text('Editar Registro');
@@ -418,6 +424,7 @@ $pagina = 'pastores';
 
 
     function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja) {
+
         $('#nome-dados').text(nome);
         $('#cpf-dados').text(cpf);
         $('#email-dados').text(email);
@@ -427,6 +434,7 @@ $pagina = 'pastores';
         $('#nasc-dados').text(data_nasc);
         $('#igreja-dados').text(igreja);
         $('#foto-dados').attr('src', '../img/membros/' + foto);
+
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
@@ -449,6 +457,19 @@ $pagina = 'pastores';
         var myModal = new bootstrap.Modal(document.getElementById('modalObs'), {});
         myModal.show();
         $('#mensagem-obs').text('');
+    }
+
+
+    function limpar() {
+        $('#id').val('');
+        $('#nome').val('');
+        $('#email').val('');
+        $('#cpf').val('');
+        $('#telefone').val('');
+        $('#endereco').val('');
+        $('#data_nasc').val('');
+        $('#igreja').val('').change();
+        $('#target').attr('src', '../img/membros/sem-foto.jpg');
     }
 
 </script>

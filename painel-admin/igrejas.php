@@ -27,6 +27,7 @@ $pagina = 'igrejas';
                         <th class="th-table column-hidden">Telefone</th>
                         <th class="th-table column-hidden">Data cadastro</th>
                         <th class="th-table column-hidden">Membros</th>
+                        <th class="th-table column-hidden">Responsável</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -43,7 +44,16 @@ $pagina = 'igrejas';
                         $matriz = $res[$i]['matriz'];
                         $data_cad = $res[$i]['data_cad'];
                         $obs = $res[$i]['obs'];
+                        $pastor = $res[$i]['pastor'];
                         $id = $res[$i]['id'];
+
+                        $query_con = $pdo->query("SELECT * FROM pastores where id = '$pastor'");
+                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_con) > 0) {
+                            $nome_p = $res_con[0]['nome'];
+                        } else {
+                            $nome_p = 'Não Definido';
+                        }
                         
                         //Retira a quebra do texto das observações
                         $obs = str_replace(array("\n", "\r"), ' + ', $obs);
@@ -66,6 +76,9 @@ $pagina = 'igrejas';
                             <td data-label="Membros" class="td-table column-hidden">
                                 Membros
                             </td>
+                            <td data-label="Membros" class="td-table column-hidden">
+                                <?php echo $nome_p ?>
+                            </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -76,7 +89,8 @@ $pagina = 'igrejas';
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
-                                            '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
+                                            '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
+                                            '<?php echo $pastor ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -90,7 +104,7 @@ $pagina = 'igrejas';
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>',
-                                            '<?php echo $data_cadF ?>', '<?php echo $matriz ?>')">
+                                            '<?php echo $data_cadF ?>', '<?php echo $matriz ?>', '<?php echo $nome_p ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -148,6 +162,29 @@ $pagina = 'igrejas';
                                         <label>Endereço</label>
                                         <input type="text" name="endereco" id="endereco"
                                             placeholder="Insira o Endereço">
+                                    </div>
+
+                                    <div class="input-field field_area_select">
+                                        <label>Pastor Responsável</label>
+                                        <select class="sel2" id="pastor" name="pastor">
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM pastores order by nome asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
+                                        </select>
                                     </div>
 
                                     <div class="area_photo">
@@ -266,6 +303,11 @@ $pagina = 'igrejas';
                     <span class="user_name">Matriz: </span>
                     <span class="texts_son" id="matriz-dados"></span>
                 </div>
+                <div class="user_area">
+                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <span class="user_name">Pastor Responsável: </span>
+                    <span class="texts_son" id="pastor-dados"></span>
+                </div>
                 <div class="user_profile_area">
                     <img class="img_info_profile" src="" id="foto-dados">
                 </div>
@@ -328,12 +370,12 @@ $pagina = 'igrejas';
 
 
 <script type="text/javascript">
-    function editar(id, nome, telefone, endereco, foto) {
+    function editar(id, nome, telefone, endereco, foto, pastor) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
-
+        $('#pastor').val(pastor).change();
         $('#target').attr('src', '../img/igrejas/' + foto);
 
         $('#tituloModal').text('Editar Registro');
@@ -343,13 +385,14 @@ $pagina = 'igrejas';
     }
 
 
-    function dados(nome, telefone, endereco, foto, data_cad, matriz) {
+    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor) {
         $('#nome-dados').text(nome);
         $('#telefone-dados').text(telefone);
         $('#endereco-dados').text(endereco);
         $('#cadastro-dados').text(data_cad);
         $('#matriz-dados').text(matriz);
         $('#foto-dados').attr('src', '../img/igrejas/' + foto);
+        $('#pastor-dados').text(pastor);
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
@@ -372,6 +415,16 @@ $pagina = 'igrejas';
         var myModal = new bootstrap.Modal(document.getElementById('modalObs'), {});
         myModal.show();
         $('#mensagem-obs').text('');
+    }
+
+   
+    function limpar() {
+        $('#id').val('');
+        $('#nome').val('');
+        $('#telefone').val('');
+        $('#endereco').val('');
+        $('#pastor').val('').change();
+        $('#target').attr('src', '../img/igrejas/sem-foto.jpg');
     }
 
 </script>

@@ -8,14 +8,26 @@ $query = $pdo->query("SELECT *FROM igrejas");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $igrejasCadastradas = @count($res);
 
-$query = $pdo->query("SELECT * FROM pastores");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-$pastoresCadastrados = @count($res);
+echo $id_igreja;
 
 ?>
 
-<h1 class="title">Estatística do sistema</h1>
+<h1 class="title"><?php echo $nome_igreja ?></h1>
 <div class="info-data">
+    <a href="index.php?pag=membros" class="card">
+        <div class="head">
+            <div>
+                <img class="icon" src="../img/svg/membro.svg" alt="">
+            </div>
+
+            <div class="area-info">
+                <span class="number">
+                    <?php echo @$membrosCadastrados ?>
+                </span>
+                <p>Membros da Sede Cadastrados</p>
+            </div>
+        </div>
+    </a>
     <a href="index.php?pag=igrejas" class="card">
         <div class="head">
             <div>
@@ -58,20 +70,6 @@ $pastoresCadastrados = @count($res);
             </div>
         </div>
     </a>
-    <a href="index.php?pag=membros" class="card">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/membro.svg" alt="">
-            </div>
-
-            <div class="area-info">
-                <span class="number">
-                    <?php echo @$membrosCadastrados ?>
-                </span>
-                <p>Membros da Sede Cadastrados</p>
-            </div>
-        </div>
-    </a>
 </div>
 
 
@@ -90,7 +88,6 @@ for ($i = 0; $i < $total_reg; $i++) {
     $imagem = $res[$i]['imagem'];
     $matriz = $res[$i]['matriz'];
     $pastor = $res[$i]['pastor'];
-    $id_ig = $res[$i]['id'];
 
     if ($matriz == 'Sim') {
         $bordacard = 'bordacardsede';
@@ -109,7 +106,7 @@ for ($i = 0; $i < $total_reg; $i++) {
     }
     ?>
     <div class="widget-church">
-        <a href="../painel-igreja/index.php?igreja=<?php echo $id_ig ?>" class="card-church <?php echo $bordacard ?>">
+        <a href="#" class="card-church <?php echo $bordacard ?>">
             <div class="head-church">
                 <div class="info-church">
                     <p class="name-brazil <?php echo $classe ?>">

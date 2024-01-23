@@ -1,11 +1,11 @@
 <?php
 require_once("../conexao.php");
-$pagina = 'tesoureiros';
+$pagina = 'pastores';
 ?>
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Novo Tesoureiro
+        Novo Pastor
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>
@@ -14,7 +14,7 @@ $pagina = 'tesoureiros';
 <div class="tabs">
     <div class="table-container">
         <?php
-        $query = $pdo->query("SELECT * FROM $pagina order by id desc");
+        $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by id desc");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
@@ -43,8 +43,12 @@ $pagina = 'tesoureiros';
                         $telefone = $res[$i]['telefone'];
                         $endereco = $res[$i]['endereco'];
                         $foto = $res[$i]['foto'];
+                        $data_nasc = $res[$i]['data_nasc'];
+                        $data_cad = $res[$i]['data_cad'];
+                        $obs = $res[$i]['obs'];
                         $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
+
 
                         $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
@@ -54,6 +58,11 @@ $pagina = 'tesoureiros';
                             $nome_ig = $nome_igreja_sistema;
                         }
 
+                        //Retira a quebra do texto das observações
+                        $obs = str_replace(array("\n", "\r"), ' + ', $obs);
+
+                        $data_nascF = implode('/', array_reverse(explode('-', $data_nasc)));
+                        $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         ?>
                         <tr class="column-body">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
@@ -71,7 +80,7 @@ $pagina = 'tesoureiros';
                             <td data-label="Telefone" class="td-table column-hidden">
                                 <?php echo $telefone ?>
                             </td>
-                            <td data-label="Telefone" class="td-table column-hidden">
+                            <td data-label="Cadastro" class="td-table column-hidden">
                                 <?php echo $nome_ig ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
@@ -83,8 +92,10 @@ $pagina = 'tesoureiros';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
+                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
+                                            '<?php echo $nome ?>', '<?php echo $cpf ?>', '<?php echo $email ?>', 
+                                            '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
+                                            '<?php echo $data_nasc ?>', '<?php echo $igreja ?>', '<?php echo $nome_ig ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -96,10 +107,18 @@ $pagina = 'tesoureiros';
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
+                                            <a class="dropdown-item" href="#"
+                                                onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
+                                            '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
+                                            '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="obs('<?php echo $id ?>', 
+                                            '<?php echo $nome ?>', '<?php echo $obs ?>')">
+                                                <i class="bi bi-chat-right-text icons_actions"></i>
+                                                Observações</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -156,24 +175,32 @@ $pagina = 'tesoureiros';
                                             required>
                                     </div>
 
-                                    <div class="input-field">
+                                    <div class="input-field field_area_2">
                                         <label>Endereço</label>
                                         <input type="text" name="endereco" id="endereco"
                                             placeholder="Insira o Endereço">
                                     </div>
 
-                                    <div class="area_photo">
+                                    <div class="input-field flex_int">
+                                        <label>Data Nascimento</label>
+                                        <input type="date" name="data_nasc" id="data_nasc"
+                                            value="<?php echo date('Y-m-d') ?>">
+                                    </div>
+
+                                    <div class="area_photo_1">
                                         <div class="area_photo_flex">
                                             <label>Foto</label>
-                                            <input type="file" class="input_file" id="imagem"
-                                            name="imagem" onChange="carregarImg();">
+                                            <input type="file" class="input_file" id="imagem" name="imagem"
+                                                onChange="carregarImg();">
                                         </div>
                                         <div class="divImg">
-                                            <img class="photo_file" id="target" src="../img/membros/sem-foto.jpg" alt="">
+                                            <img class="photo_file" id="target" src="../img/membros/sem-foto.jpg"
+                                                alt="">
                                         </div>
                                     </div>
 
                                     <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="igreja" id="igreja2" value="<?php echo $id_igreja ?>">
 
                                 </div>
                             </div>
@@ -249,10 +276,6 @@ $pagina = 'tesoureiros';
 
 
 
-
-
-
-
 <div class="modal fade" id="modalDados" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -281,8 +304,23 @@ $pagina = 'tesoureiros';
                     <span class="user_name">Endereço: </span>
                     <span class="texts_son" id="endereco-dados"></span>
                 </div>
+                <div class="user_area">
+                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <span class="user_name">Data de Cadastro: </span>
+                    <span class="texts_son" id="cadastro-dados"></span>
+                </div>
+                <div class="user_area">
+                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <span class="user_name">Data de nascimento: </span>
+                    <span class="texts_son" id="nasc-dados"></span>
+                </div>
+                <div class="user_area">
+                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <span class="user_name">Igreja: </span>
+                    <span class="texts_son" id="igreja-dados"></span>
+                </div>
                 <div class="user_profile_area">
-                    <img class="img_info_profile" src="" id="foto-dados" alt="">
+                    <img class="img_info_profile" src="" id="foto-dados">
                 </div>
             </div>
         </div>
@@ -292,6 +330,42 @@ $pagina = 'tesoureiros';
 
 
 
+
+<div class="modal fade" id="modalObs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Observações - <span id="nome-obs"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form id="form-obs" method="post">
+                <div class="modal-body">
+                    <div class="area_obs">
+                        <label class="txt_label_obs">Observações (Máximo de 500 Caracteres)</label>
+                        <textarea class="txt-obs" name="obs" id="obs" maxlength="500"></textarea>
+                    </div>
+
+                    <div id="mensagem-obs"></div>
+
+                    <input type="hidden" name="id-obs" id="id-obs">
+
+                </div>
+                <div id="mensagem"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-obs" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Salvar
+                            <i class="bi bi-pencil-square icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 
@@ -307,14 +381,17 @@ $pagina = 'tesoureiros';
 
 
 <script type="text/javascript">
-    function editar(id, nome, cpf, email, telefone, endereco, foto) {
+    function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#email').val(email);
         $('#cpf').val(cpf);
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
+        $('#data_nasc').val(data_nasc);
         $('#target').attr('src', '../img/membros/' + foto);
+
+        $('#igreja').val(igreja).change();
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -323,17 +400,40 @@ $pagina = 'tesoureiros';
     }
 
 
-    function dados(nome, cpf, email, telefone, endereco, foto) {
+    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja) {
+
         $('#nome-dados').text(nome);
         $('#cpf-dados').text(cpf);
         $('#email-dados').text(email);
         $('#telefone-dados').text(telefone);
         $('#endereco-dados').text(endereco);
+        $('#cadastro-dados').text(data_cad);
+        $('#nasc-dados').text(data_nasc);
+        $('#igreja-dados').text(igreja);
         $('#foto-dados').attr('src', '../img/membros/' + foto);
+
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
         $('#mensagem').text('');
+    }
+
+
+    function obs(id, nome, obs) {
+
+        for (let letra of obs) {
+            if (letra === '+') {
+                obs = obs.replace(' +  + ', '\n');
+            }
+        }
+
+        $('#nome-obs').text(nome);
+        $('#id-obs').val(id);
+        $('#obs').val(obs);
+
+        var myModal = new bootstrap.Modal(document.getElementById('modalObs'), {});
+        myModal.show();
+        $('#mensagem-obs').text('');
     }
 
 
@@ -344,6 +444,8 @@ $pagina = 'tesoureiros';
         $('#cpf').val('');
         $('#telefone').val('');
         $('#endereco').val('');
+        $('#data_nasc').val('');
+        $('#igreja').val('').change();
         $('#target').attr('src', '../img/membros/sem-foto.jpg');
     }
 

@@ -141,7 +141,6 @@
     grid-area: main;
     background-color: var(--fonte-menu-dropdown);
     padding: 20px 20px;
-    color: rgba(255, 255, 255, 0.95);
 }
 
 /*============================= GRID CONTAINER ================================*/
@@ -452,7 +451,7 @@
     padding: 10px 0;
     box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
     border-radius: 5px;
-    width: 160px;
+    width: 220px;
     opacity: 0;
     pointer-events: none;
     transition: all .3s ease;

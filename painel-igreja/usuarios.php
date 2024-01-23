@@ -7,7 +7,7 @@ $pagina = 'usuarios';
 <div class="tabs">
     <div class="table-container">
         <?php
-        $query = $pdo->query("SELECT * FROM $pagina order by id desc");
+        $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by id desc");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
@@ -20,7 +20,7 @@ $pagina = 'usuarios';
                         <th class="th-table">Cpf</th>
                         <th class="th-table">Email</th>
                         <th class="th-table">Senha</th>
-                        <th class="th-table column-hidden">Igreja</th>
+                        <th class="th-table column-hidden">Nível</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -36,6 +36,7 @@ $pagina = 'usuarios';
                         $senha = $res[$i]['senha'];
                         $foto = $res[$i]['foto'];
                         $igreja = $res[$i]['igreja'];
+                        $nivel = $res[$i]['nivel'];
                         $id = $res[$i]['id'];
 
                         $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
@@ -64,7 +65,7 @@ $pagina = 'usuarios';
                                 <?php echo $senha ?>
                             </td>
                             <td data-label="Telefone" class="td-table column-hidden">
-                                <?php echo $nome_ig ?>
+                                <?php echo $nivel ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">

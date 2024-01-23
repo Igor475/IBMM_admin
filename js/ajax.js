@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $('.sel2').select2({
-        placeholder: 'Selecione uma igreja',
         dropdownParent: $('#modalForm'),
     });
 });
@@ -12,7 +11,7 @@ function inserir(){
 		backdrop: 'fixed',
 	});
 	myModal.show();
-    //limparCampos();
+    limpar();
 }
 
 
@@ -25,6 +24,7 @@ function excluir(id, nome){
     var myModal = new bootstrap.Modal(document.getElementById('modalExcluir'), {       });
     myModal.show();
     $('#mensagem-excluir').text('');
+    limpar();
 }
 
 

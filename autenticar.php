@@ -19,8 +19,16 @@ if($total_reg > 0) {
     $_SESSION['id_usuario'] = $res[0]['id'];
     $_SESSION['nivel_usuario'] = $res[0]['nivel'];
     $_SESSION['cpf_usuario'] = $res[0]['cpf'];
+    $_SESSION['id_igreja'] = $res[0]['igreja'];
     
-    echo "<script>window.location='painel-admin'</script>";
+    if($res[0]['nivel'] == 'Pastor Presidente') {
+        echo "<script>window.location='painel-admin'</script>";
+    }
+
+    if($res[0]['nivel'] == 'pastor') {
+        echo "<script>window.location='painel-igreja'</script>";
+    }
+
 } else {
     echo "<script>$(function() { alertaTempo('Usuário ou senha incorretos!!', 1000) });</script>";
 }

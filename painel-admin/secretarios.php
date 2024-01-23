@@ -27,6 +27,7 @@ $pagina = 'secretarios';
                         <th class="th-table">Cpf</th>
                         <th class="th-table">Email</th>
                         <th class="th-table column-hidden">Telefone</th>
+                        <th class="th-table column-hidden">Igreja</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -42,7 +43,17 @@ $pagina = 'secretarios';
                         $telefone = $res[$i]['telefone'];
                         $endereco = $res[$i]['endereco'];
                         $foto = $res[$i]['foto'];
+                        $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
+
+                        $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
+                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_con) > 0) {
+                            $nome_ig = $res_con[0]['nome'];
+                        } else {
+                            $nome_ig = $nome_igreja_sistema;
+                        }
+
                         ?>
                         <tr class="column-body">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
@@ -59,6 +70,9 @@ $pagina = 'secretarios';
                             </td>
                             <td data-label="Telefone" class="td-table column-hidden">
                                 <?php echo $telefone ?>
+                            </td>
+                            <td data-label="Telefone" class="td-table column-hidden">
+                                <?php echo $nome_ig ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
@@ -320,6 +334,17 @@ $pagina = 'secretarios';
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
         $('#mensagem').text('');
+    }
+
+
+    function limpar() {
+        $('#id').val('');
+        $('#nome').val('');
+        $('#email').val('');
+        $('#cpf').val('');
+        $('#telefone').val('');
+        $('#endereco').val('');
+        $('#target').attr('src', '../img/membros/sem-foto.jpg');
     }
 
 </script>

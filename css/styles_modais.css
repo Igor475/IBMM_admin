@@ -95,32 +95,32 @@
     flex-wrap: wrap;
 }
 
-.area_photo .area_photo_flex {
+.area_photo_flex {
     display: flex;
     flex-direction: column;
     gap: 8px;
     flex-wrap: wrap;
 }
 
-.area_photo .divImg {
+.divImg {
     display: flex;
     justify-content: center;
     width: 50%;
 }
 
-.area_photo .divImg .photo_file {
+.photo_file {
     width: 150px;
     height: 150px;
     border-radius: 50%;
 }
 
-.area_photo .area_photo_flex label {
+.area_photo_flex label {
     font-size: 13px;
     font-weight: 600;
     color: var(--preto-light);
 }
 
-.area_photo .area_photo_flex .input_file {
+.area_photo_flex .input_file {
     font-size: 13px;
     color: var(--preto-light);
 }
@@ -154,7 +154,14 @@
 }
 
 .field_area_select {
-    flex: .5 !important;
+    flex: .93 !important;
+}
+
+.area_photo_1 {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 450px;
+    margin: 20px 0;
 }
 
 /*========================== ESTILIZAÇÕES DO SELECT2 ===========================*/

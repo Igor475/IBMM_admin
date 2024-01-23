@@ -1,11 +1,11 @@
 <?php
 require_once("../conexao.php");
-$pagina = 'tesoureiros';
+$pagina = 'secretarios';
 ?>
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Novo Tesoureiro
+        Novo Secretário
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>
@@ -14,7 +14,7 @@ $pagina = 'tesoureiros';
 <div class="tabs">
     <div class="table-container">
         <?php
-        $query = $pdo->query("SELECT * FROM $pagina order by id desc");
+        $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by id desc");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
@@ -27,7 +27,6 @@ $pagina = 'tesoureiros';
                         <th class="th-table">Cpf</th>
                         <th class="th-table">Email</th>
                         <th class="th-table column-hidden">Telefone</th>
-                        <th class="th-table column-hidden">Igreja</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -43,17 +42,7 @@ $pagina = 'tesoureiros';
                         $telefone = $res[$i]['telefone'];
                         $endereco = $res[$i]['endereco'];
                         $foto = $res[$i]['foto'];
-                        $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
-
-                        $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
-                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-                        if (count($res_con) > 0) {
-                            $nome_ig = $res_con[0]['nome'];
-                        } else {
-                            $nome_ig = $nome_igreja_sistema;
-                        }
-
                         ?>
                         <tr class="column-body">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
@@ -70,9 +59,6 @@ $pagina = 'tesoureiros';
                             </td>
                             <td data-label="Telefone" class="td-table column-hidden">
                                 <?php echo $telefone ?>
-                            </td>
-                            <td data-label="Telefone" class="td-table column-hidden">
-                                <?php echo $nome_ig ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
@@ -174,6 +160,7 @@ $pagina = 'tesoureiros';
                                     </div>
 
                                     <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="id_igreja" id="id_igreja" value="<?php echo $id_igreja ?>">
 
                                 </div>
                             </div>

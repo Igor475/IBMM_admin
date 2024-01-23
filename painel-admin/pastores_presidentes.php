@@ -322,4 +322,15 @@ $pagina = 'pastores_presidentes';
         $('#mensagem').text('');
     }
 
+    
+    function limpar() {
+        $('#id').val('');
+        $('#nome').val('');
+        $('#email').val('');
+        $('#cpf').val('');
+        $('#telefone').val('');
+        $('#endereco').val('');
+        $('#target').attr('src', '../img/membros/sem-foto.jpg');
+    }
+
 </script>

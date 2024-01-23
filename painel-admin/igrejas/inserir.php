@@ -5,6 +5,7 @@ $pagina = 'igrejas';
 $nome = $_POST['nome'];
 $endereco = $_POST['endereco'];
 $telefone = $_POST['telefone'];
+$pastor = @$_POST['pastor'];
 $id = @$_POST['id'];
 
 
@@ -43,7 +44,7 @@ if ($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif') {
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome,
         telefone = :telefone, endereco = :endereco, imagem = '$imagem',
-        data_cad = curDate(), matriz = 'Não'");
+        data_cad = curDate(), matriz = 'Não', pastor = '$pastor'");
 
     $query->bindValue(":nome", "$nome");
     $query->bindValue(":telefone", "$telefone");
@@ -53,7 +54,8 @@ if ($id == "" || $id == 0) {
 } else {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
-        telefone = :telefone, endereco = :endereco WHERE id = '$id'");
+        telefone = :telefone, endereco = :endereco, pastor = '$pastor'
+        WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -63,8 +65,8 @@ if ($id == "" || $id == 0) {
 		}
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
-            telefone = :telefone, endereco = :endereco, imagem = '$imagem' 
-            WHERE id = '$id'");
+            telefone = :telefone, endereco = :endereco, imagem = '$imagem', 
+            pastor = '$pastor' WHERE id = '$id'");
     }
 
 

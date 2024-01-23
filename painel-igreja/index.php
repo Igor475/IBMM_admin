@@ -2,8 +2,20 @@
 @session_start();
 require_once("verificar.php");
 require_once("../conexao.php");
-
 $id_usuario = @$_SESSION['id_usuario'];
+
+if(@$_GET['igreja'] > 0) {
+    @$_SESSION['id_igreja'] = @$_GET['igreja'];
+} 
+
+$id_igreja = @$_SESSION['id_igreja'];
+
+//TRAZENDO OS DADOS DA IGREJA
+$query = $pdo->query("SELECT *FROM igrejas WHERE id = '$id_igreja'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$nome_igreja = $res[0]['nome'];
+$foto_igreja = $res[0]['imagem'];
+
 
 $query = $pdo->query("SELECT *FROM usuarios WHERE id = '$id_usuario'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -102,12 +114,14 @@ if ($pag == "") {
                                 Editar Dados
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class='bi bi-gear icon'></i>
-                                Configurações
-                            </a>
-                        </li>
+                        <?php if($nivel_usu == 'Pastor Presidente') { ?>
+                            <li>
+                                <a href="../painel-admin">
+                                    <i class='bi bi-grid icon'></i>
+                                    Painel Administrador
+                                </a>
+                            </li>
+                        <?php } ?>
                         <li>
                             <a href="../logout.php">
                                 <i class='bxi bi-box-arrow-right icon'></i>
@@ -132,7 +146,7 @@ if ($pag == "") {
                 <div class="sidebar_area">
                     <div class="sidebar_sys">
                         <a class="brand">
-                            <img class="img_logo" src="../img/logo-IBMM-preta.png" alt=""
+                            <img class="img_logo" src="../img/igrejas/<?php echo $foto_igreja ?>" alt=""
                                 title="Igreja Batista Missão Multiplicar">
                         </a>
                         <h4 class="title_sys">Sistema <span class="">IBMM</span></h4>
@@ -146,7 +160,7 @@ if ($pag == "") {
                             <a href="#" class="font_main_index"><i class='bi bi-person-plus icon'></i> Pessoas <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
-                                <li><a href="index.php?pag=pastores_presidentes">Pastor Presidente</a></li>
+                                <li><a href="index.php?pag=membros">Membros</a></li>
                                 <li><a href="index.php?pag=pastores">Pastores</a></li>
                                 <li><a href="index.php?pag=tesoureiros">Tesoureiros</a></li>
                                 <li><a href="index.php?pag=secretarios">Secretários(as)</a></li>
@@ -158,7 +172,7 @@ if ($pag == "") {
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=igrejas">Igrejas</a></li>
-                                <li><a href="index.php?pag=cargos">Cargos Ministeriais</a></li>
+                                <li><a href="#">Ministérios</a></li>
                                 <li><a href="#">Frequências (Contas)</a></li>
                             </ul>
                         </li>
