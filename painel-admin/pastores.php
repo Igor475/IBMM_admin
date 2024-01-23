@@ -189,7 +189,7 @@ $pagina = 'pastores';
 
                                     <div class="input-field field_area_select">
                                         <label>Igreja</label>
-                                        <select class="sel2" id="igreja" name="igreja">
+                                        <select class="sel2" id="igreja" name="igreja" requerid>
                                             <?php
                                             $query = $pdo->query("SELECT * FROM igrejas order by matriz desc, 
                                             nome asc");

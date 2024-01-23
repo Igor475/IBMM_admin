@@ -36,20 +36,30 @@ if ($pag == "") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../img/logo-IBMM-preta.ico" type="image/x-icon">
+
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap_style.css">
     <link rel="stylesheet" type="text/css" href="../css/menu_action_table.css">
     <link rel="stylesheet" type="text/css" href="../css/styles_modais.css">
+
     <title>Painel Administrativo</title>
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
     <script src="../js/script.js" defer></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../DataTables/datatables.min.css" />
     <script type="text/javascript" src="../DataTables/datatables.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/toastr.css">
+    <script type="text/javascript" src="../js/toastr.js"></script>
 </head>
 
 <body>

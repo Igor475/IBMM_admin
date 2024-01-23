@@ -31,6 +31,27 @@ function excluir(id, nome){
 
 
 
+function mudarStatus(id, ativar){
+    
+    $.ajax({
+        url: pag + "/mudar-status.php",
+        method: 'POST',
+        data: {id, ativar},
+        dataType: "text",
+
+        success: function (mensagem) {
+            if (mensagem.trim() == "Alterado com Sucesso") {
+                window.location="index.php?pag=" + pag;
+            }               
+        },
+
+    });
+}
+
+
+
+
+
 
 $("#form").submit(function () {
 	event.preventDefault();
@@ -45,14 +66,15 @@ $("#form").submit(function () {
 			$('#mensagem').text('');
 			$('#mensagem').removeClass()
 			if (mensagem.trim() == "Salvo com Sucesso") {
-                    $('#nome').val('');
-                    $('#cpf').val('');
-                    $('#email').val('');
-                    $('#telefone').val('');
-                    $('#endereco').val('');
+                    //$('#nome').val('');
+                    //$('#cpf').val('');
 
                     $('#btn-fechar').click();
-                     window.location="index.php?pag=" + pag;
+                    mensagemSalvar();
+                    setTimeout(function(){
+                        window.location="index.php?pag=" + pag;
+                    }, 1000);
+
                 } else {
 
                 	$('#mensagem').addClass('message_error')
@@ -89,7 +111,10 @@ $("#form-excluir").submit(function () {
             $('#mensagem-excluir').removeClass()
             if (mensagem.trim() == "Excluído com Sucesso") {
                 $('#btn-fechar-excluir').click();
-                window.location="index.php?pag=" + pag;
+                mensagemExcluir()
+                setTimeout(function(){
+                        window.location="index.php?pag=" + pag;
+                }, 1000);
                		
             } else {
 
@@ -216,6 +241,53 @@ $("#form-obs").submit(function () {
 
 });
 
+
+
+
+function mensagemSalvar() {
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "1000",
+      "hideDuration": "1000",
+      "timeOut": "2500",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+
+    Command: toastr["success"]("Registro salvo com sucesso!", "Salvo")
+}
+
+
+function mensagemExcluir() {
+    toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "1000",
+    "hideDuration": "1000",
+    "timeOut": "2500",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+    }
+
+    Command: toastr["error"]("Registro Excluído!!", "Excluído")
+}
 
 
     

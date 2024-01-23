@@ -1,6 +1,6 @@
 <?php
 require_once('../../conexao.php');
-$pagina = 'pastores';
+$pagina = 'membros';
 $obs = $_POST['obs'];
 $id = @$_POST['id-obs'];
 

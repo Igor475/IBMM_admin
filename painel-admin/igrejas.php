@@ -54,7 +54,11 @@ $pagina = 'igrejas';
                         } else {
                             $nome_p = 'Não Definido';
                         }
-                        
+
+                        $query_m = $pdo->query("SELECT *FROM membros WHERE  igreja = '$id'");
+                        $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
+                        $membrosCad = @count($res_m);
+
                         //Retira a quebra do texto das observações
                         $obs = str_replace(array("\n", "\r"), ' + ', $obs);
 
@@ -62,7 +66,8 @@ $pagina = 'igrejas';
                         ?>
                         <tr class="column-body">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
-                                <img class="profile_table" src="../img/igrejas/<?php echo $foto ?>" alt="Logo Igreja" title="Logo Igreja">
+                                <img class="profile_table" src="../img/igrejas/<?php echo $foto ?>" alt="Logo Igreja"
+                                    title="Logo Igreja">
                             </td>
                             <td data-label="Nome" class="td-table">
                                 <?php echo $nome ?>
@@ -74,7 +79,7 @@ $pagina = 'igrejas';
                                 <?php echo $data_cadF ?>
                             </td>
                             <td data-label="Membros" class="td-table column-hidden">
-                                Membros
+                                <?php echo $membrosCad ?> Membros
                             </td>
                             <td data-label="Membros" class="td-table column-hidden">
                                 <?php echo $nome_p ?>
@@ -102,7 +107,8 @@ $pagina = 'igrejas';
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', 
+                                            <a class="dropdown-item" href="#"
+                                                onclick="dados('<?php echo $nome ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>',
                                             '<?php echo $data_cadF ?>', '<?php echo $matriz ?>', '<?php echo $nome_p ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
@@ -333,11 +339,11 @@ $pagina = 'igrejas';
                         <label class="txt_label_obs">Observações (Máximo de 500 Caracteres)</label>
                         <textarea class="txt-obs" name="obs" id="obs" maxlength="500"></textarea>
                     </div>
-                
+
                     <div id="mensagem-obs"></div>
 
                     <input type="hidden" name="id-obs" id="id-obs">
-                    
+
                 </div>
                 <div id="mensagem"></div>
                 <div class="modal-footer">
@@ -402,8 +408,8 @@ $pagina = 'igrejas';
 
     function obs(id, nome, obs) {
 
-        for(let letra of obs) {
-            if(letra === '+') {
+        for (let letra of obs) {
+            if (letra === '+') {
                 obs = obs.replace(' +  + ', '\n');
             }
         }
@@ -417,7 +423,7 @@ $pagina = 'igrejas';
         $('#mensagem-obs').text('');
     }
 
-   
+
     function limpar() {
         $('#id').val('');
         $('#nome').val('');

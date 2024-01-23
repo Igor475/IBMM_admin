@@ -12,6 +12,14 @@ $query = $pdo->query("SELECT * FROM pastores");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $pastoresCadastrados = @count($res);
 
+$query_m = $pdo->query("SELECT *FROM membros WHERE igreja = 1 and ativo = 'Sim'");
+$res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
+$membrosSede = @count($res_m);
+
+$query_m = $pdo->query("SELECT *FROM membros WHERE ativo = 'Sim'");
+$res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
+$membrosCadastrados = @count($res_m);
+
 ?>
 
 <h1 class="title">Estatística do sistema</h1>
@@ -52,7 +60,7 @@ $pastoresCadastrados = @count($res);
 
             <div class="area-info">
                 <span class="number">
-                    <?php echo $celulasCadastradas ?>
+                    <?php echo @$celulasCadastradas ?>
                 </span>
                 <p>Células Cadastradas</p>
             </div>
@@ -68,7 +76,7 @@ $pastoresCadastrados = @count($res);
                 <span class="number">
                     <?php echo @$membrosCadastrados ?>
                 </span>
-                <p>Membros da Sede Cadastrados</p>
+                <p>Total de Membros</p>
             </div>
         </div>
     </a>
@@ -100,6 +108,10 @@ for ($i = 0; $i < $total_reg; $i++) {
         $classe = 'text_filiais';
     }
 
+    $query_m = $pdo->query("SELECT *FROM membros WHERE  igreja = '$id_ig' and ativo = 'Sim'");
+    $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
+    $membrosCad = @count($res_m);
+
     $query_con = $pdo->query("SELECT * FROM pastores where id = '$pastor'");
     $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
     if (count($res_con) > 0) {
@@ -107,6 +119,7 @@ for ($i = 0; $i < $total_reg; $i++) {
     } else {
         $nome_p = 'Não Definido';
     }
+
     ?>
     <div class="widget-church">
         <a href="../painel-igreja/index.php?igreja=<?php echo $id_ig ?>" class="card-church <?php echo $bordacard ?>">
@@ -124,7 +137,7 @@ for ($i = 0; $i < $total_reg; $i++) {
                     <div class="image-church">
                         <img class="img_card" src="../img/igrejas/<?php echo $imagem ?>" alt="">
                     </div>
-                    <p class="text_member">Membros 207</p>
+                    <p class="text_member">Membros <?php echo @$membrosCad ?></p>
                 </div>
             </div>
         </a>

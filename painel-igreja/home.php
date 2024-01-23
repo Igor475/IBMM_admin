@@ -1,14 +1,12 @@
 <?php
+$totalDizimos = 0;
 $membrosCadastrados = 0;
-$pastoresCadastrados = 0;
-$igrejasCadastradas = 0;
-$celulasCadastradas = 0;
+$totalOfertas = 0;
+$totalGastos = 0;
 
-$query = $pdo->query("SELECT *FROM igrejas");
+$query = $pdo->query("SELECT *FROM membros WHERE  igreja = '$id_igreja' and ativo = 'Sim'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
-$igrejasCadastradas = @count($res);
-
-echo $id_igreja;
+$membrosCadastrados = @count($res);
 
 ?>
 
@@ -24,7 +22,7 @@ echo $id_igreja;
                 <span class="number">
                     <?php echo @$membrosCadastrados ?>
                 </span>
-                <p>Membros da Sede Cadastrados</p>
+                <p>Total de Membros</p>
             </div>
         </div>
     </a>
@@ -36,9 +34,9 @@ echo $id_igreja;
 
             <div class="area-info">
                 <span class="number">
-                    <?php echo @$igrejasCadastradas ?>
+                    <?php echo @$totalDizimos ?>
                 </span>
-                <p>Igrejas Cadastradas</p>
+                R$ <p>Dízimos do Mês</p>
             </div>
         </div>
     </a>
@@ -50,9 +48,9 @@ echo $id_igreja;
 
             <div class="area-info">
                 <span class="number">
-                    <?php echo @$pastoresCadastrados ?>
+                    <?php echo @$totalOfertas ?>
                 </span>
-                <p>Pastores Cadastrados</p>
+                R$ <p>Ofertas do Mês</p>
             </div>
         </div>
     </a>
@@ -64,9 +62,9 @@ echo $id_igreja;
 
             <div class="area-info">
                 <span class="number">
-                    <?php echo $celulasCadastradas ?>
+                    <?php echo @$totalGastos ?>
                 </span>
-                <p>Células Cadastradas</p>
+                R$ <p>Gastos do Mês</p>
             </div>
         </div>
     </a>
@@ -74,7 +72,7 @@ echo $id_igreja;
 
 
 
-<h1 class="churchs">Igrejas (Sede e Filial)</h1>
+<h1 class="churchs">AGENDA / TAREFAS</h1>
 <?php
 $query = $pdo->query("SELECT * FROM igrejas order by matriz desc, nome asc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);

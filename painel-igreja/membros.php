@@ -28,6 +28,7 @@ $pagina = 'membros';
                         <th class="th-table">Email</th>
                         <th class="th-table column-hidden">Telefone</th>
                         <th class="th-table column-hidden">Cargo</th>
+                        <th class="th-table column-hidden">Ativo</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -49,7 +50,25 @@ $pagina = 'membros';
                         $igreja = $res[$i]['igreja'];
                         $cargo = $res[$i]['cargo'];
                         $data_bat = $res[$i]['data_batismo'];
+                        $ativo = $res[$i]['ativo'];
                         $id = $res[$i]['id'];
+
+
+                        if ($ativo == 'Sim') {
+                            $classe = 'text_active';
+                            $ativo = 'Desativar Membro';
+                            $icone = 'bi-toggle-on';
+                            $ativar = 'Não';
+                            $inativa = '';
+                            $tab = 'Ativo';
+                        } else {
+                            $classe = 'text_desactive';
+                            $ativo = 'Ativar Membro';
+                            $icone = 'bi-toggle-off';
+                            $ativar = 'Sim';
+                            $inativa = 'text_opacity';
+                            $tab = 'Inativo';
+                        }
 
 
                         $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
@@ -60,7 +79,7 @@ $pagina = 'membros';
                             $nome_ig = $nome_igreja_sistema;
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM cargos where id = '$igreja'");
+                        $query_con = $pdo->query("SELECT * FROM cargos where id = '$cargo'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
                             $nome_cargo = $res_con[0]['nome'];
@@ -94,6 +113,9 @@ $pagina = 'membros';
                             <td data-label="Cadastro" class="td-table column-hidden">
                                 <?php echo $nome_cargo ?>
                             </td>
+                            <td data-label="Ativo" class="td-table column-hidden">
+                                <?php echo $tab ?>
+                            </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -119,8 +141,7 @@ $pagina = 'membros';
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
+                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
                                             '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
                                             '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>', 
                                             '<?php echo $data_batF ?>', '<?php echo $nome_cargo ?>')">
@@ -132,6 +153,13 @@ $pagina = 'membros';
                                             '<?php echo $nome ?>', '<?php echo $obs ?>')">
                                                 <i class="bi bi-chat-right-text icons_actions"></i>
                                                 Observações</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="mudarStatus('<?php echo $id ?>', 
+                                            '<?php echo $ativar ?>')" title="<?php echo $ativo ?>">
+                                                <i class="bi <?php echo $icone ?> icons_actions <?php echo $classe ?>"></i>
+                                                <?php echo $ativo ?>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -197,7 +225,35 @@ $pagina = 'membros';
                                     <div class="input-field flex_int">
                                         <label>Data Nascimento</label>
                                         <input type="date" name="data_nasc" id="data_nasc"
-                                            value="<?php echo date('Y-m-d') ?>">
+                                            value="<?php echo date('Y-m-d') ?>" required>
+                                    </div>
+
+                                    <div class="input-field flex_int">
+                                        <label>Data Batismo</label>
+                                        <input type="date" name="data_bat" id="data_bat">
+                                    </div>
+
+                                    <div class="input-field field_area_select">
+                                        <label>Cargo Ministerial</label>
+                                        <select class="sel2" id="cargo" name="cargo">
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM cargos order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
+                                        </select>
                                     </div>
 
                                     <div class="area_photo_1">
@@ -332,6 +388,16 @@ $pagina = 'membros';
                     <span class="user_name">Igreja: </span>
                     <span class="texts_son" id="igreja-dados"></span>
                 </div>
+                <div class="user_area">
+                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <span class="user_name">Data Batismo: </span>
+                    <span class="texts_son" id="batismo-dados"></span>
+                </div>
+                <div class="user_area">
+                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <span class="user_name">Cargo Ministerial: </span>
+                    <span class="texts_son" id="membro-dados"></span>
+                </div>
                 <div class="user_profile_area">
                     <img class="img_info_profile" src="" id="foto-dados">
                 </div>
@@ -394,7 +460,7 @@ $pagina = 'membros';
 
 
 <script type="text/javascript">
-    function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig) {
+    function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig, data_bat, cargo) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#email').val(email);
@@ -402,9 +468,11 @@ $pagina = 'membros';
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
         $('#data_nasc').val(data_nasc);
+        $('#data_bat').val(data_bat);
         $('#target').attr('src', '../img/membros/' + foto);
 
         $('#igreja').val(igreja).change();
+        $('#cargo').val(cargo).change();
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -413,7 +481,11 @@ $pagina = 'membros';
     }
 
 
-    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja) {
+    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja, data_bat, cargo) {
+
+        if (data_bat === '00/00/0000') {
+            data_bat = 'Não Batizado!';
+        }
 
         $('#nome-dados').text(nome);
         $('#cpf-dados').text(cpf);
@@ -423,6 +495,8 @@ $pagina = 'membros';
         $('#cadastro-dados').text(data_cad);
         $('#nasc-dados').text(data_nasc);
         $('#igreja-dados').text(igreja);
+        $('#batismo-dados').text(data_bat);
+        $('#membro-dados').text(cargo);
         $('#foto-dados').attr('src', '../img/membros/' + foto);
 
 

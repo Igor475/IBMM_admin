@@ -560,10 +560,12 @@
 }
 
 #container_painel .churchs {
-    font-size: 17px;
+    font-size: 15px;
     color: #333;
     margin-bottom: 20px;
     font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
 }
 
 #container_painel .widget-church {
@@ -810,6 +812,21 @@ td.td-table#radius-column-action:last-child {
 .icon {
     margin-right: 5px;
     font-size: 23px;
+}
+
+.text_active {
+    font-size: 22px !important;
+    color: var(--verde) !important;
+}
+
+.text_desactive {
+    font-size: 22px !important;
+    color: var(--btn-remove) !important;
+}
+
+#icons_tarefas {
+    font-size: 17px;
+    margin-right: 5px;
 }
 
 /*============================== FIM TABELA ==================================*/
