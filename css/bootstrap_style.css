@@ -3660,7 +3660,8 @@ textarea.form-control-lg {
 }
 
 .dropdown-item {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
   padding: 8px 15px;
   clear: both;

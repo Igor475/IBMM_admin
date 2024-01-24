@@ -52,7 +52,9 @@ body {
     max-width: 520px;
     padding: 0 20px;
     margin: 170px auto;
-    box-shadow: 0 5px 10px rgba(72, 72, 72, 0.13);
+    box-shadow: 0 3px 15px rgba(72, 72, 72, 0.08);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
 }
 
 .wrapper {
@@ -93,9 +95,14 @@ body {
     transition: all .3s ease;
 }
 
-.login-form .row .inputs-login:focus {
-    border-color: var(--black-hover);
-    box-shadow: 0 0 0 0.2rem rgba(45, 45, 45, 0.25);
+.login-form .row .inputs-login {
+    color: var(--black-sans);
+}
+
+.login-form .row .inputs-login:focus .icon-log {
+    border-color: var(--verde-light-border);
+    box-shadow: 0 0 0 0.2rem rgba(0, 127, 95, 0.25);
+    color: var(--verde);
 }
 
 .wrapper .login-form .row .btn-login {
@@ -108,10 +115,8 @@ body {
     position: absolute;
     width: 47px;
     font-size: 18px;
-    color: #fff;
+    color: var(--border-color);
     height: 100%;
-    background-color: var(--black-hover);
-    border: 1px solid var(--black-hover);
     display: flex;
     border-radius: 5px 0 0 5px;
     justify-content: center;
@@ -132,15 +137,15 @@ body {
 .wrapper .login-form .button .btn-login {
     font-size: 16px;
     font-weight: 500;
-    background-color: var(--black-hover);
-    border: 1px solid var(--black-hover);
+    background-color: var(--verde);
+    border: 1px solid var(--verde);
     cursor: pointer;
     color: #fff;
     transition: all .3s ease;
 }
 
 .wrapper .login-form .button .btn-login:hover {
-    background-color: var(--preto);
+    background-color: var(--btn-hover);
 }
 
 .btn-close {
