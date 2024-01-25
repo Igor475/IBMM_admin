@@ -88,7 +88,7 @@ $pagina = 'cargos';
             </div>
             <form id="form" method="post">
                 <div class="modal-body">
-                    <div action="#" class="form-modal">
+                    <div action="#" class="form-modal-auto">
                         <div class="form first">
                             <div class="fields">
                                 <div class="input-field">
@@ -133,7 +133,7 @@ $pagina = 'cargos';
             </div>
             <form id="form-excluir" method="post">
                 <div class="modal-body">
-                    <div action="#" class="form-modal-excluir">
+                    <div action="#" class="form-modal-auto">
                         <div class="form first">
                             <div class="details personal">
 

@@ -61,7 +61,7 @@ if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem', 
         data_nasc = '$data_nasc', data_cad = curDate(), igreja = '$igreja', 
-        data_batismo = '$data_bat', cargo = '$cargo'");
+        data_batismo = '$data_bat', cargo = '$cargo', ativo = 'Sim'");
 
     $query->bindValue(":nome", "$nome");
     $query->bindValue(":email", "$email");
@@ -75,8 +75,7 @@ if ($id == "" || $id == 0) {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, data_nasc = '$data_nasc',
-        igreja = '$igreja', data_batismo = '$data_bat', cargo = '$cargo', ativo = 'Sim'
-        WHERE id = '$id'");
+        igreja = '$igreja', data_batismo = '$data_bat', cargo = '$cargo' WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);

@@ -49,12 +49,16 @@ $pagina = 'tarefas';
 
                         if ($status == 'Concluída') {
                             $classe = 'text_active';
+                            $class_text = 'text_title_task';
+                            $class_icon = 'active_icon';
                             $ativo = 'Reagendar Tarefa';
                             $icone = 'bi-toggle-on';
                             $ativar = 'Agendada';
                             $inativa = '';
                         } else {
                             $classe = 'text_desactive';
+                            $class_text = 'text_title_task_later';
+                            $class_icon = 'desactive_icon';
                             $ativo = 'Concluir Tarefa';
                             $icone = 'bi-toggle-off';
                             $ativar = 'Concluída';
@@ -64,8 +68,8 @@ $pagina = 'tarefas';
                         ?>
                         <tr class="column-body">
                             <td data-label="Título" class="td-table">
-                                <i id="icons_tarefas" class="bi bi-circle-fill <?php echo $classe ?> column-hidden"></i>
-                                <?php echo $titulo ?>
+                                <i id="icons_tarefas" class="bi bi-caret-right-square-fill <?php echo $class_icon ?>"></i>
+                                <span class="<?php echo $class_text ?>"><?php echo $titulo ?></span>
                             </td>
                             <td data-label="Nome" class="td-table column-hidden">
                                 <?php echo $descricao ?>
@@ -76,7 +80,7 @@ $pagina = 'tarefas';
                             <td data-label="Hora" class="td-table">
                                 <?php echo $hora ?>
                             </td>
-                            <td data-label="Nome" class="td-table column-hidden">
+                            <td data-label="Status" class="td-table">
                                 <?php echo $status ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
@@ -88,8 +92,8 @@ $pagina = 'tarefas';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $descricao ?>', 
-                                                '<?php echo $data ?>', '<?php echo $hora ?>')">
+                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $titulo ?>',
+                                            '<?php echo $descricao ?>', '<?php echo $data ?>', '<?php echo $hora ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -139,7 +143,7 @@ $pagina = 'tarefas';
                     <div action="#" class="form-modal">
                         <div class="form first">
                             <div class="fields">
-                                <div class="input-field flex_int_1">
+                                <div class="input-field">
                                     <label>Título (Max 25 Caracteres)</label>
                                     <input type="text" maxlength="25" name="titulo" id="titulo"
                                         placeholder="Título da Tarefa" required>
@@ -199,7 +203,7 @@ $pagina = 'tarefas';
             </div>
             <form id="form-excluir" method="post">
                 <div class="modal-body">
-                    <div action="#" class="form-modal-excluir">
+                    <div action="#" class="form-modal-auto">
                         <div class="form first">
                             <div class="details personal">
 
@@ -245,8 +249,9 @@ $pagina = 'tarefas';
 
 
 <script type="text/javascript">
-    function editar(id, descricao, data, hora) {
+    function editar(id, titulo, descricao, data, hora) {
         $('#id').val(id);
+        $('#titulo').val(titulo);
         $('#descricao').val(descricao);
         $('#data').val(data);
         $('#hora').val(hora);
@@ -262,6 +267,7 @@ $pagina = 'tarefas';
         var data = "<?= $data_atual ?>"
 
         $('#id').val('');
+        $('#titulo').val('');
         $('#descricao').val('');
         $('#data').val(data);
         $('#hora').val('');

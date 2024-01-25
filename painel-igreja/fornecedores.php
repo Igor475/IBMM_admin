@@ -1,11 +1,11 @@
 <?php
 require_once("../conexao.php");
-$pagina = 'secretarios';
+$pagina = 'fornecedores';
 ?>
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Novo Secretário
+        Novo Fornecedor
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>
@@ -14,7 +14,7 @@ $pagina = 'secretarios';
 <div class="tabs">
     <div class="table-container">
         <?php
-        $query = $pdo->query("SELECT * FROM $pagina order by id desc");
+        $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by id desc");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
@@ -22,12 +22,10 @@ $pagina = 'secretarios';
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
-                        <th class="th-table first_table" id="radius-foto">Foto</th>
-                        <th class="th-table">Nome</th>
-                        <th class="th-table">Cpf</th>
+                        <th class="th-table" id="radius-foto">Nome</th>
                         <th class="th-table">Email</th>
                         <th class="th-table column-hidden">Telefone</th>
-                        <th class="th-table column-hidden">Igreja</th>
+                        <th class="th-table column-hidden">Produto</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -38,32 +36,15 @@ $pagina = 'secretarios';
                         }
 
                         $nome = $res[$i]['nome'];
-                        $cpf = $res[$i]['cpf'];
                         $email = $res[$i]['email'];
                         $telefone = $res[$i]['telefone'];
                         $endereco = $res[$i]['endereco'];
-                        $foto = $res[$i]['foto'];
-                        $igreja = $res[$i]['igreja'];
+                        $produto = $res[$i]['produto'];
                         $id = $res[$i]['id'];
-
-                        $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
-                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-                        if (count($res_con) > 0) {
-                            $nome_ig = $res_con[0]['nome'];
-                        } else {
-                            $nome_ig = $nome_igreja_sistema;
-                        }
-
                         ?>
                         <tr class="column-body">
-                            <td data-label="Foto" class="td-table" id="radius-column-foto">
-                                <img class="profile_table" src="../img/membros/<?php echo $foto ?>" alt="Perfil" title="Perfil">
-                            </td>
-                            <td data-label="Nome" class="td-table">
+                            <td data-label="Nome" class="td-table" id="radius-column-foto">
                                 <?php echo $nome ?>
-                            </td>
-                            <td data-label="CPF" class="td-table">
-                                <?php echo $cpf ?>
                             </td>
                             <td data-label="Email" class="td-table">
                                 <?php echo $email ?>
@@ -72,7 +53,7 @@ $pagina = 'secretarios';
                                 <?php echo $telefone ?>
                             </td>
                             <td data-label="Telefone" class="td-table column-hidden">
-                                <?php echo $nome_ig ?>
+                                <?php echo $produto ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
@@ -83,8 +64,9 @@ $pagina = 'secretarios';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
+                                            <a class="dropdown-item" href="#"
+                                                onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $email ?>',
+                                                '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $produto ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -96,8 +78,9 @@ $pagina = 'secretarios';
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
-                                    '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>')">
+                                            <a class="dropdown-item" href="#"
+                                                onclick="dados('<?php echo $nome ?>', '<?php echo $email ?>', 
+                                                '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $produto ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -139,21 +122,20 @@ $pagina = 'secretarios';
                                         <input type="text" name="nome" id="nome" placeholder="Insira o Nome" required>
                                     </div>
 
-                                    <div class="input-field field_cpf_1">
-                                        <label>CPF</label>
-                                        <input type="text" name="cpf" id="cpf" placeholder="Insira o CPF" required>
-                                    </div>
-
                                     <div class="input-field">
                                         <label>Email</label>
-                                        <input type="email" name="email" id="email" placeholder="Insira o Email"
-                                            required>
+                                        <input type="email" name="email" id="email" placeholder="Insira o Email">
                                     </div>
 
                                     <div class="input-field field_area_1">
                                         <label>Telefone</label>
-                                        <input type="text" name="telefone" id="telefone" placeholder="Insira o Telefone"
-                                            required>
+                                        <input type="text" name="telefone" id="telefone" placeholder="Insira o Telefone">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Produto / Serviço</label>
+                                        <input type="text" name="produto" id="produto"
+                                            placeholder="Tipo de Produto / Serviço Fornecido">
                                     </div>
 
                                     <div class="input-field">
@@ -162,18 +144,9 @@ $pagina = 'secretarios';
                                             placeholder="Insira o Endereço">
                                     </div>
 
-                                    <div class="area_photo">
-                                        <div class="area_photo_flex">
-                                            <label>Foto</label>
-                                            <input type="file" class="input_file" id="imagem"
-                                            name="imagem" onChange="carregarImg();">
-                                        </div>
-                                        <div class="divImg">
-                                            <img class="photo_file" id="target" src="../img/membros/sem-foto.jpg" alt="">
-                                        </div>
-                                    </div>
-
                                     <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="id_igreja" id="id_igreja"
+                                        value="<?php echo $id_igreja ?>">
 
                                 </div>
                             </div>
@@ -262,12 +235,6 @@ $pagina = 'secretarios';
             </div>
             <div class="modal-body scroll-modal">
                 <div class="user_area">
-                    <img src="../img/svg/cpf.svg" class="img_icon_data" alt="">
-                    <!-- <i class="bi bi-person-vcard icon_user"></i> -->
-                    <span class="user_name">CPF: </span>
-                    <span class="texts_son" id="cpf-dados"></span>
-                </div>
-                <div class="user_area">
                     <img src="../img/svg/email.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-envelope-at icon_user"></i> -->
                     <span class="user_name">Email:</span>
@@ -285,8 +252,11 @@ $pagina = 'secretarios';
                     <span class="user_name">Endereço: </span>
                     <span class="texts_son" id="endereco-dados"></span>
                 </div>
-                <div class="user_profile_area">
-                    <img class="img_info_profile" src="" id="foto-dados" alt="">
+                <div class="user_area">
+                    <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-person-vcard icon_user"></i> -->
+                    <span class="user_name">Produto / Serviço: </span>
+                    <span class="texts_son" id="produto-dados"></span>
                 </div>
             </div>
         </div>
@@ -311,14 +281,13 @@ $pagina = 'secretarios';
 
 
 <script type="text/javascript">
-    function editar(id, nome, cpf, email, telefone, endereco, foto) {
+    function editar(id, nome, email, telefone, endereco, produto) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#email').val(email);
-        $('#cpf').val(cpf);
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
-        $('#target').attr('src', '../img/membros/' + foto);
+        $('#produto').val(produto);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -327,13 +296,12 @@ $pagina = 'secretarios';
     }
 
 
-    function dados(nome, cpf, email, telefone, endereco, foto) {
+    function dados(nome, email, telefone, endereco, produto) {
         $('#nome-dados').text(nome);
-        $('#cpf-dados').text(cpf);
         $('#email-dados').text(email);
         $('#telefone-dados').text(telefone);
         $('#endereco-dados').text(endereco);
-        $('#foto-dados').attr('src', '../img/membros/' + foto);
+        $('#produto-dados').text(produto);
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
@@ -345,10 +313,9 @@ $pagina = 'secretarios';
         $('#id').val('');
         $('#nome').val('');
         $('#email').val('');
-        $('#cpf').val('');
+        $('#produto').val('');
         $('#telefone').val('');
         $('#endereco').val('');
-        $('#target').attr('src', '../img/membros/sem-foto.jpg');
     }
 
 </script>

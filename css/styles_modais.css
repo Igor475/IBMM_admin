@@ -172,12 +172,21 @@
     flex: .5 !important;
 }
 
+.flex_int_3 {
+    flex: 1 380px !important;
+}
+
 /*========================== ESTILIZAÇÕES DO SELECT2 ===========================*/
 .select2 .select2-container .select2-container--default,
 .select2-container--default .select2-selection--single {
     background-color: transparent !important;
     border: 2px solid var(--border-bottom) !important;
     margin: 8px 0 !important;
+}
+
+.select2 .select2-container .select2-container--default,
+.select2-container--default .select2-selection--single:focus {
+    border: 2px solid var(--verde) !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -398,6 +407,11 @@
     width: 20px;
 }
 
+.user_area .img_icon_data {
+    width: 22px;
+    margin-right: 3px;
+}
+
 .user_profile_area {
     display: flex;
     justify-content: center;
@@ -425,7 +439,7 @@
         height: 400px;
     }
 
-    .form-modal-excluir {
+    .form-modal-auto {
         height: auto;
     }
 
@@ -442,6 +456,10 @@
     }
     
     .field_cpf_1 {
+        flex: 1 !important;
+    }
+
+    .flex_int_2 {
         flex: 1 !important;
     }
 

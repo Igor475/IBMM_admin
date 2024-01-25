@@ -11,6 +11,13 @@ $nome_igreja_sistema = "Igreja Batista Missão Multiplicar";
 $telefone_igreja_sistema = "(00) 00000-0000";
 $endereco_igreja_sistema = "Avenida Brasil, 33.815 Bangu , Rio de Janeiro, RJ, Brazil";
 
+
+
+// VARIÁVEIS GLOBAIS
+$quantidade_tarefas = 20; //exibindo as próximas 20tarefas no painel da igreja
+
+
+
 try {
     $pdo = new PDO("mysql:dbname=$banco;host=$servidor", "$usuario", "$senha");
 } catch (Exception $e) {
@@ -85,7 +92,8 @@ $total_reg = count($res);
 
 if($total_reg == 0) {
     $pdo->query("INSERT INTO config SET nome = '$nome_igreja_sistema', email = '$email_super_adm',
-        endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema' ");
+        endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema', 
+        qtd_tarefas = '$quantidade_tarefas' ");
 }
 
 
@@ -95,6 +103,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $email_super_adm = $res[0]['email'];
 $nome_igreja_sistema = $res[0]['nome'];
 $telefone_igreja_sistema = $res[0]['telefone'];
-$endereco_igreja_sistema = $res[0]['endereco'];;
+$endereco_igreja_sistema = $res[0]['endereco'];
+$quantidade_tarefas = $res[0]['qtd_tarefas'];
 
 ?>

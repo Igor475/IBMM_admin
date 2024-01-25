@@ -5,6 +5,7 @@ require_once("../conexao.php");
 $id_usuario = @$_SESSION['id_usuario'];
 
 $data_atual = date('Y-m-d');
+$hora_atual = date('H:i:s');
 
 if(@$_GET['igreja'] > 0) {
     @$_SESSION['id_igreja'] = @$_GET['igreja'];
@@ -84,7 +85,7 @@ if ($pag == "") {
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                 <i class="bx bx-menu icon_menu_side"></i>
-                Menu
+                <span class="menu_hidden">Menu</span>
             </button>
 
             <div class="header-left">
@@ -167,7 +168,9 @@ if ($pag == "") {
                         <li>
                             <a href="index.php" class="font_main_index"><i class='bi bi-house-door icon'></i>Home</a>
                         </li>
-                        <li class="divider" data-text="Principal">Principal</li>
+                        <li class="divider">
+                            <span class="text_divider">Principal</span>
+                        </li>
                         <li>
                             <a href="#" class="font_main_index"><i class='bi bi-person-plus icon'></i> Pessoas <i
                                     class='bx bx-chevron-right icon-right'></i></a>
@@ -176,6 +179,7 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=pastores">Pastores</a></li>
                                 <li><a href="index.php?pag=tesoureiros">Tesoureiros</a></li>
                                 <li><a href="index.php?pag=secretarios">Secretários(as)</a></li>
+                                <li><a href="index.php?pag=fornecedores">Fornecedores</a></li>
                                 <li><a href="index.php?pag=usuarios">Usuários</a></li>
                             </ul>
                         </li>
@@ -208,13 +212,11 @@ if ($pag == "") {
                                 <li><a href="#">Fechamentos Mensais</a></li>
                             </ul>
                         </li>
-                        <li class="divider" data-text="Outros">Outros</li>
-                        <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
+                        <li class="divider">
+                            <span class="text_divider">Outros</span>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index" data-bs-toggle="modal" data-bs-target="#modalConfig">
-                            <i class='bi bi-gear icon'></i>Configuração Geral</a>
+                            <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
                         </li>
                         <li>
                             <a href="#" class="font_main_index"><i class='bi bi-database-down icon'></i>Backup Banco</a>

@@ -99,10 +99,9 @@ body {
     color: var(--black-sans);
 }
 
-.login-form .row .inputs-login:focus .icon-log {
+.login-form .row .inputs-login:focus {
     border-color: var(--verde-light-border);
     box-shadow: 0 0 0 0.2rem rgba(0, 127, 95, 0.25);
-    color: var(--verde);
 }
 
 .wrapper .login-form .row .btn-login {
@@ -115,7 +114,7 @@ body {
     position: absolute;
     width: 47px;
     font-size: 18px;
-    color: var(--border-color);
+    color: var(--verde);
     height: 100%;
     display: flex;
     border-radius: 5px 0 0 5px;

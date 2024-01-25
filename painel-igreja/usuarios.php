@@ -110,7 +110,7 @@ $pagina = 'usuarios';
             </div>
             <form id="form" method="post">
                 <div class="modal-body">
-                    <div action="#" class="form-modal">
+                    <div action="#" class="form-modal-auto">
                         <div class="form first">
                             <div class="details personal">
                                 <div class="fields">

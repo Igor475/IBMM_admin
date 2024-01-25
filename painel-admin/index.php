@@ -70,7 +70,7 @@ if ($pag == "") {
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                 <i class="bx bx-menu icon_menu_side"></i>
-                Menu
+                <span class="menu_hidden">Menu</span>
             </button>
 
             <div class="header-left">
@@ -151,7 +151,9 @@ if ($pag == "") {
                         <li>
                             <a href="index.php" class="font_main_index"><i class='bi bi-house-door icon'></i>Home</a>
                         </li>
-                        <li class="divider" data-text="Principal">Principal</li>
+                        <li class="divider">
+                            <span class="text_divider">Principal</span>
+                        </li>
                         <li>
                             <a href="#" class="font_main_index"><i class='bi bi-person-plus icon'></i> Pessoas <i
                                     class='bx bx-chevron-right icon-right'></i></a>
@@ -192,7 +194,9 @@ if ($pag == "") {
                                 <li><a href="#">Fechamentos Mensais</a></li>
                             </ul>
                         </li>
-                        <li class="divider" data-text="Outros">Outros</li>
+                        <li class="divider">
+                            <span class="text_divider">Outros</span>
+                        </li>
                         <li>
                             <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
                         </li>
@@ -339,6 +343,12 @@ if ($pag == "") {
                                         <label>Endereço da Igreja</label>
                                         <input type="text" name="end_igr" id="end_igr" placeholder="Telefone da Igreja"
                                             value="<?php echo $end_igr ?>" required>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Quantidade Tarefas</label>
+                                        <input type="number" name="qtd_tar_igr" id="qtd_tar_igr"
+                                            value="<?php echo $quantidade_tarefas ?>" required>
                                     </div>
 
                                 </div>

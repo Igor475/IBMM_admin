@@ -261,7 +261,7 @@ $pagina = 'pastores';
             </div>
             <form id="form-excluir" method="post">
                 <div class="modal-body">
-                    <div action="#" class="form-modal-excluir">
+                    <div action="#" class="form-modal-auto">
                         <div class="form first">
                             <div class="details personal">
 
@@ -308,37 +308,44 @@ $pagina = 'pastores';
             </div>
             <div class="modal-body scroll-modal">
                 <div class="user_area">
-                    <i class="bi bi-person-vcard icon_user"></i>
+                    <img src="../img/svg/cpf.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-person-vcard icon_user"></i> -->
                     <span class="user_name">CPF: </span>
                     <span class="texts_son" id="cpf-dados"></span>
                 </div>
                 <div class="user_area">
-                    <i class="bi bi-envelope-at icon_user"></i>
+                    <img src="../img/svg/email.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-envelope-at icon_user"></i> -->
                     <span class="user_name">Email:</span>
                     <span class="texts_son" id="email-dados"></span>
                 </div>
                 <div class="user_area">
-                    <i class="bi bi-phone icon_user"></i>
+                    <img src="../img/svg/telefone.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-phone icon_user"></i> -->
                     <span class="user_name">Telefone: </span>
                     <span class="texts_son" id="telefone-dados"></span>
                 </div>
                 <div class="user_area">
-                    <i class="bi bi-geo-alt icon_user"></i>
+                    <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-geo-alt icon_user"></i> -->
                     <span class="user_name">Endereço: </span>
                     <span class="texts_son" id="endereco-dados"></span>
                 </div>
                 <div class="user_area">
-                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Data de Cadastro: </span>
                     <span class="texts_son" id="cadastro-dados"></span>
                 </div>
                 <div class="user_area">
-                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Data de nascimento: </span>
                     <span class="texts_son" id="nasc-dados"></span>
                 </div>
                 <div class="user_area">
-                    <i class="bi bi-calendar4-event icon_user"></i>
+                    <img src="../img/svg/igreja.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Igreja: </span>
                     <span class="texts_son" id="igreja-dados"></span>
                 </div>
@@ -468,7 +475,10 @@ $pagina = 'pastores';
         $('#telefone').val('');
         $('#endereco').val('');
         $('#data_nasc').val('');
-        $('#igreja').val('').change();
+        
+        document.getElementById("igreja").options.selectedIndex = 0;
+        $('#igreja').val($('#igreja').val()).change(); 
+        
         $('#target').attr('src', '../img/membros/sem-foto.jpg');
     }
 

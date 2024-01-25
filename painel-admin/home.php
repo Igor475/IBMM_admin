@@ -85,46 +85,46 @@ $membrosCadastrados = @count($res_m);
 
 
 <h1 class="churchs">Igrejas (Sede e Filial)</h1>
-<?php
-$query = $pdo->query("SELECT * FROM igrejas order by matriz desc, nome asc");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-$total_reg = count($res);
+<div class="widget-church">
+    <?php
+    $query = $pdo->query("SELECT * FROM igrejas order by matriz desc, nome asc");
+    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+    $total_reg = count($res);
 
-for ($i = 0; $i < $total_reg; $i++) {
-    foreach ($res[$i] as $key => $value) {
-    }
+    for ($i = 0; $i < $total_reg; $i++) {
+        foreach ($res[$i] as $key => $value) {
+        }
 
-    $nome = $res[$i]['nome'];
-    $imagem = $res[$i]['imagem'];
-    $matriz = $res[$i]['matriz'];
-    $pastor = $res[$i]['pastor'];
-    $id_ig = $res[$i]['id'];
+        $nome = $res[$i]['nome'];
+        $imagem = $res[$i]['imagem'];
+        $matriz = $res[$i]['matriz'];
+        $pastor = $res[$i]['pastor'];
+        $id_ig = $res[$i]['id'];
 
-    if ($matriz == 'Sim') {
-        $bordacard = 'bordacardsede';
-        $classe = 'text_matriz';
-    } else {
-        $bordacard = 'bordacard';
-        $classe = 'text_filiais';
-    }
+        if ($matriz == 'Sim') {
+            $bordacard = 'bordacardsede';
+            $classe = 'text_matriz';
+        } else {
+            $bordacard = 'bordacard';
+            $classe = 'text_filiais';
+        }
 
-    $query_m = $pdo->query("SELECT *FROM membros WHERE  igreja = '$id_ig' and ativo = 'Sim'");
-    $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
-    $membrosCad = @count($res_m);
+        $query_m = $pdo->query("SELECT *FROM membros WHERE  igreja = '$id_ig' and ativo = 'Sim'");
+        $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
+        $membrosCad = @count($res_m);
 
-    $query_con = $pdo->query("SELECT * FROM pastores where id = '$pastor'");
-    $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-    if (count($res_con) > 0) {
-        $nome_p = $res_con[0]['nome'];
-    } else {
-        $nome_p = 'Não Definido';
-    }
+        $query_con = $pdo->query("SELECT * FROM pastores where id = '$pastor'");
+        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+        if (count($res_con) > 0) {
+            $nome_p = $res_con[0]['nome'];
+        } else {
+            $nome_p = 'Não Definido';
+        }
 
-    ?>
-    <div class="widget-church">
+        ?>
         <a href="../painel-igreja/index.php?igreja=<?php echo $id_ig ?>" class="card-church <?php echo $bordacard ?>">
-            <div class="head-church">
-                <div class="info-church">
+            <div class="head_church_painel_admin">
+                <div class="info_church_painel_admin">
                     <p class="name-brazil <?php echo $classe ?>">
                         <?php echo $nome ?>
                     </p>
@@ -137,7 +137,9 @@ for ($i = 0; $i < $total_reg; $i++) {
                     <div class="image-church">
                         <img class="img_card" src="../img/igrejas/<?php echo $imagem ?>" alt="">
                     </div>
-                    <p class="text_member">Membros <?php echo @$membrosCad ?></p>
+                    <p class="text_member">Membros
+                        <?php echo @$membrosCad ?>
+                    </p>
                 </div>
             </div>
         </a>
