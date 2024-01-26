@@ -365,7 +365,7 @@ $pagina = 'pagar';
                     <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-geo-alt icon_user"></i> -->
                     <span class="user_name">Vencimento: </span>
-                    <span class="texts_son" id="venc-dados"></span>
+                    <span class="texts_son" id="vencimento-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
@@ -477,14 +477,14 @@ $pagina = 'pagar';
     }
 
 
-    function dados(descricao, fornecedor, valor, data, vencimento, usuario_cad, usuario_baixa, data_baixa, frequencia, pago, arquivo) {
+    function dados(descricao, nome_for, valor, data, vencimento, usuario_cad, usuario_baixa, data_baixa, frequencia, pago, arquivo) {
 
         if (data_baixa === '00/00/0000') {
-            data_bat = 'Pendente';
+            data_baixa = 'Pendente';
         }
 
         $('#descricao-dados').text(descricao);
-        $('#fornecedor-dados').text(fornecedor);
+        $('#fornecedor-dados').text(nome_for);
         $('#valor-dados').text(valor);
         $('#data-dados').text(data);
         $('#vencimento-dados').text(vencimento);
@@ -493,7 +493,7 @@ $pagina = 'pagar';
         $('#data-baixa-dados').text(data_baixa);
         $('#frequencia-dados').text(frequencia);
         $('#pago-dados').text(pago);
-        $('#foto-dados').attr('src', '../img/contas/' + foto);
+        $('#foto-dados').attr('src', '../img/contas/' + arquivo);
 
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
