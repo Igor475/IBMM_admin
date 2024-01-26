@@ -193,10 +193,10 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-folder-plus icon'></i> Consultas <i
+                            <a href="#" class="font_main_index"><i class='bi bi-coin icon'></i> Financeiro <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
-                                <li><a href="#">Anexos / Arquivos</a></li>
+                                <li><a href="index.php?pag=pagar">Contas à Pagar</a></li>
                                 <li><a href="#">Patrimônios</a></li>
                             </ul>
                         </li>

@@ -944,8 +944,14 @@ td.td-table#radius-column-action:last-child {
     pointer-events: all;
     top: calc(100% - 20px);
 }
+
 .text_active {
     font-size: 22px !important;
+    color: var(--verde) !important;
+}
+
+.icon_bill {
+    font-size: 17px !important;
     color: var(--verde) !important;
 }
 

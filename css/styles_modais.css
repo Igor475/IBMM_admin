@@ -114,6 +114,12 @@
     border-radius: 50%;
 }
 
+.photo_file_archives {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
 .area_photo_flex label {
     font-size: 13px;
     font-weight: 600;
@@ -174,6 +180,18 @@
 
 .flex_int_3 {
     flex: 1 380px !important;
+}
+
+.flex_int_4 {
+    flex: 4 !important;
+}
+
+.flex_int_5 {
+    flex: .5 !important;
+}
+
+.flex_int_6 {
+    flex: .5 1 270px !important;
 }
 
 /*========================== ESTILIZAÇÕES DO SELECT2 ===========================*/
@@ -461,6 +479,10 @@
 
     .flex_int_2 {
         flex: 1 !important;
+    }
+
+    .flex_int_6 {
+        flex: 1 1 330px!important;
     }
 
     .input-field input {

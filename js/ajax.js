@@ -158,6 +158,16 @@ function carregarImg() {
         return;
     }
 
+    if(resultado[1] === 'rar'){
+        $('#target').attr('src', "../img/rar.png");
+        return;
+    }
+
+    if(resultado[1] === 'zip'){
+        $('#target').attr('src', "../img/rar.png");
+        return;
+    }
+
     var reader = new FileReader();
 
     reader.onloadend = function () {
