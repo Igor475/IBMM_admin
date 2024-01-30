@@ -29,6 +29,10 @@ if($total_reg > 0) {
         echo "<script>window.location='painel-igreja'</script>";
     }
 
+    if($res[0]['nivel'] == 'tesoureiro') {
+        echo "<script>window.location='painel-igreja'</script>";
+    }
+
 } else {
     echo "<script>$(function() { alertaTempo('Usuário ou senha incorretos!!', 1000) });</script>";
 }

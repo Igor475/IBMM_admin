@@ -15,7 +15,7 @@ $pagina = 'pagar';
     <div class="table-container">
         <?php
         $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by pago asc,
-            vencimento asc");
+            vencimento asc, id asc");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
@@ -23,13 +23,13 @@ $pagina = 'pagar';
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
-                        <th class="th-table first_table" id="radius-foto">Arquivo</th>
                         <th class="th-table">Descrição</th>
                         <th class="th-table column-hidden">Fornecedor</th>
                         <th class="th-table">Valor</th>
                         <th class="th-table">Vencimento</th>
                         <th class="th-table column-hidden">Frequência</th>
                         <th class="th-table column-hidden" id="radius-action">Pago</th>
+                        <th class="th-table first_table" id="radius-foto">Arquivo</th>
                         <th class="th-table last_table">Ações</th>
                     </tr>
                 </thead>
@@ -55,9 +55,19 @@ $pagina = 'pagar';
 
                         $id = $res[$i]['id'];
 
+                        //EXTRAINDO EXTENSÃO DO ARQUIVO
+                        $ext = pathinfo($arquivo, PATHINFO_EXTENSION);
+                        if ($ext == 'pdf') {
+                            $tumb_arquivo = 'pdf.png';
+                        } else if ($ext == 'rar' || $ext == 'zip') {
+                            $tumb_arquivo = 'rar.png';
+                        } else {
+                            $tumb_arquivo = $arquivo;
+                        }
 
                         if ($pago == 'Sim') {
                             $classe = 'text_active';
+                            $ocultar = 'none';
                             /* $ativo = 'Desativar Membro';
                             $icone = 'bi-toggle-on';
                             $ativar = 'Não';
@@ -65,12 +75,24 @@ $pagina = 'pagar';
                             $tab = 'Ativo'; */
                         } else {
                             $classe = 'text_desactive';
+                            $ocultar = '';
                             /* $ativo = 'Ativar Membro';
                             $icone = 'bi-toggle-off';
                             $ativar = 'Sim';
                             $inativa = 'text_opacity';
                             $tab = 'Inativo'; */
                         }
+
+                        if ($vencimento >= $data_atual) {
+                            $classe_linha = '';
+                        } else {
+                            if($pago != 'Sim') {
+                                $classe_linha = 'text_bill_later';
+                            } else {
+                                $classe_linha = '';
+                            }
+                        }
+
 
 
                         $query_con = $pdo->query("SELECT * FROM fornecedores where id = '$fornecedor'");
@@ -97,32 +119,45 @@ $pagina = 'pagar';
                             $usuario_baixa = '';
                         }
 
+                        $query_con = $pdo->query("SELECT * FROM frequencias where dias = '$frequencia'");
+                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_con) > 0) {
+                            $nome_fre = $res_con[0]['frequencia'];
+                        } else {
+                            $nome_fre = '';
+                        }
+
                         $valorF = number_format($valor, 2, ',', '.');
                         $dataF = implode('/', array_reverse(explode('-', $data)));
                         $data_baixaF = implode('/', array_reverse(explode('-', $data_baixa)));
                         $vencimentoF = implode('/', array_reverse(explode('-', $vencimento)));
                         ?>
-                        <tr class="column-body">
-                            <td data-label="Foto" class="td-table" id="radius-column-foto">
-                                <img class="profile_table" src="../img/contas/<?php echo $arquivo ?>" alt="Arquivo" title="Arquivo">
-                            </td>
-                            <td data-label="Descrição" class="td-table">
+                        <tr class="column-body <?php echo $classe_linha ?>">
+                            <td data-label="Descrição" class="td-table" id="radius-column-foto">
+                                <i class="bi bi-receipt <?php echo $classe ?>"></i>
                                 <?php echo $descricao ?>
                             </td>
                             <td data-label="Fornecedor" class="td-table column-hidden">
                                 <?php echo $nome_for ?>
                             </td>
                             <td data-label="Valor" class="td-table">
-                                R$ <?php echo $valorF ?>
+                                R$
+                                <?php echo $valorF ?>
                             </td>
                             <td data-label="Vencimento" class="td-table">
                                 <?php echo $vencimentoF ?>
                             </td>
                             <td data-label="Frequência" class="td-table column-hidden">
-                                <?php echo $frequencia ?>
+                                <?php echo $nome_fre ?>
                             </td>
                             <td data-label="Pago" class="td-table column-hidden">
                                 <?php echo $pago ?>
+                            </td>
+                            <td data-label="Foto" class="td-table">
+                                <a href="../img/contas/<?php echo $arquivo ?>" target="_blank">
+                                    <img class="profile_archives" src="../img/contas/<?php echo $tumb_arquivo ?>" alt="Arquivo"
+                                        title="Arquivo">
+                                </a>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
@@ -133,14 +168,15 @@ $pagina = 'pagar';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
+                                            <a class="dropdown-item <?php echo $ocultar ?>" href="#"
+                                                onclick="editar('<?php echo $id ?>', 
                                             '<?php echo $descricao ?>', '<?php echo $fornecedor ?>', '<?php echo $valor ?>', 
-                                            '<?php echo $vencimento ?>', '<?php echo $frequencia ?>', '<?php echo $arquivo ?>')">
+                                            '<?php echo $vencimento ?>', '<?php echo $frequencia ?>', '<?php echo $tumb_arquivo ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#"
+                                            <a class="dropdown-item <?php echo $ocultar ?>" href="#"
                                                 onclick="excluir('<?php echo $id ?>', '<?php echo $descricao ?>')">
                                                 <i class="bi bi-trash3 icons_actions"></i>
                                                 Excluir
@@ -149,16 +185,16 @@ $pagina = 'pagar';
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="dados('<?php echo $descricao ?>', 
                                             '<?php echo $nome_for ?>', '<?php echo $valorF ?>', '<?php echo $dataF ?>', 
-                                            '<?php echo $vencimentoF ?>', '<?php echo $usuario_cad ?>', '<?php echo $usuario_baixa?>', 
-                                            '<?php echo $data_baixaF ?>', '<?php echo $frequencia ?>', '<?php echo $pago ?>', 
-                                            '<?php echo $arquivo ?>')">
+                                            '<?php echo $vencimentoF ?>', '<?php echo $usuario_cad ?>', '<?php echo $usuario_baixa ?>', 
+                                            '<?php echo $data_baixaF ?>', '<?php echo $nome_fre ?>', '<?php echo $pago ?>', 
+                                            '<?php echo $tumb_arquivo ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="baixa('<?php echo $id ?>', 
+                                            <a class="dropdown-item <?php echo $ocultar ?>" href="#" onclick="baixar('<?php echo $id ?>', 
                                             '<?php echo $descricao ?>')" title="Dar baixa na Conta">
-                                                <i class="bi bi-receipt icons_actions icon_bill"></i>
+                                                <i class="bi bi-file-earmark-arrow-down-fill icons_actions icon_bill"></i>
                                                 Dar baixa
                                             </a>
                                         </li>
@@ -197,7 +233,8 @@ $pagina = 'pagar';
                                 <div class="fields">
                                     <div class="input-field flex_int_6">
                                         <label>Descrição</label>
-                                        <input type="text" name="descricao" id="descricao" placeholder="Insira a Descrição" required>
+                                        <input type="text" name="descricao" id="descricao"
+                                            placeholder="Insira a Descrição" required>
                                     </div>
 
                                     <div class="input-field field_cpf_1">
@@ -232,17 +269,30 @@ $pagina = 'pagar';
 
                                     <div class="input-field flex_int_2">
                                         <label>Vencimento</label>
-                                        <input type="date" name="vencimento" id="vencimento" 
+                                        <input type="date" name="vencimento" id="vencimento"
                                             value="<?php echo $data_atual ?>" required>
                                     </div>
 
                                     <div class="input-field flex_int_4">
                                         <label>Frequência</label>
                                         <select class="sel2" id="frequencia" name="frequencia">
-                                            <option value="0">Uma vez</option>
-                                            <option value="1">Diária</option>
-                                            <option value="2">Semanal</option>
-                                            <option value="3">Mensal</option>
+                                        <?php
+                                            $query = $pdo->query("SELECT * FROM frequencias order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['frequencia'];
+                                                    $id_reg = $res[$i]['dias'];
+                                                    ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
                                         </select>
                                     </div>
 
@@ -253,8 +303,8 @@ $pagina = 'pagar';
                                                 onChange="carregarImg();">
                                         </div>
                                         <div class="divImg">
-                                            <img class="photo_file_archives" id="target" src="../img/contas/sem-foto.jpg"
-                                                alt="">
+                                            <img class="photo_file_archives" id="target"
+                                                src="../img/contas/sem-foto.jpg" alt="">
                                         </div>
                                     </div>
 
@@ -380,7 +430,7 @@ $pagina = 'pagar';
                     <span class="texts_son" id="usu-baixa-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/igreja.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Data Baixa: </span>
                     <span class="texts_son" id="data-baixa-dados"></span>
@@ -409,41 +459,50 @@ $pagina = 'pagar';
 
 
 
-<div class="modal fade" id="modalObs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="modalBaixar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="Cadastro">Observações - <span id="nome-obs"></span></h3>
+                <h3 class="Cadastro">Confirmar Pagamento</h3>
                 <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
             </div>
-            <form id="form-obs" method="post">
+            <form id="form-excluir" method="post">
                 <div class="modal-body">
-                    <div class="area_obs">
-                        <label class="txt_label_obs">Observações (Máximo de 500 Caracteres)</label>
-                        <textarea class="txt-obs" name="obs" id="obs" maxlength="500"></textarea>
+                    <div action="#" class="form-modal-auto">
+                        <div class="form first">
+                            <div class="details personal">
+
+                                <span class="text_excluir">Deseja Realmente dar baixa nesta conta?
+                                    <span id="descricao-baixar"></span>?
+
+                                    <div id="mensagem-baixar"></div>
+
+                                    <input type="hidden" name="id-baixar" id="id-baixar">
+
+                            </div>
+                        </div>
                     </div>
-
-                    <div id="mensagem-obs"></div>
-
-                    <input type="hidden" name="id-obs" id="id-obs">
-
                 </div>
                 <div id="mensagem"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-obs" class="btn-close"
+                        <button type="button" id="btn-fechar-baixar" class="btn-close"
                             data-bs-dismiss="modal">Fechar</button>
 
-                        <button type="submit" class="btn-add">
-                            Salvar
-                            <i class="bi bi-pencil-square icon-btn-form"></i>
-                        </button>
+                        <a href="#" onclick="mudarStatus($('#id-baixar').val())" class="btn-add">
+                            Baixar
+                            <i class="bi bi-receipt icon-btn-form"></i>
+                        </a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+
 
 
 
@@ -465,7 +524,7 @@ $pagina = 'pagar';
         $('#valor').val(valor);
         $('#vencimento').val(vencimento);
 
-        $('#target').attr('src', '../img/conta/' + foto);
+        $('#target').attr('src', '../img/contas/' + foto);
 
         $('#fornecedor').val(fornecedor).change();
         $('#frequencia').val(frequencia).change();
@@ -506,7 +565,7 @@ $pagina = 'pagar';
         var data_at = "<?= $data_atual ?>"
 
         console.log(data_at)
-        
+
         $('#id').val('');
         $('#descricao').val('');
         $('#valor').val('');
@@ -520,5 +579,16 @@ $pagina = 'pagar';
 
         $('#target').attr('src', '../img/contas/sem-foto.jpg');
     }
+
+
+    function baixar(id, descricao){
+    $('#id-baixar').val(id);
+    $('#descricao-baixar').text(descricao);
+    var myModal = new bootstrap.Modal(document.getElementById('modalBaixar'), {       });
+    myModal.show();
+    $('#mensagem-baixar').text('');
+    limpar();
+}
+
 
 </script>

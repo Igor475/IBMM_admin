@@ -763,6 +763,10 @@
     color: var(--verde) !important;
 }
 
+.none {
+    display: none !important;
+}
+
 .info_church_painel_admin {
     display: flex;
     flex-direction: column;
@@ -829,6 +833,10 @@ td.td-table#radius-column-action:last-child {
     border-radius: 0 0 5px 0;
 }
 
+.content-table .body-table .column-body {
+    color: var(--black-hover);
+}
+
 .content-table .body-table .column-body:hover {
     background-color: #ccc !important;
     transition: all .3s ease;
@@ -838,7 +846,6 @@ td.td-table#radius-column-action:last-child {
     font-size: 14px;
     letter-spacing: 0.35px;
     font-weight: 400;
-    color: #4F4F4F;
     /* background-color: #ffff; */
     padding: 7px;
     text-align: center;
@@ -862,6 +869,12 @@ td.td-table#radius-column-action:last-child {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+
+.content-table .body-table .column-body .td-table .profile_archives {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
 }
 
 .list_dots {
@@ -951,8 +964,9 @@ td.td-table#radius-column-action:last-child {
 }
 
 .icon_bill {
-    font-size: 17px !important;
+    font-size: 15px !important;
     color: var(--verde) !important;
+    line-height: 0 !important;
 }
 
 .active_icon {
@@ -977,6 +991,10 @@ td.td-table#radius-column-action:last-child {
 
 .desactive_icon {
     font-size: 14px !important;
+    color: var(--btn-remove) !important;
+}
+
+.text_bill_later {
     color: var(--btn-remove) !important;
 }
 

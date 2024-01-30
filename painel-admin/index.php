@@ -171,7 +171,7 @@ if ($pag == "") {
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=igrejas">Igrejas</a></li>
                                 <li><a href="index.php?pag=cargos">Cargos Ministeriais</a></li>
-                                <li><a href="#">Frequências (Contas)</a></li>
+                                <li><a href="index.php?pag=frequencias">Frequências (Contas)</a></li>
                             </ul>
                         </li>
                         <li>
@@ -349,6 +349,16 @@ if ($pag == "") {
                                         <label>Quantidade Tarefas</label>
                                         <input type="number" name="qtd_tar_igr" id="qtd_tar_igr"
                                             value="<?php echo $quantidade_tarefas ?>" required>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Limitar Tesoureiro</label>
+                                        <select class="form-select" name="limitar_tesoureiro">
+                                            <option <?php if($limitar_tesoureiro == 'Sim') { ?>
+                                                selected <?php } ?> value="Sim">Sim</option>
+                                            <option <?php if($limitar_tesoureiro == 'Não') { ?>
+                                                selected <?php } ?> value="Não">Não</option>
+                                        </select>
                                     </div>
 
                                 </div>

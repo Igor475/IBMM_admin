@@ -193,10 +193,15 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-coin icon'></i> Financeiro <i
+                            <a href="#" class="font_main_index"><i class='bi bi-currency-dollar icon'></i> Financeiro <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=pagar">Contas à Pagar</a></li>
+                                <li><a href="index.php?pag=receber">Contas à Receber</a></li>
+                                <li><a href="index.php?pag=dizimos">Dízimos</a></li>
+                                <li><a href="index.php?pag=ofertas">Ofertas</a></li>
+                                <li><a href="index.php?pag=doacoes">Doações</a></li>
+                                <li><a href="index.php?pag=vendas">Vendas</a></li>
                                 <li><a href="#">Patrimônios</a></li>
                             </ul>
                         </li>

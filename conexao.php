@@ -15,6 +15,7 @@ $endereco_igreja_sistema = "Avenida Brasil, 33.815 Bangu , Rio de Janeiro, RJ, B
 
 // VARIÁVEIS GLOBAIS
 $quantidade_tarefas = 20; //exibindo as próximas 20tarefas no painel da igreja
+$limitar_tesoureiro = 'Sim'; //Se tiver sim, o tesoureiro não poderá excluir e nem editar as Ofertas e Dízimos
 
 
 
@@ -84,6 +85,15 @@ $pdo->query("INSERT INTO cargos SET nome = 'Membro' ");
 
 
 
+// Criando a Frequência de uma vez (Única)
+$query = $pdo->query("SELECT * FROM frequencias");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = count($res);
+
+if($total_reg == 0)
+$pdo->query("INSERT INTO frequencias SET frequencia = 'Uma vez', dias = 0");
+
+
 
 //Criando variáveis padrões do sistema
 $query = $pdo->query("SELECT * FROM config");
@@ -93,7 +103,7 @@ $total_reg = count($res);
 if($total_reg == 0) {
     $pdo->query("INSERT INTO config SET nome = '$nome_igreja_sistema', email = '$email_super_adm',
         endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema', 
-        qtd_tarefas = '$quantidade_tarefas' ");
+        qtd_tarefas = '$quantidade_tarefas', limitar_tesoureiro = '$limitar_tesoureiro' ");
 }
 
 
@@ -105,5 +115,6 @@ $nome_igreja_sistema = $res[0]['nome'];
 $telefone_igreja_sistema = $res[0]['telefone'];
 $endereco_igreja_sistema = $res[0]['endereco'];
 $quantidade_tarefas = $res[0]['qtd_tarefas'];
+$limitar_tesoureiro = $res[0]['limitar_tesoureiro'];
 
 ?>

@@ -80,6 +80,10 @@
     flex-wrap: wrap;
 }
 
+.fields_freq {
+    display: flex;
+}
+
 .fields .input-field {
     display: flex;
     width: calc(100% / 3 - 15px);
@@ -192,6 +196,10 @@
 
 .flex_int_6 {
     flex: .5 1 270px !important;
+}
+
+.flex_int_7 {
+    
 }
 
 /*========================== ESTILIZAÇÕES DO SELECT2 ===========================*/
