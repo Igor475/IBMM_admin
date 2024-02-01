@@ -1,6 +1,6 @@
 <?php
 require_once("../../conexao.php");
-$pagina = 'pagar';
+$pagina = 'receber';
 $id = @$_POST['id'];
 
 @session_start();
@@ -21,40 +21,8 @@ $igreja = $res[0]['igreja'];
 //INSERINDO NAS MOVIMENTAÇÕES
 $pdo->query("INSERT INTO movimentacoes SET tipo = 'Entrada', movimento = 'Venda', 
     descricao = '$descricao', valor = '$valor', data = curDate(), usuario = '$id_usuario',
-    id_mov = '$id', igreja = '$igreja'");
-
-
-//CRIAR A PRÓXIMA CONTA A PAGAR
-if($frequencia > 0) {
-    $dias_frequencia = $frequencia;
-
-    if($dias_frequencia == 30 || $dias_frequencia == 31){
-
-        $nova_data_vencimento = date('Y/m/d', strtotime("+1 month",strtotime($vencimento)));
-
-    }else if($dias_frequencia == 90){ 
-
-        $nova_data_vencimento = date('Y/m/d', strtotime("+3 month",strtotime($vencimento)));
-
-    }else if($dias_frequencia == 180){ 
-
-        $nova_data_vencimento = date('Y/m/d', strtotime("+6 month",strtotime($vencimento)));
-
-    }else if($dias_frequencia == 360){ 
-
-        $nova_data_vencimento = date('Y/m/d', strtotime("+1 year",strtotime($vencimento)));
-
-    }else{
-        $nova_data_vencimento = date('Y/m/d', strtotime("+$dias_frequencia days",strtotime($vencimento))); 
-    }
-
-    //CRIANDO A NOVA CONTA
-	$query = $pdo->query("INSERT INTO $pagina SET descricao = '$descricao', fornecedor = '$fornecedor', 
-        valor = '$valor', data = curDate(), vencimento = '$nova_data_vencimento', usuario_cad = '$id_usuario',
-        pago = 'Não', igreja = '$igreja', frequencia = '$frequencia', arquivo = '$arquivo'");
-
-
-}
+    id_mov = '0', igreja = '$igreja'");
+    
 
 echo "Alterado com Sucesso";
 

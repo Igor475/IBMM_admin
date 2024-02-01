@@ -59,6 +59,52 @@
 /* BOTÕES DE ADICIONAR NOVO REGISTROS NAS TABELAS DE TODAS AS PÁGINAS */
 .buttons_register {
     margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.links_filter a {
+    font-size: 14px;
+}
+
+.text_account {
+    color: var(--verde) !important;
+    background-color: var(--hover-side-menu) !important;
+}
+
+.filter_dropdown {
+    padding: 8px 10px;
+    border-radius: 5px 0 0 5px;
+    background-color: var(--hover-side-menu);
+    color: var(--verde);
+    border-left: 2px solid var(--hover-side-menu);
+    border-top: 2px solid var(--hover-side-menu);
+    border-bottom: 2px solid var(--hover-side-menu);
+    border-right: none;
+    cursor: pointer;
+    width: 28px;
+}
+
+.filter_dropdown_filt {
+    padding: 8px 10px;
+    background-color: var(--hover-side-menu);
+    color: var(--verde);
+    border-radius: 0 5px 5px 0;
+    font-weight: 500;
+    cursor: pointer;
+    border: 2px solid var(--hover-side-menu);
+    width: 115px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon_filter {
+    font-size: 15px;
+    margin-left: 5px;
 }
 
 .button_tables_register {
@@ -432,7 +478,7 @@
     font-size: 13px;
     border: 1px solid var(--fundo);
     border-radius: 50px;
-    width: 205px;
+    width: 215px;
     cursor: pointer;
     transition: box-shadow 0.2s, background-color 0.2s;
 }
@@ -465,8 +511,9 @@
 }
 
 .profile-dropdown .profile-dropdown-btn .icon_profile_down {
-    font-size: 16px;
-    color: var(--preto-cinza);
+    font-size: 21px;
+    color: var(--preto);
+    margin-right: 5px;
 }
 
 .profile-dropdown .profile-link {
@@ -547,10 +594,29 @@
 
 #container_painel .info-data {
     margin-top: 36px;
-    margin-bottom: 66px;
+    margin-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     grid-gap: 20px;
+}
+
+.area_read_more {
+    margin-bottom: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.area_read_more .read_more {
+    padding: 10px;
+    background-color: var(--hover-side-menu);
+    border-radius: 50%;
+    color: var(--verde);
+    line-height: 0;
+}
+
+.area_read_more .read_more .icon_load_more {
+    font-size: 17px;
 }
 
 #container_painel .info-data .card {
@@ -580,6 +646,7 @@
     gap: 5px;
     font-weight: 600;
     color: var(--verde);
+    margin-bottom: 10px;
 }
 
 .text_alert {
@@ -589,6 +656,7 @@
 #container_painel .card .head p {
     font-size: 15px;
     color: var(--preto-cinza);
+    text-align: right;
 }
 
 #container_painel .churchs {
@@ -629,6 +697,31 @@
 
 .text_filiais {
     color: var(--verde-musgo) !important;
+}
+
+#container_painel .header_church {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-gap: 20px;
+}
+
+#container_painel .header_church .area-money {
+    font-size: 15px;
+    color: var(--preto);
+    padding: 10px;
+    border-radius: 3px;
+    background-color: var(--hover-side-menu);
+}
+
+.money-church {
+    color: var(--verde);
+    font-weight: 500;
+}
+
+.money-church-danger {
+    color: var(--btn-remove);
 }
 
 #container_painel .card-church .head-church {

@@ -1,6 +1,13 @@
 <?php
 require_once("../conexao.php");
 $pagina = 'pastores';
+@session_start();
+$nivel_usu = @$_SESSION['nivel_usuario'];
+if($nivel_usu == "tesoureiro") {
+    echo "<script>window.alert('Você não tem permissão para entrar nesta página. Verifique com o seu Pastor')</script>";
+    echo "<script>window.location='../painel-igreja/index.php'</script>";
+    exit();
+}
 ?>
 
 <div class="buttons_register">

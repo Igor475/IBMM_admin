@@ -3,6 +3,13 @@
 require_once("verificar.php");
 require_once("../conexao.php");
 $id_usuario = @$_SESSION['id_usuario'];
+$nivel_usu = @$_SESSION['nivel_usuario'];
+
+if($nivel_usu == 'tesoureiro') {
+    $esc_tesoureiro = 'd-none';
+} else {
+    $esc_tesoureiro = '';
+}
 
 $data_atual = date('Y-m-d');
 $hora_atual = date('H:i:s');
@@ -14,10 +21,11 @@ if(@$_GET['igreja'] > 0) {
 $id_igreja = @$_SESSION['id_igreja'];
 
 //TRAZENDO OS DADOS DA IGREJA
-$query = $pdo->query("SELECT *FROM igrejas WHERE id = '$id_igreja'");
+$query = $pdo->query("SELECT * FROM igrejas WHERE id = '$id_igreja'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $nome_igreja = $res[0]['nome'];
 $foto_igreja = $res[0]['imagem'];
+
 
 
 $query = $pdo->query("SELECT *FROM usuarios WHERE id = '$id_usuario'");
@@ -112,12 +120,12 @@ if ($pag == "") {
                             <img class="img_profile" src="../img/membros/<?php echo $foto_usu ?>" alt="">
                         </div>
                         <span class="name_profile">
-                            Olá<br />
+                            Olá,<br />
                             <b>
                                 <?php echo @$nome_usu ?>
                             </b>
                         </span>
-                        <i class="bx bxs-chevron-down icon_profile_down"></i>
+                        <i class="bx bx-chevron-down icon_profile_down"></i>
                     </div>
 
                     <ul class="profile-link">
@@ -175,12 +183,24 @@ if ($pag == "") {
                             <a href="#" class="font_main_index"><i class='bi bi-person-plus icon'></i> Pessoas <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
-                                <li><a href="index.php?pag=membros">Membros</a></li>
-                                <li><a href="index.php?pag=pastores">Pastores</a></li>
-                                <li><a href="index.php?pag=tesoureiros">Tesoureiros</a></li>
-                                <li><a href="index.php?pag=secretarios">Secretários(as)</a></li>
-                                <li><a href="index.php?pag=fornecedores">Fornecedores</a></li>
-                                <li><a href="index.php?pag=usuarios">Usuários</a></li>
+                                <li>
+                                    <a href="index.php?pag=membros">Membros</a>
+                                </li>
+                                <li class="<?php echo $esc_tesoureiro ?>">
+                                    <a href="index.php?pag=pastores">Pastores</a>
+                                </li>
+                                <li class="<?php echo $esc_tesoureiro ?>">
+                                    <a href="index.php?pag=tesoureiros">Tesoureiros</a>
+                                </li>
+                                <li class="<?php echo $esc_tesoureiro ?>">
+                                    <a href="index.php?pag=secretarios">Secretários(as)</a>
+                                </li class="<?php echo $esc_tesoureiro ?>">
+                                <li class="<?php echo $esc_tesoureiro ?>">
+                                    <a href="index.php?pag=fornecedores">Fornecedores</a>
+                                </li>
+                                <li class="<?php echo $esc_tesoureiro ?>">
+                                    <a href="index.php?pag=usuarios">Usuários</a>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -202,6 +222,7 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=ofertas">Ofertas</a></li>
                                 <li><a href="index.php?pag=doacoes">Doações</a></li>
                                 <li><a href="index.php?pag=vendas">Vendas</a></li>
+                                <li><a href="index.php?pag=movimentacoes">Movimentações</a></li>
                                 <li><a href="#">Patrimônios</a></li>
                             </ul>
                         </li>

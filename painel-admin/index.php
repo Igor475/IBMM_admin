@@ -97,12 +97,12 @@ if ($pag == "") {
                             <img class="img_profile" src="../img/membros/<?php echo $foto_usu ?>" alt="">
                         </div>
                         <span class="name_profile">
-                            Olá<br />
+                            Olá,<br />
                             <b>
                                 <?php echo @$nome_usu ?>
                             </b>
                         </span>
-                        <i class="bx bxs-chevron-down icon_profile_down"></i>
+                        <i class="bx bx-chevron-down icon_profile_down"></i>
                     </div>
 
                     <ul class="profile-link">

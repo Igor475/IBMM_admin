@@ -14,22 +14,23 @@ $query = $pdo->query("SELECT * FROM usuarios WHERE (email = '$usuario'
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
-if($total_reg > 0) {
+
+if ($total_reg > 0) {
     $_SESSION['nome_usuario'] = $res[0]['nome'];
     $_SESSION['id_usuario'] = $res[0]['id'];
     $_SESSION['nivel_usuario'] = $res[0]['nivel'];
     $_SESSION['cpf_usuario'] = $res[0]['cpf'];
     $_SESSION['id_igreja'] = $res[0]['igreja'];
-    
-    if($res[0]['nivel'] == 'Pastor Presidente') {
+
+    if ($res[0]['nivel'] == 'Pastor Presidente') {
         echo "<script>window.location='painel-admin'</script>";
     }
 
-    if($res[0]['nivel'] == 'pastor') {
+    if ($res[0]['nivel'] == 'pastor') {
         echo "<script>window.location='painel-igreja'</script>";
     }
 
-    if($res[0]['nivel'] == 'tesoureiro') {
+    if ($res[0]['nivel'] == 'tesoureiro') {
         echo "<script>window.location='painel-igreja'</script>";
     }
 

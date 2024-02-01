@@ -1,6 +1,43 @@
 <?php
 require_once("../conexao.php");
 $pagina = 'pagar';
+
+if (@$_GET['filtrar'] == 'Vencidas') {
+    $classe_vencidas = 'text_account';
+    $classe_hoje = 'text_black_sans';
+    $classe_todas = 'text_black_sans';
+    $classe_pagas = 'text_black_sans';
+
+    $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' and vencimento < curDate()
+        and pago != 'Sim' order by vencimento asc, id asc");
+
+} else if (@$_GET['filtrar'] == 'Hoje') {
+    $classe_vencidas = 'text_black_sans';
+    $classe_hoje = 'text_account';
+    $classe_todas = 'text_black_sans';
+    $classe_pagas = 'text_black_sans';
+
+    $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' and vencimento = curDate()
+        and pago != 'Sim' order by vencimento asc, id asc");
+
+} else if (@$_GET['filtrar'] == 'Pagas') {
+    $classe_pagas = 'text_black_sans';
+    $classe_hoje = 'text_black_sans';
+    $classe_todas = 'text_black_sans';
+    $classe_pagas = 'text_account';
+
+    $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' and pago = 'Sim' 
+            order by vencimento asc, id asc");
+} else {
+    $classe_vencidas = 'text_black_sans';
+    $classe_hoje = 'text_black_sans';
+    $classe_pagas = 'text_black_sans';
+    $classe_todas = 'text_account';
+
+    $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by pago asc,
+    vencimento asc, id asc");
+
+}
 ?>
 
 <div class="buttons_register">
@@ -8,14 +45,51 @@ $pagina = 'pagar';
         Nova Conta
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
+
+    <div class="links_filter">
+        <!-- Split dropstart button -->
+        <div class="btn-group dropstart">
+            <button type="button" class="filter_dropdown dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropstart</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="index.php?pag=<?php echo $pagina ?>" 
+                        class="dropdown-item <?php echo $classe_todas ?>">
+                        Todas
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Vencidas" 
+                        class="dropdown-item <?php echo $classe_vencidas ?>">
+                        Vencidas
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Hoje" 
+                        class="dropdown-item <?php echo $classe_hoje ?>">
+                        Vencendo Hoje
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Pagas" 
+                        class="dropdown-item <?php echo $classe_pagas ?>">
+                        Pagas
+                    </a>
+                </li>
+            </ul>
+            <button type="button" class="filter_dropdown_filt">
+                Filtar Por<i class="bx bx-filter-alt icon_filter"></i>
+            </button>
+        </div>
+    </div>
 </div>
 
 
 <div class="tabs">
     <div class="table-container">
         <?php
-        $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by pago asc,
-            vencimento asc, id asc");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
@@ -86,7 +160,7 @@ $pagina = 'pagar';
                         if ($vencimento >= $data_atual) {
                             $classe_linha = '';
                         } else {
-                            if($pago != 'Sim') {
+                            if ($pago != 'Sim') {
                                 $classe_linha = 'text_bill_later';
                             } else {
                                 $classe_linha = '';
@@ -276,7 +350,7 @@ $pagina = 'pagar';
                                     <div class="input-field flex_int_4">
                                         <label>Frequência</label>
                                         <select class="sel2" id="frequencia" name="frequencia">
-                                        <?php
+                                            <?php
                                             $query = $pdo->query("SELECT * FROM frequencias order by id asc");
                                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                             $total_reg = count($res);
@@ -581,14 +655,14 @@ $pagina = 'pagar';
     }
 
 
-    function baixar(id, descricao){
-    $('#id-baixar').val(id);
-    $('#descricao-baixar').text(descricao);
-    var myModal = new bootstrap.Modal(document.getElementById('modalBaixar'), {       });
-    myModal.show();
-    $('#mensagem-baixar').text('');
-    limpar();
-}
+    function baixar(id, descricao) {
+        $('#id-baixar').val(id);
+        $('#descricao-baixar').text(descricao);
+        var myModal = new bootstrap.Modal(document.getElementById('modalBaixar'), {});
+        myModal.show();
+        $('#mensagem-baixar').text('');
+        limpar();
+    }
 
 
 </script>
