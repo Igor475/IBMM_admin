@@ -223,7 +223,16 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=doacoes">Doações</a></li>
                                 <li><a href="index.php?pag=vendas">Vendas</a></li>
                                 <li><a href="index.php?pag=movimentacoes">Movimentações</a></li>
-                                <li><a href="#">Patrimônios</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="font_main_index"><i class='bi bi-currency-dollar icon'></i> Secretária <i
+                                    class='bx bx-chevron-right icon-right'></i></a>
+                            <ul class="side-dropdown">
+                                <li><a href="index.php?pag=documentos">Documentos</a></li>
+                                <li><a href="index.php?pag=patrimonios">Patrimônio</a></li>
+                                <li><a href="index.php?pag=celulas">Células</a></li>
+                                <li><a href="index.php?pag=grupos">Grupos</a></li>
                             </ul>
                         </li>
                         <li>

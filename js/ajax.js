@@ -158,13 +158,13 @@ function carregarImg() {
         return;
     }
 
-    if(resultado[1] === 'rar'){
+    if(resultado[1] === 'rar' || resultado[1] === 'zip'){
         $('#target').attr('src', "../img/rar.png");
         return;
     }
 
-    if(resultado[1] === 'zip'){
-        $('#target').attr('src', "../img/rar.png");
+    if(resultado[1] === 'doc' || resultado[1] === 'docx'){
+        $('#target').attr('src', "../img/word.png");
         return;
     }
 

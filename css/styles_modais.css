@@ -172,6 +172,7 @@
     flex-wrap: wrap;
     flex: 1 1 450px;
     margin: 20px 0;
+    gap: 20px;
 }
 
 .flex_int_1 {
@@ -199,7 +200,7 @@
 }
 
 .flex_int_7 {
-    
+    flex: 1;
 }
 
 /*========================== ESTILIZAÇÕES DO SELECT2 ===========================*/

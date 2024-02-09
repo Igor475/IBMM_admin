@@ -474,19 +474,19 @@ if (@$_GET['filtrar'] == 'Vencidas') {
                     <span class="texts_son" id="fornecedor-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/email.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/dolar-simbolo.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-envelope-at icon_user"></i> -->
                     <span class="user_name">Valor:</span>
                     <span class="texts_son" id="valor-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/telefone.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-phone icon_user"></i> -->
                     <span class="user_name">Data Cadastro: </span>
                     <span class="texts_son" id="data-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-geo-alt icon_user"></i> -->
                     <span class="user_name">Vencimento: </span>
                     <span class="texts_son" id="vencimento-dados"></span>

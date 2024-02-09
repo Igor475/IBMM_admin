@@ -120,6 +120,12 @@ $pagina = 'igrejas';
                                                 <i class="bi bi-chat-right-text icons_actions"></i>
                                                 Observações</a>
                                         </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="arquivos('<?php echo $id ?>', 
+                                            '<?php echo $nome ?>')">
+                                                <i class="bi bi-file-earmark-arrow-down-fill icons_actions"></i>
+                                                Arquivos Anexados</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </td>
@@ -372,6 +378,29 @@ $pagina = 'igrejas';
 
 
 
+
+<div class="modal fade" id="modalArquivos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Igreja - <span id="nome-arquivo"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <div class="modal-body">
+
+                <div id="listar-arquivos">
+
+                <div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <script type="text/javascript">
     var pag = "<?= $pagina ?>" 
 </script>
@@ -434,11 +463,36 @@ $pagina = 'igrejas';
         $('#nome').val('');
         $('#telefone').val('');
         $('#endereco').val('');
-        
+
         document.getElementById("pastor").options.selectedIndex = 0;
-        $('#pastor').val($('#pastor').val()).change(); 
-        
+        $('#pastor').val($('#pastor').val()).change();
+
         $('#target').attr('src', '../img/igrejas/sem-foto.jpg');
+    }
+
+
+    function arquivos(id, nome) {
+
+        $('#nome-arquivo').text(nome);
+    
+
+        $.ajax({
+        url: pag + "/listar-arquivos.php",
+        method: 'POST',
+        data: {id},
+        dataType: "text",
+
+            success: function (mensagem) {
+                if (mensagem.trim() == "Alterado com Sucesso") {
+                    window.location="index.php?pag=" + pag;
+                }               
+            },
+
+        });
+
+        var myModal = new bootstrap.Modal(document.getElementById('modalArquivos'), {});
+        myModal.show();
+        $('#mensagem-arquivos').text('');
     }
 
 </script>
