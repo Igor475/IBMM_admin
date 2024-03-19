@@ -482,10 +482,8 @@ $pagina = 'igrejas';
         data: {id},
         dataType: "text",
 
-            success: function (mensagem) {
-                if (mensagem.trim() == "Alterado com Sucesso") {
-                    window.location="index.php?pag=" + pag;
-                }               
+            success: function (result) {
+                $("#listar-arquivos").html(result);              
             },
 
         });

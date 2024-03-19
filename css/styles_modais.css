@@ -39,6 +39,39 @@
     background-color: var(--fonte-menu-dropdown);
 }
 
+.list_documents {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px dashed var(--border-bottom);
+}
+
+.list_documents .profile_archives {
+    margin-right: 10px;
+    width: 25px;
+}
+
+.list_documents .text_documents {
+    color: var(--preto-light);
+    font-size: 14px;
+    transition: all .3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.list_documents .text_documents:hover {
+    color: var(--verde);
+}
+
+.text_doc {
+    color: var(--verde);
+}
+
+#entrada {
+    background-color: transparent;
+}
+
 .details.ID {
     margin-top: 20px;
 }

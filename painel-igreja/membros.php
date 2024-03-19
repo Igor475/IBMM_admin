@@ -534,13 +534,15 @@ $pagina = 'membros';
 
 
     function limpar() {
+        var data = "<?= $data_atual ?>"
+
         $('#id').val('');
         $('#nome').val('');
         $('#email').val('');
         $('#cpf').val('');
         $('#telefone').val('');
         $('#endereco').val('');
-        $('#data_nasc').val('');
+        $('#data_nasc').val(data);
         $('#data_bat').val('');
 
         document.getElementById("cargo").options.selectedIndex = 0;

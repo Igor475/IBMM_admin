@@ -247,6 +247,9 @@ if ($pag == "") {
                                 <li><a href="#">Fechamentos Mensais</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="index.php?pag=anexos" class="font_main_index"><i class='bi bi-archive icon'></i>Anexo Sede</a>
+                        </li>
                         <li class="divider">
                             <span class="text_divider">Outros</span>
                         </li>
