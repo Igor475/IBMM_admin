@@ -53,19 +53,26 @@ $pagina = 'patrimonios';
                         $data_emprestimo = $res[$i]['data_emprestimo'];
                         $ativo = $res[$i]['ativo'];
                         $entrada = $res[$i]['entrada'];
+                        $doador = $res[$i]['doador'];
                         $id = $res[$i]['id'];
+
+                        if($obs != "") {
+                            $classe_obs = 'obs_filled';
+                        } else {
+                            $classe_obs = 'obs_empty';
+                        }
 
 
                         if ($ativo == 'Sim') {
                             $classe = 'text_active';
-                            $ativo = 'Desativar Membro';
+                            $ativo = 'Desativar Item';
                             $icone = 'bi-toggle-on';
                             $ativar = 'Não';
                             $inativa = '';
                             $tab = 'Ativo';
                         } else {
                             $classe = 'text_desactive';
-                            $ativo = 'Ativar Membro';
+                            $ativo = 'Ativar Item';
                             $icone = 'bi-toggle-off';
                             $ativar = 'Sim';
                             $inativa = 'text_opacity';
@@ -113,9 +120,9 @@ $pagina = 'patrimonios';
                         $data_emprestimoF = implode('/', array_reverse(explode('-', $data_emprestimo)));
                         $valorF = number_format($valor, 2, ',', '.');
                         ?>
-                        <tr class="column-body">
+                        <tr class="column-body <?php echo $inativa ?>">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
-                                <img class="profile_table" src="../img/membros/<?php echo $foto ?>" alt="Perfil" title="Perfil">
+                                <img class="profile_table" src="../img/patrimonios/<?php echo $foto ?>" alt="Perfil" title="Perfil">
                             </td>
                             <td data-label="Código" class="td-table">
                                 <?php echo $codigo ?>
@@ -146,8 +153,8 @@ $pagina = 'patrimonios';
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
                                             '<?php echo $codigo ?>', '<?php echo $nome ?>', '<?php echo $descricao ?>', 
-                                            '<?php echo $valor ?>', '<?php echo $foto ?>', '<?php echo $data_cad ?>' 
-                                            '<?php echo $entrada ?>')">
+                                            '<?php echo $valor ?>', '<?php echo $foto ?>', '<?php echo $data_cad ?>', 
+                                            '<?php echo $entrada ?>', '<?php echo $doador ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -162,13 +169,13 @@ $pagina = 'patrimonios';
                                             <a class="dropdown-item" href="#" onclick="dados('<?php echo $codigo ?>', '<?php echo $nome ?>',
                                             '<?php echo $descricao ?>', '<?php echo $valor ?>', '<?php echo $foto ?>', '<?php echo $nome_usu_cad ?>', 
                                             '<?php echo $data_cadF ?>', '<?php echo $nome_ig_cad ?>', '<?php echo $nome_ig_item ?>', 
-                                            '<?php echo $nome_usu_emp ?>', '<?php echo $data_emprestimoF ?>', '<?php echo $ativo ?>',
-                                            '<?php echo $obs ?>', '<?php echo $entrada ?>')">
+                                            '<?php echo $nome_usu_emp ?>', '<?php echo $data_emprestimoF ?>', '<?php echo $tab ?>',
+                                            '<?php echo $obs ?>', '<?php echo $entrada ?>', '<?php echo $doador ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="obs('<?php echo $id ?>', 
+                                            <a class="dropdown-item <?php echo $classe_obs ?>" href="#" onclick="obs('<?php echo $id ?>', 
                                             '<?php echo $nome ?>', '<?php echo $obs ?>')">
                                                 <i class="bi bi-chat-right-text icons_actions"></i>
                                                 Observações</a>
@@ -225,7 +232,7 @@ $pagina = 'patrimonios';
 
                                     <div class="input-field field_area_2">
                                         <label>Descrição Item</label>
-                                        <input type="email" name="descricao" id="descricao" placeholder="Descrição do Item">
+                                        <input type="text" name="descricao" id="descricao" placeholder="Descrição do Item">
                                     </div>
 
                                     <div class="input-field flex_int">
@@ -362,7 +369,7 @@ $pagina = 'patrimonios';
                 <div class="user_area">
                     <img src="../img/svg/telefone.svg" class="img_icon_data" alt="">
                     <span class="user_name">Valor: </span>
-                    <span class="texts_son" id="valor-dados"></span>
+                    R$ <span class="texts_son" id="valor-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
@@ -396,13 +403,18 @@ $pagina = 'patrimonios';
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
-                    <span class="user_name">Ativo: </span>
+                    <span class="user_name">Status do Item: </span>
                     <span class="texts_son" id="ativo-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
                     <span class="user_name">Compra / Doação: </span>
                     <span class="texts_son" id="entrada-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Doado Por: </span>
+                    <span class="texts_son" id="doador-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
@@ -471,13 +483,14 @@ $pagina = 'patrimonios';
 
 
 <script type="text/javascript">
-    function editar(id, codigo, nome, descricao, valor, foto, data_cad, entrada) {
+    function editar(id, codigo, nome, descricao, valor, foto, data_cad, entrada, doador) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#codigo').val(codigo);
         $('#descricao').val(descricao);
         $('#valor').val(valor);
         $('#data_cad').val(data_cad);
+        $('#doador').val(doador);
         $('#entrada').val(entrada).change();
 
         $('#target').attr('src', '../img/patrimonios/' + foto);
@@ -490,10 +503,10 @@ $pagina = 'patrimonios';
 
 
     function dados(codigo, nome, descricao, valor, foto, usuario_cad, data_cad, igreja_cad, igreja_item, usuario_emp, data_emp, ativo,
-        obs, entrada) {
+        obs, entrada, doador) {
 
-        if (data_bat === '00/00/0000') {
-            data_bat = 'Não Batizado!';
+        if (data_emp === '00/00/0000') {
+            data_emp = 'Sem Empréstimo!';
         }
 
         $('#nome-dados').text(nome);
@@ -509,6 +522,7 @@ $pagina = 'patrimonios';
         $('#ativo-dados').text(ativo);
         $('#obs-dados').text(obs);
         $('#entrada-dados').text(entrada);
+        $('#doador-dados').text(doador);
         $('#foto-dados').attr('src', '../img/patrimonios/' + foto);
 
 
@@ -544,6 +558,7 @@ $pagina = 'patrimonios';
         $('#descricao').val('');
         $('#codigo').val('');
         $('#valor').val('');
+        $('#doador').val('');
         $('#data_cad').val(data);
 
         document.getElementById("entrada").options.selectedIndex = 0;

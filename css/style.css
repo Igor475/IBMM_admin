@@ -277,6 +277,20 @@
     padding-left: 20px;
 }
 
+body::-webkit-scrollbar {
+    width: 2px;
+}
+
+body::-webkit-scrollbar-track {
+    background: orange;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: blue;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid orange;
+}
+
 #offcanvasWithBothOptions .icon-right {
     margin-left: auto;
     font-size: 23px;
@@ -391,6 +405,14 @@
 #offcanvasWithBothOptions .side-menu li .font_main_index {
     font-weight: 500;
     font-size: 14px;
+}
+
+.obs_filled {
+    color: var(--verde) !important;
+}
+
+.obs_empty {
+    color: var(--bs-table-color-state);
 }
 
 /*============================= SIDEBAR MENU E SUBMENU ========================*/
@@ -955,6 +977,10 @@ td.td-table#radius-column-action:last-child {
 
 .content-table .body-table .column-body:nth-child(2n + 1) {
     background-color: var(--fundo);
+}
+
+.text_opacity {
+    color: var(--border-bottom) !important;
 }
 
 .content-table .body-table .column-body .td-table .profile_table {

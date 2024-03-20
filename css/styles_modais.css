@@ -76,6 +76,11 @@
     margin-top: 20px;
 }
 
+.scroll-modal {
+    height: 600px;
+    overflow-y: scroll;
+}
+
 .title-modal {
     font-size: 16px;
     font-weight: 500;
@@ -406,6 +411,7 @@
     transition: all .3s ease;
     padding: 5px 10px;
     outline: none;
+    font-size: 14px;
 }
 
 .txt-obs:focus {

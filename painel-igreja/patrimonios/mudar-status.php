@@ -1,6 +1,6 @@
 <?php
 require_once("../../conexao.php");
-$pagina = 'membros';
+$pagina = 'patrimonios';
 $id = @$_POST['id'];
 $ativar = @$_POST['ativar'];
 

@@ -3709,7 +3709,7 @@ textarea.form-control-lg {
   text-align: inherit;
   text-decoration: none;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 13px;
   background-color: transparent;
   border: 0;
   border-radius: var(--bs-dropdown-item-border-radius, 0);

@@ -53,6 +53,11 @@ $pagina = 'membros';
                         $ativo = $res[$i]['ativo'];
                         $id = $res[$i]['id'];
 
+                        if($obs != "") {
+                            $classe_obs = 'obs_filled';
+                        } else {
+                            $classe_obs = 'obs_empty';
+                        }
 
                         if ($ativo == 'Sim') {
                             $classe = 'text_active';
@@ -94,7 +99,7 @@ $pagina = 'membros';
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         $data_batF = implode('/', array_reverse(explode('-', $data_bat)));
                         ?>
-                        <tr class="column-body">
+                        <tr class="column-body <?php echo $inativa ?>">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
                                 <img class="profile_table" src="../img/membros/<?php echo $foto ?>" alt="Perfil" title="Perfil">
                             </td>
@@ -149,7 +154,7 @@ $pagina = 'membros';
                                                 Ver Dados</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="obs('<?php echo $id ?>', 
+                                            <a class="dropdown-item <?php echo $classe_obs ?>" href="#" onclick="obs('<?php echo $id ?>', 
                                             '<?php echo $nome ?>', '<?php echo $obs ?>')">
                                                 <i class="bi bi-chat-right-text icons_actions"></i>
                                                 Observações</a>

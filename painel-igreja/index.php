@@ -226,7 +226,7 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-currency-dollar icon'></i> Secretária <i
+                            <a href="#" class="font_main_index"><i class='bi bi-folder2-open icon'></i> Secretária <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=documentos">Documentos</a></li>
