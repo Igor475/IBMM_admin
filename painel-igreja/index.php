@@ -180,7 +180,7 @@ if ($pag == "") {
                             <span class="text_divider">Principal</span>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-person-plus icon'></i> Pessoas <i
+                            <a href="#" class="font_main_index"><i class='bi bi-person-circle icon'></i> Pessoas <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li>
@@ -204,7 +204,7 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-plus-square icon'></i> Cadastros <i
+                            <a href="#" class="font_main_index"><i class='bi bi-pencil-square icon'></i> Cadastros <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=tarefas">Agenda / Tarefas</a></li>

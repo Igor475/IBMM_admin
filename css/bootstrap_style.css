@@ -3701,8 +3701,8 @@ textarea.form-control-lg {
 .dropdown-item {
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: 8px 15px;
+  width: 91.3%;
+  padding: 8px 10px;
   clear: both;
   font-weight: 400;
   color: var(--bs-table-color-state);
@@ -3712,7 +3712,8 @@ textarea.form-control-lg {
   font-size: 13px;
   background-color: transparent;
   border: 0;
-  border-radius: var(--bs-dropdown-item-border-radius, 0);
+  border-radius: 5px;
+  margin: 0px 7px 0 7px;
 }
 .dropdown-item:hover, .dropdown-item:focus {
   color: var(--verde);

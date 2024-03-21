@@ -3,38 +3,11 @@ require_once ("../conexao.php");
 $pagina = 'patrimonios';
 ?>
 
-<div class="buttons_register">
-    <a href="#" onclick="inserir()" class="button_tables_register">
-        Cadastrar Item
-        <i class="bi bi-plus-lg icon_tables_registers"></i>
-    </a>
-
-    <div class="container_filter">
-        <span class="filter_church_1">
-            <i class="bi bi-circle-fill icon_church_f item_d_ig"></i>
-            Item da Igreja
-        </span>
-        <span class="filter_church_2">
-            <i class="bi bi-circle-fill icon_church_f item_c_emp"></i>
-            Item Emprestado
-        </span>
-        <span class="filter_church_3">
-            <i class="bi bi-circle-fill icon_church_f"></i>
-            Item de outra Igreja
-        </span>
-        <span class="filter_church_4">
-            <i class="bi bi-circle-fill icon_church_f"></i>
-            Item Inativo
-        </span>
-    </div>
-</div>
-
 
 <div class="tabs">
     <div class="table-container">
         <?php
-        $query = $pdo->query("SELECT * FROM $pagina WHERE igreja_cad = '$id_igreja' or igreja_item = '$id_igreja'
-            order by id desc");
+        $query = $pdo->query("SELECT * FROM $pagina order by id desc");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
@@ -74,23 +47,6 @@ $pagina = 'patrimonios';
                         $entrada = $res[$i]['entrada'];
                         $doador = $res[$i]['doador'];
                         $id = $res[$i]['id'];
-
-
-                        if ($igreja_cad == $id_igreja) {
-                            $background_transferir = 'back_transferir_green';
-                            $ocultar_devolucao = 'd-none';
-                            $ocultar_transferir = '';
-                            if ($igreja_item == $id_igreja) {
-                                $classe_item = '';
-                            } else {
-                                $classe_item = 'text_item_r';
-                            }
-                        } else {
-                            $background_transferir = 'back_transferir_red';
-                            $ocultar_devolucao = '';
-                            $ocultar_transferir = 'd-none';
-                            $classe_item = 'text_item_emp';
-                        }
 
 
                         if ($obs != "") {
@@ -157,7 +113,7 @@ $pagina = 'patrimonios';
                         $data_emprestimoF = implode('/', array_reverse(explode('-', $data_emprestimo)));
                         $valorF = number_format($valor, 2, ',', '.');
                         ?>
-                        <tr class="column-body <?php echo $inativa ?> <?php echo $classe_item ?>">
+                        <tr class="column-body <?php echo $inativa ?>">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
                                 <img class="profile_table" src="../img/patrimonios/<?php echo $foto ?>" alt="Perfil"
                                     title="Perfil">
@@ -223,21 +179,6 @@ $pagina = 'patrimonios';
                                             '<?php echo $ativar ?>')" title="<?php echo $ativo ?>">
                                                 <i class="bi <?php echo $icone ?> icons_actions <?php echo $classe ?>"></i>
                                                 <?php echo $ativo ?>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item <?php echo $ocultar_transferir ?> <?php echo $background_transferir ?>"
-                                                href="#" onclick="transferir('<?php echo $id ?>', '<?php echo $nome ?>')">
-                                                <i class="bi bi-arrow-repeat icons_actions"></i>
-                                                Transferir
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item <?php echo $ocultar_devolucao ?> <?php echo $background_transferir ?>"
-                                                href="#"
-                                                onclick="devolver('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $igreja_cad ?>')">
-                                                <i class="bi bi-arrow-repeat icons_actions"></i>
-                                                Devolver
                                             </a>
                                         </li>
                                     </ul>
@@ -413,7 +354,7 @@ $pagina = 'patrimonios';
                 <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
             </div>
             <div class="modal-body scroll-modal">
-                    <div class="user_area">
+            <div class="user_area">
                         <img src="../img/svg/cpf.svg" class="img_icon_data" alt="">
                         <span class="user_name">codigo: </span>
                         <span class="texts_son" id="codigo-dados"></span>
@@ -717,24 +658,6 @@ $pagina = 'patrimonios';
     }
 
 
-    function limpar() {
-        var data = "<?= $data_atual ?>"
-
-        $('#id').val('');
-        $('#nome').val('');
-        $('#descricao').val('');
-        $('#codigo').val('');
-        $('#valor').val('');
-        $('#doador').val('');
-        $('#data_cad').val(data);
-
-        document.getElementById("entrada").options.selectedIndex = 0;
-        $('#entrada').val($('#entrada').val()).change();
-
-        $('#target').attr('src', '../img/patrimonios/sem-foto.jpg');
-    }
-
-
     function transferir(id, nome) {
         $('#id-transferir').val(id);
         $('#nome-transferir').text(nome);
@@ -804,31 +727,31 @@ $pagina = 'patrimonios';
 
 
     $("#form-devolver").submit(function () {
-        event.preventDefault();
-        var formData = new FormData(this);
+	event.preventDefault();
+	var formData = new FormData(this);
 
-        $.ajax({
-            url: pag + "/transferir.php",
-            type: 'POST',
-            data: formData,
+	$.ajax({
+		url: pag + "/transferir.php",
+		type: 'POST',
+		data: formData,
 
-            success: function (mensagem) {
-                $('#mensagem-transferir').text('');
-                $('#mensagem-transferir').removeClass()
-                if (mensagem.trim() == "Alterado com Sucesso") {
+		success: function (mensagem) {
+			$('#mensagem-transferir').text('');
+			$('#mensagem-transferir').removeClass()
+			if (mensagem.trim() == "Alterado com Sucesso") {
                     //$('#nome').val('');
                     //$('#cpf').val('');
 
                     $('#btn-fechar-transferir').click();
                     mensagemSalvar();
-                    setTimeout(function () {
-                        window.location = "index.php?pag=" + pag;
+                    setTimeout(function(){
+                        window.location="index.php?pag=" + pag;
                     }, 1000);
 
                 } else {
 
-                    $('#mensagem-transferir').addClass('message_error')
-                    $('#mensagem-transferir').text(mensagem)
+                	$('#mensagem-transferir').addClass('message_error')
+                	$('#mensagem-transferir').text(mensagem)
                 }
 
 
@@ -837,10 +760,10 @@ $pagina = 'patrimonios';
             cache: false,
             contentType: false,
             processData: false,
-
+            
         });
 
-    });
+});
 
 
 

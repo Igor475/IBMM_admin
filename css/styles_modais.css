@@ -241,6 +241,12 @@
     flex: 1;
 }
 
+.flex_select {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 /*========================== ESTILIZAÇÕES DO SELECT2 ===========================*/
 .select2 .select2-container .select2-container--default,
 .select2-container--default .select2-selection--single {
@@ -456,13 +462,17 @@
 }
 
 .user_area .user_name {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--preto-text);
 }
 
+.container_flex_emp {
+    display: flex;
+}
+
 .user_area .texts_son {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--preto-cinza);
     margin: 5px 0;
 }
