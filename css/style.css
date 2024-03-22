@@ -563,12 +563,12 @@ body::-webkit-scrollbar-thumb {
 .profile-dropdown .profile-link a {
     padding: 6px 16px;
     display: flex;
-    grid-gap: 10px;
-    font-size: 14px;
+    grid-gap: 0px;
+    font-size: 13px;
     color: var(--preto);
     align-items: center;
     transition: all .3s ease;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .profile-dropdown .profile-link a:hover {
@@ -733,7 +733,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #container_painel .header_church .area-money {
-    font-size: 15px;
+    font-size: 13px;
     color: var(--preto);
     padding: 10px;
     border-radius: 3px;
@@ -846,14 +846,24 @@ body::-webkit-scrollbar-thumb {
 
 #container_painel .card-church .head-church  .info-church .text_later_task {
     color: var(--btn-remove);
+    font-size: 14px;
+    font-weight: 500;
 }
 
 #container_painel .card-church .head-church  .info-church .date_later_task {
-    color: var(--btn-remove);
-    font-size: 13px;
+    color: var(--black-grey) !important;
+    font-size: 12px;
     letter-spacing: 1px;
-    font-weight: 600;
+    font-weight: 400;
     text-transform: uppercase;
+}
+
+.hour_later_task {
+    color: var(--btn-remove);
+}
+
+.hour_task {
+    color: var(--verde);
 }
 
 #container_painel .card-church .head-church  .info-church .date_task {
@@ -861,12 +871,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #container_painel .card-church .head-church  .info-church .information-task {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--preto-cinza-mais-claro);
 }
 
 #container_painel .card-church .head-church .calendar_hour {
-    color: var(--red);
     font-size: 12px;
     text-align: center;
     font-weight: 500;
@@ -903,10 +912,12 @@ body::-webkit-scrollbar-thumb {
 
 .table-container {
     margin: 40px 0;
-    color: var(--bs-black);
+    color: var(--black-grey);
     padding: 30px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
 }
 
 .container_filter {
@@ -1174,20 +1185,23 @@ td.td-table#radius-column-action:last-child {
 .text_title_task {
     font-size: 14px !important;
     color: var(--verde) !important;
+    background-color: var(--hover-side-menu) !important;
 }
 
 .text_title_task_later {
     font-size: 14px !important;
-    color: var(--btn-remove) !important;
+    color: var(--text-table-emp) !important;
+    background-color: var(--background-table-emp) !important;
 }
 
 .desactive_icon {
     font-size: 14px !important;
-    color: var(--btn-remove) !important;
+    color: var(--text-table-emp) !important;
 }
 
 .text_bill_later {
-    color: var(--btn-remove) !important;
+    background-color: var(--background-table-emp) !important;
+    color: var(--text-table-emp) !important;
 }
 
 #icons_tarefas {

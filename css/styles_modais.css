@@ -24,13 +24,13 @@
 .modal-content .modal-header .mod_close {
     font-size: 30px;
     cursor: pointer;
-    color: var(--close);
+    color: var(--fonte-menu-dropdown);
     transition: all .3s ease;
     transition: all .3s ease;
 }
 
 .modal-content .modal-header .mod_close:hover {
-    color: var(--black-hover);
+    color: var(--fundo-ea);
 }
 
 .form-modal {
@@ -78,7 +78,7 @@
 
 .scroll-modal {
     height: 600px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .title-modal {
@@ -90,7 +90,7 @@
 }
 
 .Cadastro {
-    color: var(--black-hover);
+    color: var(--fonte-menu-dropdown);
 }
 
 .text_excluir {
@@ -312,7 +312,7 @@
 .input-field input {
     outline: none;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--preto);
     border-radius: 5px;
     border: 1px solid var(--fundo-ea);

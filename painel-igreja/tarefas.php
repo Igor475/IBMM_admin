@@ -66,10 +66,10 @@ $pagina = 'tarefas';
                         }
 
                         ?>
-                        <tr class="column-body">
+                        <tr class="column-body <?php echo $class_text ?>">
                             <td data-label="Título" class="td-table">
                                 <i id="icons_tarefas" class="bi bi-caret-right-square-fill <?php echo $class_icon ?>"></i>
-                                <span class="<?php echo $class_text ?>"><?php echo $titulo ?></span>
+                                <span class=""><?php echo $titulo ?></span>
                             </td>
                             <td data-label="Nome" class="td-table column-hidden">
                                 <?php echo $descricao ?>

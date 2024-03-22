@@ -292,7 +292,7 @@ $saldoMes = number_format($saldoMes, 2, ',', '.');
 
 <?php
 $query_tar = $pdo->query("SELECT * FROM tarefas WHERE status = 'Agendada' and igreja = '$id_igreja'
-order by status asc, data asc, hora asc LIMIT $quantidade_tarefas");
+    order by status asc, data asc, hora asc LIMIT $quantidade_tarefas");
 $res_tar = $query_tar->fetchAll(PDO::FETCH_ASSOC);
 $total_reg_tar = count($res_tar);
 
@@ -324,10 +324,12 @@ $total_reg_tar = count($res_tar);
                 $classe_border = 'border_task_schedule';
                 $classe_text = 'text_later_task';
                 $classe_date = 'date_later_task';
+                $classe_hour = 'hour_later_task';
             } else {
                 $classe_border = 'border_task';
                 $classe_text = 'text_task';
                 $classe_date = 'date_task';
+                $classe_hour = 'hour_task';
             }
 
             ?>
@@ -350,7 +352,7 @@ $total_reg_tar = count($res_tar);
                             <img class="icon-tasks" src="../img/svg/tasks-list-svgrepo-com.svg" alt="">
                         </div>
 
-                        <p class="calendar_hour">
+                        <p class="calendar_hour <?php echo $classe_hour ?>">
                             <?php echo $hora ?>
                         </p>
                     </div>
