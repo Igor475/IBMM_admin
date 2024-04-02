@@ -23,6 +23,7 @@ $pagina = 'celulas';
                 <thead class="thead-tabs">
                     <tr class="column-table">
                         <th class="th-table">Nome</th>
+                        <th class="th-table">Dias</th>
                         <th class="th-table">Horário</th>
                         <th class="th-table">Pastor Responsável</th>
                         <th class="th-table">Coordenador</th>
@@ -45,8 +46,17 @@ $pagina = 'celulas';
                         $coordenador = $res[$i]['coordenador'];
                         $lider1 = $res[$i]['lider1'];
                         $lider2 = $res[$i]['lider2'];
+                        $lider3 = $res[$i]['lider3'];
+                        $lider4 = $res[$i]['lider4'];
                         $obs = $res[$i]['obs'];
+                        $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
+
+                        if ($obs != "") {
+                            $classe_obs = "text_obs_cels";
+                        } else {
+                            $classe_obs = "";
+                        }
 
                         $query_con = $pdo->query("SELECT * FROM pastores where id = '$pastor'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
@@ -79,6 +89,24 @@ $pagina = 'celulas';
                         } else {
                             $nome_lider2 = 'Nenhum!';
                         }
+
+                        $query_con = $pdo->query("SELECT * FROM membros where id = '$lider3'");
+                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_con) > 0) {
+                            $nome_lider3 = $res_con[0]['nome'];
+                        } else {
+                            $nome_lider3 = 'Nenhum!';
+                        }
+
+                        $query_con = $pdo->query("SELECT * FROM membros where id = '$lider4'");
+                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_con) > 0) {
+                            $nome_lider4 = $res_con[0]['nome'];
+                        } else {
+                            $nome_lider4 = 'Nenhum!';
+                        }
+
+
 
                         ?>
                         <tr class="column-body">
@@ -114,10 +142,10 @@ $pagina = 'celulas';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
+                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
                                             '<?php echo $dias ?>', '<?php echo $hora ?>', '<?php echo $local ?>', '<?php echo $pastor ?>', 
-                                            '<?php echo $coordenador ?>', '<?php echo $lider1 ?>', '<?php echo $lider2 ?>')">
+                                            '<?php echo $coordenador ?>', '<?php echo $lider1 ?>', '<?php echo $lider2 ?>',
+                                            '<?php echo $lider3 ?>', '<?php echo $lider4 ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -129,10 +157,11 @@ $pagina = 'celulas';
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $dias ?>',
+                                            <a class="dropdown-item" href="#"
+                                                onclick="dados('<?php echo $nome ?>', '<?php echo $dias ?>',
                                             '<?php echo $hora ?>', '<?php echo $local ?>', '<?php echo $nome_pastor ?>',
                                             '<?php echo $nome_coordenador ?>', '<?php echo $nome_lider1 ?>', '<?php echo $nome_lider2 ?>', 
-                                            '<?php echo $obs ?>')">
+                                            '<?php echo $nome_lider3 ?>', '<?php echo $nome_lider4 ?>', '<?php echo $obs ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -141,6 +170,13 @@ $pagina = 'celulas';
                                             '<?php echo $nome ?>', '<?php echo $obs ?>')">
                                                 <i class="bi bi-chat-right-text icons_actions"></i>
                                                 Observações</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#"
+                                                onclick="addMembros('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $igreja ?>')">
+                                                <i class="bi bi-plus-square icons_actions"></i>
+                                                Adicionar Membros
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -191,13 +227,13 @@ $pagina = 'celulas';
 
                                 <div class="input-field flex_int_3">
                                     <label>Local da Célula</label>
-                                    <input type="text" name="local" id="local" placeholder="Local da Célula" required>
+                                    <input type="text" name="local" id="local" placeholder="Local da Célula">
                                 </div>
 
                                 <div class="input-field flex_int_7">
                                     <label>Pastor</label>
                                     <select class="sel21" id="pastor" name="pastor">
-                                        <option value="">Selecione um Pastor</option>
+                                        <option value="0">Selecione um Pastor</option>
                                         <?php
                                         $query = $pdo->query("SELECT * FROM pastores WHERE igreja = '$id_igreja' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -221,9 +257,10 @@ $pagina = 'celulas';
                                 <div class="input-field flex_int_7">
                                     <label>Coordenador</label>
                                     <select class="sel2" id="coordenador" name="coordenador">
-                                        <option value="">Selecione um Membro</option>
+                                        <option value="0">Selecione um Membro</option>
                                         <?php
-                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja' order by nome asc");
+                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
+                                            and ativo = 'Sim' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                         $total_reg = count($res);
                                         if ($total_reg > 0) {
@@ -245,9 +282,10 @@ $pagina = 'celulas';
                                 <div class="input-field flex_int_7">
                                     <label>Líder</label>
                                     <select class="sel2" id="lider1" name="lider1">
-                                        <option value="">Selecione um Membro</option>
+                                        <option value="0">Selecione um Membro</option>
                                         <?php
-                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja' order by nome asc");
+                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
+                                            and ativo = 'Sim' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                         $total_reg = count($res);
                                         if ($total_reg > 0) {
@@ -267,11 +305,62 @@ $pagina = 'celulas';
                                 </div>
 
                                 <div class="input-field flex_int_7">
-                                    <label>Líder em Treinamento</label>
+                                    <label>Líder em Treinamento 1</label>
                                     <select class="sel2" id="lider2" name="lider2">
-                                        <option value="">Selecione um Membro</option>
+                                        <option value="0">Selecione um Membro</option>
                                         <?php
-                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja' order by nome asc");
+                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
+                                            and ativo = 'Sim' order by nome asc");
+                                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                        $total_reg = count($res);
+                                        if ($total_reg > 0) {
+                                            for ($i = 0; $i < $total_reg; $i++) {
+                                                foreach ($res[$i] as $key => $value) {
+                                                }
+
+                                                $nome_reg = $res[$i]['nome'];
+                                                $id_reg = $res[$i]['id'];
+                                                ?>
+                                                <option value="<?php echo $id_reg ?>">
+                                                    <?php echo $nome_reg ?>
+                                                </option>
+                                            <?php }
+                                        } ?>
+                                    </select>
+                                </div>
+
+                                <div class="input-field flex_int_7">
+                                    <label>Líder em Treinamento 2</label>
+                                    <select class="sel2" id="lider3" name="lider3">
+                                        <option value="0">Selecione um Membro</option>
+                                        <?php
+                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
+                                            and ativo = 'Sim' order by nome asc");
+                                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                        $total_reg = count($res);
+                                        if ($total_reg > 0) {
+                                            for ($i = 0; $i < $total_reg; $i++) {
+                                                foreach ($res[$i] as $key => $value) {
+                                                }
+
+                                                $nome_reg = $res[$i]['nome'];
+                                                $id_reg = $res[$i]['id'];
+                                                ?>
+                                                <option value="<?php echo $id_reg ?>">
+                                                    <?php echo $nome_reg ?>
+                                                </option>
+                                            <?php }
+                                        } ?>
+                                    </select>
+                                </div>
+
+                                <div class="input-field flex_int_7">
+                                    <label>Líder em Treinamento 3</label>
+                                    <select class="sel2" id="lider4" name="lider4">
+                                        <option value="0">Selecione um Membro</option>
+                                        <?php
+                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
+                                            and ativo = 'Sim' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                         $total_reg = count($res);
                                         if ($total_reg > 0) {
@@ -389,24 +478,34 @@ $pagina = 'celulas';
                     <span class="texts_son" id="local-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/user-svgrepo-com.svg" class="img_icon_data" alt="">
                     <span class="user_name">Pastor Responsável: </span>
                     <span class="texts_son" id="pastor-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/user-svgrepo-com.svg" class="img_icon_data" alt="">
                     <span class="user_name">Coordenador: </span>
                     <span class="texts_son" id="coordenador-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/user-svgrepo-com.svg" class="img_icon_data" alt="">
                     <span class="user_name">Líder da Célula: </span>
                     <span class="texts_son" id="lider1-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/igreja.svg" class="img_icon_data" alt="">
-                    <span class="user_name">Líder em Treinamento: </span>
+                    <img src="../img/svg/user-svgrepo-com.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Líder em Treinamento 1: </span>
                     <span class="texts_son" id="lider2-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/user-svgrepo-com.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Líder em Treinamento 2: </span>
+                    <span class="texts_son" id="lider3-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/user-svgrepo-com.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Líder em Treinamento 3: </span>
+                    <span class="texts_son" id="lider4-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
@@ -462,6 +561,54 @@ $pagina = 'celulas';
 
 
 
+
+<div class="modal fade" id="modalAddMembros" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Adicionar Membros - <span id="nome-add"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form id="form-add" method="post">
+                <div class="modal-body">
+
+                    <div class="list_members_group">
+                        <div class="input-field" id="listar-membros">
+
+                        </div>
+                        <div class="list_members" id="listar-membros-add">
+
+                        </div>
+                    </div>
+
+
+                    <div id="mensagem-add"></div>
+
+                    <input type="hidden" name="id-add" id="id-add">
+                    <input type="hidden" name="id-igreja" id="id-ig">
+
+                </div>
+                <div id="mensagem"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-add" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Adicionar
+                            <i class="bi bi-pencil-square icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <script type="text/javascript">
     var pag = "<?= $pagina ?>" 
 </script>
@@ -471,7 +618,7 @@ $pagina = 'celulas';
 
 
 <script type="text/javascript">
-    function editar(id, nome, dias, hora, local, pastor, coordenador, lider1, lider2) {
+    function editar(id, nome, dias, hora, local, pastor, coordenador, lider1, lider2, lider3, lider4) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#dias').val(dias);
@@ -481,6 +628,8 @@ $pagina = 'celulas';
         $('#coordenador').val(coordenador).change();
         $('#lider1').val(lider1).change();
         $('#lider2').val(lider2).change();
+        $('#lider3').val(lider3).change();
+        $('#lider4').val(lider4).change();
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -489,7 +638,7 @@ $pagina = 'celulas';
     }
 
 
-    function dados(nome, dias, hora, local, pastor, coordenador, lider1, lider2, obs) {
+    function dados(nome, dias, hora, local, pastor, coordenador, lider1, lider2, lider3, lider4, obs) {
 
         $('#nome-dados').text(nome);
         $('#dias-dados').text(dias);
@@ -499,6 +648,8 @@ $pagina = 'celulas';
         $('#coordenador-dados').text(coordenador);
         $('#lider1-dados').text(lider1);
         $('#lider2-dados').text(lider2);
+        $('#lider3-dados').text(lider3);
+        $('#lider4-dados').text(lider4);
         $('#obs-dados').text(obs);
 
 
@@ -526,12 +677,27 @@ $pagina = 'celulas';
     }
 
 
+    function addMembros(id, nome, igreja) {
+
+        $('#nome-add').text(nome);
+        $('#id-add').val(id);
+        $('#id-ig').val(igreja);
+
+        listarMembrosCB(id, igreja);
+        listarMembrosAdd(id, igreja);
+
+        var myModal = new bootstrap.Modal(document.getElementById('modalAddMembros'), {});
+        myModal.show();
+        $('#mensagem-add').text('');
+    }
+
+
     function limpar() {
 
         $('#id').val('');
-        $('#titulo').val('');
-        $('#descricao').val('');
-        $('#data').val('');
+        $('#nome').val('');
+        $('#dias').val('');
+        $('#local').val('');
         $('#hora').val('');
 
         document.getElementById("pastor").options.selectedIndex = 0;
@@ -545,22 +711,121 @@ $pagina = 'celulas';
 
         document.getElementById("lider2").options.selectedIndex = 0;
         $('#lider2').val($('#lider2').val()).change();
+
+        document.getElementById("lider3").options.selectedIndex = 0;
+        $('#lider3').val($('#lider3').val()).change();
+
+        document.getElementById("lider4").options.selectedIndex = 0;
+        $('#lider4').val($('#lider4').val()).change();
     }
 
 
-    $(document).ready(function() {
+    $("#form-add").submit(function () {
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        var igreja = "<?= $id_igreja ?>";
+        var celula = $('#id-add').val();
+
+        $.ajax({
+            url: pag + "/add-membros.php",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+                $('#mensagem-add').text('');
+                $('#mensagem-add').removeClass()
+                if (mensagem.trim() == "Adicionado com Sucesso") {
+
+                    listarMembrosCB(celula, igreja);
+                    listarMembrosAdd(celula, igreja);
+
+                } else {
+
+                    $('#mensagem-add').addClass('message_error');
+                    $('#mensagem-add').text(mensagem);
+                }
+
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+        });
+
+    });
+
+
+    function listarMembrosCB(celula, igreja) {
+
+        $.ajax({
+            url: pag + "/listar-membros.php",
+            method: 'POST',
+            data: { celula, igreja },
+            dataType: "text",
+
+            success: function (result) {
+                $("#listar-membros").html(result);
+            },
+
+        });
+
+    }
+
+
+    function listarMembrosAdd(celula, igreja) {
+
+        $.ajax({
+            url: pag + "/listar-membros-add.php",
+            method: 'POST',
+            data: { celula, igreja },
+            dataType: "text",
+
+            success: function (result) {
+                $("#listar-membros-add").html(result);
+            },
+
+        });
+
+    }
+
+
+    function excluirMembro(id) {
+        event.preventDefault();
+
+        var igreja = "<?= $id_igreja ?>";
+        var celula = $('#id-add').val();
+
+        $.ajax({
+            url: pag + "/excluir-membro.php",
+            method: 'POST',
+            data: {id},
+            dataType: "text",
+
+            success: function (result) {
+                listarMembrosCB(celula, igreja);
+                listarMembrosAdd(celula, igreja);
+            },
+
+        });
+
+    }
+
+
+    $(document).ready(function () {
         $('.sel2').select2({
-            placeholder: 'Selecione um Registro',
+            placeholder: 'Selecione um Líder',
             dropdownParent: $('#modalForm'),
         });
     });
-    
-    $(document).ready(function() {
+
+    $(document).ready(function () {
         $('.sel21').select2({
             placeholder: 'Selecione um Pastor',
             dropdownParent: $('#modalForm'),
         });
     });
-
 
 </script>

@@ -98,7 +98,7 @@
 }
 
 #nome-excluido {
-    color: var(--btn-remove);
+    color: var(--preto-light);
     font-weight: 600;
 }
 
@@ -247,6 +247,31 @@
     flex-wrap: wrap;
 }
 
+.list_members_group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ex_member_cell {
+    background-color: var(--background-message-error);
+    color: var(--text-error-color);
+    padding: 1px 2px;
+    height: 3px;
+    line-height: 0;
+    width: 5px;
+    border-radius: 50%;
+    font-size: 17px;
+}
+
+#listar-membros {
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+}
+
 /*========================== ESTILIZAÇÕES DO SELECT2 ===========================*/
 .select2 .select2-container .select2-container--default,
 .select2-container--default .select2-selection--single {
@@ -345,7 +370,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 7px 10px 7px 15px;
+    padding: 7px 10px 7px 10px;
     border-radius: 3px;
     border: none;
     outline: none;
@@ -393,7 +418,7 @@
 
 .icon-btn-form {
     margin-left: 8px;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .message_error {

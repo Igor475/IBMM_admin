@@ -1,6 +1,6 @@
 <?php
 require_once("../../conexao.php");
-$pagina = 'tarefas';
+$pagina = 'celulas';
 $id = @$_POST['id-excluir'];
 
 $query = $pdo->query("DELETE FROM $pagina WHERE id = '$id'");
