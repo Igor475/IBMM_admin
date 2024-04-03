@@ -196,20 +196,17 @@ $pagina = 'anexos';
             </div>
             <div class="modal-body scroll-modal">
                 <div class="user_area">
-                    <img src="../img/svg/cpf.svg" class="img_icon_data" alt="">
-                    <!-- <i class="bi bi-person-vcard icon_user"></i> -->
+                    <img src="../img/svg/descrition.svg" class="img_icon_data" alt="">
                     <span class="user_name">Descrição: </span>
                     <span class="texts_son" id="descricao-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
-                    <!-- <i class="bi bi-envelope-at icon_user"></i> -->
                     <span class="user_name">Data Cadastro:</span>
                     <span class="texts_son" id="data-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/user-svgrepo-com.svg" class="img_icon_data" alt="">
-                    <!-- <i class="bi bi-phone icon_user"></i> -->
+                    <img src="../img/svg/user.svg" class="img_icon_data" alt="">
                     <span class="user_name">Usuário Cadastrou: </span>
                     <span class="texts_son" id="usuario-dados"></span>
                 </div>

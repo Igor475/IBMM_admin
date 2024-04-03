@@ -152,7 +152,7 @@
     --close: #999;
     --black-hover: #2d2d2d;
     --preto-cinza-mais-claro: #8b8b8b;
-    --verde-musgo: #19A993;
+    --verde-header: #198754de;
     --verde: #198754;
     --hover-side-menu: #007f5f12;
     --btn-hover: #157347;
@@ -5644,7 +5644,7 @@ textarea.form-control-lg {
   border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
   border-top-left-radius: var(--bs-modal-inner-border-radius);
   border-top-right-radius: var(--bs-modal-inner-border-radius);
-  background-color: var(--verde);
+  background-color: var(--verde-header);
 }
 .modal-header .btn-close {
   padding: calc(var(--bs-modal-header-padding-y) * 0.5) calc(var(--bs-modal-header-padding-x) * 0.5);

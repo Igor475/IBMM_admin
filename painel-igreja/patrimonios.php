@@ -107,6 +107,7 @@ $pagina = 'patrimonios';
                             $ativar = 'Não';
                             $inativa = '';
                             $tab = 'Ativo';
+                            $img_status = 'status_active.svg';
                         } else {
                             $classe = 'text_desactive';
                             $ativo = 'Ativar Item';
@@ -114,6 +115,7 @@ $pagina = 'patrimonios';
                             $ativar = 'Sim';
                             $inativa = 'text_opacity';
                             $tab = 'Inativo';
+                            $img_status = 'status_inactive.svg';
                         }
 
                         $query_con = $pdo->query("SELECT * FROM usuarios where id = '$usuario_cad'");
@@ -413,78 +415,78 @@ $pagina = 'patrimonios';
                 <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
             </div>
             <div class="modal-body scroll-modal">
-                    <div class="user_area">
-                        <img src="../img/svg/cpf.svg" class="img_icon_data" alt="">
-                        <span class="user_name">codigo: </span>
-                        <span class="texts_son" id="codigo-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/email.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Descrição:</span>
-                        <span class="texts_son" id="descricao-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/telefone.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Valor: </span>
-                        R$ <span class="texts_son" id="valor-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Cadastrado Por: </span>
-                        <span class="texts_son" id="usuario-cad-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Data de Cadastro: </span>
-                        <span class="texts_son" id="data-cad-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Igreja Dona Item: </span>
-                        <span class="texts_son" id="igreja-cad-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/igreja.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Igreja Possui Item: </span>
-                        <span class="texts_son" id="igreja-item-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Emprestado Por: </span>
-                        <span class="texts_son" id="usu-emp-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Data Empréstimo: </span>
-                        <span class="texts_son" id="data-emp-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Status do Item: </span>
-                        <span class="texts_son" id="ativo-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Compra / Doação: </span>
-                        <span class="texts_son" id="entrada-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
-                        <span class="user_name">Doado Por: </span>
-                        <span class="texts_son" id="doador-dados"></span>
-                    </div>
-                    <div class="user_area">
-                        <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
-                        <span class="user_name">OBS: </span>
-                        <span class="texts_son" id="obs-dados"></span>
-                    </div>
+                <div class="user_area">
+                    <img src="../img/svg/bar-code.svg" class="img_icon_data" alt="">
+                    <span class="user_name">codigo: </span>
+                    <span class="texts_son" id="codigo-dados"></span>
                 </div>
-                <div class="user_profile_area">
-                    <img class="img_info_profile" src="" id="foto-dados">
+                <div class="user_area">
+                    <img src="../img/svg/descrition.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Descrição:</span>
+                    <span class="texts_son" id="descricao-dados"></span>
                 </div>
+                <div class="user_area">
+                    <img src="../img/svg/dolar-simbolo.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Valor: </span>
+                    R$ <span class="texts_son" id="valor-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/user.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Cadastrado Por: </span>
+                    <span class="texts_son" id="usuario-cad-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Data de Cadastro: </span>
+                    <span class="texts_son" id="data-cad-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/igreja.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Igreja Dona Item: </span>
+                    <span class="texts_son" id="igreja-cad-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/igreja.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Igreja Possui Item: </span>
+                    <span class="texts_son" id="igreja-item-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/user.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Emprestado Por: </span>
+                    <span class="texts_son" id="usu-emp-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Data Empréstimo: </span>
+                    <span class="texts_son" id="data-emp-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/<?php echo $img_status ?>" class="img_icon_data" alt="">
+                    <span class="user_name">Status do Item: </span>
+                    <span class="texts_son" id="ativo-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Compra / Doação: </span>
+                    <span class="texts_son" id="entrada-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/user.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Doado Por: </span>
+                    <span class="texts_son" id="doador-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/exclamation.svg" class="img_icon_data" alt="">
+                    <span class="user_name">OBS: </span>
+                    <span class="texts_son" id="obs-dados"></span>
+                </div>
+            </div>
+            <div class="user_profile_area">
+                <img class="img_info_profile" src="" id="foto-dados">
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

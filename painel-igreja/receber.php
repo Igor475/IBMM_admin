@@ -395,37 +395,37 @@ if (@$_GET['filtrar'] == 'Vencidas') {
             </div>
             <div class="modal-body scroll-modal">
                 <div class="user_area">
-                    <img src="../img/svg/cpf.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/user.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-person-vcard icon_user"></i> -->
                     <span class="user_name">Membro: </span>
                     <span class="texts_son" id="membro-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/email.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/dolar-simbolo.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-envelope-at icon_user"></i> -->
                     <span class="user_name">Valor:</span>
                     <span class="texts_son" id="valor-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/telefone.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-phone icon_user"></i> -->
                     <span class="user_name">Data Cadastro: </span>
                     <span class="texts_son" id="data-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-geo-alt icon_user"></i> -->
                     <span class="user_name">Vencimento: </span>
                     <span class="texts_son" id="vencimento-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/user.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Usuário Cadastro: </span>
                     <span class="texts_son" id="usu-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <img src="../img/svg/user.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Usuário Baixa: </span>
                     <span class="texts_son" id="usu-baixa-dados"></span>
