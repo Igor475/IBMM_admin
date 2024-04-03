@@ -25,7 +25,7 @@ if ($total_reg > 0) {
         echo '<ul class="members_cel">';
             echo '<li>'
                     .$nome_membro.' - Membro Desde: '.$dataF.
-                    '<a href="#" onclick="excluirMembro('.$id.')" title="Excluir Membro">
+                    '<a href="#" class="link_remo" onclick="excluirMembro('.$id.')" title="Excluir Membro">
                         <i class="bi bi-x ex_member_cell"></i>
                     </a>
                   </li>';

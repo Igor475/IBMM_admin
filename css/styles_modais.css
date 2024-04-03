@@ -68,6 +68,30 @@
     color: var(--verde);
 }
 
+.members_cel {
+    list-style-type: none;
+}
+
+.members_cel li {
+    padding: 8px 0;
+    border-bottom: 2px dotted var(--border-bottom);
+    font-size: 13px;
+    color: var(--preto);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.members_cel li a {
+    line-height: 0;
+}
+
+#listar-membros-add {
+    flex: 1;
+    height: 180px;
+    overflow: auto;
+}
+
 #entrada {
     background-color: transparent;
 }
@@ -251,19 +275,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
-.ex_member_cell {
+
+.link_remo {
+    display: flex;
+    align-items: center;
     background-color: var(--background-message-error);
-    color: var(--text-error-color);
-    padding: 1px 2px;
-    height: 3px;
-    line-height: 0;
-    width: 5px;
+    padding: 2px 2px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
+}
+
+.ex_member_cell {
     font-size: 17px;
+    color: var(--text-error-color);
 }
 
 #listar-membros {
