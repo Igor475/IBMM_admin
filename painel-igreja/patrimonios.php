@@ -107,7 +107,8 @@ $pagina = 'patrimonios';
                             $ativar = 'Não';
                             $inativa = '';
                             $tab = 'Ativo';
-                            $img_status = 'status_active.svg';
+                            $img_status = '../img/svg/status_active.svg';
+
                         } else {
                             $classe = 'text_desactive';
                             $ativo = 'Ativar Item';
@@ -115,7 +116,7 @@ $pagina = 'patrimonios';
                             $ativar = 'Sim';
                             $inativa = 'text_opacity';
                             $tab = 'Inativo';
-                            $img_status = 'status_inactive.svg';
+                            $img_status = '../img/svg/status_inactive.svg';
                         }
 
                         $query_con = $pdo->query("SELECT * FROM usuarios where id = '$usuario_cad'");
@@ -461,7 +462,7 @@ $pagina = 'patrimonios';
                     <span class="texts_son" id="data-emp-dados"></span>
                 </div>
                 <div class="user_area">
-                    <img src="../img/svg/<?php echo $img_status ?>" class="img_icon_data" alt="">
+                    <img src="<?php echo $img_status ?>" class="img_icon_data" alt="">
                     <span class="user_name">Status do Item: </span>
                     <span class="texts_son" id="ativo-dados"></span>
                 </div>
@@ -480,9 +481,9 @@ $pagina = 'patrimonios';
                     <span class="user_name">OBS: </span>
                     <span class="texts_son" id="obs-dados"></span>
                 </div>
-            </div>
-            <div class="user_profile_area">
-                <img class="img_info_profile" src="" id="foto-dados">
+                <div class="user_profile_area">
+                    <img class="img_info_profile" src="" id="foto-dados">
+                </div>
             </div>
         </div>
     </div>

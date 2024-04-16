@@ -208,7 +208,7 @@ if (@$_GET['filtrar'] == 'Vencidas') {
                         ?>
                         <tr class="column-body <?php echo $classe_linha ?>">
                             <td data-label="Descrição" class="td-table" id="radius-column-foto">
-                                <i class="bi bi-receipt <?php echo $classe ?>"></i>
+                                <i class="bi bi-receipt-cutoff <?php echo $classe ?>"></i>
                                 <?php echo $descricao ?>
                             </td>
                             <td data-label="Fornecedor" class="td-table column-hidden">

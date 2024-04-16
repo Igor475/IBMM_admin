@@ -983,8 +983,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .content-table .thead-tabs {
-    background-color: var(--verde);
-    border: 1px solid var(--verde);
+    background-color: var(--fundo-profile);
+    border-top: 1px solid var(--border-table); 
+    border-left: 1px solid var(--border-table); 
+    border-right: 1px solid var(--border-table);
 }
 
 .content-table #border_rad {
@@ -992,10 +994,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 .content-table .thead-tabs .column-table .th-table {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.35px;
-    color: #ffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.60px;
+    color: var(--black-grey);
+    text-transform: uppercase;
     opacity: 1;
     padding: 15px;
     vertical-align: top;
@@ -1020,6 +1023,9 @@ td.td-table#radius-column-action:last-child {
 
 .content-table .body-table .column-body {
     color: var(--black-hover);
+    border-bottom: 1px solid var(--border-table); 
+    border-left: 1px solid var(--border-table); 
+    border-right: 1px solid var(--border-table);
 }
 
 .content-table .body-table .column-body:hover {
@@ -1034,7 +1040,6 @@ td.td-table#radius-column-action:last-child {
     /* background-color: #ffff; */
     padding: 7px;
     text-align: center;
-    border: 1px solid var(--border-table);
     position: relative;
 }
 
