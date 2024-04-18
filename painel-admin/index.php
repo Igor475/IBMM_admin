@@ -345,18 +345,28 @@ if ($pag == "") {
                                             value="<?php echo $end_igr ?>" required>
                                     </div>
 
-                                    <div class="input-field">
+                                    <div class="input-field flex_int_5">
                                         <label>Quantidade Tarefas</label>
                                         <input type="number" name="qtd_tar_igr" id="qtd_tar_igr"
                                             value="<?php echo $quantidade_tarefas ?>" required>
                                     </div>
 
-                                    <div class="input-field">
+                                    <div class="input-field flex_int_5">
                                         <label>Limitar Tesoureiro</label>
                                         <select class="form-select" name="limitar_tesoureiro">
                                             <option <?php if($limitar_tesoureiro == 'Sim') { ?>
                                                 selected <?php } ?> value="Sim">Sim</option>
                                             <option <?php if($limitar_tesoureiro == 'Não') { ?>
+                                                selected <?php } ?> value="Não">Não</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field flex_int_5">
+                                        <label>Relatório PDF</label>
+                                        <select class="form-select" name="relatorio_pdf">
+                                            <option <?php if($relatorio_pdf == 'Sim') { ?>
+                                                selected <?php } ?> value="Sim">Sim</option>
+                                            <option <?php if($relatorio_pdf == 'Não') { ?>
                                                 selected <?php } ?> value="Não">Não</option>
                                         </select>
                                     </div>

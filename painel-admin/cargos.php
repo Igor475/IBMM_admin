@@ -91,7 +91,7 @@ $pagina = 'cargos';
                     <div action="#" class="form-modal-auto">
                         <div class="form first">
                             <div class="fields">
-                                <div class="input-field">
+                                <div class="input-field flex_int_5">
                                     <label>Nome</label>
                                     <input type="text" name="nome" id="nome" placeholder="Insira o Nome" required>
                                 </div>

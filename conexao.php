@@ -6,6 +6,12 @@ $servidor = "localhost";
 $usuario = "root";
 $senha = "";
 
+$url_sistema = "http://$_SERVER[HTTP_HOST]/";
+$url = explode("//", $url_sistema);
+if($url[1] == 'localhost/'){
+	$url_sistema = "http://$_SERVER[HTTP_HOST]/IBMM_admin/";
+}
+
 $email_super_adm = "contato@ibmissaomultiplicar.com.br";
 $nome_igreja_sistema = "Igreja Batista Missão Multiplicar";
 $telefone_igreja_sistema = "(00) 00000-0000";
@@ -17,6 +23,8 @@ $endereco_igreja_sistema = "Avenida Brasil, 33.815 Bangu , Rio de Janeiro, RJ, B
 $quantidade_tarefas = 20; //exibindo as próximas 20tarefas no painel da igreja
 $limitar_tesoureiro = 'Sim'; //Se tiver sim, o tesoureiro não poderá excluir e nem editar as Ofertas e Dízimos
 
+
+$relatorio_pdf = 'Sim'; //SE ESSA OPÇÃO ESTIVER NÃO, O RELATÓRIO SERÁ GERADO EM HTML
 
 
 try {
@@ -103,7 +111,8 @@ $total_reg = count($res);
 if($total_reg == 0) {
     $pdo->query("INSERT INTO config SET nome = '$nome_igreja_sistema', email = '$email_super_adm',
         endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema', 
-        qtd_tarefas = '$quantidade_tarefas', limitar_tesoureiro = '$limitar_tesoureiro' ");
+        qtd_tarefas = '$quantidade_tarefas', limitar_tesoureiro = '$limitar_tesoureiro',
+        relatorio_pdf = '$relatorio_pdf' ");
 }
 
 
@@ -116,5 +125,6 @@ $telefone_igreja_sistema = $res[0]['telefone'];
 $endereco_igreja_sistema = $res[0]['endereco'];
 $quantidade_tarefas = $res[0]['qtd_tarefas'];
 $limitar_tesoureiro = $res[0]['limitar_tesoureiro'];
+$relatorio_pdf = $res[0]['relatorio_pdf'];
 
 ?>

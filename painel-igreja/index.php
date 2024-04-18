@@ -1,11 +1,11 @@
 <?php
 @session_start();
-require_once("verificar.php");
-require_once("../conexao.php");
+require_once ("verificar.php");
+require_once ("../conexao.php");
 $id_usuario = @$_SESSION['id_usuario'];
 $nivel_usu = @$_SESSION['nivel_usuario'];
 
-if($nivel_usu == 'tesoureiro') {
+if ($nivel_usu == 'tesoureiro') {
     $esc_tesoureiro = 'd-none';
 } else {
     $esc_tesoureiro = '';
@@ -14,9 +14,9 @@ if($nivel_usu == 'tesoureiro') {
 $data_atual = date('Y-m-d');
 $hora_atual = date('H:i:s');
 
-if(@$_GET['igreja'] > 0) {
+if (@$_GET['igreja'] > 0) {
     @$_SESSION['id_igreja'] = @$_GET['igreja'];
-} 
+}
 
 $id_igreja = @$_SESSION['id_igreja'];
 
@@ -55,11 +55,12 @@ if ($pag == "") {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../img/logo-IBMM-preta.ico" type="image/x-icon">
-    
+
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap_style.css">
     <link rel="stylesheet" type="text/css" href="../css/menu_action_table.css">
@@ -135,13 +136,13 @@ if ($pag == "") {
                                 Editar Dados
                             </a>
                         </li>
-                        <?php if($nivel_usu == 'Pastor Presidente') { ?>
-                            <li>
-                                <a href="../painel-admin">
-                                    <i class='bi bi-grid icon'></i>
-                                    Painel Administrador
-                                </a>
-                            </li>
+                        <?php if ($nivel_usu == 'Pastor Presidente') { ?>
+                        <li>
+                            <a href="../painel-admin">
+                                <i class='bi bi-grid icon'></i>
+                                Painel Administrador
+                            </a>
+                        </li>
                         <?php } ?>
                         <li>
                             <a href="../logout.php">
@@ -239,8 +240,13 @@ if ($pag == "") {
                             <a href="#" class="font_main_index"><i class='bi bi-folder-symlink icon'></i> Relatórios <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
-                                <li><a href="#">Membros</a></li>
-                                <li><a href="#">Patrimônios</a></li>
+                                <li>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelMembros">Membros</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalRelPatrimonios">Patrimônios</a>
+                                </li>
                                 <li><a href="#">Financeiros</a></li>
                                 <li><a href="#">Auditoria e Logs</a></li>
                                 <li><a href="#">Tranferência de Membros</a></li>
@@ -248,7 +254,8 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="index.php?pag=anexos" class="font_main_index"><i class='bi bi-archive icon'></i>Anexo Sede</a>
+                            <a href="index.php?pag=anexos" class="font_main_index"><i
+                                    class='bi bi-archive icon'></i>Anexo Sede</a>
                         </li>
                         <li class="divider">
                             <span class="text_divider">Outros</span>
@@ -267,7 +274,7 @@ if ($pag == "") {
 
         <main id="container_painel">
             <?php
-            require_once($pag . '.php');
+            require_once ($pag . '.php');
             ?>
         </main>
     </div>
@@ -322,11 +329,12 @@ if ($pag == "") {
                                     <div class="area_photo">
                                         <div class="area_photo_flex">
                                             <label>Foto</label>
-                                            <input type="file" class="input_file" id="imagem-usu"
-                                            name="imagem" onChange="carregarImg2();">
+                                            <input type="file" class="input_file" id="imagem-usu" name="imagem"
+                                                onChange="carregarImg2();">
                                         </div>
                                         <div class="divImg">
-                                            <img class="photo_file" id="target-usu" src="../img/membros/<?php echo $foto_usu ?>" alt="">
+                                            <img class="photo_file" id="target-usu"
+                                                src="../img/membros/<?php echo $foto_usu ?>" alt="">
                                         </div>
                                     </div>
 
@@ -340,7 +348,8 @@ if ($pag == "") {
                 <div id="msg-usu"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-usu" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-usu" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
                             Editar
@@ -358,46 +367,54 @@ if ($pag == "") {
 
 
 
-<div class="modal fade" id="modalConfig" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalRelMembros" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="Cadastro">Configurações do sistema</h3>
+                <h3 class="Cadastro">Relatório de Membros</h3>
                 <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
             </div>
-            <form id="form-config" method="post">
+            <form method="post" action="../relatorios/relMembros.php" target="_blank">
                 <div class="modal-body">
                     <div action="#" class="form-modal">
                         <div class="form first">
                             <div class="details personal">
-                                <span class="title-modal">Personalizar detalhes</span>
-
                                 <div class="fields">
                                     <div class="input-field">
-                                        <label>Nome Igreja</label>
-                                        <input type="text" name="nome_igr" id="nome_igr" placeholder="Nome Igreja"
-                                            value="<?php echo $nome_igr ?>" required>
+                                        <label>Cargo / Membros</label>
+                                        <select name="cargo" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM cargos order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                            <option value="<?php echo $id_reg ?>">
+                                                <?php echo $nome_reg ?>
+                                            </option>
+                                            <?php }
+                                            } ?>
+                                        </select>
                                     </div>
 
                                     <div class="input-field">
-                                        <label>Email Igreja</label>
-                                        <input type="email" name="email_igr" id="email_igr" placeholder="Insira o Email da Igreja"
-                                            value="<?php echo $email_igr ?>" required>
+                                        <label>Status</label>
+                                        <select name="status" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <option value="Sim">Ativo</option>
+                                            <option value="Não">Inativo</option>
+                                        </select>
                                     </div>
-
-                                    <div class="input-field field_area_1">
-                                        <label>Telefone da Igreja</label>
-                                        <input type="text" name="tel_igr" id="tel_igr" placeholder="Telefone da Igreja"
-                                            value="<?php echo $tel_igr ?>" required>
-                                    </div>
-
-                                    <div class="input-field">
-                                        <label>Endereço da Igreja</label>
-                                        <input type="text" name="end_igr" id="end_igr" placeholder="Telefone da Igreja"
-                                            value="<?php echo $end_igr ?>" required>
-                                    </div>
-
                                 </div>
+
+                                <input type="hidden" name="igreja" value="<?php echo $id_igreja ?>">
                             </div>
                         </div>
                     </div>
@@ -405,11 +422,83 @@ if ($pag == "") {
                 <div id="msg-config"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-config" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
-                            Editar
-                            <i class="bi bi-pencil-square icon-btn-form"></i>
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="modalRelPatrimonios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Relatório de Patrimônios</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form method="post" action="../relatorios/relPatrimonio.php" target="_blank">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="details personal">
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>Itens</label>
+                                        <select name="itens" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <option value="1">Pertencentes a Igreja</option>
+                                            <option value="2">Emprestados a Outros</option>
+                                            <option value="3">Itens de Outras Igrejas</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Status</label>
+                                        <select name="status" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <option value="Sim">Ativo</option>
+                                            <option value="Não">Inativo</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Compra / Doação</label>
+                                        <select name="entrada" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <option value="Compra">Compra</option>
+                                            <option value="Doação">Doação</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <input type="hidden" name="igreja" value="<?php echo $id_igreja ?>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
                         </button>
                     </div>
                 </div>

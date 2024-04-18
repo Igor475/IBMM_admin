@@ -1051,7 +1051,7 @@ td.td-table#radius-column-action:last-child {
     width: 120px;
 }
 
-.content-table .body-table .column-body:nth-child(2n + 1) {
+.content-table .body-table .column-body:nth-child(2n) {
     background-color: var(--fundo);
 }
 

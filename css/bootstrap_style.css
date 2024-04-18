@@ -2365,6 +2365,7 @@ textarea.form-control-lg {
   border: 2px solid var(--border-bottom);
   border-radius: var(--bs-border-radius);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background-color: transparent;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-select {
