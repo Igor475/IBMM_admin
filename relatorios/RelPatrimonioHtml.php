@@ -4,9 +4,19 @@ require_once ("../conexao.php");
 
 $igreja = $_GET['igreja'];
 $status = $_GET['status'];
+$dataInicial = $_GET['dataInicial'];
+$dataFinal = $_GET['dataFinal'];
 $entrada = $_GET['entrada'];
 $itens = $_GET['itens'];
 
+$dataInicialF = implode('/', array_reverse(explode('-', $dataInicial)));
+$dataFinalF = implode('/', array_reverse(explode('-', $dataFinal)));
+
+if($dataInicial == $dataFinal) {
+    $texto_apuracao = 'APURADO EM '.$dataInicialF;
+} else {
+    $texto_apuracao = 'APURADO DE '.$dataInicialF.' ATÉ '.$dataFinalF;
+}
 
 $query = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -40,11 +50,11 @@ if ($status == 'Sim') {
 
 
 if ($entrada == 'Compra') {
-    $entrada = 'Comprados';
-} else if ($entrada == 'Doação') {
-    $entrada = 'Doados';
+    $entrada_rel = 'Comprados';
+} else if ($status == 'Doação') {
+    $entrada_rel = 'Doados';
 } else {
-    $entrada = '';
+    $entrada_rel = '';
 }
 
 
@@ -53,19 +63,24 @@ $entrada = '%'.$entrada.'%';
 
 
 if ($itens == "") {
-    $titulo_rel = 'Relatório de Patrimônios '.$entrada.' '.$status_rel;
+    $titulo_rel = 'Relatório de Patrimônios '.$entrada_rel.' '.$status_rel;
     $query = $pdo->query("SELECT * FROM patrimonios where (igreja_cad = '$igreja' or igreja_item = '$igreja') 
-        and ativo LIKE '$status' and entrada LIKE '$entrada' order by id desc");
+        and ativo LIKE '$status' and entrada LIKE '$entrada' and data_cad >= '$dataInicial' and data_cad <= '$dataFinal'
+        order by id desc"); 
 } else if ($itens == "1") {
-    $titulo_rel = 'Patrimônios dessa Igreja ' . $entrada . ' ' . $status_rel;
+    $titulo_rel = 'Patrimônios dessa Igreja '.$entrada_rel.' '.$status_rel;
     $query = $pdo->query("SELECT * FROM patrimonios where igreja_cad = '$igreja' and ativo LIKE '$status' and
-        entrada LIKE '$entrada' order by id desc");
+        entrada LIKE '$entrada' and data_cad >= '$dataInicial' and data_cad <= '$dataFinal' order by id desc");
 } else if ($itens == "2") {
-    $titulo_rel = 'Patrimônios Emprestados a Outros ' . $entrada . ' ' . $status_rel;
-    $query = $pdo->query("SELECT * FROM patrimonios where (igreja_cad != '$igreja' and igreja_item = '$igreja') 
-        and ativo LIKE '$status' and entrada LIKE '$entrada' order by id desc");
+    $titulo_rel = 'Patrimônios Emprestados a Outros '.$entrada_rel.' '.$status_rel;
+    $query = $pdo->query("SELECT * FROM patrimonios where (igreja_cad == '$igreja' and igreja_item != '$igreja') 
+        and ativo LIKE '$status' and entrada LIKE '$entrada' and data_cad >= '$dataInicial' and data_cad <= '$dataFinal'
+        order by id desc");
 } else {
-    $titulo_rel = 'Patrimônios Emprestados a nossa Igreja '.$entrada.' '.$status_rel;
+    $titulo_rel = 'Patrimônios Emprestados a nossa Igreja '.$entrada_rel.' '.$status_rel;
+    $query = $pdo->query("SELECT * FROM patrimonios where (igreja_cad != '$igreja' and igreja_item = '$igreja') 
+        and ativo LIKE '$status' and entrada LIKE '$entrada' and data_cad >= '$dataInicial' and data_cad <= '$dataFinal'
+        order by id desc");
 }
 
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -81,7 +96,7 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
 
 <head>
     <title>Relatório de Membros</title>
-    <link rel="shortcut icon" href="../img/logo-IBMM-preta.ico" />
+    <link rel="shortcut icon" href="<?php echo $url_sistema ?>img/logo-IBMM-preta.ico" />
 
 
     <style>
@@ -145,7 +160,7 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
 
         .titulo_cab {
             color: #151515;
-            font-size: 17px;
+            font-size: 16px;
         }
 
         .titulo {
@@ -300,6 +315,16 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
             border-radius: 4px;
             display: inline-block;
         }
+
+        .area_canvass {
+            padding: 0 15px;
+        }
+
+        .txt_canvass {
+            font-size: 12px;
+            color: #777;
+            letter-spacing: 0.40px;
+        }
     </style>
 
 
@@ -335,6 +360,10 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
 
     <br>
     <div class="cabecalho" style="border-bottom: solid 1px #ececec; margin-bottom: 30px">
+    </div>
+
+    <div class="area_canvass">
+        <span class="txt_canvass"><?php echo $texto_apuracao ?></span>
     </div>
 
     <div class="legend_area" align="right">

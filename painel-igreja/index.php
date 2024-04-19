@@ -14,6 +14,11 @@ if ($nivel_usu == 'tesoureiro') {
 $data_atual = date('Y-m-d');
 $hora_atual = date('H:i:s');
 
+$mes_atual = Date('m');
+$ano_atual = Date('Y');
+$data_mes = $ano_atual."-".$mes_atual."-01";
+$data_ano = $ano_atual."01-01";
+
 if (@$_GET['igreja'] > 0) {
     @$_SESSION['id_igreja'] = @$_GET['igreja'];
 }
@@ -487,6 +492,31 @@ if ($pag == "") {
 
                                 <input type="hidden" name="igreja" value="<?php echo $id_igreja ?>">
                             </div>
+                            
+                            <div class="widget_bottom_dates">
+                                <div class="input-field-in">
+                                    <label>Data Inicial (
+                                        <a href="#" onclick="datas('1980-01-01', 'tudo-pat')">
+                                            <span class="txt_date_all" id="tudo-pat">Tudo</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-pat')">
+                                            <span class="txt_date_all" id="hoje-pat">Hoje</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-pat')">
+                                            <span class="txt_date_all" id="mes-pat">Mês</span>
+                                        </a> 
+                                        <a href="#" onclick="datas('<?php echo $data_ano ?>', 'ano-pat')">
+                                            <span class="txt_date_all" id="ano-pat">Ano</span>
+                                        </a>)
+                                    </label>
+                                    <input type="date" name="dataInicial" id="dtInicialPatrimonio" value="1980-01-01">
+                                </div>
+
+                                <div class="input-field-in">
+                                    <label>Data Final</label>
+                                    <input type="date" id="dtFinalPatrimonio" name="dataFinal" value="<?php echo $data_atual ?>">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -598,4 +628,27 @@ if ($pag == "") {
         });
 
     });
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function datas(data, id) {
+        var data_atual = "<?=$data_atual?>";
+            $('#dtInicialPatrimonio').val(data);
+            $('#dtFinalPatrimonio').val(data_atual);
+            document.getElementById('tudo-pat').style.color = "#999";
+            document.getElementById('tudo-pat').style.backgroundColor = "#ececec";
+            document.getElementById('hoje-pat').style.color = "#999";
+            document.getElementById('hoje-pat').style.backgroundColor = "#ececec";
+            document.getElementById('mes-pat').style.color = "#999";
+            document.getElementById('mes-pat').style.backgroundColor = "#ececec";
+            document.getElementById('ano-pat').style.color = "#999";
+            document.getElementById('ano-pat').style.backgroundColor = "#ececec";
+            document.getElementById(id).style.color = "#198754";
+            document.getElementById(id).style.backgroundColor = "#007f5f12";
+    }
 </script>

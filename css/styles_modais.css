@@ -204,11 +204,32 @@
     color: var(--preto-light);
 }
 
+.input-field-in label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--preto-light);
+}
+
+.txt_date_all {
+    color: var(--close);
+    padding: 3px 7px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    font-size: 13px;
+    margin-right: 3px;
+    font-weight: 500;
+}
+
 .flex_int {
     flex: none !important;
 }
 
 .input-field input {
+    height: 40px;
+    margin: 8px 0;
+}
+
+.input-field-in input {
     height: 40px;
     margin: 8px 0;
 }
@@ -389,11 +410,46 @@
     box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
 }
 
+.input-field-in input:focus {
+    border-color: var(--verde-light-border);
+    box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
+}
+
 .input-field input[type="date"] {
     color: var(--black-grey);
 }
 
+.widget_bottom_dates {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-field-in input {
+    outline: none;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--preto);
+    border-radius: 5px;
+    border: 1px solid var(--fundo-ea);
+    padding: 0 10px;
+    margin: 8px 0;
+    transition: all .3s ease;
+}
+
+.input-field-in {
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 5px;
+    flex: 1 1 200px;
+}
+
 .input-field input[type="date"]:valid {
+    color: var(--preto);
+}
+
+.input-field-in input[type="date"]:valid {
     color: var(--preto);
 }
 
@@ -408,7 +464,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 7px 15px;
+    padding: 10px 15px;
     border-radius: 3px;
     border: none;
     outline: none;
@@ -436,7 +492,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 7px 15px;
+    padding: 10px 15px;
     border-radius: 3px;
     border: none;
     outline: none;

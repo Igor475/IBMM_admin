@@ -3,12 +3,14 @@ require_once("../conexao.php");
 
 $igreja = $_POST['igreja'];
 $status = $_POST['status'];
+$dataInicial = $_POST['dataInicial'];
+$dataFinal = $_POST['dataFinal'];
 $entrada = $_POST['entrada'];
 $itens = $_POST['itens'];
 
 
 //ALIMENTANDO OS DADOS DO RELATÓRIO
-$html = file_get_contents($url_sistema."relatorios/relPatrimonioHtml.php?igreja=$igreja&status=$status&entrada=$entrada&itens=$itens");
+$html = file_get_contents($url_sistema."relatorios/relPatrimonioHtml.php?igreja=$igreja&status=$status&entrada=$entrada&itens=$itens&dataInicial=$dataInicial&dataFinal=$dataFinal");
 
 if($relatorio_pdf != 'Sim') {
     echo $html;
