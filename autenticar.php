@@ -35,7 +35,14 @@ if ($total_reg > 0) {
     }
 
 } else {
-    echo "<script>$(function() { alertaTempo('Usuário ou senha incorretos!!', 1000) });</script>";
+    $_SESSION['msg'] = "<div id='alert_mess_box'>
+                            <span>
+                                Usuário ou Senha não batem!
+                                <i id='icon_close_box' class='bi bi-x' onclick='closeLogin()'></i>
+                            </span>
+                        </div>";
+    header("Location: index.php");
+    /* echo "<script>$(function() { alertaTempo('Usuário ou senha incorretos!!', 1000) });</script>"; */
 }
 
 ?>
