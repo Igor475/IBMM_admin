@@ -1,3 +1,7 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="../js/alerta-tempo.js"></script>
+
+
 <?php
 
 @session_start();
@@ -106,6 +110,16 @@ $totalOfertas = number_format($totalOfertas, 2, ',', '.');
 $totalVendas = number_format($totalVendas, 2, ',', '.');
 $totalDoacoes = number_format($totalDoacoes, 2, ',', '.');
 $saldoMes = number_format($saldoMes, 2, ',', '.');
+
+
+if(@$home == 'ocultar') {
+    echo "<script>$(function() { 
+                     alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
+                });
+          </script>"; 
+    /* echo "<script>window.location='index.php'</script>"; */
+    exit();
+}
 
 ?>
 
@@ -360,6 +374,6 @@ $total_reg_tar = count($res_tar);
             </a>
         <?php }
     } else {
-        echo 'Não existem tarefas Pendetes!!';
+        echo 'Não existem tarefas Pendentes!!';
     } ?>
 </div>

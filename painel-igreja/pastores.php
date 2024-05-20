@@ -1,11 +1,24 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="../js/alerta-tempo.js"></script>
+
+
 <?php
 require_once("../conexao.php");
 $pagina = 'pastores';
 @session_start();
 $nivel_usu = @$_SESSION['nivel_usuario'];
-if($nivel_usu == "tesoureiro") {
+/*if($nivel_usu == "tesoureiro") {
     echo "<script>window.alert('Você não tem permissão para entrar nesta página. Verifique com o seu Pastor')</script>";
     echo "<script>window.location='../painel-igreja/index.php'</script>";
+    exit();
+}*/
+
+if(@$pastores == 'ocultar') {
+    echo "<script>$(function() { 
+                     alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
+                });
+          </script>"; 
+    /* echo "<script>window.location='index.php'</script>"; */
     exit();
 }
 ?>

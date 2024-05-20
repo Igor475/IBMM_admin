@@ -1,6 +1,8 @@
 <?php 
 require_once("../conexao.php");
 
+
+
 $igreja = $_POST['igreja'];
 $status = $_POST['status'];
 $cargo = $_POST['cargo'];

@@ -61,6 +61,27 @@
     width: 2px;
 }
 
+.txt_sweet_alert{
+    color: var(--text-table-emp);
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 3px;
+    background-color: var(--background-table-emp);
+    display: inline-block;
+}
+
+.txt_msg {
+    font-size: 20px;
+    line-height: 25px;
+    height: 10px;
+    display: inline-block;
+}
+
+/* OCULTANDO MENUS DAS PERMISSÕES DOS USUÁRIOS */
+.ocultar {
+    display: none;
+}
+
 
 /* BOTÕES DE ADICIONAR NOVO REGISTROS NAS TABELAS DE TODAS AS PÁGINAS */
 .buttons_register {

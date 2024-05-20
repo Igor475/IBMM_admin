@@ -300,6 +300,23 @@
     flex-wrap: wrap;
 }
 
+.area_permissions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+
+.titulo-grupo {
+    color: var(--preto-light);
+    font-weight: 400;
+}
+
+.labelcheck {
+    font-size: 14px;
+    color: var(--preto);
+}
 
 .link_remo {
     display: flex;

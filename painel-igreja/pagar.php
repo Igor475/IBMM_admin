@@ -1,3 +1,7 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="../js/alerta-tempo.js"></script>
+
+
 <?php
 require_once("../conexao.php");
 $pagina = 'pagar';
@@ -37,6 +41,15 @@ if (@$_GET['filtrar'] == 'Vencidas') {
     $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by pago asc,
     vencimento asc, id asc");
 
+}
+
+if(@$pagar == 'ocultar') {
+    echo "<script>$(function() { 
+                     alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
+                });
+          </script>"; 
+    /* echo "<script>window.location='index.php'</script>"; */
+    exit();
 }
 ?>
 

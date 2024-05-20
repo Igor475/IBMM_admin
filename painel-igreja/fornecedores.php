@@ -1,6 +1,20 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="../js/alerta-tempo.js"></script>
+
+
 <?php
 require_once("../conexao.php");
 $pagina = 'fornecedores';
+
+
+if(@$fornecedores == 'ocultar') {
+    echo "<script>$(function() { 
+                     alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
+                });
+          </script>"; 
+    /* echo "<script>window.location='index.php'</script>"; */
+    exit();
+}
 ?>
 
 <div class="buttons_register">

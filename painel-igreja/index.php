@@ -5,19 +5,19 @@ require_once ("../conexao.php");
 $id_usuario = @$_SESSION['id_usuario'];
 $nivel_usu = @$_SESSION['nivel_usuario'];
 
-if ($nivel_usu == 'tesoureiro') {
+/* if ($nivel_usu == 'tesoureiro') {
     $esc_tesoureiro = 'd-none';
 } else {
     $esc_tesoureiro = '';
-}
+} */
 
 $data_atual = date('Y-m-d');
 $hora_atual = date('H:i:s');
 
 $mes_atual = Date('m');
 $ano_atual = Date('Y');
-$data_mes = $ano_atual."-".$mes_atual."-01";
-$data_ano = $ano_atual."01-01";
+$data_mes = $ano_atual . "-" . $mes_atual . "-01";
+$data_ano = $ano_atual . "01-01";
 
 if (@$_GET['igreja'] > 0) {
     @$_SESSION['id_igreja'] = @$_GET['igreja'];
@@ -56,6 +56,10 @@ $tel_igr = $res[0]['telefone'];
 $pag = @$_GET['pag'];
 if ($pag == "") {
     $pag = 'home';
+}
+
+if (@$_SESSION['nivel_usuario'] != 'Pastor Presidente') {
+    require_once ("verificar-permissoes.php");
 }
 ?>
 <!DOCTYPE html>
@@ -179,98 +183,319 @@ if ($pag == "") {
                         <h4 class="title_sys">Sistema <span class="">IBMM</span></h4>
                     </div>
                     <ul class="side-menu">
-                        <li>
-                            <a href="index.php" class="font_main_index"><i class='bi bi-house-door icon'></i>Home</a>
+                        <?php if ($home == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$home ?>">
+                            <a href="index.php" class="font_main_index">
+                                <i class="bi bi-house-door icon"></i>
+                                Home
+                            </a>
                         </li>
+                        <?php } ?>
                         <li class="divider">
                             <span class="text_divider">Principal</span>
                         </li>
-                        <li>
+
+
+
+
+                        <?php if ($menu_pessoas == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$menu_pessoas ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-person-circle icon'></i> Pessoas <i
                                     class='bx bx-chevron-right icon-right'></i></a>
+                            <?php } ?>
+
+                            <?php if ($membros == "ocultar") { ?>
+
+                            <?php } else { ?>
                             <ul class="side-dropdown">
-                                <li>
+                                <li class="<?php echo @$membros ?>">
                                     <a href="index.php?pag=membros">Membros</a>
                                 </li>
-                                <li class="<?php echo $esc_tesoureiro ?>">
+                                <?php } ?>
+
+                                <?php if ($pastores == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$pastores ?>">
                                     <a href="index.php?pag=pastores">Pastores</a>
                                 </li>
-                                <li class="<?php echo $esc_tesoureiro ?>">
+                                <?php } ?>
+
+                                <?php if ($tesoureiros == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$tesoureiros ?>">
                                     <a href="index.php?pag=tesoureiros">Tesoureiros</a>
                                 </li>
-                                <li class="<?php echo $esc_tesoureiro ?>">
+                                <?php } ?>
+
+                                <?php if ($secretarios == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$secretarios ?>">
                                     <a href="index.php?pag=secretarios">Secretários(as)</a>
-                                </li class="<?php echo $esc_tesoureiro ?>">
-                                <li class="<?php echo $esc_tesoureiro ?>">
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($fornecedores == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$fornecedores ?>">
                                     <a href="index.php?pag=fornecedores">Fornecedores</a>
                                 </li>
-                                <li class="<?php echo $esc_tesoureiro ?>">
+                                <?php } ?>
+
+                                <?php if ($usuarios == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$usuarios ?>">
                                     <a href="index.php?pag=usuarios">Usuários</a>
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <?php } ?>
+
+
+
+
+
+                        <?php if ($menu_cadastros == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$menu_cadastros ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-pencil-square icon'></i> Cadastros <i
                                     class='bx bx-chevron-right icon-right'></i></a>
+                            <?php } ?>
+
+                            <?php if ($tarefas == "ocultar") { ?>
+
+                            <?php } else { ?>
                             <ul class="side-dropdown">
-                                <li><a href="index.php?pag=tarefas">Agenda / Tarefas</a></li>
+                                <li class="<?php echo @$tarefas ?>">
+                                    <a href="index.php?pag=tarefas">Agenda / Tarefas</a>
+                                </li>
                                 <li><a href="#">Ministérios</a></li>
                                 <li><a href="#">Frequências (Contas)</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <?php } ?>
+
+
+
+
+
+                        <?php if ($menu_financeiro == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$menu_financeiro ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-currency-dollar icon'></i> Financeiro <i
                                     class='bx bx-chevron-right icon-right'></i></a>
+                            <?php } ?>
+                            <?php if ($pagar == "ocultar") { ?>
+
+                            <?php } else { ?>
                             <ul class="side-dropdown">
-                                <li><a href="index.php?pag=pagar">Contas à Pagar</a></li>
-                                <li><a href="index.php?pag=receber">Contas à Receber</a></li>
-                                <li><a href="index.php?pag=dizimos">Dízimos</a></li>
-                                <li><a href="index.php?pag=ofertas">Ofertas</a></li>
-                                <li><a href="index.php?pag=doacoes">Doações</a></li>
-                                <li><a href="index.php?pag=vendas">Vendas</a></li>
-                                <li><a href="index.php?pag=movimentacoes">Movimentações</a></li>
+                                <li class="<?php echo @$pagar ?>">
+                                    <a href="index.php?pag=pagar">Contas à Pagar</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($receber == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$receber ?>">
+                                    <a href="index.php?pag=receber">Contas à Receber</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($dizimos == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$dizimos ?>">
+                                    <a href="index.php?pag=dizimos">Dízimos</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($ofertas == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$ofertas ?>">
+                                    <a href="index.php?pag=ofertas">Ofertas</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($doacoes == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$doacoes ?>">
+                                    <a href="index.php?pag=doacoes">Doações</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($vendas == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$vendas ?>">
+                                    <a href="index.php?pag=vendas">Vendas</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($movimentacoes == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$movimentacoes ?>">
+                                    <a href="index.php?pag=movimentacoes">Movimentações</a>
+                                </li>
                             </ul>
                         </li>
-                        <li>
+                        <?php } ?>
+
+
+
+
+
+
+                        <?php if ($menu_secretaria == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$menu_secretaria ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-folder2-open icon'></i> Secretária <i
                                     class='bx bx-chevron-right icon-right'></i></a>
+                            <?php } ?>
+                            
+                            <?php if ($documentos == "ocultar") { ?>
+
+                            <?php } else { ?>
                             <ul class="side-dropdown">
-                                <li><a href="index.php?pag=documentos">Documentos</a></li>
-                                <li><a href="index.php?pag=patrimonios">Patrimônio</a></li>
-                                <li><a href="index.php?pag=celulas">Células</a></li>
-                                <li><a href="index.php?pag=grupos">Grupos</a></li>
+                                <li class="<?php echo @$documentos ?>">
+                                    <a href="index.php?pag=documentos">Documentos</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($patrimonio == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$patrimonio ?>">
+                                    <a href="index.php?pag=patrimonios">Patrimônio</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($celulas == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$celulas ?>">
+                                    <a href="index.php?pag=celulas">Células</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($grupos == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$grupos ?>">
+                                    <a href="index.php?pag=grupos">Grupos</a>
+                                </li>
                             </ul>
                         </li>
-                        <li>
+                        <?php } ?>
+
+
+
+
+
+
+                        <?php if ($menu_relatorio == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$menu_relatorio ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-folder-symlink icon'></i> Relatórios <i
                                     class='bx bx-chevron-right icon-right'></i></a>
+                            <?php } ?>
+
+                            <?php if ($RelMembros == "ocultar") { ?>
+
+                            <?php } else { ?>
                             <ul class="side-dropdown">
-                                <li>
+                                <li class="<?php echo @$RelMembros ?>">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelMembros">Membros</a>
                                 </li>
-                                <li>
+                                <?php } ?>
+
+                                <?php if ($RelPatrimonio == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$RelPatrimonio ?>">
                                     <a href="#" data-bs-toggle="modal"
                                         data-bs-target="#modalRelPatrimonios">Patrimônios</a>
                                 </li>
-                                <li><a href="#">Financeiros</a></li>
-                                <li><a href="#">Auditoria e Logs</a></li>
-                                <li><a href="#">Tranferência de Membros</a></li>
-                                <li><a href="#">Fechamentos Mensais</a></li>
+                                <?php } ?>
+
+                                <?php if ($rel_financeiro == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_financeiro ?>">
+                                    <a href="#">Financeiros</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($rel_auditoria == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_auditoria ?>">
+                                    <a href="#">Auditoria e Logs</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($rel_trans_membros == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_trans_membros ?>">
+                                    <a href="#">Tranferência de Membros</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if ($rel_fechamento == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_fechamento ?>">
+                                    <a href="#">Fechamentos Mensais</a>
+                                </li>
+                                <?php } ?>
                             </ul>
                         </li>
-                        <li>
+
+                        <?php if ($anexos == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$anexos ?>">
                             <a href="index.php?pag=anexos" class="font_main_index"><i
-                                    class='bi bi-archive icon'></i>Anexo Sede</a>
+                                    class='bi bi-archive icon'></i>Anexo
+                                Sede</a>
                         </li>
+                        <?php } ?>
+
                         <li class="divider">
                             <span class="text_divider">Outros</span>
                         </li>
-                        <li>
+
+                        <?php if ($notificacoes == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$notificacoes ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
                         </li>
-                        <li>
+                        <?php } ?>
+
+                        <?php if ($backup == "ocultar") { ?>
+
+                        <?php } else { ?>
+                        <li class="<?php echo @$backup ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-database-down icon'></i>Backup Banco</a>
                         </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -492,7 +717,7 @@ if ($pag == "") {
 
                                 <input type="hidden" name="igreja" value="<?php echo $id_igreja ?>">
                             </div>
-                            
+
                             <div class="widget_bottom_dates">
                                 <div class="input-field-in">
                                     <label>Data Inicial (
@@ -504,7 +729,7 @@ if ($pag == "") {
                                         </a>
                                         <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-pat')">
                                             <span class="txt_date_all" id="mes-pat">Mês</span>
-                                        </a> 
+                                        </a>
                                         <a href="#" onclick="datas('<?php echo $data_ano ?>', 'ano-pat')">
                                             <span class="txt_date_all" id="ano-pat">Ano</span>
                                         </a>)
@@ -514,7 +739,8 @@ if ($pag == "") {
 
                                 <div class="input-field-in">
                                     <label>Data Final</label>
-                                    <input type="date" id="dtFinalPatrimonio" name="dataFinal" value="<?php echo $data_atual ?>">
+                                    <input type="date" id="dtFinalPatrimonio" name="dataFinal"
+                                        value="<?php echo $data_atual ?>">
                                 </div>
                             </div>
                         </div>
@@ -637,18 +863,18 @@ if ($pag == "") {
 
 <script type="text/javascript">
     function datas(data, id) {
-        var data_atual = "<?=$data_atual?>";
-            $('#dtInicialPatrimonio').val(data);
-            $('#dtFinalPatrimonio').val(data_atual);
-            document.getElementById('tudo-pat').style.color = "#999";
-            document.getElementById('tudo-pat').style.backgroundColor = "#ececec";
-            document.getElementById('hoje-pat').style.color = "#999";
-            document.getElementById('hoje-pat').style.backgroundColor = "#ececec";
-            document.getElementById('mes-pat').style.color = "#999";
-            document.getElementById('mes-pat').style.backgroundColor = "#ececec";
-            document.getElementById('ano-pat').style.color = "#999";
-            document.getElementById('ano-pat').style.backgroundColor = "#ececec";
-            document.getElementById(id).style.color = "#198754";
-            document.getElementById(id).style.backgroundColor = "#007f5f12";
+        var data_atual = "<?= $data_atual ?>";
+        $('#dtInicialPatrimonio').val(data);
+        $('#dtFinalPatrimonio').val(data_atual);
+        document.getElementById('tudo-pat').style.color = "#999";
+        document.getElementById('tudo-pat').style.backgroundColor = "#ececec";
+        document.getElementById('hoje-pat').style.color = "#999";
+        document.getElementById('hoje-pat').style.backgroundColor = "#ececec";
+        document.getElementById('mes-pat').style.color = "#999";
+        document.getElementById('mes-pat').style.backgroundColor = "#ececec";
+        document.getElementById('ano-pat').style.color = "#999";
+        document.getElementById('ano-pat').style.backgroundColor = "#ececec";
+        document.getElementById(id).style.color = "#198754";
+        document.getElementById(id).style.backgroundColor = "#007f5f12";
     }
 </script>

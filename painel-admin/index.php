@@ -172,6 +172,8 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=igrejas">Igrejas</a></li>
                                 <li><a href="index.php?pag=cargos">Cargos Ministeriais</a></li>
                                 <li><a href="index.php?pag=frequencias">Frequências (Contas)</a></li>
+                                <li><a href="index.php?pag=grupo_acessos">Grupo Acessos</a></li>
+                                <li><a href="index.php?pag=acessos">Acessos</a></li>
                             </ul>
                         </li>
                         <li>

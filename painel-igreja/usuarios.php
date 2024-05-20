@@ -1,6 +1,20 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="../js/alerta-tempo.js"></script>
+
+
 <?php
 require_once("../conexao.php");
 $pagina = 'usuarios';
+
+// VERIFICANDO SE O USUÁRIO TEM PERMISSÃO PARA ESTAR NESSA PÁGINA
+if(@$usuarios == 'ocultar') {
+    echo "<script>$(function() { 
+                     alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
+                });
+          </script>"; 
+    /* echo "<script>window.location='index.php'</script>"; */
+    exit();
+}
 ?>
 
 
@@ -77,7 +91,7 @@ $pagina = 'usuarios';
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
-                                            '<?php echo $nome ?>', '<?php echo $senha ?>',)">
+                                            '<?php echo $nome ?>', '<?php echo $senha ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
