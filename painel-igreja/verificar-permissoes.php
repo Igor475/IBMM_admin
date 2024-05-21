@@ -228,12 +228,10 @@ if($total_reg > 0){
 }
 
 
-
+$pag_inicial = '';
 if($home != 'ocultar'){
 	$pag_inicial = 'home';
-}else if(@$atendimento != 'ocultar'){
-	$pag_inicial = 'inicial';
-}else{
+}else {
 	$query = $pdo->query("SELECT * FROM usuarios_permissoes where usuario = '$id_usuario' order by id asc limit 1");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
