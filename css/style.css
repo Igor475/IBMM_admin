@@ -1064,6 +1064,16 @@ td.td-table#radius-column-action:last-child {
     position: relative;
 }
 
+.content-table .body-table .column-body .td-table-pd {
+    font-size: 13px;
+    letter-spacing: 0.35px;
+    font-weight: 400;
+    /* background-color: #ffff; */
+    padding: 12px;
+    text-align: center;
+    position: relative;
+}
+
 .content-table .thead-tabs .column-table .first_table {
     width: 120px;
 }
@@ -1194,6 +1204,104 @@ td.td-table#radius-column-action:last-child {
     top: calc(100% - 20px);
 }
 
+
+/* OUTRA TIPO DE CLASSE PARA AS TABELAS QUE NÃO TEM IMAGENS OU ARQUIVOS (O PADDING DAS CÉLULAS SÃO MAIORES) */
+
+.content-table .body-table .column-body .td-table-pd .profile_table {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.content-table .body-table .column-body .td-table-pd .profile_archives {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.list_dots {
+    position: relative;
+}
+
+.content-table .body-table .column-body .td-table-pd .area_icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-table .body-table .column-body .td-table-pd .actions_tab {
+    cursor: pointer;
+    background-color: var(--verde-light-border);
+    color: var(--fonte-menu-dropdown);
+    padding: 7px 10px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 5px;
+    transition: all .3s ease;
+}
+
+.content-table .body-table .column-body .td-table-pd .actions_tab .text_tab_act {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.content-table .body-table .column-body .td-table-pd .list_dots .area-icons .actions_tab .actions_dots::before {
+    font-size: 2px;
+    color: var(--preto);
+    transition: all .3s ease;
+}
+
+.content-table .body-table .column-body .td-table-pd .area-icons .actions_dots:hover {
+    color: var(--preto-cinza-claro);
+    background-color: none;
+}
+
+.content-table .body-table .column-body .td-table-pd .list_dots .actions-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 54%;
+    background: var(--fonte-menu-dropdown);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    width: 180px;
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+    transition: all .3s ease;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.content-table .body-table .column-body .td-table-pd .actions-dropdown li .link_dots {
+    font-size: 13px;
+    color: var(--preto);
+    letter-spacing: .5px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    transition: all .3s ease;
+}
+
+.content-table .body-table .column-body .td-table-pd .actions-dropdown li .link_dots:hover {
+    background-color: var(--border-color);
+    color: var(--verde-light-border);
+}
+
+.content-table .body-table .column-body .td-table-pd .actions-dropdown li .link_dots .icon_dots {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.content-table .body-table .column-body .td-table-pd .list_dots .actions-dropdown.ShowList {
+    opacity: 1;
+    pointer-events: all;
+    top: calc(100% - 20px);
+}
+
+/*============================== FIM DA CLASSE ===============================*/
+
 .text_active {
     font-size: 17px !important;
     color: var(--verde) !important;
@@ -1211,8 +1319,8 @@ td.td-table#radius-column-action:last-child {
 }
 
 .text_desactive {
-    font-size: 17px !important;
-    color: var(--btn-remove) !important;
+    font-size: 15px !important;
+    color: var(--text-table-emp) !important;
 }
 
 .text_title_task {
@@ -1241,6 +1349,10 @@ td.td-table#radius-column-action:last-child {
     font-size: 17px;
     margin-right: 5px;
 }
+
+
+
+
 
 /*============================== FIM TABELA ==================================*/
 
@@ -1280,6 +1392,22 @@ td.td-table#radius-column-action:last-child {
 
     .content-table .body-table .column-body .td-table {
         background-color: #fff;
+        padding: 10px;
+    }
+
+    .content-table .td-table-pd {
+        display: flex;
+        justify-content: space-between;
+        grid-gap: 20px;
+        border-bottom: 1px solid #e7e7e7 !important;
+    }
+
+    .content-table .td-table-pd:last-child {
+        border-bottom: 0 !important;
+    }
+
+    .content-table .body-table .column-body .td-table-pd {
+        background-color: #fff;
     }
 
     .content-table .column-body {
@@ -1289,16 +1417,35 @@ td.td-table#radius-column-action:last-child {
         border-bottom: 3px solid #ddd;
     }
 
+    .content-table .body-table .column-body {
+        border-bottom: 3px solid #ddd;;
+    }
+
     .content-table .td-table:first-of-type {
         font-weight: 700 !important;
         font-size: 1rem !important; 
         text-align: center;
         display: block;
         background-color: #ececec !important;
-        color: #007f5f !important;
+        /* color: #007f5f !important; */
     }
 
     .content-table .td-table:not(:first-of-type)::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 700;
+    }
+
+    .content-table .td-table-pd:first-of-type {
+        font-weight: 700 !important;
+        font-size: 1rem !important; 
+        text-align: center;
+        display: block;
+        background-color: #ececec !important;
+        /* color: #007f5f !important; */
+    }
+
+    .content-table .td-table-pd:not(:first-of-type)::before {
         content: attr(data-label);
         display: block;
         font-weight: 700;
@@ -1530,6 +1677,15 @@ td.td-table#radius-column-action:last-child {
         padding: 10px 0;
     }
 
+    .content-table .body-table .column-body .td-table-pd {
+        display: block;
+        padding: 10px 0;
+    }
+
+    .content-table .body-table .column-body .td-table-pd:last-child {
+        padding: 10px 0;
+    }
+
     /* ========================================= BOTÃO DE AÇÃO DA TABELA ==================================== */
     .btn-secondary {
         padding: 9px 17px !important;
@@ -1568,6 +1724,38 @@ td.td-table#radius-column-action:last-child {
     }
 
     .content-table .body-table .column-body .td-table .area_icons {
+        margin: 5px 0;
+    }
+
+    
+
+
+    .content-table .body-table .column-body .td-table-pd .list_dots .actions-dropdown {
+        right: 23%;
+    }
+
+    .content-table .body-table .column-body .td-table .area-icons .actions_dots {
+        rotate: 90deg;
+        font-size: 30px;
+    }
+
+    .content-table .body-table .column-body .td-table-pd .actions-dropdown li .link_dots {
+        font-size: 11.5px;
+        font-weight: 500;
+        color: var(--preto);
+    }
+
+    .content-table .body-table .column-body .td-table-pd .list_dots .actions-dropdown {
+        top: calc(100% + 20px);
+    }
+
+    .content-table .body-table .column-body .td-table .list_dots .actions-dropdown.ShowList {
+        opacity: 1;
+        pointer-events: all;
+        top: 100%
+    }
+
+    .content-table .body-table .column-body .td-table-pd .area_icons {
         margin: 5px 0;
     }
 }

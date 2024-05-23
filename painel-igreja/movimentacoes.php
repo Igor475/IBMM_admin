@@ -130,21 +130,21 @@ if(@$movimentacoes == 'ocultar') {
                         $dataF = implode('/', array_reverse(explode('-', $data)));
                         ?>
                         <tr class="column-body <?php echo $classe_linha ?>">
-                            <td data-label="Movimento" class="td-table" id="radius-column-foto">
-                                <i class="bi bi-receipt <?php echo $classe ?>"></i>
+                            <td data-label="Movimento" class="td-table-pd" id="radius-column-foto">
+                                <i class="bi bi-exclamation-octagon-fill <?php echo $classe ?>"></i>
                                 <?php echo $movimento ?>
                             </td>
-                            <td data-label="Fornecedor" class="td-table column-hidden">
+                            <td data-label="Descrição" class="td-table-pd">
                                 <?php echo $descricao ?>
                             </td>
-                            <td data-label="Valor" class="td-table">
+                            <td data-label="Valor" class="td-table-pd">
                                 R$
                                 <?php echo $valorF ?>
                             </td>
-                            <td data-label="Vencimento" class="td-table">
+                            <td data-label="Vencimento" class="td-table-pd">
                                 <?php echo $dataF ?>
                             </td>
-                            <td data-label="Tesoureiro / Pastor" class="td-table column-hidden">
+                            <td data-label="Tesoureiro / Pastor" class="td-table-pd column-hidden">
                                 <?php echo $usuario_cad ?>
                             </td>
                         </tr>

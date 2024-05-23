@@ -162,7 +162,7 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=pastores">Pastores</a></li>
                                 <li><a href="index.php?pag=tesoureiros">Tesoureiros</a></li>
                                 <li><a href="index.php?pag=secretarios">Secretários(as)</a></li>
-                                <li><a href="usuarios">Usuários</a></li>
+                                <li><a href="index.php?pag=usuarios">Usuários</a></li>
                             </ul>
                         </li>
                         <li>

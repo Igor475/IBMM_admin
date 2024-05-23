@@ -3,7 +3,7 @@
 
 
 <?php
-require_once("../conexao.php");
+require_once ("../conexao.php");
 $pagina = 'pagar';
 
 if (@$_GET['filtrar'] == 'Vencidas') {
@@ -43,11 +43,11 @@ if (@$_GET['filtrar'] == 'Vencidas') {
 
 }
 
-if(@$pagar == 'ocultar') {
+if (@$pagar == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });
-          </script>"; 
+          </script>";
     /* echo "<script>window.location='index.php'</script>"; */
     exit();
 }
@@ -68,25 +68,24 @@ if(@$pagar == 'ocultar') {
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="index.php?pag=<?php echo $pagina ?>" 
-                        class="dropdown-item <?php echo $classe_todas ?>">
+                    <a href="index.php?pag=<?php echo $pagina ?>" class="dropdown-item <?php echo $classe_todas ?>">
                         Todas
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Vencidas" 
+                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Vencidas"
                         class="dropdown-item <?php echo $classe_vencidas ?>">
                         Vencidas
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Hoje" 
+                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Hoje"
                         class="dropdown-item <?php echo $classe_hoje ?>">
                         Vencendo Hoje
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Pagas" 
+                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Pagas"
                         class="dropdown-item <?php echo $classe_pagas ?>">
                         Pagas
                     </a>
@@ -220,8 +219,8 @@ if(@$pagar == 'ocultar') {
                         $vencimentoF = implode('/', array_reverse(explode('-', $vencimento)));
                         ?>
                         <tr class="column-body <?php echo $classe_linha ?>">
-                            <td data-label="Descrição" class="td-table" id="radius-column-foto">
-                                <i class="bi bi-receipt-cutoff <?php echo $classe ?>"></i>
+                            <td data-label="Descrição" class="td-table <?php echo $classe_linha ?>" id="radius-column-foto">
+                                <i class="bi bi-exclamation-octagon-fill <?php echo $classe ?>"></i>
                                 <?php echo $descricao ?>
                             </td>
                             <td data-label="Fornecedor" class="td-table column-hidden">
@@ -254,21 +253,25 @@ if(@$pagar == 'ocultar') {
                                     </a>
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li>
-                                            <a class="dropdown-item <?php echo $ocultar ?>" href="#"
-                                                onclick="editar('<?php echo $id ?>', 
+                                        <?php if ($pago == 'Sim') { ?>
+
+                                        <?php } else { ?>
+                                            <li>
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="editar('<?php echo $id ?>', 
                                             '<?php echo $descricao ?>', '<?php echo $fornecedor ?>', '<?php echo $valor ?>', 
                                             '<?php echo $vencimento ?>', '<?php echo $frequencia ?>', '<?php echo $tumb_arquivo ?>')">
-                                                <i class="bi bi-pencil-square icons_actions"></i>
-                                                Editar</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item <?php echo $ocultar ?>" href="#"
-                                                onclick="excluir('<?php echo $id ?>', '<?php echo $descricao ?>')">
-                                                <i class="bi bi-trash3 icons_actions"></i>
-                                                Excluir
-                                            </a>
-                                        </li>
+                                                    <i class="bi bi-pencil-square icons_actions"></i>
+                                                    Editar</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="excluir('<?php echo $id ?>', '<?php echo $descricao ?>')">
+                                                    <i class="bi bi-trash3 icons_actions"></i>
+                                                    Excluir
+                                                </a>
+                                            </li>
+                                        <?php } ?>
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="dados('<?php echo $descricao ?>', 
                                             '<?php echo $nome_for ?>', '<?php echo $valorF ?>', '<?php echo $dataF ?>', 
@@ -278,13 +281,17 @@ if(@$pagar == 'ocultar') {
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
-                                        <li>
-                                            <a class="dropdown-item <?php echo $ocultar ?>" href="#" onclick="baixar('<?php echo $id ?>', 
+                                        <?php if ($pago == 'Sim') { ?>
+
+                                        <?php } else { ?>
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="baixar('<?php echo $id ?>', 
                                             '<?php echo $descricao ?>')" title="Dar baixa na Conta">
-                                                <i class="bi bi-file-earmark-arrow-down-fill icons_actions icon_bill"></i>
-                                                Dar baixa
-                                            </a>
-                                        </li>
+                                                    <i class="bi bi-file-earmark-arrow-down-fill icons_actions icon_bill"></i>
+                                                    Dar baixa
+                                                </a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </td>

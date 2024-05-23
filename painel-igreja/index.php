@@ -258,7 +258,7 @@ if ($pag == "") {
 
                                 <?php } else { ?>
                                 <li class="<?php echo @$usuarios ?>">
-                                    <a href="usuarios">Usuários</a>
+                                    <a href="index.php?pag=usuarios">Usuários</a>
                                 </li>
                                 <?php } ?>
                             </ul>

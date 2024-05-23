@@ -147,10 +147,10 @@ if(@$celulas == 'ocultar') {
                             <td data-label="Coordenador" class="td-table">
                                 <?php echo $nome_coordenador ?>
                             </td>
-                            <td data-label="Coordenador" class="td-table">
+                            <td data-label="Líder 1" class="td-table">
                                 <?php echo $nome_lider1 ?>
                             </td>
-                            <td data-label="Coordenador" class="td-table">
+                            <td data-label="Líder 2" class="td-table">
                                 <?php echo $nome_lider2 ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
