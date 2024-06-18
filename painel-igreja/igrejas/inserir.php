@@ -5,7 +5,7 @@ $pagina = 'igrejas';
 $nome = $_POST['nome'];
 $endereco = $_POST['endereco'];
 $telefone = $_POST['telefone'];
-$pastor = @$_POST['pastor'];
+//$pastor = @$_POST['pastor'];
 $video = @$_POST['video'];
 $email = @$_POST['email'];
 $id = @$_POST['id'];
@@ -16,14 +16,6 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $id_reg = @$res[0]['id'];
 if (@count($res) > 0 and $id_reg != $id) {
     echo 'O Nome da igreja já está cadastrado no sistema!';
-    exit();
-}
-
-$query = $pdo->query("SELECT * FROM $pagina WHERE email = '$email'");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-$id_reg = @$res[0]['id'];
-if (@count($res) > 0 and $id_reg != $id) {
-    echo 'O Email da igreja já está cadastrado no sistema!';
     exit();
 }
 
@@ -54,13 +46,14 @@ if ($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif') {
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome,
         telefone = :telefone, endereco = :endereco, imagem = '$imagem',
-        data_cad = curDate(), matriz = 'Não', pastor = '$pastor', logo_rel = 'sem-foto.jpg',
-        cab_rel = 'sem-foto.jpg', carteirinha_rel = 'sem-foto.jpg', video = :video, email = :email");
+        data_cad = curDate(), matriz = 'Não', logo_rel = 'sem-foto.jpg',
+        cab_rel = 'sem-foto.jpg', carteirinha_rel = 'sem-foto.jpg', video = :video, 
+        email = :email");
 
 } else {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
-        telefone = :telefone, endereco = :endereco, pastor = '$pastor',
+        telefone = :telefone, endereco = :endereco,
         video = :video, email = :email WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
@@ -71,11 +64,12 @@ if ($id == "" || $id == 0) {
 		}
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
-            telefone = :telefone, endereco = :endereco, imagem = '$imagem', 
-            pastor = '$pastor', video = :video, email = :email WHERE id = '$id'");
+            telefone = :telefone, endereco = :endereco, imagem = '$imagem',
+            video = :video, email = :email WHERE id = '$id'");
     }
 
 }
+
 
 $query->bindValue(":nome", "$nome");
 $query->bindValue(":telefone", "$telefone");

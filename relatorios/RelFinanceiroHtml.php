@@ -3,11 +3,14 @@ require_once ("../conexao.php");
 
 
 $igreja = $_GET['igreja'];
-$status = $_GET['status'];
+$tipo = $_GET['tipo'];
 $dataInicial = $_GET['dataInicial'];
 $dataFinal = $_GET['dataFinal'];
-$entrada = $_GET['entrada'];
-$itens = $_GET['itens'];
+$movimento = $_GET['movimento'];
+
+if ($movimento == 'Conta') {
+    $movimento = 'Conta à Pagar';
+}
 
 $dataInicialF = implode('/', array_reverse(explode('-', $dataInicial)));
 $dataFinalF = implode('/', array_reverse(explode('-', $dataFinal)));
@@ -51,48 +54,46 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $nome_pastor = $res[0]['nome'];
 
 
-if ($status == 'Sim') {
-    $status_rel = 'Ativos';
-} else if ($status == 'Não') {
-    $status_rel = 'Inativos';
+if ($tipo == 'Entrada') {
+    $tipo_rel = ' de Entradas';
+} else if ($tipo == 'Saída') {
+    $tipo_rel = ' de Saídas';
 } else {
-    $status_rel = '';
+    $tipo_rel = '';
 }
 
 
-if ($entrada == 'Compra') {
-    $entrada_rel = 'Comprados';
-} else if ($status == 'Doação') {
-    $entrada_rel = 'Doados';
+if ($movimento == 'Conta à Pagar') {
+    $movimento_rel = 'Contas à Pagar';
+} else if ($movimento == 'Dízimo') {
+    $movimento_rel = 'Dízimos';
+} else if ($movimento == 'Oferta') {
+    $movimento_rel = 'Ofertas';
+} else if ($movimento == 'Doação') {
+    $movimento_rel = 'Doações';
+} else if ($movimento == 'Venda') {
+    $movimento_rel = 'Vendas';
 } else {
-    $entrada_rel = '';
+    $movimento_rel = '';
 }
 
 
-$status = '%' . $status . '%';
-$entrada = '%' . $entrada . '%';
-
-
-if ($itens == "") {
-    $titulo_rel = 'Relatório de Patrimônios ' . $entrada_rel . ' ' . $status_rel;
-    $query = $pdo->query("SELECT * FROM patrimonios where (igreja_cad = '$igreja' or igreja_item = '$igreja') 
-        and ativo LIKE '$status' and entrada LIKE '$entrada' and data_cad >= '$dataInicial' and data_cad <= '$dataFinal'
-        order by id desc");
-} else if ($itens == "1") {
-    $titulo_rel = 'Patrimônios dessa Igreja ' . $entrada_rel . ' ' . $status_rel;
-    $query = $pdo->query("SELECT * FROM patrimonios where igreja_cad = '$igreja' and ativo LIKE '$status' and
-        entrada LIKE '$entrada' and data_cad >= '$dataInicial' and data_cad <= '$dataFinal' order by id desc");
-} else if ($itens == "2") {
-    $titulo_rel = 'Patrimônios Emprestados a Outros ' . $entrada_rel . ' ' . $status_rel;
-    $query = $pdo->query("SELECT * FROM patrimonios where (igreja_cad = '$igreja' and igreja_item != '$igreja') 
-        and ativo LIKE '$status' and entrada LIKE '$entrada' and data_cad >= '$dataInicial' and data_cad <= '$dataFinal'
-        order by id desc");
+if ($movimento == '') {
+    $titulo_rel = 'Relatório de Movimentações' . $tipo_rel;
 } else {
-    $titulo_rel = 'Patrimônios Emprestados a nossa Igreja ' . $entrada_rel . ' ' . $status_rel;
-    $query = $pdo->query("SELECT * FROM patrimonios where (igreja_cad != '$igreja' and igreja_item = '$igreja') 
-        and ativo LIKE '$status' and entrada LIKE '$entrada' and data_cad >= '$dataInicial' and data_cad <= '$dataFinal'
-        order by id desc");
+    $titulo_rel = 'Relatório de ' . $movimento;
 }
+
+if ($movimento == 'Conta à Pagar' || $tipo == 'Saída') {
+    $classe_total = 'txt_result_rel_out';
+} else {
+    $classe_total = 'txt_result_rel_entry';
+}
+
+
+$tipo = '%' . $tipo . '%';
+$movimento = '%' . $movimento . '%';
+
 
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
@@ -106,7 +107,7 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
 <html>
 
 <head>
-    <title>Relatório de Patrimônio</title>
+    <title>Relatório Financeiro</title>
     <link rel="shortcut icon" href="<?php echo $url_sistema ?>img/logo-IBMM-preta.ico" />
 
 
@@ -244,11 +245,8 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
         .area-tab-2 {
             display: block;
             width: 100%;
-            height: 35px;
+            height: 30px;
             line-height: 0;
-            border-bottom: 1px solid #ececec;
-            border-right: 1px solid #ececec;
-            border-left: 1px solid #ececec;
         }
 
         .txt_rodape_rel {
@@ -264,19 +262,30 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
             color: #3a3a3a;
         }
 
-        .txt_table_rel {
+        /* .txt_table_rel {
             font-size: 11px;
             padding: 0 8px;
             line-height: 28px;
             color: #4c4c4c;
-        }
+        } */
 
-        .txt_result_rel {
+        .txt_result_rel_entry {
             font-size: 11px;
             letter-spacing: 0.35px;
-            color: #3f3f40;
             padding: 6px 8px;
-            background-color: #f5f5f5;
+            color: #198754;
+            background-color: #e2f9e8 !important;
+            border-radius: 4px;
+            display: inline-block;
+            float: right;
+        }
+
+        .txt_result_rel_out {
+            font-size: 11px;
+            letter-spacing: 0.35px;
+            padding: 6px 8px;
+            color: #842029;
+            background-color: #f9e2e4;
             border-radius: 4px;
             display: inline-block;
             float: right;
@@ -330,15 +339,41 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
         .legend_area {
             margin-bottom: 15px;
             padding: 0 15px;
+            margin-right: 40px;
+        }
+
+        .txt_legend_itens_out {
+            padding: 7px 8px;
+            font-size: 10px;
+            color: #842029;
+            background-color: #f9e2e4;
+            border-radius: 2px;
+            display: inline-block;
         }
 
         .txt_legend_itens {
-            padding: 7px 8px;
+            padding: 7px 10px;
             font-size: 10px;
-            color: #777;
-            background-color: #eee;
-            border-radius: 4px;
+            color: #198754;
+            background-color: #e2f9e8;
+            border-radius: 2px;
             display: inline-block;
+        }
+
+        .txt_table_itens_entry {
+            padding: 15px 10px;
+            font-size: 11px;
+            color: #198754;
+            background-color: #e2f9e8 !important;
+            line-height: 5px;
+        }
+
+        .txt_table_itens_out {
+            padding: 15px 8px;
+            font-size: 10px;
+            color: #842029;
+            background-color: #f9e2e4 !important;
+            line-height: 5px;
         }
 
         .area_canvass {
@@ -349,6 +384,28 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
             font-size: 12px;
             color: #777;
             letter-spacing: 0.40px;
+        }
+
+        .area_fin {
+            width: 98%;
+        }
+
+        .legend_area_out {
+            position: relative;
+            top: -41px;
+        }
+
+        .table_rel {
+            width: 100%;
+        }
+
+        .area_saldo_movim {
+            float: right;
+        }
+
+        .area_total_xsc {
+            width: 50%;
+            margin-top: -20px;
         }
 
         .imagem {
@@ -417,100 +474,94 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
         <span class="txt_canvass"><?php echo $texto_apuracao ?></span>
     </div>
 
-    <div class="legend_area" align="right">
-        <div class="txt_legend_itens">Itens Inativos</div>
+    <div class="area_fin">
+        <div class="legend_area" align="right">
+            <div class="txt_legend_itens">Entradas</div>
+        </div>
+
+        <div class="legend_area_out" align="right">
+            <div class="txt_legend_itens_out">Saídas</div>
+        </div>
     </div>
 
     <?php
-
+    $query = $pdo->query("SELECT * FROM movimentacoes where igreja = '$igreja' and tipo LIKE '$tipo' and movimento LIKE '$movimento'
+        and data >= '$dataInicial' and data <= '$dataFinal' order by data asc, id asc");
     $res = $query->fetchAll(PDO::FETCH_ASSOC);
     $total_reg = count($res);
     if ($total_reg > 0) {
         ?>
 
 
-
         <div class="table_rel_container">
             <section class="area-tab" style="background-color: #f5f5f5;">
                 <div class="linha-cab head_table_rel">
-                    <div class="coluna" style="width:10%">CÓDIGO</div>
-                    <div class="coluna" style="width:23%">NOME</div>
-                    <div class="coluna" style="width:15%">CADASTRO</div>
-                    <div class="coluna" style="width:20%">VALOR</div>
-                    <div class="coluna" style="width:25%">USUÁRIO QUE CADASTROU</div>
-                    <div class="coluna" style="width:7%">FOTO</div>
+                    <div class="coluna" style="width:15%">MOVIMENTO</div>
+                    <div class="coluna" style="width:45%">DESCRIÇÃO</div>
+                    <div class="coluna" style="width:10%">VALOR</div>
+                    <div class="coluna" style="width:10%">DATA</div>
+                    <div class="coluna" style="width:20%">USUÁRIO</div>
                 </div>
             </section>
         </div>
 
         <?php
+        $total = 0;
+        $entradas = 0;
+        $saidas = 0;
+        $saldo = 0;
         for ($i = 0; $i < $total_reg; $i++) {
             foreach ($res[$i] as $key => $value) {
             }
-            $igreja_cad = $res[$i]['igreja_cad'];
-            $igreja_item = $res[$i]['igreja_item'];
-            $usuario_cad = $res[$i]['usuario_cad'];
-            $ativo = $res[$i]['ativo'];
-            $entrada = $res[$i]['entrada'];
-            $valor = $res[$i]['valor'];
+            $usuario = $res[$i]['usuario'];
+            $tipo = $res[$i]['tipo'];
 
-            $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja_cad'");
+            $query_con = $pdo->query("SELECT * FROM usuarios where id = '$usuario'");
             $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
             if (count($res_con) > 0) {
-                $nome_ig_cad = $res_con[0]['nome'];
+                $nome_usuario = $res_con[0]['nome'];
             } else {
-                $nome_ig_cad = '';
+                $nome_usuario = '';
             }
 
-            $query_con = $pdo->query("SELECT * FROM usuarios where id = '$usuario_cad'");
-            $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-            if (count($res_con) > 0) {
-                $nome_usu_cad = $res_con[0]['nome'];
+            if ($tipo == 'Entrada') {
+                $classe_item = 'txt_table_itens_entry';
+                $entradas += $res[$i]['valor'];
             } else {
-                $nome_usu_cad = '';
+                $classe_item = 'txt_table_itens_out';
+                $saidas += $res[$i]['valor'];
             }
 
-            if ($igreja_cad == $igreja) {
-                if ($igreja_item == $igreja) {
-                    $classe_item = '';
-                } else {
-                    $classe_item = 'text_item_r';
-                }
-            } else {
-                $classe_item = 'text_item_emp';
-            }
+            $total += $res[$i]['valor'];
+            $saldo = $entradas - $saidas;
 
-            if ($ativo == 'Sim') {
-                $inativa = '';
+            if ($saldo >= 0) {
+                $classe_saldo = 'txt_result_rel_entry';
             } else {
-                $inativa = 'text_opacity';
-            }
-
-            if ($valor) {
-                $text_itens = $entrada;
-            } else {
-                $text_itens = '';
+                $classe_saldo = 'txt_result_rel_out';
             }
 
             ?>
 
             <div class="container_txt_rel">
-                <section class="area-tab-2">
-                    <div class="linha-cab txt_table_rel <?php echo $classe_item ?> <?php echo $inativa ?>">
-                        <div class="coluna" style="width:10%"><?php echo $res[$i]['codigo'] ?></div>
-                        <div class="coluna" style="width:23%"><?php echo $res[$i]['nome'] ?></div>
+                <section class="area-tab">
+                    <div class="linha-cab <?php echo $classe_item ?>">
                         <div class="coluna" style="width:15%">
-                            <?php echo implode('/', array_reverse(explode('-', $res[$i]['data_cad']))) ?>
+                            <?php echo $res[$i]['movimento'] ?>
                         </div>
-                        <div class="coluna" style="width:20%">
-                            R$ <?php echo number_format($valor, 2, ',', '.'); ?>
-                            (<?php echo $text_itens ?>)
+
+                        <div class="coluna" style="width:45%"><?php echo $res[$i]['descricao'] ?></div>
+
+                        <div class="coluna <?php echo $classe_valor ?>" style="width:10%">R$
+                            <?php echo number_format($res[$i]['valor'], 2, ',', '.'); ?>
                         </div>
-                        <div class="coluna" style="width:25%"><?php echo $nome_usu_cad ?></div>
-                        <div class="coluna line_img_table" style="width:7%">
-                            <img class="img_profile_rel"
-                                src="<?php echo $url_sistema ?>img/patrimonios/<?php echo $res[$i]['foto'] ?>" width="25px">
+
+                        <div class="coluna" style="width:10%">
+                            <?php echo implode('/', array_reverse(explode('-', $res[$i]['data']))) ?>
                         </div>
+
+                        <div class="coluna" style="width:20%"><?php echo $nome_usuario ?></div>
+
 
                     </div>
                 </section>
@@ -528,13 +579,47 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
     } ?>
 
 
+    <?php if ($movimento != "%%") { ?>
 
-    <div class="col-md-12 p-2">
-        <div class="area_total_rel" align="right">
-            <span class="txt_result_rel">Total de Itens: <?php echo $total_reg ?></span>
+        <div class="col-md-12 p-2">
+            <div class="area_total_rel" align="right">
+                <span class="<?php echo $classe_total ?>" style="font-weight: bold">TOTAL: R$
+                    <?php echo number_format($total, 2, ',', '.'); ?></span>
+            </div>
         </div>
-    </div>
-    </div>
+        </div>
+
+    <?php } else { ?>
+
+        <div class="area_saldo_movim">
+            <div class="col-md-12 p-2">
+                <div class="area_total_rel" align="right">
+                    <span class="txt_result_rel_entry" style="font-weight: bold">ENTRADAS
+                        R$<?php echo number_format(@$entradas, 2, ',', '.'); ?>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 p-2">
+            <div class="area_total_rel" align="right">
+                <span class="txt_result_rel_out" style="font-weight: bold">SAÍDAS
+                    R$<?php echo number_format(@$saidas, 2, ',', '.'); ?>
+                </span>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-12 p-2">
+            <div class="area_total_xsc" align="right">
+                <span class="<?php echo $classe_saldo ?>" style="font-weight: bold">SALDO:
+                    R$ <?php echo number_format(@$saldo, 2, ',', '.'); ?>
+                </span>
+            </div>
+        </div>
+        </div>
+        </div>
+
+    <?php } ?>
 
 
 

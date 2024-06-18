@@ -56,9 +56,14 @@
     --verde-lima-claro: #aacc00;
 }
 
-::-webkit-scrollbar-track {
+::-webkit-scrollbar {
     background: #888;
-    width: 2px;
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--verde);
+    border-radius: 50px;
 }
 
 .txt_sweet_alert{

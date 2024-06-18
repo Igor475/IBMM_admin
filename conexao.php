@@ -6,13 +6,20 @@ $servidor = "localhost";
 $usuario = "root";
 $senha = "";
 
+try {
+    $pdo = new PDO("mysql:dbname=$banco;host=$servidor", "$usuario", "$senha");
+} catch (Exception $e) {
+    echo "Erro ao conectar com o banco de dados!<br>".$e;
+}
+
+
 $url_sistema = "http://$_SERVER[HTTP_HOST]/";
 $url = explode("//", $url_sistema);
 if($url[1] == 'localhost/'){
 	$url_sistema = "http://$_SERVER[HTTP_HOST]/IBMM_admin/";
 }
 
-$email_super_adm = "contato@ibmissaomultiplicar.com.br";
+$email_super_adm = "contato@ibmissaomultiplicar.com.br"; // E-mail Principal
 $nome_igreja_sistema = "Igreja Batista Missão Multiplicar";
 $telefone_igreja_sistema = "(00) 00000-0000";
 $endereco_igreja_sistema = "Avenida Brasil, 33.815 Bangu , Rio de Janeiro, RJ, Brazil";
@@ -25,13 +32,9 @@ $limitar_tesoureiro = 'Sim'; //Se tiver sim, o tesoureiro não poderá excluir e
 
 
 $relatorio_pdf = 'Sim'; //SE ESSA OPÇÃO ESTIVER NÃO, O RELATÓRIO SERÁ GERADO EM HTML
+$cabecalho_rel_img = 'Sim'; /* SE ESSA OPÇÃO ESTIVER SIM, O RELATORIO TERA UMA IMAGEM NO CABECALHO, 
+CADA IGREJA DEVERA SUBIR A SUA IMAGEM JPG NO CADASTRO DE IGREJAS */
 
-
-try {
-    $pdo = new PDO("mysql:dbname=$banco;host=$servidor", "$usuario", "$senha");
-} catch (Exception $e) {
-    echo "Erro ao conectar com o banco de dados!<br>".$e;
-}
 
 // INSERINDO OS REGISTROS INICIAIS 
 
@@ -79,7 +82,8 @@ $total_reg = count($res);
 if($total_reg == 0)
 $pdo->query("INSERT INTO igrejas SET nome = '$nome_igreja', telefone = '$telefone_igreja',
     endereco = '$endereco_igreja', matriz = 'Sim', imagem = 'sem-foto.jpg',
-    data_cad = curDate(), pastor = '1' ");
+    data_cad = curDate(), pastor = '1', logo_rel = 'sem-foto.jpg', cab_rel = 'sem-foto.jpg',
+    carteirinha_rel = 'sem-foto.jpg', email = '$email_super_adm' ");
 
 
 
@@ -112,7 +116,7 @@ if($total_reg == 0) {
     $pdo->query("INSERT INTO config SET nome = '$nome_igreja_sistema', email = '$email_super_adm',
         endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema', 
         qtd_tarefas = '$quantidade_tarefas', limitar_tesoureiro = '$limitar_tesoureiro',
-        relatorio_pdf = '$relatorio_pdf' ");
+        relatorio_pdf = '$relatorio_pdf', cabecalho_rel_img = '$cabecalho_rel_img' ");
 }
 
 
@@ -126,5 +130,5 @@ $endereco_igreja_sistema = $res[0]['endereco'];
 $quantidade_tarefas = $res[0]['qtd_tarefas'];
 $limitar_tesoureiro = $res[0]['limitar_tesoureiro'];
 $relatorio_pdf = $res[0]['relatorio_pdf'];
-
+$cabecalho_rel_img = $res[0]['cabecalho_rel_img'];
 ?>

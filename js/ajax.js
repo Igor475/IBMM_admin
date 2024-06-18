@@ -42,7 +42,9 @@ function mudarStatus(id, ativar){
         success: function (mensagem) {
             if (mensagem.trim() == "Alterado com Sucesso") {
                 window.location="index.php?pag=" + pag;
-            }               
+            } else {
+                mensagemErroAtivar()
+            } 
         },
 
     });
@@ -297,6 +299,34 @@ function mensagemExcluir() {
     }
 
     Command: toastr["error"]("Registro Excluído!!", "Excluído")
+}
+
+
+
+function mensagemErroAtivar() {
+
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+      }
+    }
+
+    Command: toastr["error"]("Não é possível ter mais de um alerta ativo ao mesmo tempo", "Erro ao Ativar")
 }
 
 

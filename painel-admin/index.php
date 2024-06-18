@@ -373,6 +373,16 @@ if ($pag == "") {
                                         </select>
                                     </div>
 
+                                    <div class="input-field flex_int_6">
+                                        <label>Cabeçalho Relatório Imagem</label>
+                                        <select class="form-select" name="cabecalho_rel_img">
+                                            <option <?php if($cabecalho_rel_img == 'Sim') { ?>
+                                                selected <?php } ?> value="Sim">Sim</option>
+                                            <option <?php if($cabecalho_rel_img == 'Não') { ?>
+                                                selected <?php } ?> value="Não">Não</option>
+                                        </select>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

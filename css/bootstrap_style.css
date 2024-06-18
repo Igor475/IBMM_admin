@@ -6873,7 +6873,18 @@ textarea.form-control-lg {
 
 .offcanvas-body {
   flex-grow: 1;
-  overflow-y: auto;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.offcanvas-body::-webkit-scrollbar {
+  width: 10px !important;
+  background-color: var(--hover-side-menu) !important;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background-color: var(--verde);
 }
 
 .placeholder {

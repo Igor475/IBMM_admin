@@ -17,7 +17,8 @@ $hora_atual = date('H:i:s');
 $mes_atual = Date('m');
 $ano_atual = Date('Y');
 $data_mes = $ano_atual . "-" . $mes_atual . "-01";
-$data_ano = $ano_atual . "01-01";
+$data_ano = $ano_atual . "-01-01";
+
 
 if (@$_GET['igreja'] > 0) {
     @$_SESSION['id_igreja'] = @$_GET['igreja'];
@@ -56,7 +57,7 @@ $pag_inicial = 'home';
 if (@$_SESSION['nivel_usuario'] != 'Pastor Presidente') {
     require_once ("verificar-permissoes.php");
 }
-if(@$_GET['pag'] != "") {
+if (@$_GET['pag'] != "") {
     $pag = @$_GET['pag'];
 } else {
     $pag = $pag_inicial;
@@ -81,6 +82,8 @@ if ($pag == "") {
     <link rel="stylesheet" type="text/css" href="../css/menu_action_table.css">
     <link rel="stylesheet" type="text/css" href="../css/styles_modais.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <title>Painel Administrativo</title>
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -99,6 +102,7 @@ if ($pag == "") {
 
     <link rel="stylesheet" type="text/css" href="../css/toastr.css">
     <script type="text/javascript" src="../js/toastr.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -284,8 +288,36 @@ if ($pag == "") {
                                 <li class="<?php echo @$tarefas ?>">
                                     <a href="index.php?pag=tarefas">Agenda / Tarefas</a>
                                 </li>
-                                <li><a href="#">Ministérios</a></li>
-                                <li><a href="#">Frequências (Contas)</a></li>
+                                <?php } ?>
+
+                                <?php if (@$dadosIgreja == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$dadosIgreja ?>">
+                                    <a href="index.php?pag=igrejas" class="font_main_index">
+                                        Dados da Igreja
+                                    </a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if (@$cultos == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$cultos ?>">
+                                    <a href="index.php?pag=cultos" class="font_main_index">
+                                        Cultos
+                                    </a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if (@$alertas == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$alertas ?>">
+                                    <a href="index.php?pag=alertas" class="font_main_index">
+                                        Alertas
+                                    </a>
+                                </li>
                                 <?php } ?>
                             </ul>
                         </li>
@@ -296,7 +328,7 @@ if ($pag == "") {
 
 
                         <?php if (@$menu_financeiro == "ocultar") { ?>
-                            
+
                         <?php } else { ?>
                         <li class="<?php echo @$menu_financeiro ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-currency-dollar icon'></i> Financeiro <i
@@ -425,9 +457,9 @@ if ($pag == "") {
                                     class='bx bx-chevron-right icon-right'></i></a>
 
                             <ul class="side-dropdown">
-                            <?php if (@$RelMembros == "ocultar") { ?>
+                                <?php if (@$RelMembros == "ocultar") { ?>
 
-                            <?php } else { ?>
+                                <?php } else { ?>
                                 <li class="<?php echo @$RelMembros ?>">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelMembros">Membros</a>
                                 </li>
@@ -446,7 +478,8 @@ if ($pag == "") {
 
                                 <?php } else { ?>
                                 <li class="<?php echo @$rel_financeiro ?>">
-                                    <a href="#">Financeiros</a>
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalRelFinanceiro">Financeiro</a>
                                 </li>
                                 <?php } ?>
 
@@ -731,25 +764,116 @@ if ($pag == "") {
                             <div class="widget_bottom_dates">
                                 <div class="input-field-in">
                                     <label>Data Inicial (
-                                        <a href="#" onclick="datas('1980-01-01', 'tudo-pat')">
+                                        <a href="#" onclick="datas('1980-01-01', 'tudo-pat', 'pat')">
                                             <span class="txt_date_all" id="tudo-pat">Tudo</span>
                                         </a>
-                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-pat')">
+                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-pat', 'pat')">
                                             <span class="txt_date_all" id="hoje-pat">Hoje</span>
                                         </a>
-                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-pat')">
+                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-pat', 'pat')">
                                             <span class="txt_date_all" id="mes-pat">Mês</span>
                                         </a>
-                                        <a href="#" onclick="datas('<?php echo $data_ano ?>', 'ano-pat')">
+                                        <a href="#" onclick="datas('<?php echo $data_ano ?>', 'ano-pat', 'pat')">
                                             <span class="txt_date_all" id="ano-pat">Ano</span>
                                         </a>)
                                     </label>
-                                    <input type="date" name="dataInicial" id="dtInicialPatrimonio" value="1980-01-01">
+                                    <input type="date" name="dataInicial" id="dtInicial-pat" value="1980-01-01">
                                 </div>
 
                                 <div class="input-field-in">
                                     <label>Data Final</label>
-                                    <input type="date" id="dtFinalPatrimonio" name="dataFinal"
+                                    <input type="date" id="dtFinal-pat" name="dataFinal"
+                                        value="<?php echo $data_atual ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="modalRelFinanceiro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Relatório Financeiro</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form method="post" action="../relatorios/relFinanceiro.php" target="_blank">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="details personal">
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>Movimento</label>
+                                        <select name="movimento" class="form-select" aria-label="Default select example"
+                                            id="movim">
+                                            <option value="">Todos</option>
+                                            <option value="Conta">Contas à Pagar</option>
+                                            <option value="Dízimo">Dízimos</option>
+                                            <option value="Oferta">Ofertas</option>
+                                            <option value="Doação">Doações</option>
+                                            <option value="Venda">Vendas</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Entradas / Saídas</label>
+                                        <select name="tipo" class="form-select" aria-label="Default select example"
+                                            id="tip">
+                                            <option value="">Todas</option>
+                                            <option value="Entrada">Entradas</option>
+                                            <option value="Saída">Saídas</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <input type="hidden" name="igreja" value="<?php echo $id_igreja ?>">
+                            </div>
+
+                            <div class="widget_bottom_dates">
+                                <div class="input-field-in">
+                                    <label>Data Inicial (
+                                        <a href="#" onclick="datas('1980-01-01', 'tudo-fin', 'fin')">
+                                            <span class="txt_date_all" id="tudo-fin">Tudo</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-fin', 'fin')">
+                                            <span class="txt_date_all" id="hoje-fin">Hoje</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-fin', 'fin')">
+                                            <span class="txt_date_all" id="mes-fin">Mês</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_ano ?>', 'ano-fin', 'fin')">
+                                            <span class="txt_date_all" id="ano-fin">Ano</span>
+                                        </a>)
+                                    </label>
+                                    <input type="date" name="dataInicial" id="dtInicial-fin" value="1980-01-01">
+                                </div>
+
+                                <div class="input-field-in">
+                                    <label>Data Final</label>
+                                    <input type="date" id="dtFinal-fin" name="dataFinal"
                                         value="<?php echo $data_atual ?>">
                                 </div>
                             </div>
@@ -872,19 +996,34 @@ if ($pag == "") {
 
 
 <script type="text/javascript">
-    function datas(data, id) {
+    function datas(data, id, campo) {
         var data_atual = "<?= $data_atual ?>";
-        $('#dtInicialPatrimonio').val(data);
-        $('#dtFinalPatrimonio').val(data_atual);
-        document.getElementById('tudo-pat').style.color = "#999";
-        document.getElementById('tudo-pat').style.backgroundColor = "#ececec";
-        document.getElementById('hoje-pat').style.color = "#999";
-        document.getElementById('hoje-pat').style.backgroundColor = "#ececec";
-        document.getElementById('mes-pat').style.color = "#999";
-        document.getElementById('mes-pat').style.backgroundColor = "#ececec";
-        document.getElementById('ano-pat').style.color = "#999";
-        document.getElementById('ano-pat').style.backgroundColor = "#ececec";
+        $('#dtInicial-' + campo).val(data);
+        $('#dtFinal-' + campo).val(data_atual);
+        document.getElementById('tudo-' + campo).style.color = "#999";
+        document.getElementById('tudo-' + campo).style.backgroundColor = "#ececec";
+        document.getElementById('hoje-' + campo).style.color = "#999";
+        document.getElementById('hoje-' + campo).style.backgroundColor = "#ececec";
+        document.getElementById('mes-' + campo).style.color = "#999";
+        document.getElementById('mes-' + campo).style.backgroundColor = "#ececec";
+        document.getElementById('ano-' + campo).style.color = "#999";
+        document.getElementById('ano-' + campo).style.backgroundColor = "#ececec";
         document.getElementById(id).style.color = "#198754";
         document.getElementById(id).style.backgroundColor = "#007f5f12";
     }
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#movim").change(function () {
+            if ($("#movim").val() != "") {
+                document.getElementById("tip").options.selectedIndex = 0;
+                $("#tip").val($("#tip").val()).change();
+                document.getElementById('tip').disabled = true;
+            } else {
+                document.getElementById('tip').disabled = false;
+            }
+        })
+    })
 </script>

@@ -13,15 +13,25 @@ $tel_igreja = $res[0]['telefone'];
 $end_igreja = $res[0]['endereco'];
 $imagem_igreja = $res[0]['imagem'];
 $pastor_igreja = $res[0]['pastor'];
+$logo_rel = $res[0]['logo_rel'];
+$cab_rel = $res[0]['cab_rel'];
 
-//EXTRAIR EXTENSÃO DO ARQUIVO
-$ext = pathinfo($imagem_igreja, PATHINFO_EXTENSION);
-if ($ext == 'jpg') {
-    $imagem_igreja = $imagem_igreja;
+
+
+if ($logo_rel != 'sem-foto.jpg') {
+    $imagem_igreja = $logo_rel;
 
 } else {
     $imagem_igreja = 'logo-rel.jpg';
 }
+
+if ($cab_rel != 'sem-foto.jpg') {
+    $cabecalho_rel = $cab_rel;
+
+} else {
+    $cabecalho_rel = 'cabecalho-rel.jpg';
+}
+
 
 $query = $pdo->query("SELECT * FROM pastores where id = '$pastor_igreja'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -77,9 +87,30 @@ $cargo = '%' . $cargo . '%';
             margin: 0px;
         }
 
-        @page {
-            margin: 20px 0 0 0;
-        }
+        <?php if ($cabecalho_rel_img != 'Sim') { ?>
+            @page {
+                margin: 20px 0 0 0;
+            }
+
+            .cabecalho {
+                padding: 10px;
+                margin-bottom: 5px;
+                width: 100%;
+                font-family: "Inter", sans-serif;
+            }
+
+        <?php } else { ?>
+            @page {
+                margin: 0;
+                padding: 0;
+            }
+
+            .cabecalho {
+                padding: 0;
+                margin-bottom: 0;
+            }
+
+        <?php } ?>
 
         body {
             margin-top: 0px;
@@ -110,13 +141,6 @@ $cargo = '%' . $cargo . '%';
             }
 
         <?php } ?>
-
-        .cabecalho {
-            padding: 10px;
-            margin-bottom: 5px;
-            width: 100%;
-            font-family: "Inter", sans-serif;
-        }
 
         .coluna_name_church {
             font-size: 14px;
@@ -257,38 +281,64 @@ $cargo = '%' . $cargo . '%';
         .img_profile_rel {
             border-radius: 50%;
         }
+
+        .imagem {
+            width: 100%;
+        }
+
+        .titulo_img {
+            position: absolute;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .data_img {
+            position: absolute;
+            margin-top: 35px;
+            margin-left: 10px;
+        }
     </style>
 
 
 </head>
 
 <body>
-    <section class="area-cab">
-        <div class="cabecalho">
-            <div class="coluna titulo_cab" style="width:27.5%">
-                <?php echo $titulo_rel ?>
+    <?php if ($cabecalho_rel_img != 'Sim') { ?>
+        <section class="area-cab">
+            <div class="cabecalho">
+                <div class="coluna titulo_cab" style="width:27.5%">
+                    <?php echo $titulo_rel ?>
+                </div>
+                <div align="right" class="coluna" style="width:70%">
+                    <img class="img_rel" src="<?php echo $url_sistema ?>img/igrejas/<?php echo $imagem_igreja ?>">
+                    <span class="coluna_name_church"><?php echo $nome_igreja ?></span>
+                </div>
             </div>
-            <div align="right" class="coluna" style="width:70%">
-                <img class="img_rel" src="<?php echo $url_sistema ?>img/igrejas/<?php echo $imagem_igreja ?>">
-                <span class="coluna_name_church"><?php echo $nome_igreja ?></span>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <br>
+        <br>
 
-    <section class="area-cab">
-        <div class="cabecalho">
-            <div class="coluna" style="width:60%">
-                <span class="date_rel">
-                    <?php echo ucwords($data_hoje) ?>
-                </span>
+        <section class="area-cab">
+            <div class="cabecalho">
+                <div class="coluna" style="width:60%">
+                    <span class="date_rel">
+                        <?php echo ucwords($data_hoje) ?>
+                    </span>
+                </div>
+                <div align="right" class="coluna" style="width:37%">
+                    <span class="end_rel"><?php echo $end_igreja ?></span>
+                </div>
             </div>
-            <div align="right" class="coluna" style="width:37%">
-                <span class="end_rel"><?php echo $end_igreja ?></span>
-            </div>
+        </section>
+    <?php } else { ?>
+        <div class="titulo_cab titulo_img">
+            <?php echo $titulo_rel ?>
         </div>
-    </section>
+        <div class="data_img">
+            <span class="date_rel"><?php echo ucwords($data_hoje) ?></span>
+        </div>
+        <img class="imagem" src="<?php echo $url_sistema ?>img/igrejas/<?php echo $cabecalho_rel ?>">
+    <?php } ?>
 
     <br>
     <div class="cabecalho" style="border-bottom: solid 1px #ececec; margin-bottom: 30px">
@@ -310,38 +360,40 @@ $cargo = '%' . $cargo . '%';
                 <div class="linha-cab head_table_rel">
                     <div class="coluna" style="width:25%">NOME</div>
                     <div class="coluna" style="width:10%">CARGO</div>
-                    <div class="coluna" style="width:23%">EMAIL</div>
-                    <div class="coluna" style="width:15%">TELEFONE</div>
-                    <div class="coluna" style="width:18%">DATA CADASTRO</div>
-                    <div class="coluna" style="width:12%">FOTO</div>
+                    <div class="coluna" style="width:30%">EMAIL</div>
+                    <div class="coluna" style="width:13%">TELEFONE</div>
+                    <div class="coluna" style="width:12%">CADASTRO</div>
+                    <div class="coluna" style="width:10%">FOTO</div>
                 </div>
             </section>
         </div>
 
         <?php
-            for ($i = 0; $i < $total_reg; $i++) {
-                foreach ($res[$i] as $key => $value) {}
-                $cargo = $res[$i]['cargo'];
+        for ($i = 0; $i < $total_reg; $i++) {
+            foreach ($res[$i] as $key => $value) {
+            }
+            $cargo = $res[$i]['cargo'];
 
-                $query_con = $pdo->query("SELECT * FROM cargos where id = '$cargo'");
-                $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-                if (count($res_con) > 0) {
-                    $nome_cargo = $res_con[0]['nome'];
-                } else {
-                    $nome_cargo = '';
-                }
-        ?>
+            $query_con = $pdo->query("SELECT * FROM cargos where id = '$cargo'");
+            $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+            if (count($res_con) > 0) {
+                $nome_cargo = $res_con[0]['nome'];
+            } else {
+                $nome_cargo = '';
+            }
+            ?>
 
             <div class="container_txt_rel">
                 <section class="area-tab-2">
                     <div class="linha-cab txt_table_rel">
                         <div class="coluna" style="width:25%"><?php echo $res[$i]['nome'] ?></div>
                         <div class="coluna" style="width:10%"><?php echo $nome_cargo ?></div>
-                        <div class="coluna" style="width:23%"><?php echo $res[$i]['email'] ?></div>
+                        <div class="coluna" style="width:30%"><?php echo $res[$i]['email'] ?></div>
                         <div class="coluna" style="width:15%"><?php echo $res[$i]['telefone'] ?></div>
-                        <div class="coluna" style="width:18%">
-                            <?php echo implode('/', array_reverse(explode('-', $res[$i]['data_cad']))) ?></div>
-                        <div class="coluna line_img_table" style="width:12%">
+                        <div class="coluna" style="width:10%">
+                            <?php echo implode('/', array_reverse(explode('-', $res[$i]['data_cad']))) ?>
+                        </div>
+                        <div class="coluna line_img_table" style="width:10%">
                             <img class="img_profile_rel"
                                 src="<?php echo $url_sistema ?>img/membros/<?php echo $res[$i]['foto'] ?>" width="30px">
                         </div>

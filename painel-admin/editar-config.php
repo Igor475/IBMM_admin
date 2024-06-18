@@ -7,11 +7,13 @@ $email = $_POST['email_igr'];
 $qtd_tar = $_POST['qtd_tar_igr'];
 $limitar_tesoureiro = $_POST['limitar_tesoureiro'];
 $relatorio_pdf = $_POST['relatorio_pdf'];
+$cabecalho_rel_img = $_POST['cabecalho_rel_img'];
 
 
 $query = $pdo->prepare("UPDATE config SET nome = :nome, endereco = :endereco, 
     telefone = :telefone, email = :email, qtd_tarefas = '$qtd_tar', 
-    limitar_tesoureiro = '$limitar_tesoureiro', relatorio_pdf = '$relatorio_pdf'");
+    limitar_tesoureiro = '$limitar_tesoureiro', relatorio_pdf = '$relatorio_pdf',
+    cabecalho_rel_img = '$cabecalho_rel_img'");
 $query->bindValue(":nome", "$nome");
 $query->bindValue(":endereco", "$endereco");
 $query->bindValue(":telefone", "$telefone");

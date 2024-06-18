@@ -10,7 +10,8 @@ $igreja = $_POST['igreja'];
 $id = @$_POST['id'];
 
 
-$query = $pdo->query("SELECT * FROM $pagina WHERE data = '$data' and hora = '$hora'");
+$query = $pdo->query("SELECT * FROM $pagina WHERE data = '$data' and hora = '$hora' and
+    igreja = '$igreja'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $id_reg = @$res[0]['id'];
 if (@count($res) > 0 and $id_reg != $id) {

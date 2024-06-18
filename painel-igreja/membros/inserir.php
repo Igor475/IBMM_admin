@@ -18,7 +18,7 @@ $query = $pdo->query("SELECT * FROM $pagina WHERE cpf = '$cpf'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $id_reg = @$res[0]['id'];
 if (@count($res) > 0 and $id_reg != $id) {
-    echo 'O CPF já cadastrado no sistema!';
+    echo 'O CPF já cadastrado no sistema, nessa ou em outra filial!';
     exit();
 }
 
@@ -27,7 +27,7 @@ $query = $pdo->query("SELECT * FROM $pagina WHERE email = '$email'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $id_reg = @$res[0]['id'];
 if (@count($res) > 0 and $id_reg != $id) {
-    echo 'O email já está cadastrado no sistema!';
+    echo 'O email já está cadastrado no sistema, nessa ou em outra filial!';
     exit();
 }
 
@@ -47,10 +47,10 @@ if (@$_FILES['imagem']['name'] == "") {
 
 $imagem_temp = @$_FILES['imagem']['tmp_name'];
 $ext = pathinfo($imagem, PATHINFO_EXTENSION);
-if ($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif') {
+if ($ext == 'jpg' or $ext == 'jpeg') {
     move_uploaded_file($imagem_temp, $caminho);
 } else {
-    echo 'Extensão de Imagem não permitida!';
+    echo 'Extensão de Imagem não permitida, somente JPG ou JPEG!';
     exit();
 }
 

@@ -1,5 +1,5 @@
 <?php
-require_once("../conexao.php");
+require_once ("../conexao.php");
 $pagina = 'igrejas';
 ?>
 
@@ -45,7 +45,13 @@ $pagina = 'igrejas';
                         $data_cad = $res[$i]['data_cad'];
                         $obs = $res[$i]['obs'];
                         $pastor = $res[$i]['pastor'];
+                        $video = $res[$i]['video'];
+                        $email = $res[$i]['email'];
                         $id = $res[$i]['id'];
+
+                        $logo_rel = $res[$i]['logo_rel'];
+                        $cab_rel = $res[$i]['cab_rel'];
+                        $carteirinha_rel = $res[$i]['carteirinha_rel'];
 
                         $query_con = $pdo->query("SELECT * FROM pastores where id = '$pastor'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
@@ -95,7 +101,7 @@ $pagina = 'igrejas';
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                            '<?php echo $pastor ?>')">
+                                            '<?php echo $pastor ?>', '<?php echo $video ?>', '<?php echo $email ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -110,7 +116,8 @@ $pagina = 'igrejas';
                                             <a class="dropdown-item" href="#"
                                                 onclick="dados('<?php echo $nome ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>',
-                                            '<?php echo $data_cadF ?>', '<?php echo $matriz ?>', '<?php echo $nome_p ?>')">
+                                            '<?php echo $data_cadF ?>', '<?php echo $matriz ?>', '<?php echo $nome_p ?>', 
+                                            '<?php echo $email ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -125,6 +132,13 @@ $pagina = 'igrejas';
                                             '<?php echo $nome ?>')">
                                                 <i class="bi bi-file-earmark-arrow-down-fill icons_actions"></i>
                                                 Arquivos Anexados</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="imagens('<?php echo $id ?>', 
+                                            '<?php echo $nome ?>', '<?php echo $logo_rel ?>', '<?php echo $cab_rel ?>', 
+                                            '<?php echo $carteirinha_rel ?>')">
+                                                <i class="bi bi-file-earmark-arrow-up icons_actions"></i>
+                                                Imagens do Relatório</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -197,6 +211,17 @@ $pagina = 'igrejas';
                                                 <?php }
                                             } ?>
                                         </select>
+                                    </div>
+
+                                    <div class="input-field flex_int_3">
+                                        <label>Vídeo Página Inicial do Site (Url do YouTube, o src do iframe)</label>
+                                        <input type="url" name="video" id="video"
+                                            placeholder="https://www.youtube.com/embed/iq0_NMs6DIU?si=o2fBWMu5eCb06oA8">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>E-mail da Igreja</label>
+                                        <input type="email" name="email" id="email" placeholder="Email da Igreja">
                                     </div>
 
                                     <div class="area_photo">
@@ -302,6 +327,12 @@ $pagina = 'igrejas';
                     <span class="texts_son" id="telefone-dados"></span>
                 </div>
                 <div class="user_area">
+                    <img src="../img/svg/email.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
+                    <span class="user_name">Email da Igreja: </span>
+                    <span class="texts_son" id="email-dados"></span>
+                </div>
+                <div class="user_area">
                     <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
                     <!-- <i class="bi bi-geo-alt icon_user"></i> -->
                     <span class="user_name">Endereço: </span>
@@ -390,9 +421,80 @@ $pagina = 'igrejas';
 
                 <div id="listar-arquivos">
 
-                <div>
+                    <div>
 
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="modalImagens" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Imagens da Igreja - <span id="nome-imagem"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form id="form-img" method="post">
+                <div class="modal-body">
+                    <div class="area_logos_rel_church">
+                        <div class="area_photo_rel">
+                            <div class="area_photo_flex">
+                                <label>Logo Relatório JPG</label>
+                                <input type="file" class="input_file" id="imagemlogojpg" name="logojpg"
+                                    onChange="carregarImglogojpg();">
+                            </div>
+                            <div class="divImgRel">
+                                <img class="photo_file_rel" id="targetlogojpg" src="../img/igrejas/sem-foto.jpg"
+                                    style="width: 60%" alt="">
+                            </div>
+                        </div>
+                        <div class="area_photo_rel">
+                            <div class="area_photo_flex">
+                                <label>Cabeçalho Relatório JPG</label>
+                                <input type="file" class="input_file" id="imagemcabjpg" name="cabjpg"
+                                    onChange="carregarImgcabjpg();">
+                            </div>
+                            <div class="divImgRel">
+                                <img class="photo_file_rel" id="targetcabjpg" src="../img/igrejas/sem-foto.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="area_photo_rel">
+                            <div class="area_photo_flex">
+                                <label>Cabeçalho Carteirinha JPG</label>
+                                <input type="file" class="input_file" id="imagemcartjpg" name="cartjpg"
+                                    onChange="carregarImgcartjpg();">
+                            </div>
+                            <div class="divImgRel">
+                                <img class="photo_file_rel" id="targetcartjpg" src="../img/igrejas/sem-foto.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mensagem-img"></div>
+
+                    <input type="hidden" name="id-img" id="id-img">
+
+                </div>
+                <div id="mensagem"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-img" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Salvar
+                            <i class="bi bi-pencil-square icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -410,13 +512,15 @@ $pagina = 'igrejas';
 
 
 <script type="text/javascript">
-    function editar(id, nome, telefone, endereco, foto, pastor) {
+    function editar(id, nome, telefone, endereco, foto, pastor, video, email) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
         $('#pastor').val(pastor).change();
         $('#target').attr('src', '../img/igrejas/' + foto);
+        $('#video').val(video);
+        $('#email').val(email);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -425,12 +529,13 @@ $pagina = 'igrejas';
     }
 
 
-    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor) {
+    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor, email) {
         $('#nome-dados').text(nome);
         $('#telefone-dados').text(telefone);
         $('#endereco-dados').text(endereco);
         $('#cadastro-dados').text(data_cad);
         $('#matriz-dados').text(matriz);
+        $('#email-dados').text(email);
         $('#foto-dados').attr('src', '../img/igrejas/' + foto);
         $('#pastor-dados').text(pastor);
 
@@ -474,16 +579,16 @@ $pagina = 'igrejas';
     function arquivos(id, nome) {
 
         $('#nome-arquivo').text(nome);
-    
+
 
         $.ajax({
-        url: pag + "/listar-arquivos.php",
-        method: 'POST',
-        data: {id},
-        dataType: "text",
+            url: pag + "/listar-arquivos.php",
+            method: 'POST',
+            data: { id },
+            dataType: "text",
 
             success: function (result) {
-                $("#listar-arquivos").html(result);              
+                $("#listar-arquivos").html(result);
             },
 
         });
@@ -493,4 +598,120 @@ $pagina = 'igrejas';
         $('#mensagem-arquivos').text('');
     }
 
+
+
+    function imagens(id, nome, logo, cab, cart) {
+
+        $('#nome-imagem').text(nome);
+        $('#id-img').val(id);
+
+        $('#targetlogojpg').attr('src', '../img/igrejas/' + logo);
+        $('#targetcabjpg').attr('src', '../img/igrejas/' + cab);
+        $('#targetcartjpg').attr('src', '../img/igrejas/' + cart);
+
+        var myModal = new bootstrap.Modal(document.getElementById('modalImagens'), {});
+        myModal.show();
+        $('#mensagem-imagens').text('');
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    function carregarImglogojpg() {
+    var target = document.getElementById('targetlogojpg');
+    var file = document.querySelector("#imagemlogojpg").files[0];
+    
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+        } else {
+            target.src = "";
+        }
+    }
+
+
+
+
+    function carregarImgcabjpg() {
+    var target = document.getElementById('targetcabjpg');
+    var file = document.querySelector("#imagemcabjpg").files[0];
+    
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+        } else {
+            target.src = "";
+        }
+    }
+
+
+
+    function carregarImgcartjpg() {
+    var target = document.getElementById('targetcartjpg');
+    var file = document.querySelector("#imagemcartjpg").files[0];
+    
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+        } else {
+            target.src = "";
+        }
+    }
+</script>
+
+
+
+
+<script type="text/javascript">
+    $("#form-img").submit(function () {
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: pag + "/imagens.php",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+                $('#mensagem-img').text('');
+                $('#mensagem-img').removeClass()
+                if (mensagem.trim() == "Salvo com Sucesso") {
+                    
+                        $('#btn-fechar-img').click();
+                        window.location="index.php?pag=" + pag;
+                    } else {
+
+                        $('#mensagem-img').addClass('message_error')
+                        $('#mensagem-img').text(mensagem)
+                    }
+
+
+                },
+
+                cache: false,
+                contentType: false,
+                processData: false,
+                
+            });
+
+    });
 </script>

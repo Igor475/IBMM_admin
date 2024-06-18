@@ -305,7 +305,7 @@ if (@$receber == 'ocultar') {
                                         <label>Membro</label>
                                         <select class="sel2" id="membro" name="membro">
                                             <?php
-                                            $query = $pdo->query("SELECT * FROM membros order by id asc");
+                                            $query = $pdo->query("SELECT * FROM membros where igreja = '$id_igreja' order by id asc");
                                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                             $total_reg = count($res);
                                             if ($total_reg > 0) {

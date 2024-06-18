@@ -175,10 +175,21 @@
     width: 50%;
 }
 
+.divImgAlert {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+}
+
 .photo_file {
     width: 150px;
     height: 150px;
     border-radius: 50%;
+}
+
+.photo_file_alert {
+    width: 100%;
+    height: 200px;
 }
 
 .photo_file_archives {
@@ -284,7 +295,15 @@
 }
 
 .flex_int_7 {
-    flex: 1;
+    flex: 1 !important;
+}
+
+.flex_int_8 {
+    flex: .25 !important;
+}
+
+.flex_int_9 {
+    flex: 1 1 400px !important;
 }
 
 .flex_select {
@@ -541,6 +560,32 @@
     border: 1px solid var(--text-error-color);
     padding: 10px;
     width: 91.8%;
+    font-size: 14px;
+}
+
+.area_logos_rel_church {
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.photo_file_rel {
+    width: 100%;
+}
+
+.area_photo_rel {
+    flex: 1 1 220px;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.divImgRel {
+    display: flex;
+    justify-content: center;
+    max-width: 200px;
+    margin-top: 12px;
 }
 
 
@@ -556,10 +601,33 @@
     font-size: 14px;
 }
 
+.txt-obs-alert {
+    font-size: 13px;
+    height: 100px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid var(--fundo-ea);
+    transition: all .3s ease;
+    padding: 10px 10px;
+    outline: none;
+    font-size: 14px;
+    color: var(--preto);
+}
+
+#link-dados {
+    color: var(--verde);
+}
+
 .txt-obs:focus {
     border-color: var(--verde-light-border);
     box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
 }
+
+.txt-obs-alert:focus {
+    border-color: var(--verde-light-border);
+    box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
+}
+
 
 .area_obs {
     display: flex;
@@ -633,8 +701,8 @@
 
 .user_profile_area .img_info_profile {
     display: block;
-    width: 200px;
-    height: 200px;
+    width: 175px;
+    height: auto;
     border-radius: 8%;
 }
 /* FIM ESTILIZAÇÃO DA MODAL DE "VER DADOS" */

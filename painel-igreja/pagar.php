@@ -219,7 +219,7 @@ if (@$pagar == 'ocultar') {
                         $vencimentoF = implode('/', array_reverse(explode('-', $vencimento)));
                         ?>
                         <tr class="column-body <?php echo $classe_linha ?>">
-                            <td data-label="Descrição" class="td-table <?php echo $classe_linha ?>" id="radius-column-foto">
+                            <td data-label="Descrição" class="td-table" id="radius-column-foto">
                                 <i class="bi bi-exclamation-octagon-fill <?php echo $classe ?>"></i>
                                 <?php echo $descricao ?>
                             </td>
@@ -336,7 +336,7 @@ if (@$pagar == 'ocultar') {
                                         <select class="sel2" id="fornecedor" name="fornecedor">
                                             <option value="0">Selecionar Fornecedor</option>
                                             <?php
-                                            $query = $pdo->query("SELECT * FROM fornecedores order by id asc");
+                                            $query = $pdo->query("SELECT * FROM fornecedores where igreja = '$id_igreja' order by id asc");
                                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                             $total_reg = count($res);
                                             if ($total_reg > 0) {
