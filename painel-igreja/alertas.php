@@ -196,7 +196,7 @@ if(@$patrimonio == 'ocultar') {
                                     <div class="input-field flex_int_9">
                                         <div class="area_obs">
                                             <label class="txt_label_obs">Descrição (Max 500 Caracteres)</label>
-                                            <textarea class="txt-obs-alert" maxlength="500" style="width" type="text" 
+                                            <textarea class="txt-obs-alert" maxlength="500" type="text" 
                                                 name="descricao" id="descricao"></textarea>
                                         </div>
                                     </div>

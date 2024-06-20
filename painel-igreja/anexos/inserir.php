@@ -23,7 +23,7 @@ if (@$_FILES['imagem']['name'] == "") {
 
 $imagem_temp = @$_FILES['imagem']['tmp_name'];
 $ext = pathinfo($imagem, PATHINFO_EXTENSION);
-if ($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'pdf'
+if ($ext == 'png' or $ext == 'jpg' or $ext == 'JPG' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'pdf'
     or $ext == 'rar' or $ext == 'zip' or $ext == 'docx' or $ext == 'doc') {
     move_uploaded_file($imagem_temp, $caminho);
 } else {

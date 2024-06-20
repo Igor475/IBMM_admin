@@ -52,7 +52,7 @@ $membrosCadastrados = @count($res_m);
             </div>
         </div>
     </a>
-    <a href="index.php?pag=celulas" class="card">
+    <a href="#" class="card">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/cells-svgrepo-com.svg" alt="">
@@ -66,7 +66,7 @@ $membrosCadastrados = @count($res_m);
             </div>
         </div>
     </a>
-    <a href="index.php?pag=membros" class="card">
+    <a href="#" class="card">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/membro.svg" alt="">

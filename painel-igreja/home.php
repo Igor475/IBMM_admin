@@ -35,6 +35,7 @@ $totalGastos = 0;
 $totalVendas = 0;
 $totalDoacoes = 0;
 $saldoMes = 0;
+$patCadastrados = 0;
 
 $pagarVencidas = 0;
 $pagarHoje = 0;
@@ -58,6 +59,18 @@ $query = $pdo->query("SELECT *FROM pagar WHERE igreja = '$id_igreja' and vencime
     and pago != 'Sim'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $pagarVencidas = @count($res);
+
+$query = $pdo->query("SELECT *FROM grupos where igreja = '$id_igreja'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$gruposCadastrados = @count($res);
+
+$query = $pdo->query("SELECT *FROM celulas where igreja = '$id_igreja'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$celulasCadastradas = @count($res);
+
+$query = $pdo->query("SELECT *FROM patrimonios WHERE igreja_cad = '$id_igreja' and ativo = 'Sim'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$patCadastrados = @count($res);
 
 $mes_atual = Date('m');
 $ano_atual = Date('Y');
@@ -134,7 +147,7 @@ if(@$home == 'ocultar') {
     </div>
 </div>
 <div class="info-data">
-    <a href="index.php?pag=igrejas" class="card">
+    <a href="index.php?pag=dizimos" class="card">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/donations-svgrepo-com.svg" alt="">
@@ -149,7 +162,7 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
-    <a href="index.php?pag=pastores" class="card">
+    <a href="index.php?pag=ofertas" class="card">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/donation-svgrepo-com.svg" alt="">
@@ -164,7 +177,7 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
-    <a href="index.php?pag=celulas" class="card">
+    <a href="index.php?pag=pagar" class="card">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/loss-svgrepo-com.svg" alt="">
@@ -179,7 +192,7 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
-    <a href="index.php?pag=igrejas" class="card">
+    <a href="index.php?pag=vendas" class="card">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/profits-svgrepo-com.svg" alt="">
@@ -194,7 +207,7 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
-    <a href="index.php?pag=pastores" class="card">
+    <a href="index.php?pag=doacoes" class="card">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/donate-donation-svgrepo-com.svg" alt="">
@@ -223,7 +236,7 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
-    <a href="index.php?pag=membros" class="card <?php echo $esc_tesoureiro ?>">
+    <a href="index.php?pag=grupos" class="card <?php echo $esc_tesoureiro ?>">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/group-svgrepo-com.svg" alt="">
@@ -237,7 +250,7 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
-    <a href="index.php?pag=membros" class="card <?php echo $esc_tesoureiro ?>">
+    <a href="index.php?pag=celulas" class="card <?php echo $esc_tesoureiro ?>">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/cells-svgrepo-com.svg" alt="">
@@ -251,10 +264,24 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
+    <a href="index.php?pag=patrimonios" class="card <?php echo $esc_tesoureiro ?>">
+        <div class="head">
+            <div>
+                <img class="icon" src="../img/svg/patrimonio.svg" alt="">
+            </div>
+
+            <div class="area-info">
+                <span class="number">
+                    <?php echo @$patCadastrados  ?>
+                </span>
+                <p>Patrimônio / Itens</p>
+            </div>
+        </div>
+    </a>
 
 
 
-    <a href="index.php?pag=membros" class="card <?php echo $esc_pastor ?>">
+    <a href="index.php?pag=pagar&filtrar=Hoje" class="card <?php echo $esc_pastor ?>">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/invoice-svgrepo-com.svg" alt="">
@@ -268,7 +295,7 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
-    <a href="index.php?pag=membros" class="card <?php echo $esc_pastor ?>">
+    <a href="index.php?pag=receber&filtrar=Hoje" class="card <?php echo $esc_pastor ?>">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/conta-para-receber.svg" alt="">
@@ -282,7 +309,7 @@ if(@$home == 'ocultar') {
             </div>
         </div>
     </a>
-    <a href="index.php?pag=membros" class="card <?php echo $esc_pastor ?>">
+    <a href="index.php?pag=pagar&filtrar=Vencidas" class="card <?php echo $esc_pastor ?>">
         <div class="head">
             <div>
                 <img class="icon" src="../img/svg/notification-svgrepo-com.svg" alt="">

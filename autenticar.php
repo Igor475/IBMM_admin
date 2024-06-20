@@ -34,6 +34,10 @@ if ($total_reg > 0) {
         echo "<script>window.location='painel-igreja'</script>";
     }
 
+    if ($res[0]['nivel'] == 'secretario') {
+        echo "<script>window.location='painel-igreja'</script>";
+    }
+
 } else {
     $_SESSION['msg'] = "<div id='alert_mess_box'>
                             <span>

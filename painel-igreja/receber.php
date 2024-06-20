@@ -86,12 +86,6 @@ if (@$receber == 'ocultar') {
                         Vencendo Hoje
                     </a>
                 </li>
-                <li>
-                    <a href="index.php?pag=<?php echo $pagina ?>&filtrar=Pagas"
-                        class="dropdown-item <?php echo $classe_pagas ?>">
-                        Pagas
-                    </a>
-                </li>
             </ul>
             <button type="button" class="filter_dropdown_filt">
                 Filtar Por<i class="bx bx-filter-alt icon_filter"></i>

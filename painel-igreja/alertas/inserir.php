@@ -27,7 +27,7 @@ if (@$_FILES['imagem']['name'] == "") {
 
 $imagem_temp = @$_FILES['imagem']['tmp_name'];
 $ext = pathinfo($imagem, PATHINFO_EXTENSION);
-if ($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif') {
+if ($ext == 'png' or $ext == 'jpg' or $ext == 'JPG' or $ext == 'jpeg' or $ext == 'gif') {
     move_uploaded_file($imagem_temp, $caminho);
 } else {
     echo 'Extensão de Imagem não permitida!';
@@ -40,7 +40,7 @@ if ($ext == 'png' or $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif') {
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET titulo = :titulo, descricao = :descricao, 
         link = :link, usuario = '$id_usuario', data = '$data', igreja = '$igreja', 
-        ativo = 'Sim',  imagem = '$imagem'");
+        ativo = 'Não',  imagem = '$imagem'");
 
 } else {
     if ($imagem == "sem-foto.jpg") {
