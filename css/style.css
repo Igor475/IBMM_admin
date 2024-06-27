@@ -84,9 +84,8 @@
 
 /* OCULTANDO MENUS DAS PERMISSÕES DOS USUÁRIOS */
 .ocultar {
-    display: none;
+    display: none !important;
 }
-
 
 /* BOTÕES DE ADICIONAR NOVO REGISTROS NAS TABELAS DE TODAS AS PÁGINAS */
 .buttons_register {
@@ -1675,7 +1674,7 @@ td.td-table#radius-column-action:last-child {
 @media screen and (max-width: 450px) {
     .content-table .body-table .column-body .td-table {
         display: block;
-        padding: 10px 0;
+        padding: 10px 10px;
     }
 
     .content-table .body-table .column-body .td-table:last-child {

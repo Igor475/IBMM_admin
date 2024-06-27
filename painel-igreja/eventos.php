@@ -243,8 +243,8 @@ if (@$patrimonio == 'ocultar') {
                                             <label>Imagem</label>
                                             <input type="file" class="input_file" id="imagem" name="imagem" onChange="carregarImg();">
                                         </div>
-                                        <div class="divImg">
-                                            <img class="photo_file" id="target" src="../img/eventos/sem-foto.jpg" alt="">
+                                        <div class="divImgVideoForm">
+                                            <img class="photo_file_video_image" id="target" src="../img/eventos/sem-foto.jpg" alt="">
                                         </div>
                                     </div>
 
@@ -362,13 +362,15 @@ if (@$patrimonio == 'ocultar') {
                     <span class="user_name">OBS: </span>
                     <span class="texts_son" id="obs-dados"></span>
                 </div>
-                <div class="user_area">
+                <div class="video_image_area">
                     <span class="area_video_modal">
+                        <span class="txt_video">Vídeo</span>
                         <iframe id="video-dados" width="100%" height="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </span>
-                </div>
-                <div class="user_profile_area">
-                    <img class="img_info_profile" src="" id="foto-dados">
+                    <div class="area_dados_image">
+                        <span class="txt_image">Imagem</span>
+                        <img class="img_inf_dados" src="" id="foto-dados">
+                    </div>
                 </div>
             </div>
         </div>

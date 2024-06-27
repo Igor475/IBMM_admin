@@ -175,6 +175,69 @@
     width: 50%;
 }
 
+.divImgVideoForm {
+    display: flex;
+    justify-content: center;
+    max-width: 480px;
+}
+
+.photo_file_video_image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.user_dados_video {
+    max-width: 100%;
+    position: relative;
+}
+
+.video_image_area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+}
+
+.area_dados_image {
+    max-width: 260px;
+    position: relative;
+    flex: 1 1 330px;
+}
+
+.img_inf_dados {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.area_video_modal {
+    max-width: 260px;
+    position: relative;
+    flex: 1 1 300px;
+}
+
+.txt_video {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--preto-text);
+}
+
+.txt_image {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--preto-text);
+}
+
+#video-dados {
+    width: 310px;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
 .divImgAlert {
     display: flex;
     justify-content: center;
@@ -619,15 +682,6 @@
     color: var(--verde);
 }
 
-.area_video_modal {
-    width: 100%;
-    height: 100%;
-}
-
-#video-dados {
-    width: 100%;
-}
-
 .txt-obs:focus {
     border-color: var(--verde-light-border);
     box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
@@ -723,6 +777,21 @@
         overflow-y: scroll;
         height: 400px;
     }
+    
+    .area_dados_image {
+        max-width: 58%;
+        margin: 0 auto;
+    }
+
+    #video-dados {
+        height: 200px;
+    }
+    
+    .area_video_modal {
+        max-width: 100%;
+        margin: 0 auto;
+        flex: 0;
+    }
 
     .scroll-modal {
         overflow-y: scroll;
@@ -786,10 +855,6 @@
         flex: 1 !important;
     }
 
-    #video-dados {
-        height: 200px;
-    }
-
     /*============================================= FOTOS DAS MODAIS =========================================*/
     .area_photo { 
         justify-content: center;
@@ -821,6 +886,20 @@
 @media (max-width: 550px) {
     .fields .input-field {
         width: 100%
+    }
+
+    .area_dados_image {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .area_video_modal {
+        flex: 1 1 330px;
+    }
+
+    #video-dados {
+        height: 150px;
+        width: 100%;
     }
 
     /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */

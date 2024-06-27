@@ -1,7 +1,18 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^usuarios_page(.*)$ index.php?pag=usuarios [L]
-RewriteRule ^grupo_acessos(.*)$ index.php?pagina=grupo_acessos [L]
-RewriteRule ^acessos(.*)$ index.php?pagina=acessos [L]
+
+ErrorDocument 403 http://localhost/IBMM_admin/painel-admin/
+
+Options -Indexes
+
+RewriteRule ^usuarios - [F]
+RewriteRule ^tesoureiros - [F]
+RewriteRule ^secretarios - [F]
+RewriteRule ^patrimonios - [F]
+RewriteRule ^pastores_presidentes - [F]
+RewriteRule ^pastores - [F]
+RewriteRule ^igrejas - [F]
+RewriteRule ^grupo_acessos - [F]
+RewriteRule ^frequencias - [F]
+RewriteRule ^cargos - [F]
+RewriteRule ^anexos - [F]
+RewriteRule ^acessos - [F]

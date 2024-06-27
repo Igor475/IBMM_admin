@@ -42,6 +42,7 @@ $cpf_usu = $res[0]['cpf'];
 $senha_usu = $res[0]['senha'];
 $nivel_usu = $res[0]['nivel'];
 $foto_usu = $res[0]['foto'];
+$id_pessoa = $res[0]['id_pessoa'];
 
 
 // TRAZENDO DADOS DAS CONFIGURAÇÕES DAS IGREJAS

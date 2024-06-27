@@ -3,26 +3,45 @@
 
 
 <?php
-require_once ("../conexao.php");
+require_once("../conexao.php");
 $pagina = 'celulas';
 
 
-if(@$celulas == 'ocultar') {
+if (@$celulas == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });
-          </script>"; 
+          </script>";
     /* echo "<script>window.location='index.php'</script>"; */
     exit();
 }
+
+$query_con = $pdo->query("SELECT * FROM $pagina where igreja = '$id_igreja' order by id desc");
+$res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+@$lider1 = $res[0]['lider1'];
+
+if ($id_pessoa == $lider1) {
+    $none = 'ocultar';
+} elseif ($nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente' || $nivel_usu == 'pastor') {
+    $none = '';
+} else {
+    $none = 'ocultar';
+}
+
 ?>
 
-<div class="buttons_register">
-    <a href="#" onclick="inserir()" class="button_tables_register">
-        Nova Célula
-        <i class="bi bi-plus-lg icon_tables_registers"></i>
-    </a>
-</div>
+<?php if ($id_pessoa == $lider1) { ?>
+
+<?php } elseif ($nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente' || $nivel_usu == 'pastor') { ?>
+    <div class="buttons_register">
+        <a href="#" onclick="inserir()" class="button_tables_register">
+            Nova Célula
+            <i class="bi bi-plus-lg icon_tables_registers"></i>
+        </a>
+    </div>
+<?php } else { ?>
+
+<?php } ?>
 
 
 <div class="tabs">
@@ -32,7 +51,7 @@ if(@$celulas == 'ocultar') {
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
-            ?>
+        ?>
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
@@ -126,83 +145,91 @@ if(@$celulas == 'ocultar') {
                             $nome_lider4 = 'Nenhum!';
                         }
 
+                        echo $id_pessoa;
 
+                    ?>
 
-                        ?>
-                        <tr class="column-body">
-                            <td data-label="Nome" class="td-table">
-                                <span class="">
-                                    <?php echo $nome ?>
-                                </span>
-                            </td>
-                            <td data-label="Dia" class="td-table column-hidden">
-                                <?php echo $dias ?>
-                            </td>
-                            <td data-label="Hora" class="td-table">
-                                <?php echo $hora ?>
-                            </td>
-                            <td data-label="Pastor" class="td-table">
-                                <?php echo $nome_pastor ?>
-                            </td>
-                            <td data-label="Coordenador" class="td-table">
-                                <?php echo $nome_coordenador ?>
-                            </td>
-                            <td data-label="Líder 1" class="td-table">
-                                <?php echo $nome_lider1 ?>
-                            </td>
-                            <td data-label="Líder 2" class="td-table">
-                                <?php echo $nome_lider2 ?>
-                            </td>
-                            <td class="td-table" id="radius-column-action">
-                                <div class="dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Opções
-                                    </a>
+                        <?php if ($id_pessoa == $lider1 || ($nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente' || $nivel_usu == 'pastor')) { ?>
+                            <tr class="column-body">
+                                <td data-label="Nome" class="td-table">
+                                    <span class="">
+                                        <?php echo $nome ?>
+                                    </span>
+                                </td>
+                                <td data-label="Dia" class="td-table column-hidden">
+                                    <?php echo $dias ?>
+                                </td>
+                                <td data-label="Hora" class="td-table">
+                                    <?php echo $hora ?>
+                                </td>
+                                <td data-label="Pastor" class="td-table">
+                                    <?php echo $nome_pastor ?>
+                                </td>
+                                <td data-label="Coordenador" class="td-table">
+                                    <?php echo $nome_coordenador ?>
+                                </td>
+                                <td data-label="Líder 1" class="td-table">
+                                    <?php echo $nome_lider1 ?>
+                                </td>
+                                <td data-label="Líder 2" class="td-table">
+                                    <?php echo $nome_lider2 ?>
+                                </td>
+                                <td class="td-table" id="radius-column-action">
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Opções
+                                        </a>
 
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
-                                            '<?php echo $dias ?>', '<?php echo $hora ?>', '<?php echo $local ?>', '<?php echo $pastor ?>', 
-                                            '<?php echo $coordenador ?>', '<?php echo $lider1 ?>', '<?php echo $lider2 ?>',
-                                            '<?php echo $lider3 ?>', '<?php echo $lider4 ?>')">
-                                                <i class="bi bi-pencil-square icons_actions"></i>
-                                                Editar</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
-                                                <i class="bi bi-trash3 icons_actions"></i>
-                                                Excluir
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="dados('<?php echo $nome ?>', '<?php echo $dias ?>',
-                                            '<?php echo $hora ?>', '<?php echo $local ?>', '<?php echo $nome_pastor ?>',
-                                            '<?php echo $nome_coordenador ?>', '<?php echo $nome_lider1 ?>', '<?php echo $nome_lider2 ?>', 
-                                            '<?php echo $nome_lider3 ?>', '<?php echo $nome_lider4 ?>', '<?php echo $obs ?>', 
-                                            '<?php echo $membros_celula ?>')">
-                                                <i class="bi bi-info-circle icons_actions"></i>
-                                                Ver Dados</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item <?php echo $classe_obs ?>" href="#" onclick="obs('<?php echo $id ?>', 
-                                            '<?php echo $nome ?>', '<?php echo $obs ?>')">
-                                                <i class="bi bi-chat-right-text icons_actions"></i>
-                                                Observações</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="addMembros('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $igreja ?>')">
-                                                <i class="bi bi-plus-square icons_actions"></i>
-                                                Adicionar Membros
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
+                                                '<?php echo $dias ?>', '<?php echo $hora ?>', '<?php echo $local ?>', '<?php echo $pastor ?>', 
+                                                '<?php echo $coordenador ?>', '<?php echo $lider1 ?>', '<?php echo $lider2 ?>',
+                                                '<?php echo $lider3 ?>', '<?php echo $lider4 ?>')">
+                                                    <i class="bi bi-pencil-square icons_actions"></i>
+                                                    Editar</a>
+                                            </li>
+                                            <?php if ($id_pessoa == $lider1) { ?>
+
+                                            <?php } elseif (
+                                                $nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente'
+                                                || $nivel_usu == 'pastor'
+                                            ) { ?>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
+                                                        <i class="bi bi-trash3 icons_actions"></i>
+                                                        Excluir
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $dias ?>',
+                                                '<?php echo $hora ?>', '<?php echo $local ?>', '<?php echo $nome_pastor ?>',
+                                                '<?php echo $nome_coordenador ?>', '<?php echo $nome_lider1 ?>', '<?php echo $nome_lider2 ?>', 
+                                                '<?php echo $nome_lider3 ?>', '<?php echo $nome_lider4 ?>', '<?php echo $obs ?>', 
+                                                '<?php echo $membros_celula ?>')">
+                                                    <i class="bi bi-info-circle icons_actions"></i>
+                                                    Ver Dados</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item <?php echo $classe_obs ?>" href="#" onclick="obs('<?php echo $id ?>', 
+                                                '<?php echo $nome ?>', '<?php echo $obs ?>')">
+                                                    <i class="bi bi-chat-right-text icons_actions"></i>
+                                                    Observações</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="addMembros('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $igreja ?>')">
+                                                    <i class="bi bi-plus-square icons_actions"></i>
+                                                    Adicionar Membros
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } else { ?>
+
+                        <?php } ?>
                     <?php } ?>
                 </tbody>
             </table>
@@ -251,7 +278,14 @@ if(@$celulas == 'ocultar') {
                                     <input type="text" name="local" id="local" placeholder="Local da Célula">
                                 </div>
 
-                                <div class="input-field flex_int_7">
+                                <?php if ($id_pessoa == $lider1) { ?>
+                                    <input type="hidden" name="pastor" id="pastor">
+                                    <input type="hidden" name="coordenador" id="coordenador">
+                                    <input type="hidden" name="lider1" id="lider1">
+                                <?php } elseif ($nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente' 
+                                    || $nivel_usu == 'pastor') { ?>
+
+                                <div class="input-field" id="hidden_select1">
                                     <label>Pastor</label>
                                     <select class="sel21" id="pastor" name="pastor">
                                         <option value="0">Selecione um Pastor</option>
@@ -266,22 +300,22 @@ if(@$celulas == 'ocultar') {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                                ?>
+                                        ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </select>
                                 </div>
 
-                                <div class="input-field flex_int_7">
+                                <div class="input-field" id="hidden_select2">
                                     <label>Coordenador</label>
                                     <select class="sel2" id="coordenador" name="coordenador">
                                         <option value="0">Selecione um Membro</option>
                                         <?php
                                         $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
-                                            and ativo = 'Sim' order by nome asc");
+                                        and ativo = 'Sim' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                         $total_reg = count($res);
                                         if ($total_reg > 0) {
@@ -291,22 +325,22 @@ if(@$celulas == 'ocultar') {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                                ?>
+                                        ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </select>
                                 </div>
 
-                                <div class="input-field flex_int_7">
+                                <div class="input-field" id="hidden_select3">
                                     <label>Líder</label>
                                     <select class="sel2" id="lider1" name="lider1">
                                         <option value="0">Selecione um Membro</option>
                                         <?php
                                         $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
-                                            and ativo = 'Sim' order by nome asc");
+                                        and ativo = 'Sim' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                         $total_reg = count($res);
                                         if ($total_reg > 0) {
@@ -316,16 +350,18 @@ if(@$celulas == 'ocultar') {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                                ?>
+                                        ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </select>
                                 </div>
 
-                                <div class="input-field flex_int_7">
+                                <?php } ?>
+
+                                <div class="input-field">
                                     <label>Líder em Treinamento 1</label>
                                     <select class="sel2" id="lider2" name="lider2">
                                         <option value="0">Selecione um Membro</option>
@@ -341,16 +377,16 @@ if(@$celulas == 'ocultar') {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                                ?>
+                                        ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </select>
                                 </div>
 
-                                <div class="input-field flex_int_7">
+                                <div class="input-field">
                                     <label>Líder em Treinamento 2</label>
                                     <select class="sel2" id="lider3" name="lider3">
                                         <option value="0">Selecione um Membro</option>
@@ -366,16 +402,16 @@ if(@$celulas == 'ocultar') {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                                ?>
+                                        ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </select>
                                 </div>
 
-                                <div class="input-field flex_int_7">
+                                <div class="input-field">
                                     <label>Líder em Treinamento 3</label>
                                     <select class="sel2" id="lider4" name="lider4">
                                         <option value="0">Selecione um Membro</option>
@@ -391,11 +427,11 @@ if(@$celulas == 'ocultar') {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                                ?>
+                                        ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </select>
                                 </div>
@@ -456,8 +492,7 @@ if(@$celulas == 'ocultar') {
                 <div id="mensagem"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-excluir" class="btn-close"
-                            data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-excluir" class="btn-close" data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-remove">
                             Excluir
@@ -565,8 +600,7 @@ if(@$celulas == 'ocultar') {
                 <div id="mensagem"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-obs" class="btn-close"
-                            data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-obs" class="btn-close" data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
                             Salvar
@@ -613,8 +647,7 @@ if(@$celulas == 'ocultar') {
                 <div id="mensagem"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-add" class="btn-close"
-                            data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-add" class="btn-close" data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
                             Adicionar
@@ -632,7 +665,7 @@ if(@$celulas == 'ocultar') {
 
 
 <script type="text/javascript">
-    var pag = "<?= $pagina ?>" 
+    var pag = "<?= $pagina ?>"
 </script>
 <script src="../js/ajax.js"></script>
 
@@ -743,7 +776,7 @@ if(@$celulas == 'ocultar') {
     }
 
 
-    $("#form-add").submit(function () {
+    $("#form-add").submit(function() {
         event.preventDefault();
         var formData = new FormData(this);
 
@@ -755,7 +788,7 @@ if(@$celulas == 'ocultar') {
             type: 'POST',
             data: formData,
 
-            success: function (mensagem) {
+            success: function(mensagem) {
                 $('#mensagem-add').text('');
                 $('#mensagem-add').removeClass()
                 if (mensagem.trim() == "Adicionado com Sucesso") {
@@ -786,10 +819,13 @@ if(@$celulas == 'ocultar') {
         $.ajax({
             url: pag + "/listar-membros.php",
             method: 'POST',
-            data: { celula, igreja },
+            data: {
+                celula,
+                igreja
+            },
             dataType: "text",
 
-            success: function (result) {
+            success: function(result) {
                 $("#listar-membros").html(result);
             },
 
@@ -803,10 +839,13 @@ if(@$celulas == 'ocultar') {
         $.ajax({
             url: pag + "/listar-membros-add.php",
             method: 'POST',
-            data: { celula, igreja },
+            data: {
+                celula,
+                igreja
+            },
             dataType: "text",
 
-            success: function (result) {
+            success: function(result) {
                 $("#listar-membros-add").html(result);
             },
 
@@ -824,10 +863,12 @@ if(@$celulas == 'ocultar') {
         $.ajax({
             url: pag + "/excluir-membro.php",
             method: 'POST',
-            data: {id},
+            data: {
+                id
+            },
             dataType: "text",
 
-            success: function (result) {
+            success: function(result) {
                 listarMembrosCB(celula, igreja);
                 listarMembrosAdd(celula, igreja);
             },
@@ -837,18 +878,52 @@ if(@$celulas == 'ocultar') {
     }
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.sel2').select2({
             placeholder: 'Selecione um Líder',
             dropdownParent: $('#modalForm'),
         });
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.sel21').select2({
             placeholder: 'Selecione um Pastor',
             dropdownParent: $('#modalForm'),
         });
     });
-
 </script>
+
+
+<!-- <script type="text/javascript">
+    var idPessoa = "<?= $id_pessoa ?>";
+    var lider = "<?= $lider1 ?>";
+    var nivelUsu = "<?= $nivel_usu ?>";
+
+    var hiddenSelect1 = document.getElementById('hidden_select1');
+    var hiddenSelect2 = document.getElementById('hidden_select2');
+    var hiddenSelect3 = document.getElementById('hidden_select3');
+
+    if (idPessoa == lider) {
+        hiddenSelect1.style.display = "none";
+    } else if (nivelUsu == 'secretario' || nivelUsu == 'Pastor Presidente' || nivelUsu == 'pastor') {
+        hiddenSelect1.style.display = "block";
+    } else {
+        hiddenSelect1.style.display = "none";
+    }
+
+    if (idPessoa == lider) {
+        hiddenSelect2.style.display = "none";
+    } else if (nivelUsu == 'secretario' || nivelUsu == 'Pastor Presidente' || nivelUsu == 'pastor') {
+        hiddenSelect2.style.display = "block";
+    } else {
+        hiddenSelect2.style.display = "none";
+    }
+
+    if (idPessoa == lider) {
+        hiddenSelect3.style.display = "none";
+    } else if (nivelUsu == 'secretario' || nivelUsu == 'Pastor Presidente' || nivelUsu == 'pastor') {
+        hiddenSelect3.style.display = "block";
+    } else {
+        hiddenSelect3.style.display = "none";
+    }       
+</script> -->
