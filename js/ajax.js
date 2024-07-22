@@ -190,6 +190,36 @@ function carregarImg() {
 
 
 
+/* function carregarImgLicao() {
+    var targetLicao = document.getElementById('target_l');
+    var fileLicao = document.querySelector("input[type=file]").files[0];
+    var arquivoLicao = fileLicao['name'];
+    resultadoLicao = arquivoLicao.split(".", 2);
+
+    //console.log(resultado[1]);
+    if(resultadoLicao[1] === 'pdf'){
+        $('#target_l').attr('src', "../img/pdf.png");
+        return;
+    }
+
+    var readerLicao = new FileReader();
+
+    readerLicao.onloadend = function () {
+        targetLicao.src = readerLicao.result;
+    };
+
+    if (fileLicao) {
+        readerLicao.readAsDataURL(fileLicao);
+
+    } else {
+        readerLicao.src = "";
+    }
+} */
+
+
+
+
+
 
 function carregarImg2() {
     var target = document.getElementById('target-usu');
