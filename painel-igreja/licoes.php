@@ -4,14 +4,14 @@
 
 <?php
 setlocale(LC_TIME, "portuguese");
-require_once("../conexao.php");
+require_once ("../conexao.php");
 $pagina = 'licoes';
 
-if(@$documentos == 'ocultar') {
+if (@$licoes == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });
-          </script>"; 
+          </script>";
     /* echo "<script>window.location='index.php'</script>"; */
     exit();
 }
@@ -33,20 +33,20 @@ if(@$documentos == 'ocultar') {
         $total_reg = count($res);
         if ($total_reg > 0) {
             ?>
-        <table class="content-table" id="example">
-            <thead class="thead-tabs">
-                <tr class="column-table">
-                    <th class="th-table">Nome</th>
-                    <th class="th-table column-hidden">Descrição</th>
-                    <th class="th-table column-hidden">Imagem</th>
-                    <th class="th-table">Arquivo</th>
-                    <th class="th-table">Data</th>
-                    <th class="th-table column-hidden">Secretário / Pastor</th>
-                    <th class="th-table last_table">Ações</th>
-                </tr>
-            </thead>
-            <tbody class="body-table">
-                <?php
+            <table class="content-table" id="example">
+                <thead class="thead-tabs">
+                    <tr class="column-table">
+                        <th class="th-table">Nome</th>
+                        <th class="th-table column-hidden">Descrição</th>
+                        <th class="th-table column-hidden">Imagem</th>
+                        <th class="th-table">Arquivo</th>
+                        <th class="th-table">Data</th>
+                        <th class="th-table column-hidden">Secretário / Pastor</th>
+                        <th class="th-table last_table">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="body-table">
+                    <?php
                     for ($i = 0; $i < $total_reg; $i++) {
                         foreach ($res[$i] as $key => $value) {
                         }
@@ -81,75 +81,75 @@ if(@$documentos == 'ocultar') {
                             $usuario_cad = '';
                         }
 
-                        
-                        if($descricao == '') {
+
+                        if ($descricao == '') {
                             $descricao = 'Nenhuma!';
                         }
 
                         $dataF = implode('/', array_reverse(explode('-', $data)));
                         ?>
-                <tr class="column-body <?php echo $classe_linha ?>">
-                    <td data-label="Nome" class="td-table" id="radius-column-foto">
-                        <?php echo $nome ?>
-                    </td>
-                    <td data-label="Descrição" class="td-table column-hidden">
-                        <?php echo $descricao ?>
-                    </td>
-                    <td data-label="Imagem" class="td-table">
-                        <a href="../img/licoes/<?php echo $imagem ?>" target="_blank">
-                            <img class="profile_archives" src="../img/licoes/<?php echo $imagem ?>" alt="Arquivo"
-                                title="<?php echo $imagem ?>">
-                        </a>
-                    </td>
-                    <td data-label="Arquivo" class="td-table">
-                        <a href="../img/licoes/<?php echo $arquivo ?>" target="_blank">
-                            <img class="profile_archives" src="../img/licoes/<?php echo $tumb_arquivo ?>" alt="Arquivo"
-                                title="<?php echo $arquivo ?>">
-                        </a>
-                    </td>
-                    <td data-label="Data Cadastro" class="td-table">
-                        <?php echo strftime("%C, %B de %Y", strtotime($dataF)) ?>
-                    </td>
-                    <td data-label="Usuário Cadastrou" class="td-table">
-                        <?php echo $usuario_cad ?>
-                    </td>
-                    <td class="td-table" id="radius-column-action">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Opções
-                            </a>
+                        <tr class="column-body">
+                            <td data-label="Título" class="td-table" id="radius-column-foto">
+                                <?php echo $nome ?>
+                            </td>
+                            <td data-label="Descrição" class="td-table column-hidden">
+                                <?php echo $descricao ?>
+                            </td>
+                            <td data-label="Imagem" class="td-table">
+                                <a href="../img/licoes/<?php echo $imagem ?>" target="_blank">
+                                    <img class="profile_archives" src="../img/licoes/<?php echo $imagem ?>" alt="Arquivo"
+                                        title="<?php echo $imagem ?>">
+                                </a>
+                            </td>
+                            <td data-label="Arquivo" class="td-table">
+                                <a href="../img/licoes/<?php echo $arquivo ?>" target="_blank">
+                                    <img class="profile_archives" src="../img/licoes/<?php echo $tumb_arquivo ?>" alt="Arquivo"
+                                        title="<?php echo $arquivo ?>">
+                                </a>
+                            </td>
+                            <td data-label="Data Cadastro" class="td-table">
+                                <?php echo strftime("%C, %B de %Y", strtotime($dataF)) ?>
+                            </td>
+                            <td data-label="Usuário Cadastrou" class="td-table">
+                                <?php echo $usuario_cad ?>
+                            </td>
+                            <td class="td-table" id="radius-column-action">
+                                <div class="dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Opções
+                                    </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
                                             '<?php echo $nome ?>', '<?php echo $descricao ?>', '<?php echo $imagem ?>',
                                             '<?php echo $tumb_arquivo ?>', '<?php echo $data ?>')">
-                                        <i class="bi bi-pencil-square icons_actions"></i>
-                                        Editar</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#"
-                                        onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
-                                        <i class="bi bi-trash3 icons_actions"></i>
-                                        Excluir
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#"
-                                        onclick="dados('<?php echo $nome ?>', 
+                                                <i class="bi bi-pencil-square icons_actions"></i>
+                                                Editar</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#"
+                                                onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
+                                                <i class="bi bi-trash3 icons_actions"></i>
+                                                Excluir
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#"
+                                                onclick="dados('<?php echo $nome ?>', 
                                             '<?php echo $descricao ?>', '<?php echo $imagem ?>',
                                             '<?php echo $tumb_arquivo ?>', '<?php echo $dataF ?>', '<?php echo $usuario_cad ?>')">
-                                        <i class="bi bi-info-circle icons_actions"></i>
-                                        Ver Dados</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                                                <i class="bi bi-info-circle icons_actions"></i>
+                                                Ver Dados</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         <?php } else {
             echo 'Não existem dados cadastrados!';
         }
@@ -336,7 +336,7 @@ if(@$documentos == 'ocultar') {
 
 
 <script type="text/javascript">
-var pag = "<?= $pagina ?>"
+    var pag = "<?= $pagina ?>"
 </script>
 <script src="../js/ajax.js"></script>
 
@@ -344,105 +344,105 @@ var pag = "<?= $pagina ?>"
 
 
 <script type="text/javascript">
-function editar(id, nome, descricao, imagem, arquivo, data) {
-    $('#id').val(id);
-    $('#descricao').val(descricao);
-    $('#nome').val(nome);
-    $('#data').val(data);
-    $('#targetlicao').attr('src', '../img/licoes/' + imagem);
-    $('#target').attr('src', '../img/licoes/' + arquivo);
+    function editar(id, nome, descricao, imagem, arquivo, data) {
+        $('#id').val(id);
+        $('#descricao').val(descricao);
+        $('#nome').val(nome);
+        $('#data').val(data);
+        $('#targetlicao').attr('src', '../img/licoes/' + imagem);
+        $('#target').attr('src', '../img/licoes/' + arquivo);
 
-    $('#tituloModal').text('Editar Registro');
-    var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
-    myModal.show();
-    $('#mensagem').text('');
-}
-
-
-function dados(nome, descricao, imagem, arquivo, data, usuario) {
-
-    $('#descricao-dados').text(descricao);
-    $('#nome-dados').text(nome);
-    $('#data-dados').text(data);
-    $('#usuario-dados').text(usuario);
-    $('#foto-dados').attr('src', '../img/licoes/' + arquivo);
-    $('#foto-licao').attr('src', '../img/licoes/' + imagem);
+        $('#tituloModal').text('Editar Registro');
+        var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
+        myModal.show();
+        $('#mensagem').text('');
+    }
 
 
-    var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
-    myModal.show();
-    $('#mensagem').text('');
-}
+    function dados(nome, descricao, imagem, arquivo, data, usuario) {
+
+        $('#descricao-dados').text(descricao);
+        $('#nome-dados').text(nome);
+        $('#data-dados').text(data);
+        $('#usuario-dados').text(usuario);
+        $('#foto-dados').attr('src', '../img/licoes/' + arquivo);
+        $('#foto-licao').attr('src', '../img/licoes/' + imagem);
 
 
-function limpar() {
-    var data_at = "<?= $data_atual ?>"
+        var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
+        myModal.show();
+        $('#mensagem').text('');
+    }
 
-    console.log(data_at)
 
-    $('#id').val('');
-    $('#descricao').val('');
-    $('#nome').val('');
+    function limpar() {
+        var data_at = "<?= $data_atual ?>"
 
-    $('#targetlicao').attr('src', '../img/licoes/sem-foto.jpg');
-    $('#target').attr('src', '../img/licoes/sem-foto.jpg');
-}
+        console.log(data_at)
+
+        $('#id').val('');
+        $('#descricao').val('');
+        $('#nome').val('');
+
+        $('#targetlicao').attr('src', '../img/licoes/sem-foto.jpg');
+        $('#target').attr('src', '../img/licoes/sem-foto.jpg');
+    }
 </script>
 
 
 <script type="text/javascript">
 
-function carregarImgLicao() {
-    var target = document.getElementById('targetlicao');
-    var file = document.querySelector("#imagemlicao").files[0];
+    function carregarImgLicao() {
+        var target = document.getElementById('targetlicao');
+        var file = document.querySelector("#imagemlicao").files[0];
 
-    var reader = new FileReader();
+        var reader = new FileReader();
 
-    reader.onloadend = function() {
-        target.src = reader.result;
-    };
+        reader.onloadend = function () {
+            target.src = reader.result;
+        };
 
-    if (file) {
-        reader.readAsDataURL(file);
+        if (file) {
+            reader.readAsDataURL(file);
 
-    } else {
-        target.src = "";
-    }
-}
-
-function carregarImgArquivos() {
-    var target = document.getElementById('target');
-    var file = document.querySelector("#imagem").files[0];
-    var arquivo = file['name'];
-    resultado = arquivo.split(".", 2);
-
-    //console.log(resultado[1]);
-    if (resultado[1] === 'pdf') {
-        $('#target').attr('src', "../img/pdf.png");
-        return;
+        } else {
+            target.src = "";
+        }
     }
 
-    if (resultado[1] === 'rar' || resultado[1] === 'zip') {
-        $('#target').attr('src', "../img/rar.png");
-        return;
+    function carregarImgArquivos() {
+        var target = document.getElementById('target');
+        var file = document.querySelector("#imagem").files[0];
+        var arquivo = file['name'];
+        resultado = arquivo.split(".", 2);
+
+        //console.log(resultado[1]);
+        if (resultado[1] === 'pdf') {
+            $('#target').attr('src', "../img/pdf.png");
+            return;
+        }
+
+        if (resultado[1] === 'rar' || resultado[1] === 'zip') {
+            $('#target').attr('src', "../img/rar.png");
+            return;
+        }
+
+        if (resultado[1] === 'doc' || resultado[1] === 'docx') {
+            $('#target').attr('src', "../img/word.png");
+            return;
+        }
+
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+        } else {
+            target.src = "";
+        }
     }
-
-    if (resultado[1] === 'doc' || resultado[1] === 'docx') {
-        $('#target').attr('src', "../img/word.png");
-        return;
-    }
-
-    var reader = new FileReader();
-
-    reader.onloadend = function() {
-        target.src = reader.result;
-    };
-
-    if (file) {
-        reader.readAsDataURL(file);
-
-    } else {
-        target.src = "";
-    }
-}
 </script>

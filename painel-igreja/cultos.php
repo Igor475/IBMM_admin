@@ -6,7 +6,7 @@
 require_once ("../conexao.php");
 $pagina = 'cultos';
 
-if (@$tarefas == 'ocultar') {
+if (@$cultos == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });

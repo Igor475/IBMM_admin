@@ -6,7 +6,7 @@
 require_once("../conexao.php");
 $pagina = 'eventos';
 
-if (@$patrimonio == 'ocultar') {
+if (@$eventos == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });

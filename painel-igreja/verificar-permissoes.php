@@ -22,6 +22,11 @@ $fornecedores = 'ocultar';
 
 //grupo cadastros
 $tarefas = 'ocultar';
+$dadosIgreja = 'ocultar';
+$cultos = 'ocultar';
+$alertas = 'ocultar';
+$eventos = 'ocultar';
+$licoes = 'ocultar';
 
 
 //grupo financeiros
@@ -127,6 +132,26 @@ if($total_reg > 0){
         
         if($chave == 'tarefas'){
 			$tarefas = '';
+		}
+
+		if($chave == 'igrejas'){
+			$dadosIgreja = '';
+		}
+
+		if($chave == 'cultos'){
+			$cultos = '';
+		}
+
+		if($chave == 'alertas'){
+			$alertas = '';
+		}
+
+		if($chave == 'eventos'){
+			$eventos = '';
+		}
+
+		if($chave == 'licoes'){
+			$licoes = '';
 		}
 
 
@@ -255,7 +280,8 @@ if($usuarios == 'ocultar' and $membros == 'ocultar' and $pastores == 'ocultar'  
 
 
 
-if($tarefas == 'ocultar'){
+if($tarefas == 'ocultar' and $dadosIgreja == 'ocultar' and $cultos == 'ocultar' and
+	$alertas == 'ocultar' and $eventos == 'ocultar' and $licoes == 'ocultar'){
 	$menu_cadastros = 'ocultar';
 }else{
 	$menu_cadastros = '';
@@ -291,4 +317,4 @@ if($RelMembros == 'ocultar' and $RelPatrimonio == 'ocultar' and $rel_financeiro 
 
 
 
- ?>
+?>
