@@ -3,6 +3,7 @@
 
 
 <?php
+setlocale(LC_TIME, "portuguese");
 require_once("../conexao.php");
 $pagina = 'licoes';
 
@@ -107,7 +108,7 @@ if(@$documentos == 'ocultar') {
                         </a>
                     </td>
                     <td data-label="Data Cadastro" class="td-table">
-                        <?php echo $dataF ?>
+                        <?php echo strftime("%C, %B de %Y", strtotime($dataF)) ?>
                     </td>
                     <td data-label="Usuário Cadastrou" class="td-table">
                         <?php echo $usuario_cad ?>

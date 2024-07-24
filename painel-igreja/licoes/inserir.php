@@ -1,5 +1,5 @@
 <?php
-require_once('../../conexao.php');
+require_once ('../../conexao.php');
 $pagina = 'licoes';
 @session_start();
 $id_usuario = $_SESSION['id_usuario'];
@@ -23,8 +23,10 @@ if (@$_FILES['imagem']['name'] == "") {
 
 $imagem_temp = @$_FILES['imagem']['tmp_name'];
 $ext = pathinfo($imagem, PATHINFO_EXTENSION);
-if ($ext == 'png' or $ext == 'jpg' or $ext == 'JPG' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'pdf'
-    or $ext == 'rar' or $ext == 'zip' or $ext == 'docx' or $ext == 'doc') {
+if (
+    $ext == 'png' or $ext == 'jpg' or $ext == 'JPG' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'pdf'
+    or $ext == 'rar' or $ext == 'zip' or $ext == 'docx' or $ext == 'doc'
+) {
     move_uploaded_file($imagem_temp, $caminho);
 } else {
     echo 'Extensão de Imagem não permitida!';
@@ -62,35 +64,34 @@ if ($id == "" || $id == 0) {
         usuario = '$id_usuario', arquivo = '$imagem', imagem = '$imagem_licao', igreja = '$igreja'");
 
 } else {
-    if ($imagem == "sem-foto.jpg") {
-        $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, descricao = :descricao, data = '$data',
-        usuario = '$id_usuario' WHERE id = '$id'");
-    } else {
+    if ($imagem != "sem-foto.jpg") {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        $foto = $res[0]['arquivo'];
-        if($foto != "sem-foto.jpg"){
-			@unlink('../../img/licoes/'.$foto);	
-		}
+        $foto_arquivo = $res[0]['arquivo'];
+        if ($foto_arquivo != "sem-foto.jpg") {
+            @unlink('../../img/licoes/' . $foto_arquivo);
+        }
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, descricao = :descricao, data = '$data',
-        usuario = '$id_usuario', arquivo = '$imagem' WHERE id = '$id'");
-    }
+            usuario = '$id_usuario', arquivo = '$imagem' WHERE id = '$id'");
 
-    if($imagem_licao == "sem-foto.jpg") {
-        $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, descricao = :descricao, data = '$data',
-        usuario = '$id_usuario', arquivo = '$imagem' WHERE id = '$id'");
-    } else {
+    } elseif($imagem_licao != "sem-foto.jpg") {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        $foto = $res[0]['imagem'];
-        if($foto != "sem-foto.jpg"){
-			@unlink('../../img/licoes/'.$foto);	
-		}
+        $foto_imagem = $res[0]['imagem'];
+        if ($foto_imagem != "sem-foto.jpg") {
+            @unlink('../../img/licoes/' . $foto_imagem);
+        }
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, descricao = :descricao, data = '$data',
-        usuario = '$id_usuario', imagem = '$imagem_licao' WHERE id = '$id'");
+            usuario = '$id_usuario', imagem = '$imagem_licao' WHERE id = '$id'");
+
+    } else {
+        $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, descricao = :descricao, data = '$data',
+            usuario = '$id_usuario' WHERE id = '$id'");
+        
     }
+
 
 }
 
