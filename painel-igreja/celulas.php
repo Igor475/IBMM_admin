@@ -145,8 +145,6 @@ if ($id_pessoa == $lider1) {
                             $nome_lider4 = 'Nenhum!';
                         }
 
-                        echo $id_pessoa;
-
                     ?>
 
                         <?php if ($id_pessoa == $lider1 || ($nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente' || $nivel_usu == 'pastor')) { ?>

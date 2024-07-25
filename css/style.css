@@ -928,6 +928,92 @@ body::-webkit-scrollbar-thumb {
     gap: 10px;
 }
 
+.flex_cards_initial {
+    display: flex;
+    align-items: stretch;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.link_cards_initial {
+    padding: 20px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 250px;
+    max-width: 300px;
+}
+
+.link_cards_initial:hover {
+    background: var(--fundo-navbar);
+    transition: .3s ease-in;
+}
+
+.icon_circle {
+    background-color: var(--verde-musgo);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons_cards_initial {
+    color: var(--fonte-menu-dropdown);
+    width: 25px;
+}
+
+.info_cards_initial {
+    text-align: center;
+}
+
+.title_initial {
+    font-size: 16px;
+    color: var(--black-sans);
+    margin-bottom: 10px;
+}
+
+.count_lessons {
+    color: var(--verde-border);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.txt_wellcome {
+    font-size: 14px;
+    color: var(--verde);
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    border-top: 1px solid var(--border-table);
+    border-right: 1px solid var(--border-table);
+    border-bottom: 1px solid var(--border-table);
+    display: inline-block;
+    font-weight: 500;
+    position: relative;
+}
+
+.txt_wellcome::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 37px;
+    background: linear-gradient(35deg, #42a678, #ccc245);
+}
+
+.txt_title_church {
+    color: linear-gradient(35deg, #42a678, #ccc245);
+}
 
 /*=============================== MAIN CONTAINER ===============================*/
 
@@ -1655,6 +1741,10 @@ td.td-table#radius-column-action:last-child {
 
     .info-church {
         flex: .8;
+    }
+
+    .link_cards_initial {
+        max-width: 100%;
     }
     
 }
