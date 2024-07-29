@@ -125,11 +125,11 @@ $totalDoacoes = number_format($totalDoacoes, 2, ',', '.');
 $saldoMes = number_format($saldoMes, 2, ',', '.');
 
 
-if(@$home == 'ocultar') {
+if (@$home == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });
-          </script>"; 
+          </script>";
     /* echo "<script>window.location='index.php'</script>"; */
     exit();
 }
@@ -140,195 +140,283 @@ if(@$home == 'ocultar') {
     <h1 class="title">
         <?php echo $nome_igreja ?>
     </h1>
-    <div class="area-money">
-        Saldo do Mês: <span class="<?php echo $classeSaldo ?>">R$
-            <?php echo $saldoMes ?>
-        </span>
-    </div>
+    <?php if (@$movimentacoes == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <div class="area-money">
+            Saldo do Mês: <span class="<?php echo $classeSaldo ?>">R$
+                <?php echo $saldoMes ?>
+            </span>
+        </div>
+    <?php } ?>
 </div>
 <div class="info-data">
-    <a href="index.php?pag=dizimos" class="card">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/donations-svgrepo-com.svg" alt="">
-            </div>
+    <?php if (@$dizimos == 'ocultar') { ?>
 
-            <div class="area-info">
-                <span class="number">
-                    <small>R$</small>
-                    <?php echo @$totalDizimos ?>
-                </span>
-                <p>Dízimos do Mês</p>
-            </div>
-        </div>
-    </a>
-    <a href="index.php?pag=ofertas" class="card">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/donation-svgrepo-com.svg" alt="">
-            </div>
+    <?php } else { ?>
+        <a href="index.php?pag=dizimos" class="card">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/donations-svgrepo-com.svg" alt="">
+                </div>
 
-            <div class="area-info">
-                <span class="number">
-                    <small>R$</small>
-                    <?php echo @$totalOfertas ?>
-                </span>
-                <p>Ofertas do Mês</p>
+                <div class="area-info">
+                    <span class="number">
+                        <small>R$</small>
+                        <?php echo @$totalDizimos ?>
+                    </span>
+                    <p>Dízimos do Mês</p>
+                </div>
             </div>
-        </div>
-    </a>
-    <a href="index.php?pag=pagar" class="card">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/loss-svgrepo-com.svg" alt="">
-            </div>
-
-            <div class="area-info">
-                <span class="number text_alert">
-                    <small>R$</small>
-                    <?php echo @$totalGastos ?>
-                </span>
-                <p>Gastos do Mês</p>
-            </div>
-        </div>
-    </a>
-    <a href="index.php?pag=vendas" class="card">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/profits-svgrepo-com.svg" alt="">
-            </div>
-
-            <div class="area-info">
-                <span class="number">
-                    <small>R$</small>
-                    <?php echo @$totalVendas ?>
-                </span>
-                <p>Vendas do Mês</p>
-            </div>
-        </div>
-    </a>
-    <a href="index.php?pag=doacoes" class="card">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/donate-donation-svgrepo-com.svg" alt="">
-            </div>
-
-            <div class="area-info">
-                <span class="number">
-                    <small>R$</small>
-                    <?php echo @$totalDoacoes ?>
-                </span>
-                <p>Doações do Mês</p>
-            </div>
-        </div>
-    </a>
-    <a href="index.php?pag=membros" class="card <?php echo $esc_tesoureiro ?>">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/membro.svg" alt="">
-            </div>
-
-            <div class="area-info">
-                <span class="number">
-                    <?php echo @$membrosCadastrados ?>
-                </span>
-                <p>Total de Membros</p>
-            </div>
-        </div>
-    </a>
-    <a href="index.php?pag=grupos" class="card <?php echo $esc_tesoureiro ?>">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/group-svgrepo-com.svg" alt="">
-            </div>
-
-            <div class="area-info">
-                <span class="number">
-                    <?php echo @$gruposCadastrados ?>
-                </span>
-                <p>Total de Grupos</p>
-            </div>
-        </div>
-    </a>
-    <a href="index.php?pag=celulas" class="card <?php echo $esc_tesoureiro ?>">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/cells-svgrepo-com.svg" alt="">
-            </div>
-
-            <div class="area-info">
-                <span class="number">
-                    <?php echo @$celulasCadastradas ?>
-                </span>
-                <p>Total de Células</p>
-            </div>
-        </div>
-    </a>
-    <a href="index.php?pag=patrimonios" class="card <?php echo $esc_tesoureiro ?>">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/patrimonio.svg" alt="">
-            </div>
-
-            <div class="area-info">
-                <span class="number">
-                    <?php echo @$patCadastrados  ?>
-                </span>
-                <p>Patrimônio / Itens</p>
-            </div>
-        </div>
-    </a>
+        </a>
+    <?php } ?>
 
 
 
-    <a href="index.php?pag=pagar&filtrar=Hoje" class="card <?php echo $esc_pastor ?>">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/invoice-svgrepo-com.svg" alt="">
-            </div>
+    <?php if (@$ofertas == 'ocultar') { ?>
 
-            <div class="area-info">
-                <span class="number">
-                    <?php echo @$pagarHoje ?>
-                </span>
-                <p>Contas para Pagar Hoje</p>
-            </div>
-        </div>
-    </a>
-    <a href="index.php?pag=receber&filtrar=Hoje" class="card <?php echo $esc_pastor ?>">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/conta-para-receber.svg" alt="">
-            </div>
+    <?php } else { ?>
+        <a href="index.php?pag=ofertas" class="card">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/donation-svgrepo-com.svg" alt="">
+                </div>
 
-            <div class="area-info">
-                <span class="number">
-                    <?php echo @$receberHoje ?>
-                </span>
-                <p>Contas à Receber Hoje</p>
+                <div class="area-info">
+                    <span class="number">
+                        <small>R$</small>
+                        <?php echo @$totalOfertas ?>
+                    </span>
+                    <p>Ofertas do Mês</p>
+                </div>
             </div>
-        </div>
-    </a>
-    <a href="index.php?pag=pagar&filtrar=Vencidas" class="card <?php echo $esc_pastor ?>">
-        <div class="head">
-            <div>
-                <img class="icon" src="../img/svg/notification-svgrepo-com.svg" alt="">
-            </div>
+        </a>
+    <?php } ?>
 
-            <div class="area-info">
-                <span class="number text_alert">
-                    <?php echo @$pagarVencidas ?>
-                </span>
-                <p>Contas para Pagar Vencidas</p>
+
+
+
+    <?php if (@$pagar == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=pagar" class="card">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/loss-svgrepo-com.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number text_alert">
+                        <small>R$</small>
+                        <?php echo @$totalGastos ?>
+                    </span>
+                    <p>Gastos do Mês</p>
+                </div>
             </div>
-        </div>
-    </a>
+        </a>
+    <?php } ?>
+
+
+
+    <?php if (@$vendas == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=vendas" class="card">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/profits-svgrepo-com.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number">
+                        <small>R$</small>
+                        <?php echo @$totalVendas ?>
+                    </span>
+                    <p>Vendas do Mês</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+
+
+    <?php if (@$doacoes == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=doacoes" class="card">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/donate-donation-svgrepo-com.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number">
+                        <small>R$</small>
+                        <?php echo @$totalDoacoes ?>
+                    </span>
+                    <p>Doações do Mês</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+
+
+    <?php if (@$membros == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=membros" class="card <?php echo $esc_tesoureiro ?>">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/membro.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number">
+                        <?php echo @$membrosCadastrados ?>
+                    </span>
+                    <p>Total de Membros</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+
+
+    <?php if (@$grupos == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=grupos" class="card <?php echo $esc_tesoureiro ?>">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/group-svgrepo-com.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number">
+                        <?php echo @$gruposCadastrados ?>
+                    </span>
+                    <p>Total de Grupos</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+
+
+    <?php if (@$celulas == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=celulas" class="card <?php echo $esc_tesoureiro ?>">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/cells-svgrepo-com.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number">
+                        <?php echo @$celulasCadastradas ?>
+                    </span>
+                    <p>Total de Células</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+
+
+    <?php if (@$patrimonio == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=patrimonios" class="card <?php echo $esc_tesoureiro ?>">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/patrimonio.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number">
+                        <?php echo @$patCadastrados ?>
+                    </span>
+                    <p>Patrimônio / Itens</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+
+
+
+    <?php if (@$pagar == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=pagar&filtrar=Hoje" class="card <?php echo $esc_pastor ?>">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/invoice-svgrepo-com.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number">
+                        <?php echo @$pagarHoje ?>
+                    </span>
+                    <p>Contas para Pagar Hoje</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+
+
+
+    <?php if (@$receber == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=receber&filtrar=Hoje" class="card <?php echo $esc_pastor ?>">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/conta-para-receber.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number">
+                        <?php echo @$receberHoje ?>
+                    </span>
+                    <p>Contas à Receber Hoje</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+
+
+    <?php if (@$pagar == 'ocultar') { ?>
+
+    <?php } else { ?>
+        <a href="index.php?pag=pagar&filtrar=Vencidas" class="card <?php echo $esc_pastor ?>">
+            <div class="head">
+                <div>
+                    <img class="icon" src="../img/svg/notification-svgrepo-com.svg" alt="">
+                </div>
+
+                <div class="area-info">
+                    <span class="number text_alert">
+                        <?php echo @$pagarVencidas ?>
+                    </span>
+                    <p>Contas para Pagar Vencidas</p>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
 </div>
+
+<!--
 <div class="area_read_more <?php echo $esc_tesoureiro ?>">
     <a href="index.php?mostrar=<?php echo $mostrar ?>" class="read_more">
-        <i class="bi <?php echo $icone_plus?> icon_load_more"></i>
+        <i class="bi <?php echo $icone_plus ?> icon_load_more"></i>
     </a>
-</div>
+</div> -->
 
 
 <?php
@@ -338,69 +426,74 @@ $res_tar = $query_tar->fetchAll(PDO::FETCH_ASSOC);
 $total_reg_tar = count($res_tar);
 
 ?>
-<h1 class="churchs">AGENDA / TAREFAS (
-    <?php echo $total_reg_tar ?> Tarefas Pendentes)
-</h1>
-<div class="widget-church">
-    <?php
-    $query = $pdo->query("SELECT * FROM tarefas WHERE status = 'Agendada' and igreja = '$id_igreja'
+
+<?php if (@$tarefas == 'ocultar') { ?>
+
+<?php } else { ?>
+    <h1 class="churchs">AGENDA / TAREFAS (
+        <?php echo $total_reg_tar ?> Tarefas Pendentes)
+    </h1>
+    <div class="widget-church">
+        <?php
+        $query = $pdo->query("SELECT * FROM tarefas WHERE status = 'Agendada' and igreja = '$id_igreja'
         order by status asc, data asc, hora asc LIMIT $quantidade_tarefas");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    $total_reg = count($res);
-    if ($total_reg > 0) {
-        for ($i = 0; $i < $total_reg; $i++) {
-            foreach ($res[$i] as $key => $value) {
-            }
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        $total_reg = count($res);
+        if ($total_reg > 0) {
+            for ($i = 0; $i < $total_reg; $i++) {
+                foreach ($res[$i] as $key => $value) {
+                }
 
-            $titulo = $res[$i]['titulo'];
-            $data = $res[$i]['data'];
-            $hora = $res[$i]['hora'];
-            $descricao = $res[$i]['descricao'];
-            $status = $res[$i]['status'];
-            $id = $res[$i]['id'];
+                $titulo = $res[$i]['titulo'];
+                $data = $res[$i]['data'];
+                $hora = $res[$i]['hora'];
+                $descricao = $res[$i]['descricao'];
+                $status = $res[$i]['status'];
+                $id = $res[$i]['id'];
 
-            $dataF = implode('/', array_reverse(explode('-', $data)));
+                $dataF = implode('/', array_reverse(explode('-', $data)));
 
-            if ($data < $data_atual || $hora < $hora_atual) {
-                $classe_border = 'border_task_schedule';
-                $classe_text = 'text_later_task';
-                $classe_date = 'date_later_task';
-                $classe_hour = 'hour_later_task';
-            } else {
-                $classe_border = 'border_task';
-                $classe_text = 'text_task';
-                $classe_date = 'date_task';
-                $classe_hour = 'hour_task';
-            }
+                if ($data < $data_atual || $hora < $hora_atual) {
+                    $classe_border = 'border_task_schedule';
+                    $classe_text = 'text_later_task';
+                    $classe_date = 'date_later_task';
+                    $classe_hour = 'hour_later_task';
+                } else {
+                    $classe_border = 'border_task';
+                    $classe_text = 'text_task';
+                    $classe_date = 'date_task';
+                    $classe_hour = 'hour_task';
+                }
 
-            ?>
-            <a href="index.php?pag=tarefas" class="card-church <?php echo $classe_border ?>">
-                <div class="head-church">
-                    <div class="info-church">
-                        <p class="<?php echo $classe_date ?>">
-                            <?php echo $dataF ?>
-                        </p>
-                        <span class="<?php echo $classe_text ?>">
-                            <?php echo $titulo ?>
-                        </span>
-                        <p class="information-task">
-                            <?php echo $descricao ?>
-                        </p>
-                    </div>
-
-                    <div class="more-info">
-                        <div class="calendar-church">
-                            <img class="icon-tasks" src="../img/svg/tasks-list-svgrepo-com.svg" alt="">
+                ?>
+                <a href="index.php?pag=tarefas" class="card-church <?php echo $classe_border ?>">
+                    <div class="head-church">
+                        <div class="info-church">
+                            <p class="<?php echo $classe_date ?>">
+                                <?php echo $dataF ?>
+                            </p>
+                            <span class="<?php echo $classe_text ?>">
+                                <?php echo $titulo ?>
+                            </span>
+                            <p class="information-task">
+                                <?php echo $descricao ?>
+                            </p>
                         </div>
 
-                        <p class="calendar_hour <?php echo $classe_hour ?>">
-                            <?php echo $hora ?>
-                        </p>
+                        <div class="more-info">
+                            <div class="calendar-church">
+                                <img class="icon-tasks" src="../img/svg/tasks-list-svgrepo-com.svg" alt="">
+                            </div>
+
+                            <p class="calendar_hour <?php echo $classe_hour ?>">
+                                <?php echo $hora ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        <?php }
-    } else {
-        echo 'Não existem tarefas Pendentes!!';
-    } ?>
-</div>
+                </a>
+            <?php }
+        } else {
+            echo 'Não existem tarefas Pendentes!!';
+        } ?>
+    </div>
+<?php } ?>

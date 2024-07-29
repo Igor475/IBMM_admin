@@ -36,6 +36,10 @@ $cabecalho_rel_img = 'Sim'; /* SE ESSA OPÇÃO ESTIVER SIM, O RELATORIO TERA UMA
 CADA IGREJA DEVERA SUBIR A SUA IMAGEM JPG NO CADASTRO DE IGREJAS */
 
 
+$escolher_usuario = 'Sim';
+$usuario_celula = 'Sim';
+
+
 // INSERINDO OS REGISTROS INICIAIS 
 
 //Criando um usuário e um Pastor Presidente padrão
@@ -116,7 +120,8 @@ if($total_reg == 0) {
     $pdo->query("INSERT INTO config SET nome = '$nome_igreja_sistema', email = '$email_super_adm',
         endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema', 
         qtd_tarefas = '$quantidade_tarefas', limitar_tesoureiro = '$limitar_tesoureiro',
-        relatorio_pdf = '$relatorio_pdf', cabecalho_rel_img = '$cabecalho_rel_img' ");
+        relatorio_pdf = '$relatorio_pdf', cabecalho_rel_img = '$cabecalho_rel_img', 
+        escolher_usuario = '$escolher_usuario', usuario_celula = '$usuario_celula' ");
 }
 
 
@@ -131,4 +136,6 @@ $quantidade_tarefas = $res[0]['qtd_tarefas'];
 $limitar_tesoureiro = $res[0]['limitar_tesoureiro'];
 $relatorio_pdf = $res[0]['relatorio_pdf'];
 $cabecalho_rel_img = $res[0]['cabecalho_rel_img'];
+$choose_user = $res[0]['escolher_usuario'];
+$user_cel = $res[0]['usuario_celula'];
 ?>

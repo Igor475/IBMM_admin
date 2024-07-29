@@ -1,7 +1,7 @@
 <?php
 @session_start();
-require_once("verificar.php");
-require_once("../conexao.php");
+require_once ("verificar.php");
+require_once ("../conexao.php");
 
 $id_usuario = @$_SESSION['id_usuario'];
 
@@ -204,7 +204,7 @@ if ($pag == "") {
                         </li>
                         <li>
                             <a href="#" class="font_main_index" data-bs-toggle="modal" data-bs-target="#modalConfig">
-                            <i class='bi bi-gear icon'></i>Configuração Geral</a>
+                                <i class='bi bi-gear icon'></i>Configuração Geral</a>
                         </li>
                         <li>
                             <a href="#" class="font_main_index"><i class='bi bi-database-down icon'></i>Backup Banco</a>
@@ -217,7 +217,7 @@ if ($pag == "") {
 
         <main id="container_painel">
             <?php
-            require_once($pag . '.php');
+            require_once ($pag . '.php');
             ?>
         </main>
     </div>
@@ -272,11 +272,12 @@ if ($pag == "") {
                                     <div class="area_photo">
                                         <div class="area_photo_flex">
                                             <label>Foto</label>
-                                            <input type="file" class="input_file" id="imagem-usu"
-                                            name="imagem" onChange="carregarImg2();">
+                                            <input type="file" class="input_file" id="imagem-usu" name="imagem"
+                                                onChange="carregarImg2();">
                                         </div>
                                         <div class="divImg">
-                                            <img class="photo_file" id="target-usu" src="../img/membros/<?php echo $foto_usu ?>" alt="">
+                                            <img class="photo_file" id="target-usu"
+                                                src="../img/membros/<?php echo $foto_usu ?>" alt="">
                                         </div>
                                     </div>
 
@@ -290,7 +291,8 @@ if ($pag == "") {
                 <div id="msg-usu"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-usu" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-usu" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
                             Editar
@@ -331,8 +333,9 @@ if ($pag == "") {
 
                                     <div class="input-field">
                                         <label>Email Igreja</label>
-                                        <input type="email" name="email_igr" id="email_igr" placeholder="Insira o Email da Igreja"
-                                            value="<?php echo $email_igr ?>" required>
+                                        <input type="email" name="email_igr" id="email_igr"
+                                            placeholder="Insira o Email da Igreja" value="<?php echo $email_igr ?>"
+                                            required>
                                     </div>
 
                                     <div class="input-field field_area_1">
@@ -356,32 +359,86 @@ if ($pag == "") {
                                     <div class="input-field flex_int_5">
                                         <label>Limitar Tesoureiro</label>
                                         <select class="form-select" name="limitar_tesoureiro">
-                                            <option <?php if($limitar_tesoureiro == 'Sim') { ?>
-                                                selected <?php } ?> value="Sim">Sim</option>
-                                            <option <?php if($limitar_tesoureiro == 'Não') { ?>
-                                                selected <?php } ?> value="Não">Não</option>
+                                            <option <?php if ($limitar_tesoureiro == 'Sim') { ?> selected
+                                                <?php } ?>
+                                                value="Sim">Sim
+                                            </option>
+                                            <option <?php if ($limitar_tesoureiro == 'Não') { ?> selected
+                                                <?php } ?>
+                                                value="Não">Não
+                                            </option>
                                         </select>
                                     </div>
 
                                     <div class="input-field flex_int_5">
                                         <label>Relatório PDF</label>
                                         <select class="form-select" name="relatorio_pdf">
-                                            <option <?php if($relatorio_pdf == 'Sim') { ?>
-                                                selected <?php } ?> value="Sim">Sim</option>
-                                            <option <?php if($relatorio_pdf == 'Não') { ?>
-                                                selected <?php } ?> value="Não">Não</option>
+                                            <option <?php if ($relatorio_pdf == 'Sim') { ?> selected
+                                                <?php } ?>
+                                                value="Sim">Sim
+                                            </option>
+                                            <option <?php if ($relatorio_pdf == 'Não') { ?> selected
+                                                <?php } ?>
+                                                value="Não">Não
+                                            </option>
                                         </select>
                                     </div>
 
                                     <div class="input-field flex_int_6">
                                         <label>Cabeçalho Relatório Imagem</label>
                                         <select class="form-select" name="cabecalho_rel_img">
-                                            <option <?php if($cabecalho_rel_img == 'Sim') { ?>
-                                                selected <?php } ?> value="Sim">Sim</option>
-                                            <option <?php if($cabecalho_rel_img == 'Não') { ?>
-                                                selected <?php } ?> value="Não">Não</option>
+                                            <option <?php if ($cabecalho_rel_img == 'Sim') { ?> selected
+                                                <?php } ?>
+                                                value="Sim">Sim
+                                            </option>
+                                            <option <?php if ($cabecalho_rel_img == 'Não') { ?> selected
+                                                <?php } ?>
+                                                value="Não">Não
+                                            </option>
                                         </select>
                                     </div>
+
+                                    <div class="input-field flex_int_6">
+                                        <label>Escolher Usuário (Acessar todas as Células)</label>
+                                        <select class="form-select" name="choose_user">
+                                            <option <?php if ($choose_user == 'Sim') { ?> selected
+                                                <?php } ?>
+                                                value="Sim">Sim
+                                            </option>
+                                            <option <?php if ($choose_user == 'Não') { ?> selected
+                                                <?php } ?>
+                                                value="Não">Não
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <?php if ($choose_user == 'Sim') { ?>
+                                    <div class="input-field flex_int_2" id="hidden_select1">
+                                        <label>Usuário</label>
+                                        <select class="sel25" id="user_cel" name="user_cel">
+                                            <option value="<?php echo $user_cel ?>"><?php echo $name_user_celula ?></option>
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM usuarios order by nome asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id_pessoa'];
+                                                    ?>
+                                            <option value="<?php echo $id_reg ?>">
+                                                <?php echo $nome_reg ?>
+                                            </option>
+                                            <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
+                                    <?php } else { ?>
+
+                                    <?php } ?>
 
                                 </div>
                             </div>
@@ -391,7 +448,8 @@ if ($pag == "") {
                 <div id="msg-config"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-config" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
                             Editar
@@ -494,5 +552,14 @@ if ($pag == "") {
 
         });
 
+    });
+
+
+
+    $(document).ready(function () {
+        $('.sel25').select2({
+            placeholder: 'Selecione um usuário',
+            dropdownParent: $('#modalConfig'),
+        });
     });
 </script>

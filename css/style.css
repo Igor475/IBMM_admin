@@ -646,10 +646,14 @@ body::-webkit-scrollbar-thumb {
 
 #container_painel .info-data {
     margin-top: 36px;
-    margin-bottom: 10px;
-    display: grid;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: stretch;
+    flex-wrap: wrap;
+    gap: 20px;
+    /*display: grid;
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-    grid-gap: 20px;
+    grid-gap: 20px; */
 }
 
 .area_read_more {
@@ -678,6 +682,8 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--fonte-menu-dropdown);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, .07);
     position: relative;
+    flex: 1 1 300px;
+    max-width: 300px;
 }
 
 #container_painel .card .head {
@@ -721,9 +727,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 #container_painel .widget-church {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-    grid-gap: 20px;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 20px;
+    /*grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    grid-gap: 20px;*/
 }
 
 #container_painel .card-church {
@@ -733,6 +742,8 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--fonte-menu-dropdown);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, .07);
     position: relative;
+    flex: 1 1 280px;
+    max-width: 380px;
 }
 
 .bordacardsede {
@@ -1619,6 +1630,12 @@ td.td-table#radius-column-action:last-child {
     }
 
     /*=================== CONTAINER DOS CARDS ====================*/
+}
+
+@media screen and (max-width: 980px) {
+    #container_painel .info-data .card {
+        max-width: 100%;
+    }
 }
 
 

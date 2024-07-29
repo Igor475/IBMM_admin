@@ -147,7 +147,7 @@ if ($id_pessoa == $lider1) {
 
                     ?>
 
-                        <?php if ($id_pessoa == $lider1 || ($nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente' || $nivel_usu == 'pastor')) { ?>
+                        <?php if ($id_pessoa == $lider1 || $nivel_usu == 'Pastor Presidente' || $user_cel == $id_pessoa) { ?>
                             <tr class="column-body">
                                 <td data-label="Nome" class="td-table">
                                     <span class="">

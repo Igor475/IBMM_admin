@@ -55,7 +55,7 @@ echo $id_celula. '</br>';
 
 
 <div class="flex_cards_initial">
-    <?php if($id_pessoa == @$lideranca) { ?>
+    <?php if($id_pessoa == @$lideranca && $celulas != 'ocultar') { ?>
             <a href="http://localhost/IBMM_admin/painel-igreja/index.php?pag=celulas" class="link_cards_initial">
                 <div class="icon_circle">
                     <img src="../img/svg/licoes.svg" class="icons_cards_initial">
