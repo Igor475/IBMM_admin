@@ -5,6 +5,8 @@
 <?php
 require_once("../conexao.php");
 $pagina = 'celulas';
+$id_usuario = @$_SESSION['id_usuario'];
+
 
 
 if (@$celulas == 'ocultar') {
@@ -51,7 +53,7 @@ if ($id_pessoa == $lider1) {
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
-        ?>
+            ?>
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
@@ -97,7 +99,7 @@ if ($id_pessoa == $lider1) {
                             $classe_obs = "";
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM pastores where id = '$pastor'");
+                        $query_con = $pdo->query("SELECT * FROM usuarios where id = '$pastor'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
                             $nome_pastor = $res_con[0]['nome'];
@@ -105,7 +107,7 @@ if ($id_pessoa == $lider1) {
                             $nome_pastor = 'Nenhum!';
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM membros where id = '$coordenador'");
+                        $query_con = $pdo->query("SELECT * FROM usuarios where id = '$coordenador'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
                             $nome_coordenador = $res_con[0]['nome'];
@@ -113,15 +115,16 @@ if ($id_pessoa == $lider1) {
                             $nome_coordenador = 'Nenhum!';
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM membros where id = '$lider1'");
+                        $query_con = $pdo->query("SELECT * FROM usuarios where id = '$lider1'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
+                            $id_user_lider = $res_con[0]['id'];
                             $nome_lider1 = $res_con[0]['nome'];
                         } else {
                             $nome_lider1 = 'Nenhum!';
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM membros where id = '$lider2'");
+                        $query_con = $pdo->query("SELECT * FROM usuarios where id = '$lider2'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
                             $nome_lider2 = $res_con[0]['nome'];
@@ -129,7 +132,7 @@ if ($id_pessoa == $lider1) {
                             $nome_lider2 = 'Nenhum!';
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM membros where id = '$lider3'");
+                        $query_con = $pdo->query("SELECT * FROM usuarios where id = '$lider3'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
                             $nome_lider3 = $res_con[0]['nome'];
@@ -137,7 +140,7 @@ if ($id_pessoa == $lider1) {
                             $nome_lider3 = 'Nenhum!';
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM membros where id = '$lider4'");
+                        $query_con = $pdo->query("SELECT * FROM usuarios where id = '$lider4'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
                             $nome_lider4 = $res_con[0]['nome'];
@@ -145,9 +148,17 @@ if ($id_pessoa == $lider1) {
                             $nome_lider4 = 'Nenhum!';
                         }
 
-                    ?>
 
-                        <?php if ($id_pessoa == $lider1 || $nivel_usu == 'Pastor Presidente' || $user_cel == $id_pessoa) { ?>
+                        $query2 = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' and lider1 = '$id_usuario'");
+                        $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        @$lider_celula = $res2[0]['lider1'];
+
+                        echo $lider_celula;
+                        echo $id_usuario;
+
+                        ?>
+
+                        <?php if ($id_usuario == $lider1 || $nivel_usu == 'Pastor Presidente' || $user_cel == $id_pessoa) { ?>
                             <tr class="column-body">
                                 <td data-label="Nome" class="td-table">
                                     <span class="">
@@ -174,7 +185,8 @@ if ($id_pessoa == $lider1) {
                                 </td>
                                 <td class="td-table" id="radius-column-action">
                                     <div class="dropdown">
-                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                             Opções
                                         </a>
 
@@ -194,7 +206,8 @@ if ($id_pessoa == $lider1) {
                                                 || $nivel_usu == 'pastor'
                                             ) { ?>
                                                 <li>
-                                                    <a class="dropdown-item" href="#" onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
+                                                    <a class="dropdown-item" href="#"
+                                                        onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
                                                         <i class="bi bi-trash3 icons_actions"></i>
                                                         Excluir
                                                     </a>
@@ -216,7 +229,8 @@ if ($id_pessoa == $lider1) {
                                                     Observações</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="#" onclick="addMembros('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $igreja ?>')">
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="addMembros('<?php echo $id ?>', '<?php echo $nome ?>', '<?php echo $igreja ?>')">
                                                     <i class="bi bi-plus-square icons_actions"></i>
                                                     Adicionar Membros
                                                 </a>
@@ -276,96 +290,99 @@ if ($id_pessoa == $lider1) {
                                     <input type="text" name="local" id="local" placeholder="Local da Célula">
                                 </div>
 
-                                <?php if ($id_pessoa == $lider1) { ?>
-                                    <input type="hidden" name="pastor" id="pastor">
-                                    <input type="hidden" name="coordenador" id="coordenador">
-                                    <input type="hidden" name="lider1" id="lider1">
-                                <?php } elseif ($nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente' 
-                                    || $nivel_usu == 'pastor') { ?>
+                                <?php if ($lider_celula == $id_usuario) { ?>
+                                    <input type="hidden" id="pastor" name="pastor">
+                                    <input type="hidden" id="cordenador" name="coordenador">
+                                    <input type="hidden" id="lider1" name="lider1">
+                                <?php } elseif (
+                                    $nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente'
+                                    || $nivel_usu == 'pastor'
+                                ) { ?>
+<div class="input-field" id="hidden_select1">
+                                        <label>Pastor</label>
+                                        <select class="sel21" id="pastor" name="pastor">
+                                            <option value="0">Selecione um Pastor</option>
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM usuarios WHERE igreja = '$id_igreja' order by nome asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
 
-                                <div class="input-field" id="hidden_select1">
-                                    <label>Pastor</label>
-                                    <select class="sel21" id="pastor" name="pastor">
-                                        <option value="0">Selecione um Pastor</option>
-                                        <?php
-                                        $query = $pdo->query("SELECT * FROM pastores WHERE igreja = '$id_igreja' order by nome asc");
-                                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                                        $total_reg = count($res);
-                                        if ($total_reg > 0) {
-                                            for ($i = 0; $i < $total_reg; $i++) {
-                                                foreach ($res[$i] as $key => $value) {
-                                                }
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
 
-                                                $nome_reg = $res[$i]['nome'];
-                                                $id_reg = $res[$i]['id'];
-                                        ?>
-                                                <option value="<?php echo $id_reg ?>">
-                                                    <?php echo $nome_reg ?>
-                                                </option>
-                                        <?php }
-                                        } ?>
-                                    </select>
-                                </div>
+                                    <div class="input-field" id="hidden_select2">
+                                        <label>Coordenador</label>
+                                        <select class="sel2" id="coordenador" name="coordenador">
+                                            <option value="0">Selecione um Membro</option>
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM usuarios WHERE igreja = '$id_igreja' order by nome asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
 
-                                <div class="input-field" id="hidden_select2">
-                                    <label>Coordenador</label>
-                                    <select class="sel2" id="coordenador" name="coordenador">
-                                        <option value="0">Selecione um Membro</option>
-                                        <?php
-                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
-                                        and ativo = 'Sim' order by nome asc");
-                                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                                        $total_reg = count($res);
-                                        if ($total_reg > 0) {
-                                            for ($i = 0; $i < $total_reg; $i++) {
-                                                foreach ($res[$i] as $key => $value) {
-                                                }
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
 
-                                                $nome_reg = $res[$i]['nome'];
-                                                $id_reg = $res[$i]['id'];
-                                        ?>
-                                                <option value="<?php echo $id_reg ?>">
-                                                    <?php echo $nome_reg ?>
-                                                </option>
-                                        <?php }
-                                        } ?>
-                                    </select>
-                                </div>
+                                    <div class="input-field" id="hidden_select3">
+                                        <label>Líder</label>
+                                        <select class="sel2" id="lider1" name="lider1">
+                                            <option value="0">Selecione um Membro</option>
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM usuarios WHERE igreja = '$id_igreja' order by nome asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
 
-                                <div class="input-field" id="hidden_select3">
-                                    <label>Líder</label>
-                                    <select class="sel2" id="lider1" name="lider1">
-                                        <option value="0">Selecione um Membro</option>
-                                        <?php
-                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
-                                        and ativo = 'Sim' order by nome asc");
-                                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                                        $total_reg = count($res);
-                                        if ($total_reg > 0) {
-                                            for ($i = 0; $i < $total_reg; $i++) {
-                                                foreach ($res[$i] as $key => $value) {
-                                                }
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
 
-                                                $nome_reg = $res[$i]['nome'];
-                                                $id_reg = $res[$i]['id'];
-                                        ?>
-                                                <option value="<?php echo $id_reg ?>">
-                                                    <?php echo $nome_reg ?>
-                                                </option>
-                                        <?php }
-                                        } ?>
-                                    </select>
-                                </div>
+                                    
 
                                 <?php } ?>
+
+
+                                
 
                                 <div class="input-field">
                                     <label>Líder em Treinamento 1</label>
                                     <select class="sel2" id="lider2" name="lider2">
                                         <option value="0">Selecione um Membro</option>
                                         <?php
-                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
-                                            and ativo = 'Sim' order by nome asc");
+                                        $query = $pdo->query("SELECT * FROM usuarios WHERE igreja = '$id_igreja' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                         $total_reg = count($res);
                                         if ($total_reg > 0) {
@@ -375,11 +392,11 @@ if ($id_pessoa == $lider1) {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                        ?>
+                                                ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                        <?php }
+                                            <?php }
                                         } ?>
                                     </select>
                                 </div>
@@ -389,8 +406,7 @@ if ($id_pessoa == $lider1) {
                                     <select class="sel2" id="lider3" name="lider3">
                                         <option value="0">Selecione um Membro</option>
                                         <?php
-                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
-                                            and ativo = 'Sim' order by nome asc");
+                                        $query = $pdo->query("SELECT * FROM usuarios WHERE igreja = '$id_igreja' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                         $total_reg = count($res);
                                         if ($total_reg > 0) {
@@ -400,11 +416,11 @@ if ($id_pessoa == $lider1) {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                        ?>
+                                                ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                        <?php }
+                                            <?php }
                                         } ?>
                                     </select>
                                 </div>
@@ -414,8 +430,7 @@ if ($id_pessoa == $lider1) {
                                     <select class="sel2" id="lider4" name="lider4">
                                         <option value="0">Selecione um Membro</option>
                                         <?php
-                                        $query = $pdo->query("SELECT * FROM membros WHERE igreja = '$id_igreja'
-                                            and ativo = 'Sim' order by nome asc");
+                                        $query = $pdo->query("SELECT * FROM usuarios WHERE igreja = '$id_igreja' order by nome asc");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                         $total_reg = count($res);
                                         if ($total_reg > 0) {
@@ -425,11 +440,11 @@ if ($id_pessoa == $lider1) {
 
                                                 $nome_reg = $res[$i]['nome'];
                                                 $id_reg = $res[$i]['id'];
-                                        ?>
+                                                ?>
                                                 <option value="<?php echo $id_reg ?>">
                                                     <?php echo $nome_reg ?>
                                                 </option>
-                                        <?php }
+                                            <?php }
                                         } ?>
                                     </select>
                                 </div>
@@ -490,7 +505,8 @@ if ($id_pessoa == $lider1) {
                 <div id="mensagem"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-excluir" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-excluir" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-remove">
                             Excluir
@@ -598,7 +614,8 @@ if ($id_pessoa == $lider1) {
                 <div id="mensagem"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-obs" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-obs" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
                             Salvar
@@ -645,7 +662,8 @@ if ($id_pessoa == $lider1) {
                 <div id="mensagem"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-add" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-add" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
                             Adicionar
@@ -774,7 +792,7 @@ if ($id_pessoa == $lider1) {
     }
 
 
-    $("#form-add").submit(function() {
+    $("#form-add").submit(function () {
         event.preventDefault();
         var formData = new FormData(this);
 
@@ -786,7 +804,7 @@ if ($id_pessoa == $lider1) {
             type: 'POST',
             data: formData,
 
-            success: function(mensagem) {
+            success: function (mensagem) {
                 $('#mensagem-add').text('');
                 $('#mensagem-add').removeClass()
                 if (mensagem.trim() == "Adicionado com Sucesso") {
@@ -823,7 +841,7 @@ if ($id_pessoa == $lider1) {
             },
             dataType: "text",
 
-            success: function(result) {
+            success: function (result) {
                 $("#listar-membros").html(result);
             },
 
@@ -843,7 +861,7 @@ if ($id_pessoa == $lider1) {
             },
             dataType: "text",
 
-            success: function(result) {
+            success: function (result) {
                 $("#listar-membros-add").html(result);
             },
 
@@ -866,7 +884,7 @@ if ($id_pessoa == $lider1) {
             },
             dataType: "text",
 
-            success: function(result) {
+            success: function (result) {
                 listarMembrosCB(celula, igreja);
                 listarMembrosAdd(celula, igreja);
             },
@@ -876,14 +894,14 @@ if ($id_pessoa == $lider1) {
     }
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.sel2').select2({
             placeholder: 'Selecione um Líder',
             dropdownParent: $('#modalForm'),
         });
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.sel21').select2({
             placeholder: 'Selecione um Pastor',
             dropdownParent: $('#modalForm'),

@@ -34,7 +34,7 @@ if($total_reg == 1) {
     $txt_reg = 'Cadastradas';
 }
 
-$query = $pdo->query("SELECT *FROM celulas WHERE igreja = '$id_igreja' and lider1 = '$id_pessoa'");
+$query = $pdo->query("SELECT *FROM celulas WHERE igreja = '$id_igreja' and lider1 = '$id_usuario'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 @$nome_celula = $res[0]['nome'];
 @$lideranca = $res[0]['lider1'];
@@ -45,7 +45,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg_membros = count($res);
 
 
-echo $id_pessoa. '</br>';
+echo $id_usuario. '</br>';
 echo $lideranca. '</br>';
 echo $id_celula. '</br>';
 
@@ -55,7 +55,7 @@ echo $id_celula. '</br>';
 
 
 <div class="flex_cards_initial">
-    <?php if($id_pessoa == @$lideranca && $celulas != 'ocultar') { ?>
+    <?php if($id_usuario == @$lideranca && $celulas != 'ocultar') { ?>
             <a href="http://localhost/IBMM_admin/painel-igreja/index.php?pag=celulas" class="link_cards_initial">
                 <div class="icon_circle">
                     <img src="../img/svg/licoes.svg" class="icons_cards_initial">
