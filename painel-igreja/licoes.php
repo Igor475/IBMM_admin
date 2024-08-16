@@ -19,7 +19,7 @@ if (@$licoes == 'ocultar') {
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Nova Lição
+        Cadastrar Lição
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>

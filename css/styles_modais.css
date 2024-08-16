@@ -143,8 +143,28 @@
     flex-wrap: wrap;
 }
 
+.flex_guest {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    margin-bottom: 40px;
+}
+
+.con_field {
+    flex-grow: 1;
+    flex-basis: 300px;
+}
+
+.fo_field {
+    flex-grow: 1;
+    flex-basis: 250px;
+}
+
 .fields_freq {
     display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
 }
 
 .fields .input-field {
@@ -181,9 +201,43 @@
     max-width: 480px;
 }
 
+.fields_guest {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.fields_guest::-webkit-scrollbar {
+    display: none;
+}
+
+.height_images_scroll {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.height_images_scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.divImgGuestForm {
+    display: flex;
+    justify-content: center;
+    max-width: 230px;
+    height: 180px;
+    margin-top: 10px;
+}
+
+.labels_form {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--preto-light);
+}
+
 .photo_file_video_image {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     border-radius: 5px;
 }
 
@@ -324,6 +378,11 @@
     margin: 8px 0;
 }
 
+.input-field-guest input {
+    height: 40px;
+    margin: 8px 0;
+}
+
 .field_area_1 {
     flex: .8 !important;
 }
@@ -383,6 +442,10 @@
 
 .flex_int_9 {
     flex: 1 1 400px !important;
+}
+
+.flex_int_10 {
+    flex: 1 1 300px !important;
 }
 
 .flex_select {
@@ -520,12 +583,25 @@
     transition: all .3s ease;
 }
 
+.input-field-guest input {
+    outline: none;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--preto);
+    border-radius: 5px;
+    border: 1px solid var(--fundo-ea);
+    padding: 0 10px;
+    margin: 8px 0 20px 0;
+    transition: all .3s ease;
+    width: 100%;
+  }
+
 .input-field input:focus {
     border-color: var(--verde-light-border);
     box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
 }
 
-.input-field-in input:focus {
+.input-field-guest input:focus {
     border-color: var(--verde-light-border);
     box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
 }
@@ -571,7 +647,7 @@
 .area-buttons {
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items: stretch;
     grid-gap: 15px;
 }
 
@@ -650,7 +726,19 @@
     flex-wrap: wrap;
 }
 
+.area_images_gallery {
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 0 20px;
+}
+
 .photo_file_rel {
+    width: 100%;
+}
+
+.photo_file_gal {
     width: 100%;
 }
 
@@ -668,6 +756,18 @@
     margin-top: 12px;
 }
 
+.divImgGal {
+    display: flex;
+    justify-content: center;
+    max-width: 280px;
+    margin-top: 12px;
+}
+
+.txt_notice {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--preto-text);
+}
 
 /*======================= CAMPO DE OBSERVAÇÕES DOS PASTORES =========================*/
 .txt-obs {
@@ -787,6 +887,10 @@
     object-fit: cover;
 }
 /* FIM ESTILIZAÇÃO DA MODAL DE "VER DADOS" */
+
+.form-modal::-webkit-scrollbar {
+    display: none;
+}
 
 @media (max-width: 750px) {
 
