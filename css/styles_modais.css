@@ -354,6 +354,12 @@
     color: var(--preto-light);
 }
 
+.input-field-guest label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--preto-light);
+}
+
 .txt_date_all {
     color: var(--close);
     padding: 3px 7px;
@@ -594,7 +600,7 @@
     margin: 8px 0 20px 0;
     transition: all .3s ease;
     width: 100%;
-  }
+}
 
 .input-field input:focus {
     border-color: var(--verde-light-border);

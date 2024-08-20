@@ -45,8 +45,8 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg_membros = count($res);
 
 
-echo $id_usuario. '</br>';
-echo $lideranca. '</br>';
+echo $id_usuario. ' ' . 'id_usuario </br>';
+echo $lideranca. ' ' . 'Líder da Célula </br>';
 echo $id_celula. '</br>';
 
 ?>

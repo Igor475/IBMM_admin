@@ -162,7 +162,7 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=pastores">Pastores</a></li>
                                 <li><a href="index.php?pag=tesoureiros">Tesoureiros</a></li>
                                 <li><a href="index.php?pag=secretarios">Secretários(as)</a></li>
-                                <li><a href="usuarios_">Usuários</a></li>
+                                <li><a href="index.php?pag=usuarios">Usuários</a></li>
                             </ul>
                         </li>
                         <li>
@@ -174,6 +174,7 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=frequencias">Frequências (Contas)</a></li>
                                 <li><a href="index.php?pag=grupo_acessos">Grupo Acessos</a></li>
                                 <li><a href="index.php?pag=acessos">Acessos</a></li>
+                                <li><a href="index.php?pag=categoria-oracao">Categoria de Orações</a></li>
                             </ul>
                         </li>
                         <li>

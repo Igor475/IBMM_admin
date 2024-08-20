@@ -1,7 +1,7 @@
 <?php
 @session_start();
-require_once ("verificar.php");
-require_once ("../conexao.php");
+require_once("verificar.php");
+require_once("../conexao.php");
 $id_usuario = @$_SESSION['id_usuario'];
 $nivel_usu = @$_SESSION['nivel_usuario'];
 
@@ -56,7 +56,7 @@ $tel_igr = $res[0]['telefone'];
 
 $pag_inicial = 'home';
 if (@$_SESSION['nivel_usuario'] != 'Pastor Presidente') {
-    require_once ("verificar-permissoes.php");
+    require_once("verificar-permissoes.php");
 }
 if (@$_GET['pag'] != "") {
     $pag = @$_GET['pag'];
@@ -461,6 +461,14 @@ if ($pag == "") {
                                     <a href="index.php?pag=grupos">Grupos</a>
                                 </li>
                                 <?php } ?>
+
+                                <?php if (@$oracoes == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$oracoes ?>">
+                                    <a href="index.php?pag=oracao">Orações</a>
+                                </li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <?php } ?>
@@ -568,7 +576,7 @@ if ($pag == "") {
 
         <main id="container_painel">
             <?php
-            require_once ($pag . '.php');
+            require_once($pag . '.php');
             ?>
         </main>
     </div>
