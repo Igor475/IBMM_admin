@@ -6,7 +6,7 @@
 require_once("../conexao.php");
 $pagina = 'oracao';
 
-if (@$tarefas == 'ocultar') {
+if (@$oracao == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });
@@ -51,6 +51,7 @@ if (@$tarefas == 'ocultar') {
                         $motivo_oracao = $res[$i]['motivo_oracao'];
                         $telefone = $res[$i]['telefone'];
                         $usuario = $res[$i]['usuario'];
+                        $status = $res[$i]['status'];
                         $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
 
@@ -72,21 +73,40 @@ if (@$tarefas == 'ocultar') {
                             $categoria_oracao = '';
                         }
 
+
+
+                        if ($status == 'Concluída') {
+                            $classe = 'text_active';
+                            $class_text = 'text_title_task';
+                            $class_icon = 'active_icon';
+                            $icone = 'bi-check2-square';
+                            $ativar = 'Aguardando';
+                            $inativa = '';
+                        } else {
+                            $classe = 'text_desactive';
+                            $class_text = 'text_title_task_later';
+                            $class_icon = 'desactive_icon';
+                            $ativo = 'Concluir Oração';
+                            $icone = 'bi-check2-square';
+                            $ativar = 'Concluída';
+                            $inativa = 'text_opacity';
+                        }
+
                         ?>
                         <tr class="column-body <?php echo $class_text ?>">
-                            <td data-label="Nome" class="td-table column-hidden">
+                            <td data-label="Nome" class="td-table">
                                 <?php echo $nome ?>
                             </td>
-                            <td data-label="Status" class="td-table">
+                            <td data-label="Email" class="td-table column-hidden">
                                 <?php echo $email ?>
                             </td>
-                            <td data-label="Status" class="td-table">
+                            <td data-label="Telefone" class="td-table">
                                 <?php echo $telefone ?>
                             </td>
-                            <td data-label="Status" class="td-table">
+                            <td data-label="Motivo da Oração" class="td-table">
                                 <?php echo $categoria_oracao ?>
                             </td>
-                            <td data-label="Hora" class="td-table">
+                            <td data-label="Hora" class="td-table column-hidden">
                                 <?php echo $hora ?>
                             </td>
                             <td data-label="Data" class="td-table">
@@ -121,13 +141,17 @@ if (@$tarefas == 'ocultar') {
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
-                                        <!-- <li>
-                                            <a class="dropdown-item" href="#" onclick="mudarStatus('<?php echo $id ?>', 
-                                            '<?php echo $ativar ?>')" title="<?php echo $ativo ?>">
-                                                <i class="bi <?php echo $icone ?> icons_actions <?php echo $classe ?>"></i>
-                                                <?php echo $ativo ?>
-                                            </a>
-                                        </li> -->
+                                        <?php if($status == 'Concluída') { ?>
+
+                                        <?php } else { ?>
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="mudarStatusOracao('<?php echo $id ?>', 
+                                                '<?php echo $ativar ?>', '<?php echo $telefone ?>')" title="<?php echo $ativo ?>">
+                                                    <i class="bi <?php echo $icone ?> icons_actions <?php echo $classe ?>"></i>
+                                                    <?php echo $ativo ?>
+                                                </a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </td>
@@ -319,7 +343,7 @@ if (@$tarefas == 'ocultar') {
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/user.svg" class="img_icon_data" alt="">
-                    <span class="user_name">Usuário Baixa: </span>
+                    <span class="user_name">Usuário Editou: </span>
                     <span class="texts_son" id="usuario-dados"></span>
                 </div>
             </div>

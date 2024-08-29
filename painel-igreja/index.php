@@ -111,11 +111,85 @@ if ($pag == "") {
 
         <!----------------------------------- HEADER --------------------------------------->
         <header class="header">
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-                <i class="bx bx-menu icon_menu_side"></i>
-                <span class="menu_hidden">Menu</span>
-            </button>
+            <div class="flex_widget_one">
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    <i class="bx bx-menu icon_menu_side"></i>
+                    <span class="menu_hidden">Menu</span>
+                </button>
+
+                <div class="order_prayer">
+                    <div class="order_dropdown_btn" onclick="toggleOracao()">
+                        <?php
+                        $query = $pdo->query("SELECT * FROM oracao where igreja = '$id_igreja' and data = CurDate() and status = 'Aguardando'");
+                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $total_reg = @count($res);
+                        if ($total_reg > 1) {
+                            $texto_pedidos = 'Você possui ' . $total_reg . ' novos pedidos de Oração!';
+                        } else if ($total_reg == 1) {
+                            $texto_pedidos = 'Você possui ' . $total_reg . ' novo pedido de Oração!';
+                        } else {
+                            $texto_pedidos = 'Você não possui novos pedidos de Oração!';
+                        }
+                        ?>
+                        <div class="box_order_img">
+                            <img src="../img/svg/oracao.svg" alt="" class="img_order_prayer">
+                        </div>
+                        <span class="reg_order_p">
+                            <?php echo $total_reg ?>
+                        </span>
+                    </div>
+
+                    <ul class="items_order_prayer">
+                        <div class="div_head_txt">
+                            <li>
+                                <?php echo $texto_pedidos ?>
+                            </li>
+                        </div>
+                        <div class="div_content_regs">
+                            <?php
+                            $query = $pdo->query("SELECT * FROM oracao where igreja = '$id_igreja' and data = CurDate() and status = 'Aguardando' order by id desc limit 6");
+                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                            $total_reg = @count($res);
+                            for ($i = 0; $i < $total_reg; $i++) {
+                                foreach ($res[$i] as $key => $value) {
+                                }
+                                $id = $res[$i]['id'];
+                                $nome = $res[$i]['nome'];
+                                $categoria_oracao = $res[$i]['motivo_oracao'];
+
+                                $query2 = $pdo->query("SELECT * FROM categoria_oracao where id = '$categoria_oracao'");
+                                $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                                $total_reg2 = @count($res2);
+                                if ($total_reg2 > 0) {
+                                    $nome_cat_oracao = $res2[0]['nome'];
+                                } else {
+                                    $nome_cat_oracao = 'Nenhum!';
+                                }
+
+                                ?>
+                            <li>
+                                <b>Pedido de Oração:
+                                    <?php echo $id ?>
+                                </b><br>
+                                <b>Motivo:</b> <span class="names_pr">
+                                    <?php echo $nome_cat_oracao ?>
+                                </span><br>
+                                <b>Nome: </b> <span class="names_pr">
+                                    <?php echo $nome ?>
+                                </span>
+                            </li>
+                            <?php } ?>
+                        </div>
+                        <li>
+                            <div class="btn_ord">
+                                <a href="index.php?pag=oracao" class="link_order_prayers">Ir para os pedidos de
+                                    Oração</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
             <div class="header-left">
                 <form class="form-navbar" action="#">
@@ -126,14 +200,8 @@ if ($pag == "") {
                 </form>
             </div>
             <div class="header-right">
-                <a href="" class="nav-link">
-                    <i class='bx bxs-bell icon'></i>
-                    <span class="badge">5</span>
-                </a>
-                <a href="" class="nav-link">
-                    <i class='bx bxs-message-square-dots icon'></i>
-                    <span class="badge">8</span>
-                </a>
+
+
 
                 <div class="profile-dropdown">
                     <div class="profile-dropdown-btn" onclick="toggle()">
@@ -192,6 +260,11 @@ if ($pag == "") {
                                 title="Igreja Batista Missão Multiplicar">
                         </a>
                         <h4 class="title_sys">Sistema <span class="">IBMM</span></h4>
+                        <div class="well_area_usu">
+                            <span class="name_usu_res">Seja bem-vindo
+                                <?php echo $nome_usu ?>!
+                            </span>
+                        </div>
                     </div>
                     <ul class="side-menu">
                         <?php if (@$home == "ocultar") { ?>
@@ -340,6 +413,14 @@ if ($pag == "") {
                                     <a href="index.php?pag=licoes">Lições de Célula</a>
                                 </li>
                                 <?php } ?>
+
+                                <?php if (@$categoria_licoes == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$categoria_licoes ?>">
+                                    <a href="index.php?pag=categoria_licoes">Categoria das Lições</a>
+                                </li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <?php } ?>
@@ -462,10 +543,10 @@ if ($pag == "") {
                                 </li>
                                 <?php } ?>
 
-                                <?php if (@$oracoes == "ocultar") { ?>
+                                <?php if (@$oracao == "ocultar") { ?>
 
                                 <?php } else { ?>
-                                <li class="<?php echo @$oracoes ?>">
+                                <li class="<?php echo @$oracao ?>">
                                     <a href="index.php?pag=oracao">Orações</a>
                                 </li>
                                 <?php } ?>

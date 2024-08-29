@@ -31,7 +31,7 @@ if(isset($nome) && empty($nome)) {
 
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome, email = :email,  telefone = :telefone,
-    descricao = :descricao, motivo_oracao = '$motivo_oracao', data = '$data', hora = '$hora', 
+    descricao = :descricao, motivo_oracao = '$motivo_oracao', data = '$data', hora = '$hora', status = 'Aguardando', 
     igreja = '$igreja'");
 
 } else {

@@ -210,6 +210,12 @@
     flex: 1;
 }
 
+.flex_widget_one {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .menu-icon {
     display: block;
 }
@@ -609,6 +615,147 @@ body::-webkit-scrollbar-thumb {
     top: 100%; 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+.order_prayer {
+    position: relative;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+.order_prayer .order_dropdown_btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1.1rem;
+    padding: 7px;
+    font-size: 13px;
+    border: 1px solid var(--fundo);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: box-shadow 0.2s, background-color 0.2s;
+}
+
+.order_prayer .order_dropdown_btn:hover {
+    background-color: var(--fundo-profile);
+}
+
+.reg_order_p {
+    position: absolute;
+    background-color: var(--background-message-error);
+    width: 16px;
+    height: 16px;
+    color: var(--text-table-emp);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: -5px;
+}
+
+.order_prayer .order_dropdown_btn .box_order_img .img_order_prayer {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.order_prayer .items_order_prayer {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: -100%;
+    background: var(--fonte-menu-dropdown);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    width: 250px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.order_prayer .items_order_prayer .icon_pray {
+    font-size: 20px;
+}
+
+.items_order_prayer.active {
+    opacity: 1;
+    pointer-events: visible;
+    top: 100%; 
+}
+
+.div_head_txt {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.div_head_txt li {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--black-grey);
+}
+
+.div_content_regs {
+    padding: 5px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.div_content_regs li {
+    padding: 7px 0;
+    font-size: 12px;
+    color: var(--black-hover);
+    border-bottom: 1px solid var(--fundo-profile);
+}
+
+.div_content_regs li:last-child {
+    border-bottom: 0;
+}
+
+.names_pr {
+    color: var(--black-grey);
+}
+
+.btn_ord {
+    padding: 10px 15px;
+}
+
+.link_order_prayers {
+    display: block;
+    background-color: var(--hover-side-menu);
+    color: var(--btn-hover);
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 8px;
+    text-align: center;
+}
+
+.well_area_usu {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.name_usu_res {
+    font-size: 14px;
+    color: var(--btn-hover);
+}
 
 /*=============================== MAIN CONTAINER ===============================*/
 
@@ -1664,6 +1811,10 @@ td.td-table#radius-column-action:last-child {
 
 
 @media screen and (max-width: 768px) {
+    
+    .header-left {
+        display: none;
+    }
 
     /*=================== MENU LATERAL MOBILE DO PAINEL ====================*/
     #offcanvasWithBothOptions .side-menu a {
@@ -1768,10 +1919,6 @@ td.td-table#radius-column-action:last-child {
 
 
 @media screen and (max-width: 576px) {
-    .header-left {
-        display: none;
-    }
-
     #container_painel .churchs {
         text-align: center;
     }
@@ -1868,6 +2015,22 @@ td.td-table#radius-column-action:last-child {
 
     .content-table .body-table .column-body .td-table-pd .area_icons {
         margin: 5px 0;
+    }
+
+    .name_profile {
+        display: none;
+    }
+
+    .profile-dropdown .profile-dropdown-btn {
+        width: auto;
+    }
+
+    .profile-dropdown .profile-dropdown-btn .icon_profile_down {
+        display: none;
+    }
+
+    .well_area_usu {
+        display: flex;
     }
 }
 

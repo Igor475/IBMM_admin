@@ -56,6 +56,38 @@ function mudarStatus(id, ativar){
 
 
 
+function mudarStatusOracao(id, ativar, telefone){
+    
+    $.ajax({
+        url: pag + "/mudar-status.php",
+        method: 'POST',
+        data: {id, ativar, telefone},
+        dataType: "text",
+
+        success: function (mensagem) {
+            var split = mensagem.split("***"); 
+
+            if (split[0] == "Alterado com Sucesso") {                  
+                if(ativar == 'Concluída'){
+                    let a= document.createElement('a');
+                    a.target= '_blank';
+                    a.href= 'http://api.whatsapp.com/send?1=pt_BR&phone=+55'+telefone+'A Família IBMM está em oração por todos os seus pedidos, intercedendo por suas necessidades e confiando no cuidado de Deus. Deus te abençoe.';
+                    a.click();
+                    window.location="index.php?pag=" + pag;
+           }       
+            } else {
+                $('#mensagem-excluir').addClass('text-danger')
+                $('#mensagem-excluir').text(mensagem)
+            } 
+        },
+
+    });
+}
+
+
+
+
+
 
 $("#form").submit(function () {
 	event.preventDefault();

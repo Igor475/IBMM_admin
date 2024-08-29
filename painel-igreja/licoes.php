@@ -57,6 +57,7 @@ if (@$licoes == 'ocultar') {
                         $usuario = $res[$i]['usuario'];
                         $data = $res[$i]['data'];
                         $arquivo = $res[$i]['arquivo'];
+                        $categoria = $res[$i]['categoria_licao'];
                         $igreja = $res[$i]['igreja'];
 
                         $id = $res[$i]['id'];
@@ -79,6 +80,14 @@ if (@$licoes == 'ocultar') {
                             $usuario_cad = $res_con[0]['nome'];
                         } else {
                             $usuario_cad = '';
+                        }
+
+                        $query_con = $pdo->query("SELECT * FROM categoria_licoes where id = '$categoria'");
+                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_con) > 0) {
+                            $nome_categoria = $res_con[0]['nome'];
+                        } else {
+                            $nome_categoria = '';
                         }
 
 
@@ -108,7 +117,7 @@ if (@$licoes == 'ocultar') {
                                 </a>
                             </td>
                             <td data-label="Data Cadastro" class="td-table">
-                                <?php echo strftime("%C, %B de %Y", strtotime($dataF)) ?>
+                                <?php echo strftime("%F, %B de %Y", strtotime($dataF)) ?>
                             </td>
                             <td data-label="Usuário Cadastrou" class="td-table">
                                 <?php echo $usuario_cad ?>
@@ -124,7 +133,7 @@ if (@$licoes == 'ocultar') {
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
                                             '<?php echo $nome ?>', '<?php echo $descricao ?>', '<?php echo $imagem ?>',
-                                            '<?php echo $tumb_arquivo ?>', '<?php echo $data ?>')">
+                                            '<?php echo $tumb_arquivo ?>', '<?php echo $data ?>', '<?php echo $categoria ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -139,7 +148,8 @@ if (@$licoes == 'ocultar') {
                                             <a class="dropdown-item" href="#"
                                                 onclick="dados('<?php echo $nome ?>', 
                                             '<?php echo $descricao ?>', '<?php echo $imagem ?>',
-                                            '<?php echo $tumb_arquivo ?>', '<?php echo $dataF ?>', '<?php echo $usuario_cad ?>')">
+                                            '<?php echo $tumb_arquivo ?>', '<?php echo $dataF ?>', '<?php echo $usuario_cad ?>', 
+                                            '<?php echo $nome_categoria ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -176,16 +186,39 @@ if (@$licoes == 'ocultar') {
                         <div class="form first">
                             <div class="details personal">
                                 <div class="fields">
-                                    <div class="input-field flex_int_2">
+                                    <div class="input-field flex_int_9">
                                         <label>Nome</label>
                                         <input type="text" name="nome" id="nome" placeholder="Nome do Documento"
                                             required>
                                     </div>
 
-                                    <div class="input-field field_cpf_1">
+                                    <div class="input-field flex_int_6">
                                         <label>Data Cadastro</label>
                                         <input type="date" name="data" id="data" value="<?php echo $data_atual ?>"
                                             required>
+                                    </div>
+
+                                    <div class="input-field flex_int_6">
+                                        <label>Categoria da Lição</label>
+                                        <select class="sel2" id="categoria_licao" name="categoria_licao">
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM categoria_licoes WHERE igreja = '$id_igreja' order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
+                                        </select>
                                     </div>
 
                                     <div class="input-field flex_int_3">
@@ -314,6 +347,11 @@ if (@$licoes == 'ocultar') {
                     <span class="texts_son" id="data-dados"></span>
                 </div>
                 <div class="user_area">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Categoria da Lição:</span>
+                    <span class="texts_son" id="categoria-dados"></span>
+                </div>
+                <div class="user_area">
                     <img src="../img/svg/user.svg" class="img_icon_data" alt="">
                     <span class="user_name">Usuário Cadastrou: </span>
                     <span class="texts_son" id="usuario-dados"></span>
@@ -344,13 +382,15 @@ if (@$licoes == 'ocultar') {
 
 
 <script type="text/javascript">
-    function editar(id, nome, descricao, imagem, arquivo, data) {
+    function editar(id, nome, descricao, imagem, arquivo, data, categoria) {
         $('#id').val(id);
         $('#descricao').val(descricao);
         $('#nome').val(nome);
         $('#data').val(data);
         $('#targetlicao').attr('src', '../img/licoes/' + imagem);
         $('#target').attr('src', '../img/licoes/' + arquivo);
+
+        $('#categoria_licao').val(categoria).change();
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -359,12 +399,13 @@ if (@$licoes == 'ocultar') {
     }
 
 
-    function dados(nome, descricao, imagem, arquivo, data, usuario) {
+    function dados(nome, descricao, imagem, arquivo, data, usuario, nome_categoria) {
 
         $('#descricao-dados').text(descricao);
         $('#nome-dados').text(nome);
         $('#data-dados').text(data);
         $('#usuario-dados').text(usuario);
+        $('#categoria-dados').text(nome_categoria);
         $('#foto-dados').attr('src', '../img/licoes/' + arquivo);
         $('#foto-licao').attr('src', '../img/licoes/' + imagem);
 
@@ -383,6 +424,10 @@ if (@$licoes == 'ocultar') {
         $('#id').val('');
         $('#descricao').val('');
         $('#nome').val('');
+        $('#categoria_licao').val('').change();
+
+        document.getElementById("categoria_licao").options.selectedIndex = 0;
+        $('#categoria_licao').val($('#categoria_licao').val()).change();
 
         $('#targetlicao').attr('src', '../img/licoes/sem-foto.jpg');
         $('#target').attr('src', '../img/licoes/sem-foto.jpg');

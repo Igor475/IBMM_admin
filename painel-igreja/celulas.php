@@ -298,7 +298,7 @@ if ($id_pessoa == $lider1) {
                                     $nivel_usu == 'secretario' || $nivel_usu == 'Pastor Presidente'
                                     || $nivel_usu == 'pastor'
                                 ) { ?>
-<div class="input-field" id="hidden_select1">
+                                    <div class="input-field" id="hidden_select1">
                                         <label>Pastor</label>
                                         <select class="sel21" id="pastor" name="pastor">
                                             <option value="0">Selecione um Pastor</option>

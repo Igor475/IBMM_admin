@@ -5,6 +5,7 @@ $pagina = 'licoes';
 $id_usuario = $_SESSION['id_usuario'];
 $descricao = $_POST['descricao'];
 $nome = $_POST['nome'];
+$categoria = $_POST['categoria_licao'];
 $igreja = @$_POST['igreja'];
 $data = $_POST['data'];
 $id = @$_POST['id'];
@@ -61,7 +62,8 @@ if ($ext == 'png' or $ext == 'jpg' or $ext == 'JPG' or $ext == 'jpeg') {
 
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome, descricao = :descricao, data = '$data',
-        usuario = '$id_usuario', arquivo = '$imagem', imagem = '$imagem_licao', igreja = '$igreja'");
+        usuario = '$id_usuario', arquivo = '$imagem', imagem = '$imagem_licao', igreja = '$igreja', 
+        categoria_licao = '$categoria'");
 
 } else {
     if ($imagem != "sem-foto.jpg") {
@@ -73,7 +75,8 @@ if ($id == "" || $id == 0) {
         }
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, descricao = :descricao, data = '$data',
-            usuario = '$id_usuario', arquivo = '$imagem' WHERE id = '$id'");
+            usuario = '$id_usuario', categoria_licao = '$categoria', igreja = '$igreja',
+            arquivo = '$imagem' WHERE id = '$id'");
 
     } elseif($imagem_licao != "sem-foto.jpg") {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
@@ -84,11 +87,12 @@ if ($id == "" || $id == 0) {
         }
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, descricao = :descricao, data = '$data',
-            usuario = '$id_usuario', imagem = '$imagem_licao' WHERE id = '$id'");
+            usuario = '$id_usuario', categoria_licao = '$categoria', imagem = '$imagem_licao', 
+            igreja = '$igreja' WHERE id = '$id'");
 
     } else {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, descricao = :descricao, data = '$data',
-            usuario = '$id_usuario' WHERE id = '$id'");
+            usuario = '$id_usuario', categoria_licao = '$categoria', igreja = '$igreja' WHERE id = '$id'");
         
     }
 

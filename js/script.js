@@ -94,5 +94,20 @@ window.addEventListener('click', function (e) {
 
 
 
+let prayer = document.querySelector('.header .order_dropdown_btn');
+let dropdownPrayer = document.querySelector(".items_order_prayer");
+let btnPrayer = document.querySelector(".order_dropdown_btn");
+
+function toggleOracao() {}
+btnPrayer.addEventListener('click', function() {
+    dropdownPrayer.classList.toggle('active'); 
+})
+
+window.addEventListener('click', function (es) {
+    if(!btnPrayer.contains(es.target)) dropdownPrayer.classList.remove('active');
+})
+
+
+
 
 
