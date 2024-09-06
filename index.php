@@ -1,76 +1,87 @@
 <?php
-require_once ("conexao.php");
-session_start();
+   require_once('sistema/conexao.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="img/logo-IBMM-preta.ico" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="css/login.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap_login.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
-  <title><?php echo $nome_igreja_sistema ?></title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="sistema/img/logo-IBMM-preta.ico" type="image/x-icon">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+   <link rel="stylesheet" href="assets/css/styles.css">
+   <title><?php echo $nome_igreja_sistema ?></title>
 </head>
 
 <body>
-  <section class="container-login">
-    <div class="wrapper">
-      <div class="wrapper-login">
-        <img class="img_wrapper" src="img/logo-IBMM-preta.png" alt="">
+   <div class="ti_area_sel">
+      <div class="img_church_sfl">
+         <img src="assets/img/Logo-IBMM.png" alt="" class="des">
       </div>
+      <h1 class="title_churchs">Selecione uma igreja</h1>
+   </div>
+   <div class="area_churchs">
       <?php
-      if (isset($_SESSION['msg'])) {
-        echo $_SESSION['msg'];
-        unset($_SESSION['msg']);
-      }
-      ?>
-      <form method="post" class="login-form" action="autenticar.php">
-        <div class="row">
-          <i class="bx bxs-user icon-log"></i>
-          <input class="inputs-login" type="text" name="usuario" placeholder="Email ou CPF" required autofocus>
-        </div>
-        <div class="row">
-          <i class="bx bxs-lock icon-log"></i>
-          <input class="inputs-login" type="password" id="password" name="senha" placeholder="Insira a sua Senha" required>
-          <span class="bi bi-eye" id="icon-password" onclick="eyeClick()"></span>
-        </div>
-        <div class="recovery">
-          <a href="#" class="btn-recovery-senha" data-bs-toggle="modal"
-            data-bs-target="#modal-recuperar-senha">Recuperar Senha</a>
-        </div>
-        <div class="row button">
-          <button type="submit" class="btn-login" value="Entrar">Entrar</button>
-        </div>
-      </form>
-    </div>
-  </section>
+      $query = $pdo->query("SELECT * FROM igrejas order by matriz desc, nome asc");
+      $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      $total_reg = count($res);
+
+      for ($i = 0; $i < $total_reg; $i++) {
+         foreach ($res[$i] as $key => $value) {
+         }
+
+         $nome = $res[$i]['nome'];
+         $imagem = $res[$i]['imagem'];
+         $matriz = $res[$i]['matriz'];
+         $pastor = $res[$i]['pastor'];
+         $id_ig = $res[$i]['id'];
+         $url = $res[$i]['url'];
+
+         if ($matriz == 'Sim') {
+            $bordacard = 'bordacardsede';
+            $classe = 'text_matriz';
+            $texto_matriz = 'Sede';
+         } else {
+            $bordacard = 'bordacard';
+            $classe = 'text_filiais';
+            $texto_matriz = 'Filial';
+         }
+
+         $query_m = $pdo->query("SELECT *FROM membros WHERE  igreja = '$id_ig' and ativo = 'Sim'");
+         $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
+         $membrosCad = @count($res_m);
+
+         $query_con = $pdo->query("SELECT * FROM pastores where id = '$pastor'");
+         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+         if (count($res_con) > 0) {
+            $nome_p = $res_con[0]['nome'];
+         } else {
+            $nome_p = 'Não Definido';
+         }
+
+         ?>
+         <a href="igreja<?php echo $url?>" class="card_church">
+            <div class="head_church_sel">
+               <div class="info_church_sel">
+                  <p class="names_chruchs_sel <?php echo $classe ?>">
+                     <?php echo $nome ?>
+                  </p>
+                  <span class="names_ch_sel">
+                     <b>Responsável: </b><?php echo $nome_p ?>
+                  </span>
+               </div>
+
+               <div class="more_info_sel">
+                  <div class="image_churchs_sel">
+                     <img class="img_cards_churchs" src="sistema/img/igrejas/<?php echo $imagem ?>" alt="">
+                  </div>
+                  <p class="text_member"><?php echo $texto_matriz ?></p>
+               </div>
+            </div>
+         </a>
+      <?php } ?>
+   </div>
 </body>
 
 </html>
-
-
-
-<div class="modal fade" id="modal-recuperar-senha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Recuperação de senha</h5>
-        <span class="bx bx-x btn-close" data-bs-dismiss="modal" aria-label="Close"></span>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script src="js/login.js"></script>

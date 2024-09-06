@@ -1,0 +1,21 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^igreja(.*)$ igreja.php?nome=$1 [L]
+RewriteRule ^evento-(.*)$ evento.php?evento=$1 [L]
+RewriteRule ^mensagem-(.*)$ mensagem.php?mensagem=$1 [L]
+#RewriteRule ^mensagens-(.*)$ mensagens.php?mensagens=$1 [L]
+RewriteRule ^contribua(.*)$ contribua.php?evento=$1 [L]
+
+
+
+
+# Bloquear acesso direto ao arquivo "config.php"
+#RewriteCond %{THE_REQUEST} "licoes" [NC]
+# RewriteRule ^ - [F]
+
+RewriteEngine On
+
+# Bloquear acesso direto ao arquivo "config.php"
+RewriteCond %{THE_REQUEST} "licoes" [NC]
+RewriteRule ^ - [F]

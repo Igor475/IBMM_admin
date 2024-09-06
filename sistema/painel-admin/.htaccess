@@ -1,0 +1,16 @@
+#ErrorDocument 403 http://localhost/ibmissaomultiplicar/sistema/painel-admin/
+
+#Options -Indexes
+
+#RewriteRule ^usuarios - [F]
+#RewriteRule ^tesoureiros - [F]
+#RewriteRule ^secretarios - [F]
+#RewriteRule ^patrimonios - [F]
+#RewriteRule ^pastores_presidentes - [F]
+#RewriteRule ^pastores - [F]
+#RewriteRule ^igrejas - [F]
+#RewriteRule ^grupo_acessos - [F]
+#RewriteRule ^frequencias - [F]
+#RewriteRule ^cargos - [F]
+#RewriteRule ^anexos - [F]
+#RewriteRule ^acessos - [F] 
