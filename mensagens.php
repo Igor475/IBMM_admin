@@ -167,9 +167,10 @@
 
     <section class="prin_message">
         <div class="message_des container">
+            Imagem Recomendada 400x200
             <a href="#" class="image-box">
                 <div class="image-container-sermon">
-                    <img src="https://via.placeholder.com/400x200" alt="Imagem de vídeo">
+                    <img src="assets/img/banner-3.jpg" alt="Imagem de vídeo">
                     <i class="bi bi-play play-icon"></i>
                     <div class="text-container-sermon">
                         <span>Última Mensagem</span>

@@ -169,28 +169,36 @@
             </div>
 
             <div class="area_cont_faith_f">
-                <h1 class="title ti_faith">Dê o próximo passo de fé</h1>
+                <div class="flex_ti_after">
+                    <h1 class="title ti_faith">Dê o próximo passo</h1>
+                </div>
 
                 <div class="boxes_cards_words">
                     <div class="box_card_svcbn">
-                        <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
+                        <a href="#" class="link__steps">
+                            <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
+                        </a>
                         <div class="content_faith_info">
+                            <a href="#">Junte-se a uma célula</a>
                             <span>Encontrar célula</span>
-                            <h4>junte-se a uma célula</h4>
                         </div>
                     </div>
                     <div class="box_card_svcbn">
-                        <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
-                        <div class="content_faith_info">
-                            <span>Estamos aqui para você</span>
-                            <h4>Peça oração</h4>
-                        </div>
+                            <a href="#" class="link__steps">
+                                <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
+                            </a>
+                            <div class="content_faith_info">
+                                <a href="#">Peça oração</a>
+                                <span>Estamos aqui para você</span>
+                            </div>
                     </div>
                     <div class="box_card_svcbn">
-                        <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
+                        <a href="#" class="link__steps">
+                            <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
+                        </a>
                         <div class="content_faith_info">
-                            <span>Dê o próximo passo em sua fé</span>
-                            <h4>Seja Batizado</h4>
+                            <a href="#">Seja Batizado</a>
+                            <span>Dê o próximo passo para Cristo</span>
                         </div>
                     </div>
                 </div>

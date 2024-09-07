@@ -86,6 +86,7 @@ btns.forEach((btn, i) => {
 
 
 
+
 var swiper = new Swiper(".slide__content", {
    slidesPerView: 3,
    spaceBetween: 30,
@@ -147,6 +148,6 @@ var swiper = new Swiper(".box__versicle", {
 /* FANCYBOX */
 Fancybox.bind('[data-fancybox="gallery"]', {
    //
-}); 
+});
 
 

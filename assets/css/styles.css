@@ -1192,6 +1192,46 @@ img {
   gap: 5px;
 }
 
+.area_arrows_prev_next {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon_slider_banner_pre {
+  position: relative;
+  font-size: 35px;
+  left: 20px;
+  color: var(--white);
+  z-index: 100;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.10);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon_slider_banner_next {
+  position: relative;
+  right: 20px;
+  font-size: 35px;
+  color: var(--white);
+  z-index: 100;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.10);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .items__footer__1 li {
   color: var(--color-2);
   font-size: 0.85rem;
@@ -1909,7 +1949,7 @@ a.image-box:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 50px;
+  font-size: 45px;
   color: rgba(255, 255, 255, 0.8);
   transition: color 0.3s ease;
   background: rgba(0, 0, 0, 0.25);
@@ -3371,6 +3411,7 @@ a.image-box:hover .play-icon {
   padding: 10px;
   border-radius: 5px;
   transition: .3s ease-in;
+  flex: .1 1 100px;
 }
 
 .card_more_rgh:hover {
@@ -3390,19 +3431,86 @@ a.image-box:hover .play-icon {
   padding: 3rem 0;
 }
 
+.flex_ti_after {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
 .ti_faith {
   color: var(--white);
   text-align: left;
   margin-bottom: 35px;
-  position: relative;
+  margin-left: 25px;
+  font-size: 1.5rem;
 }
 
 .ti_faith::before {
   content: '';
   position: absolute;
-  width: 3px;
-  height: 15px;
+  top: 6px;
+  width: 5px;
+  left: 0;
+  height: 23px;
   background: linear-gradient(#42a678, #ccc245);
+}
+
+.boxes_cards_words {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.box_card_svcbn {
+  flex: 1 1 230px;
+  height: auto;
+}
+
+.link__steps {
+  position: relative;
+}
+
+.link__steps::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  transition: .3s ease-in;
+}
+
+.link__steps:hover::after {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.img_ca_skjh {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.content_faith_info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.content_faith_info a {
+  font-size: 1.10rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.content_faith_info span {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--font-color-3);
 }
 
 /* Navigation for mobile devices */
@@ -3543,7 +3651,7 @@ a.image-box:hover .play-icon {
   }
   
   .name__sermon {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 8px;
   }
   
@@ -3841,7 +3949,7 @@ a.image-box:hover .play-icon {
   }
   
   .name__sermon {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 8px;
   }
   
@@ -4102,6 +4210,10 @@ a.image-box:hover .play-icon {
   .items_requirements li {
     width: 100%;
   }
+  
+  .content_faith_info a {
+    font-size: 1rem;
+  }
 }
 
 
@@ -4121,5 +4233,9 @@ a.image-box:hover .play-icon {
   .area__content__video {
     height: 290px;
     padding: 0;
+  }
+
+  .card_more_rgh {
+    flex: 1;
   }
 }

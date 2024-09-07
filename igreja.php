@@ -12,7 +12,7 @@ require_once("cabecalho.php");
    $res = $query->fetchAll(PDO::FETCH_ASSOC);
    $total_reg = count($res);
    if ($total_reg > 0) {
-      ?>
+   ?>
       <div class="home__banner">
          <?php
          for ($i = 0; $i < $total_reg; $i++) {
@@ -29,17 +29,17 @@ require_once("cabecalho.php");
 
             $activeClass = $i === 0 ? 'active' : '';
 
-            if($tipo == 'Evento') {
+            if ($tipo == 'Evento') {
                $name_page = 'evento-';
-            } elseif($tipo == 'Mensagem') {
+            } elseif ($tipo == 'Mensagem') {
                $name_page = 'mensagem-';
-            } elseif($tipo == 'Evento com Inscrição') {
+            } elseif ($tipo == 'Evento com Inscrição') {
                $name_page = 'evento-com-inscricao-';
             } else {
                $name_page = 'evento-';
             }
 
-            ?>
+         ?>
             <img class="image__banner <?php echo $activeClass ?>" src="sistema/img/eventos/<?php echo $banner ?>" alt="">
             <div class="area__banner">
                <div class="content <?php echo $activeClass ?>">
@@ -61,6 +61,11 @@ require_once("cabecalho.php");
                </div>
             </div>
          <?php } ?>
+
+         <div class="area_arrows_prev_next">
+            <i id="prev" class="ri-arrow-left-s-line icon_slider_banner_pre"></i>
+            <i id="next" class="ri-arrow-right-s-line icon_slider_banner_next"></i>
+         </div>
 
          <div class="slider__navegation">
             <div class="nav__slider active"></div>
@@ -113,7 +118,7 @@ require_once("cabecalho.php");
                   $total_reg = count($res);
                   if ($total_reg > 0) {
 
-                     ?>
+                  ?>
                      <?php
                      for ($i = 0; $i < $total_reg; $i++) {
                         foreach ($res[$i] as $key => $value) {
@@ -124,7 +129,7 @@ require_once("cabecalho.php");
                         $hora = $res[$i]['hora'];
                         $count = 1 + ($i * 1);
 
-                        ?>
+                     ?>
                         <div class="worship swiper-slide">
                            <div class="name__worship">
 
@@ -140,7 +145,7 @@ require_once("cabecalho.php");
                               <p class="descrition__worship"><?php echo $dia ?> às <?php echo $hora ?></p>
                            </div>
                         </div>
-                     <?php }
+                  <?php }
                   } ?>
                </div>
             </div>
@@ -268,7 +273,7 @@ require_once("cabecalho.php");
                $url = $res[$i]['url'];
                $video = $res[$i]['video'];
 
-               ?>
+         ?>
                <a href="mensagem-<?php echo $url ?>" class="box__live">
                   <img class="image__sermon active" src="sistema/img/eventos/<?php echo $imagem ?>" alt="">
                   <div class="area__content__video">
@@ -295,7 +300,7 @@ require_once("cabecalho.php");
                      </div>
                   </div>
                </a>
-            <?php }
+         <?php }
          } ?>
       </section>
       <div class="area__link__more">
