@@ -219,7 +219,7 @@ if ($pag == "") {
 
                     <ul class="profile-link">
                         <li>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalPerfil">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#modalPerfil">
                                 <i class='bi bi-person-gear icon'></i>
                                 Editar Dados
                             </a>

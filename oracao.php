@@ -1,8 +1,5 @@
 <?php
-require_once("sistema/conexao.php");
-session_start();
-
-$id_igreja = @$_SESSION['id_igreja'];
+require_once("cabecalho.php");
 
 ?>
 
@@ -18,6 +15,11 @@ $id_igreja = @$_SESSION['id_igreja'];
 </head>
 
 <body>
+    <style>
+        #form_prayer {
+            margin-top: 20%;
+        }
+    </style>
     <form method="POST" id="form_prayer">
         <label for="">Nome</label>
         <input type="text" name="nome" id="nome"><br>
@@ -49,9 +51,6 @@ $id_igreja = @$_SESSION['id_igreja'];
         <input type="text" name="descricao" id="descricao">
 
         <div id="mensagem"></div>
-
-        <input type="hidden" name="id" id="id">
-        <input type="hidden" name="igreja" id="igreja" value="<?php echo $id_igreja ?>">
 
         <input type="submit">
 

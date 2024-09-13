@@ -53,6 +53,9 @@ if (@$dadosIgreja == 'ocultar') {
                         $video = $res[$i]['video'];
                         $email = $res[$i]['email'];
                         $id = $res[$i]['id'];
+                        $youtube = $res[$i]['youtube'];
+                        $instagram = $res[$i]['instagram'];
+                        $facebook = $res[$i]['facebook'];
 
                         $logo_rel = $res[$i]['logo_rel'];
                         $cab_rel = $res[$i]['cab_rel'];
@@ -106,7 +109,8 @@ if (@$dadosIgreja == 'ocultar') {
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                            '<?php echo $pastor ?>', '<?php echo $video ?>', '<?php echo $email ?>')">
+                                            '<?php echo $pastor ?>', '<?php echo $video ?>', '<?php echo $email ?>','<?php echo $youtube ?>',
+                                            '<?php echo $instagram ?>', '<?php echo $facebook ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -211,9 +215,24 @@ if (@$dadosIgreja == 'ocultar') {
                                             placeholder="https://www.youtube.com/embed/iq0_NMs6DIU?si=o2fBWMu5eCb06oA8">
                                     </div>
 
-                                    <div class="input-field">
+                                    <div class="input-field flex_int_9">
                                         <label>E-mail da Igreja</label>
                                         <input type="email" name="email" id="email" placeholder="Email da Igreja">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>YouTube</label>
+                                        <input type="text" name="youtube" id="youtube" placeholder="Link do canal do YouTube">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Instagram</label>
+                                        <input type="text" name="instagram" id="instagram" placeholder="Link do Instagram">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Facebook</label>
+                                        <input type="text" name="facebook" id="facebook" placeholder="Link do facebook">
                                     </div>
 
                                     <div class="area_photo">
@@ -504,7 +523,7 @@ if (@$dadosIgreja == 'ocultar') {
 
 
 <script type="text/javascript">
-    function editar(id, nome, telefone, endereco, foto, pastor, video, email) {
+    function editar(id, nome, telefone, endereco, foto, pastor, video, email, youtube, instagram, facebook) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#telefone').val(telefone);
@@ -513,6 +532,9 @@ if (@$dadosIgreja == 'ocultar') {
         $('#target').attr('src', '../img/igrejas/' + foto);
         $('#video').val(video);
         $('#email').val(email);
+        $('#youtube').val(youtube);
+        $('#instagram').val(instagram);
+        $('#facebook').val(facebook);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -560,6 +582,9 @@ if (@$dadosIgreja == 'ocultar') {
         $('#nome').val('');
         $('#telefone').val('');
         $('#endereco').val('');
+        $('#youtube').val('');
+        $('#instagram').val('');
+        $('#facebook').val('');
 
         document.getElementById("pastor").options.selectedIndex = 0;
         $('#pastor').val($('#pastor').val()).change();

@@ -3,7 +3,11 @@ function alertaTempo(msg) {
     icon: "error",
     title: '<span class="txt_msg">' + msg + '</span>',
     showConfirmButton: false,
-    html: `<a href="index.php?pag=inicial" class="txt_sweet_alert">OK</a>`
+    html: `<a href="index.php?pag=inicial" class="txt_sweet_alert">OK</a>`,
+    allowOutsideClick: true,
+      willClose: () => {
+        window.location.href= `index.php?pag=inicial`
+      }
   });
   /* let timerInterval;
   Swal.fire({

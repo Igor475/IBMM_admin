@@ -18,7 +18,7 @@ if (@$_FILES['img1']['name'] == ""){
 
 $imagem_temp = @$_FILES['img1']['tmp_name']; 
 $ext = pathinfo($img1, PATHINFO_EXTENSION);   
-if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png'){ 
+if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png' or $ext == 'webp'){ 
 	move_uploaded_file($imagem_temp, $caminho);
 }else{
 	echo 'Extensão de Imagem não permitida para a imagem da Logo!. Somente JPG para os Relatórios';
@@ -41,7 +41,7 @@ if (@$_FILES['img2']['name'] == ""){
 
 $imagem_temp = @$_FILES['img2']['tmp_name']; 
 $ext = pathinfo($img2, PATHINFO_EXTENSION);   
-if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png'){ 
+if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png' or $ext == 'webp'){ 
 	move_uploaded_file($imagem_temp, $caminho);
 }else{
 	echo 'Extensão de Imagem não permitida para a imagem do Cabeçalho. Somente JPG para os Relatórios';
@@ -65,7 +65,7 @@ if (@$_FILES['img3']['name'] == ""){
 
 $imagem_temp = @$_FILES['img3']['tmp_name']; 
 $ext = pathinfo($img3, PATHINFO_EXTENSION);   
-if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png'){ 
+if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png' or $ext == 'webp'){ 
 	move_uploaded_file($imagem_temp, $caminho);
 }else{
 	echo 'Extensão de Imagem não permitida para a imagem da Carteirinha. Somente JPG para os Relatórios';
@@ -89,7 +89,7 @@ if (@$_FILES['img4']['name'] == ""){
 
 $imagem_temp = @$_FILES['img4']['tmp_name']; 
 $ext = pathinfo($img4, PATHINFO_EXTENSION);   
-if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png'){ 
+if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png' or $ext == 'webp'){ 
 	move_uploaded_file($imagem_temp, $caminho);
 }else{
 	echo 'Extensão de Imagem não permitida para a imagem da Carteirinha. Somente JPG para os Relatórios';
@@ -113,7 +113,7 @@ if (@$_FILES['img5']['name'] == ""){
 
 $imagem_temp = @$_FILES['img5']['tmp_name']; 
 $ext = pathinfo($img5, PATHINFO_EXTENSION);   
-if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png'){ 
+if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png' or $ext == 'webp'){ 
 	move_uploaded_file($imagem_temp, $caminho);
 }else{
 	echo 'Extensão de Imagem não permitida para a imagem da Carteirinha. Somente JPG para os Relatórios';
@@ -138,7 +138,7 @@ if (@$_FILES['img6']['name'] == ""){
 
 $imagem_temp = @$_FILES['img6']['tmp_name']; 
 $ext = pathinfo($img6, PATHINFO_EXTENSION);   
-if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png'){ 
+if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png' or $ext == 'webp'){ 
 	move_uploaded_file($imagem_temp, $caminho);
 }else{
 	echo 'Extensão de Imagem não permitida para a imagem da Carteirinha. Somente JPG para os Relatórios';

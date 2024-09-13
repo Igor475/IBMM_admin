@@ -54,35 +54,62 @@ window.addEventListener("scroll", () => {
 })
 
 
-const btns = document.querySelectorAll(".nav__slider");
-const slides = document.querySelectorAll(".image__banner");
-const contents = document.querySelectorAll(".content");
+// SCRIPTS DOS SLIDERS
+let currentIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const indicators = document.querySelectorAll('.indicator');
+const prev = document.querySelector('.prev');
+const next = document.querySelector('.next');
+let autoplayInterval;
 
-
-var sliderNav = function (manual) {
-   btns.forEach((btn) => {
-      btn.classList.remove("active");
-   });
-
-   slides.forEach((slide) => {
-      slide.classList.remove("active");
-   });
-
-   contents.forEach((content) => {
-      content.classList.remove("active");
-   })
-
-
-   btns[manual].classList.add("active");
-   slides[manual].classList.add("active");
-   contents[manual].classList.add("active");
+// Função para exibir o slide
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active_slider', i === index);
+        indicators[i].classList.toggle('active_slider', i === index);
+    });
 }
 
-btns.forEach((btn, i) => {
-   btn.addEventListener("click", () => {
-      sliderNav(i);
-   });
+// Próximo slide
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+}
+
+// Slide anterior
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+}
+
+// Reiniciar autoplay quando o usuário navegar manualmente
+function resetAutoplay() {
+    clearInterval(autoplayInterval);
+    autoplayInterval = setInterval(nextSlide, 5000); // Reinicia o intervalo
+}
+
+// Setas de navegação
+prev.addEventListener('click', () => {
+    prevSlide();
+    resetAutoplay(); // Reiniciar o autoplay
 });
+
+next.addEventListener('click', () => {
+    nextSlide();
+    resetAutoplay(); // Reiniciar o autoplay
+});
+
+// Indicadores
+indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+        currentIndex = index;
+        showSlide(currentIndex);
+        resetAutoplay(); // Reiniciar o autoplay
+    });
+});
+
+// Iniciar o autoplay
+autoplayInterval = setInterval(nextSlide, 5000);
 
 
 

@@ -34,6 +34,8 @@ $limitar_tesoureiro = 'Sim'; //Se tiver sim, o tesoureiro não poderá excluir e
 $relatorio_pdf = 'Sim'; //SE ESSA OPÇÃO ESTIVER NÃO, O RELATÓRIO SERÁ GERADO EM HTML
 $cabecalho_rel_img = 'Sim'; /* SE ESSA OPÇÃO ESTIVER SIM, O RELATORIO TERA UMA IMAGEM NO CABECALHO, 
 CADA IGREJA DEVERA SUBIR A SUA IMAGEM JPG NO CADASTRO DE IGREJAS */
+$itens_por_pagina = 6;
+$itens_por_pagina_message = 6;
 
 
 $escolher_usuario = 'Sim';
@@ -121,7 +123,8 @@ if($total_reg == 0) {
         endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema', 
         qtd_tarefas = '$quantidade_tarefas', limitar_tesoureiro = '$limitar_tesoureiro',
         relatorio_pdf = '$relatorio_pdf', cabecalho_rel_img = '$cabecalho_rel_img', 
-        escolher_usuario = '$escolher_usuario', usuario_celula = '$usuario_celula' ");
+        escolher_usuario = '$escolher_usuario', usuario_celula = '$usuario_celula', 
+        itens_por_pagina = '$itens_por_pagina', itens_por_pagina_message = '$itens_por_pagina_message' ");
 }
 
 
@@ -138,4 +141,6 @@ $relatorio_pdf = $res[0]['relatorio_pdf'];
 $cabecalho_rel_img = $res[0]['cabecalho_rel_img'];
 $choose_user = $res[0]['escolher_usuario'];
 $user_cel = $res[0]['usuario_celula'];
+$itens_por_pagina = $res[0]['itens_por_pagina'];
+$itens_por_pagina_message = $res[0]['itens_por_pagina_message'];
 ?>

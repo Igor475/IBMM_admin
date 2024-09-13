@@ -1,150 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--=============== REMIXICONS ===============-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <title>IBMM</title>
+require_once("cabecalho.php");
 
-    <script src="assets/js/swiper-bundle.min.js"></script>
-</head>
+if (@$_GET['pagina'] != null) {
+    $pag = $_GET['pagina'];
+} else {
+    $pag = 0;
+}
 
-<body>
-    <!--==================== HEADER ====================-->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav__logo">
-                <img width="100%" src="assets/img/Logo-IBMM.png" alt="">
-            </a>
+$limite = $pag * $itens_por_pagina_message;
+$pagina = $pag;
+$nome_pag = 'mensagens.php';
 
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Home</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Quem Somos</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Células</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Mensagens</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Ministérios</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Eventos</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Contato</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="donation">Doação</a>
-                    </li>
-
-                    <div class="media__icons__reponsive">
-                        <a href="#" class="link__media__responsive">
-                            <i class="ri-facebook-fill"></i>
-                        </a>
-                        <a href="" class="link__media__responsive">
-                            <i class="ri-instagram-fill"></i>
-                        </a>
-                        <a href="" class="link__media__responsive">
-                            <i class="ri-twitter-x-fill"></i>
-                        </a>
-                    </div>
-                </ul>
-
-                <!-- Close button -->
-                <div class="nav__close" id="nav-close">
-                    <i class="ri-close-line"></i>
-                </div>
-            </div>
-
-            <div class="nav__actions">
-                <div class="nav__donation">
-                    <a href="" class="link__donation" id="donation">Doação</a>
-                </div>
-                <!-- Search button -->
-                <i class="ri-search-line nav__search" id="search-btn"></i>
-
-                <!-- Login button -->
-                <i class="ri-user-line nav__login" id="login-btn"></i>
-
-                <!-- Toggle button -->
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class="ri-menu-line"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!--==================== SEARCH ====================-->
-    <div class="search" id="search">
-        <form action="" class="search__form">
-            <i class="ri-search-line search__icon"></i>
-            <input type="search" placeholder="Pesquisar..." class="search__input">
-        </form>
-
-        <i class="ri-close-line search__close" id="search-close"></i>
-    </div>
-
-    <!--==================== LOGIN ====================-->
-    <div class="login" id="login">
-        <form action="" class="login__form">
-            <div class="login__image">
-                <img class="login__img" src="assets/img/logo-IBMM-preta.png">
-            </div>
-
-            <div class="login__group">
-                <div>
-                    <label for="email" class="login__label">Email</label>
-                    <input type="email" placeholder="Digite seu E-mail" id="email" class="login__input">
-                </div>
-
-                <div>
-                    <label for="password" class="login__label">Senha</label>
-                    <input type="password" placeholder="Sua Senha" id="password" class="login__input">
-                </div>
-            </div>
-
-            <div>
-                <a href="#" class="login__forgot">
-                    Esqueceu sua senha?
-                </a>
-
-                <button type="submit" class="login__button">Entrar</button>
-            </div>
-        </form>
-
-        <i class="ri-close-line login__close" id="login-close"></i>
-    </div>
-
-    <section class="container_widget_plans">
-        <div class="content_widget container">
-            <div class="area_title_c">
-                <div class="area_content_widget">
-                    <h3 class="title_cx">Mensagens</h3>
-                </div>
+?>
+<section class="container_widget_plans">
+    <div class="content_widget container">
+        <div class="area_title_c">
+            <div class="area_content_widget">
+                <h3 class="title_cx">Mensagens</h3>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
+<div class="main__back">
     <section class="in_widget container in_message">
         <div class="show_messages">
             <h1 class="title_messages">Assista nossas mensagens</h1>
@@ -167,82 +46,141 @@
 
     <section class="prin_message">
         <div class="message_des container">
-            Imagem Recomendada 400x200
-            <a href="#" class="image-box">
-                <div class="image-container-sermon">
-                    <img src="assets/img/banner-3.jpg" alt="Imagem de vídeo">
-                    <i class="bi bi-play play-icon"></i>
-                    <div class="text-container-sermon">
-                        <span>Última Mensagem</span>
-                        <h3>Pr. Marcos Ângelo</h3>
+            <?php
+            $query_main = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
+                    and tipo = 'Mensagem' order by data_evento desc, id desc LIMIT 1");
+            $res_main = $query_main->fetchAll(PDO::FETCH_ASSOC);
+            $total_reg_main = count($res_main);
+
+            if ($total_reg_main > 0) {
+                for ($i_m = 0; $i_m < $total_reg_main; $i_m++) {
+                    foreach ($res_main[$i_m] as $key => $value_main) {
+                    }
+                    $titulo_main = $res_main[$i_m]['titulo'];
+                    $subtitulo_main = $res_main[$i_m]['subtitulo'];
+                    $descricao1_main = $res_main[$i_m]['descricao1'];
+                    $data_evento_main = $res_main[$i_m]['data_evento'];
+                    $id_main = $res_main[$i_m]['id'];
+                    $banner_main = $res_main[$i_m]['banner'];
+                    $imagem_main = $res_main[$i_m]['imagem'];
+                    $url_main = $res_main[$i_m]['url'];
+                    $video_main = $res_main[$i_m]['video'];
+                    $pregador_main = $res_main[$i_m]['pregador'];
+
+
+                    $query_preg = $pdo->query("SELECT * FROM usuarios where igreja = '$id_igreja'");
+                    $res_preg = $query_preg->fetchAll(PDO::FETCH_ASSOC);
+                    $total_reg_preg = count($res_preg);
+                    if ($total_reg_preg > 0) {
+                        $nome_pregador = $res_preg[0]['nome'];
+                    } else {
+                        $nome_pregador = '';
+                    }
+
+
+            ?>
+                    Imagem Recomendada 400x200
+                    <a href="mensagem-<?php echo $url_main ?>" class="image-box">
+                        <div class="image-container-sermon">
+                            <img src="sistema/img/eventos/<?php echo $imagem_main ?>" alt="Imagem de vídeo">
+                            <i class="bi bi-play play-icon"></i>
+                            <div class="text-container-sermon">
+                                <span>Última mensagem</span>
+                                <h3><?php echo $titulo_main ?></h3>
+                            </div>
+                        </div>
+                    </a>
+            <?php }
+            } ?>
+        </div>
+    </section>
+</div>
+
+<section class="area_messages">
+    <div class="title mess_mr">Mais Mensagens</div>
+
+    <div class="boxes_messages container">
+        <?php
+        $query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
+                and tipo = 'Mensagem' order by data_evento desc, id desc LIMIT $limite, $itens_por_pagina_message");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        $total_reg = count($res);
+
+        if ($total_reg > 0) {
+            for ($i = 0; $i < $total_reg; $i++) {
+                foreach ($res[$i] as $key => $value) {}
+
+                if ($i === 0 && $pagina == 0) {
+                    continue;
+                }
+                    $titulo = $res[$i]['titulo'];
+                    $subtitulo = $res[$i]['subtitulo'];
+                    $descricao1 = $res[$i]['descricao1'];
+                    $data_evento = $res[$i]['data_evento'];
+                    $id = $res[$i]['id'];
+                    $banner = $res[$i]['banner'];
+                    $imagem = $res[$i]['imagem'];
+                    $url = $res[$i]['url'];
+                    $video = $res[$i]['video'];
+                    $pregador = $res[$i]['pregador'];
+                    
+
+                //TOTALIZANDO AS PÁGINAS
+                $query_cont = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
+                and tipo = 'Mensagem'");
+                $res_cont = $query_cont->fetchAll(PDO::FETCH_ASSOC);
+                $total_cont = count($res_cont);
+                $num_paginas = ceil($total_cont / $itens_por_pagina_message);
+
+
+        ?>
+                <a href="mensagem-<?php echo $url ?>" class="link_message">
+                    <div class="box_img_mesage">
+                        <img src="sistema/img/eventos/<?php echo $imagem ?>" alt="" class="image_me">
                     </div>
-                </div>
-            </a>
-        </div>
-    </section>
 
-    <section class="area_messages">
-        <div class="title">Mais Mensagens</div>
+                    <div class="info_message">
+                        <h3 class="title_message"><?php echo $titulo ?></h3>
+                        <span class="date_me"><?php echo $data_evento ?></span>
+                    </div>
+                </a>
+        <?php }
+        } ?>
+    </div>
 
-        <div class="boxes_messages container">
-            <a href="#" class="link_message">
-                <div class="box_img_mesage">
-                    <img src="assets/img/celulas.png" alt="" class="image_me">
-                </div>
+    <div class="events__pagination">
+        <a href="<?php echo $nome_pag ?>?pagina=0" class="pagination__link__1">
+            <div class="pagination__items">
+                <i class="ri-arrow-left-s-line"></i>
+                <span>Anterior</span>
+            </div>
+        </a>
 
-                <div class="info_message">
-                    <h3 class="title_message">Culto ao Vivo | Domingo | Ceia do Senhor</h3>
-                    <span class="date_me">04 de Agosto</span>
-                </div>
-            </a>
+        <?php
+        for ($i = 0; $i < @$num_paginas; $i++) {
 
-            <a href="#" class="link_message">
-                <div class="box_img_mesage">
-                    <img src="assets/img/seja membro.jpg" alt="" class="image_me">
-                </div>
+            if ($pagina == $i) {
+                $estilo = 'txt_num_pag_1';
+            } else {
+                $estilo = 'txt_num_pag_2';
+            }
 
-                <div class="info_message">
-                    <h3 class="title_message">Culto ao Vivo | Domingo | Ceia do Senhor</h3>
-                    <span class="date_me">04 de Agosto</span>
-                </div>
-            </a>
+            if ($pagina >= ($i - 2) && $pagina <= ($i + 2)) { ?>
+                <a class="<?php echo $estilo ?>" href="<?php echo $nome_pag ?>?pagina=<?php echo $i ?>"><?php echo $i + 1 ?></a>
 
-            <a href="#" class="link_message">
-                <div class="box_img_mesage">
-                    <img src="assets/img/pontos-2.png" alt="" class="image_me">
-                </div>
+        <?php }
+        } ?>
 
-                <div class="info_message">
-                    <h3 class="title_message">Culto ao Vivo | Domingo | Ceia do Senhor</h3>
-                    <span class="date_me">04 de Agosto</span>
-                </div>
-            </a>
+        <a href="<?php echo $nome_pag ?>?pagina=<?php echo $num_paginas - 1 ?>" class="pagination__link__2">
+            <div class="pagination__items">
+                <span>Próximo</span>
+                <i class="ri-arrow-right-s-line"></i>
+            </div>
+        </a>
+    </div>
+</section>
 
-            <a href="#" class="link_message">
-                <div class="box_img_mesage">
-                    <img src="assets/img/pontos-2.png" alt="" class="image_me">
-                </div>
-
-                <div class="info_message">
-                    <h3 class="title_message">Culto ao Vivo | Domingo | Ceia do Senhor</h3>
-                    <span class="date_me">04 de Agosto</span>
-                </div>
-            </a>
-
-            <a href="#" class="link_message">
-                <div class="box_img_mesage">
-                    <img src="assets/img/pontos-2.png" alt="" class="image_me">
-                </div>
-
-                <div class="info_message">
-                    <h3 class="title_message">Culto ao Vivo | Domingo | Ceia do Senhor</h3>
-                    <span class="date_me">04 de Agosto</span>
-                </div>
-            </a>
-        </div>
-    </section>
-
-
+<?php require_once("rodape.php") ?>
 
 </body>
 

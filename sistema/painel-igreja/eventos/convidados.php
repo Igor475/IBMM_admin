@@ -7,6 +7,10 @@ $convidado1 = @$_POST['convidado1'];
 $convidado2 = @$_POST['convidado2'];
 $convidado3 = @$_POST['convidado3'];
 $convidado4 = @$_POST['convidado4'];
+$descr_conv1 = $_POST['descr_conv1'];
+$descr_conv2 = $_POST['descr_conv2'];
+$descr_conv3 = $_POST['descr_conv3'];
+$descr_conv4 = $_POST['descr_conv4'];
 
 
 
@@ -95,7 +99,7 @@ if (@$_FILES['imagem4']['name'] == ""){
 
 $imagem_temp = @$_FILES['imagem4']['tmp_name']; 
 $ext = pathinfo($imagem4, PATHINFO_EXTENSION);   
-if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png'){ 
+if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png' or $ext == 'webp'){ 
 	move_uploaded_file($imagem_temp, $caminho);
 }else{
 	echo 'Extensão de Imagem não permitida para a imagem da Logo!. Somente JPG para os Relatórios';
@@ -110,11 +114,18 @@ if($ext == 'jpg' or $ext == 'jpeg' or $ext == 'png'){
 
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET convidado1 = :convidado1, convidado2 = :convidado2, 
-        convidado3 = :convidado3, convidado4 = :convidado4");
+        convidado3 = :convidado3, convidado4 = :convidado4, descr_conv1 = :descr_conv1, descr_conv2 = :descr_conv2, 
+        descr_conv3 = :descr_conv3, descr_conv4 = :descr_conv4, imagem1 = '$imagem1', imagem2 = '$imagem2',
+        imagem3 = '$imagem3', imagem4 = '$imagem4'");
+
     $query->bindValue(":convidado1", $convidado1);
     $query->bindValue(":convidado2", $convidado2);
     $query->bindValue(":convidado3", $convidado3);
     $query->bindValue(":convidado4", $convidado4);
+    $query->bindValue(":descr_conv1", $descr_conv1);
+    $query->bindValue(":descr_conv2", $descr_conv2);
+    $query->bindValue(":descr_conv3", $descr_conv3);
+    $query->bindValue(":descr_conv4", $descr_conv4);
     $query->execute();
 
 } else {
@@ -127,12 +138,17 @@ if ($id == "" || $id == 0) {
         }
     
         $query = $pdo->prepare("UPDATE $pagina SET convidado1 = :convidado1, convidado2 = :convidado2, 
-            convidado3 = :convidado3, convidado4 = :convidado4, imagem1 = :imagem1 where id = :id");
+            convidado3 = :convidado3, convidado4 = :convidado4, descr_conv1 = :descr_conv1, descr_conv2 = :descr_conv2, 
+        descr_conv3 = :descr_conv3, descr_conv4 = :descr_conv4, imagem1 = :imagem1 where id = :id");
         $query->bindValue(":convidado1", $convidado1);
         $query->bindValue(":convidado2", $convidado2);
         $query->bindValue(":convidado3", $convidado3);
         $query->bindValue(":convidado4", $convidado4);
         $query->bindValue(":imagem1", $imagem1);
+        $query->bindValue(":descr_conv1", $descr_conv1);
+        $query->bindValue(":descr_conv2", $descr_conv2);
+        $query->bindValue(":descr_conv3", $descr_conv3);
+        $query->bindValue(":descr_conv4", $descr_conv4);
         $query->bindValue(":id", $id);
         $query->execute();
     
@@ -145,12 +161,17 @@ if ($id == "" || $id == 0) {
         }
     
         $query = $pdo->prepare("UPDATE $pagina SET convidado1 = :convidado1, convidado2 = :convidado2, 
-            convidado3 = :convidado3, convidado4 = :convidado4, imagem2 = :imagem2 where id = :id");
+            convidado3 = :convidado3, convidado4 = :convidado4, descr_conv1 = :descr_conv1, descr_conv2 = :descr_conv2, 
+        descr_conv3 = :descr_conv3, descr_conv4 = :descr_conv4, imagem2 = :imagem2 where id = :id");
         $query->bindValue(":convidado1", $convidado1);
         $query->bindValue(":convidado2", $convidado2);
         $query->bindValue(":convidado3", $convidado3);
         $query->bindValue(":convidado4", $convidado4);
         $query->bindValue(":imagem2", $imagem2);
+        $query->bindValue(":descr_conv1", $descr_conv1);
+        $query->bindValue(":descr_conv2", $descr_conv2);
+        $query->bindValue(":descr_conv3", $descr_conv3);
+        $query->bindValue(":descr_conv4", $descr_conv4);
         $query->bindValue(":id", $id);
         $query->execute();
 
@@ -163,12 +184,17 @@ if ($id == "" || $id == 0) {
         }
     
         $query = $pdo->prepare("UPDATE $pagina SET convidado1 = :convidado1, convidado2 = :convidado2, 
-            convidado3 = :convidado3, convidado4 = :convidado4, imagem3 = :imagem3 where id = :id");
+            convidado3 = :convidado3, convidado4 = :convidado4, descr_conv1 = :descr_conv1, descr_conv2 = :descr_conv2, 
+        descr_conv3 = :descr_conv3, descr_conv4 = :descr_conv4, imagem3 = :imagem3 where id = :id");
         $query->bindValue(":convidado1", $convidado1);
         $query->bindValue(":convidado2", $convidado2);
         $query->bindValue(":convidado3", $convidado3);
         $query->bindValue(":convidado4", $convidado4);
         $query->bindValue(":imagem3", $imagem3);
+        $query->bindValue(":descr_conv1", $descr_conv1);
+        $query->bindValue(":descr_conv2", $descr_conv2);
+        $query->bindValue(":descr_conv3", $descr_conv3);
+        $query->bindValue(":descr_conv4", $descr_conv4);
         $query->bindValue(":id", $id);
         $query->execute();
 
@@ -181,27 +207,36 @@ if ($id == "" || $id == 0) {
         }
 
         $query = $pdo->prepare("UPDATE $pagina SET convidado1 = :convidado1, convidado2 = :convidado2, 
-            convidado3 = :convidado3, convidado4 = :convidado4, imagem4 = :imagem4 where id = :id");
+            convidado3 = :convidado3, convidado4 = :convidado4, descr_conv1 = :descr_conv1, descr_conv2 = :descr_conv2, 
+        descr_conv3 = :descr_conv3, descr_conv4 = :descr_conv4, imagem4 = :imagem4 where id = :id");
         $query->bindValue(":convidado1", $convidado1);
         $query->bindValue(":convidado2", $convidado2);
         $query->bindValue(":convidado3", $convidado3);
         $query->bindValue(":convidado4", $convidado4);
         $query->bindValue(":imagem4", $imagem4);
+        $query->bindValue(":descr_conv1", $descr_conv1);
+        $query->bindValue(":descr_conv2", $descr_conv2);
+        $query->bindValue(":descr_conv3", $descr_conv3);
+        $query->bindValue(":descr_conv4", $descr_conv4);
         $query->bindValue(":id", $id);
         $query->execute();
 
     } else {
         $query = $pdo->prepare("UPDATE $pagina SET convidado1 = :convidado1, convidado2 = :convidado2, 
-            convidado3 = :convidado3, convidado4 = :convidado4 WHERE id = :id");
+            convidado3 = :convidado3, convidado4 = :convidado4, descr_conv1 = :descr_conv1, descr_conv2 = :descr_conv2, 
+        descr_conv3 = :descr_conv3, descr_conv4 = :descr_conv4 WHERE id = :id");
         $query->bindValue(":convidado1", $convidado1);
         $query->bindValue(":convidado2", $convidado2);
         $query->bindValue(":convidado3", $convidado3);
         $query->bindValue(":convidado4", $convidado4);
+        $query->bindValue(":descr_conv1", $descr_conv1);
+        $query->bindValue(":descr_conv2", $descr_conv2);
+        $query->bindValue(":descr_conv3", $descr_conv3);
+        $query->bindValue(":descr_conv4", $descr_conv4);
         $query->bindValue(":id", $id);
         $query->execute();
     }
 }
-
 
 echo 'Salvo com Sucesso';
 

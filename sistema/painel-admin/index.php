@@ -108,7 +108,7 @@ if ($pag == "") {
 
                     <ul class="profile-link">
                         <li>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalPerfil">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#modalPerfil">
                                 <i class='bi bi-person-gear icon'></i>
                                 Editar Dados
                             </a>
@@ -156,7 +156,7 @@ if ($pag == "") {
                             <span class="text_divider">Principal</span>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-person-circle icon'></i> Pessoas <i
+                            <a href="" class="font_main_index"><i class='bi bi-person-circle icon'></i> Pessoas <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=pastores_presidentes">Pastor Presidente</a></li>
@@ -167,7 +167,7 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-pencil-square icon'></i> Cadastros <i
+                            <a href="" class="font_main_index"><i class='bi bi-pencil-square icon'></i> Cadastros <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=igrejas">Igrejas</a></li>
@@ -179,7 +179,7 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-folder-plus icon'></i> Consultas <i
+                            <a href="" class="font_main_index"><i class='bi bi-folder-plus icon'></i> Consultas <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="index.php?pag=anexos">Anexos / Arquivos</a></li>
@@ -187,7 +187,7 @@ if ($pag == "") {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-folder-symlink icon'></i> Relatórios <i
+                            <a href="" class="font_main_index"><i class='bi bi-folder-symlink icon'></i> Relatórios <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
                                 <li><a href="#">Membros</a></li>
@@ -205,7 +205,7 @@ if ($pag == "") {
                             <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index" data-bs-toggle="modal" data-bs-target="#modalConfig">
+                            <a href="" class="font_main_index" data-bs-toggle="modal" data-bs-target="#modalConfig">
                                 <i class='bi bi-gear icon'></i>Configuração Geral</a>
                         </li>
                         <li>
@@ -441,6 +441,18 @@ if ($pag == "") {
                                     <?php } else { ?>
 
                                     <?php } ?>
+
+                                    <div class="input-field flex_int_8">
+                                        <label>Itens Por Página (site - Eventos)</label>
+                                        <input type="number" name="itens_por_pagina" id="itens_por_pagina"
+                                            value="<?php echo $itens_por_pagina ?>" required />
+                                    </div>
+
+                                    <div class="input-field flex_int_7">
+                                        <label>Itens Por Página (site - Mensagem)</label>
+                                        <input type="number" name="itens_por_pagina_message" id="itens_por_pagina_message"
+                                            value="<?php echo $itens_por_pagina_message ?>" required />
+                                    </div>
 
                                 </div>
                             </div>

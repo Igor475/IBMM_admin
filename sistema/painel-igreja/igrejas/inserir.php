@@ -8,6 +8,9 @@ $telefone = $_POST['telefone'];
 //$pastor = @$_POST['pastor'];
 $video = @$_POST['video'];
 $email = @$_POST['email'];
+$youtube = @$_POST['youtube'];
+$instagram = @$_POST['instagram'];
+$facebook = @$_POST['facebook'];
 $id = @$_POST['id'];
 
 
@@ -48,13 +51,14 @@ if ($id == "" || $id == 0) {
         telefone = :telefone, endereco = :endereco, imagem = '$imagem',
         data_cad = curDate(), matriz = 'Não', logo_rel = 'sem-foto.jpg',
         cab_rel = 'sem-foto.jpg', carteirinha_rel = 'sem-foto.jpg', video = :video, 
-        email = :email");
+        email = :email, youtube = :youtube, instagram = :instagram, facebook = :facebook");
 
 } else {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
         telefone = :telefone, endereco = :endereco,
-        video = :video, email = :email WHERE id = '$id'");
+        video = :video, email = :email, youtube = :youtube, instagram = :instagram, 
+        facebook = :facebook WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -65,7 +69,8 @@ if ($id == "" || $id == 0) {
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
             telefone = :telefone, endereco = :endereco, imagem = '$imagem',
-            video = :video, email = :email WHERE id = '$id'");
+            video = :video, email = :email, youtube = :youtube, instagram = :instagram, 
+            facebook = :facebook WHERE id = '$id'");
     }
 
 }
@@ -76,6 +81,9 @@ $query->bindValue(":telefone", "$telefone");
 $query->bindValue(":endereco", "$endereco");
 $query->bindValue(":video", "$video");
 $query->bindValue(":email", "$email");
+$query->bindValue(":youtube", "$youtube");
+$query->bindValue(":instagram", "$instagram");
+$query->bindValue(":facebook", "$facebook");
 $query->execute();
 
 echo 'Salvo com Sucesso';

@@ -5710,6 +5710,12 @@ textarea.form-control-lg {
   height: 100%;
   margin: 0;
 }
+
+.modal_responsive_scr {
+  height: 600px;
+  overflow-y: scroll;
+}
+
 .modal-fullscreen .modal-content {
   height: 100%;
   border: 0;

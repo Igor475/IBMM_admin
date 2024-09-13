@@ -3,7 +3,7 @@
 
 
 <?php
-require_once ("../conexao.php");
+require_once("../conexao.php");
 $pagina = 'eventos';
 
 if (@$eventos == 'ocultar') {
@@ -31,7 +31,7 @@ if (@$eventos == 'ocultar') {
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
-            ?>
+        ?>
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
@@ -64,8 +64,10 @@ if (@$eventos == 'ocultar') {
                         $obs = $res[$i]['obs'];
                         $id = $res[$i]['id'];
                         $banner = $res[$i]['banner'];
+                        $banner_mobile = $res[$i]['banner_mobile'];
                         $tipo = $res[$i]['tipo'];
-
+                        $pregador = $res[$i]['pregador'];
+                        $hora = $res[$i]['hora_evento'];
 
                         $img1 = $res[$i]['img_1'];
                         $img2 = $res[$i]['img_2'];
@@ -74,11 +76,16 @@ if (@$eventos == 'ocultar') {
                         $img5 = $res[$i]['img_5'];
                         $img6 = $res[$i]['img_6'];
 
-
                         $convidado1 = $res[$i]['convidado1'];
                         $convidado2 = $res[$i]['convidado2'];
                         $convidado3 = $res[$i]['convidado3'];
                         $convidado4 = $res[$i]['convidado4'];
+
+                        $descr_conv1 = $res[$i]['descr_conv1'];
+                        $descr_conv2 = $res[$i]['descr_conv2'];
+                        $descr_conv3 = $res[$i]['descr_conv3'];
+                        $descr_conv4 = $res[$i]['descr_conv4'];
+
                         $imagem1 = $res[$i]['imagem1'];
                         $imagem2 = $res[$i]['imagem2'];
                         $imagem3 = $res[$i]['imagem3'];
@@ -119,11 +126,19 @@ if (@$eventos == 'ocultar') {
                             $nome_usu_cad = '';
                         }
 
+                        $query_con = $pdo->query("SELECT * FROM usuarios where id = '$pregador'");
+                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_con) > 0) {
+                            $name_pregador = $res_con[0]['nome'];
+                        } else {
+                            $name_pregador = '';
+                        }
+
 
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         $data_eventoF = implode('/', array_reverse(explode('-', $data_evento)));
 
-                        ?>
+                    ?>
                         <tr class="column-body <?php echo $inativa ?> <?php echo $classe_item ?>">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
                                 <img class="profile_table" src="../img/eventos/<?php echo $imagem ?>" alt="Perfil"
@@ -154,7 +169,8 @@ if (@$eventos == 'ocultar') {
                                             '<?php echo $titulo ?>', '<?php echo $subtitulo ?>', '<?php echo $descricao1 ?>', 
                                             '<?php echo $descricao2 ?>', '<?php echo $descricao3 ?>', '<?php echo $data_evento ?>', 
                                             '<?php echo $imagem ?>', '<?php echo $video ?>', '<?php echo $banner ?>', 
-                                            '<?php echo $tipo ?>')">
+                                            '<?php echo $tipo ?>', '<?php echo $banner_mobile ?>', '<?php echo $pregador ?>', 
+                                            '<?php echo $hora ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -170,7 +186,7 @@ if (@$eventos == 'ocultar') {
                                             '<?php echo $subtitulo ?>', '<?php echo $descricao1 ?>', '<?php echo $descricao2 ?>', 
                                             '<?php echo $descricao3 ?>', '<?php echo $data_cadF ?>', '<?php echo $data_eventoF ?>', 
                                             '<?php echo $nome_usu_cad ?>', '<?php echo $imagem ?>', '<?php echo $video ?>', 
-                                            '<?php echo $ativo ?>', '<?php echo $obs ?>', '<?php echo $tipo ?>')">
+                                            '<?php echo $ativo ?>', '<?php echo $obs ?>', '<?php echo $tipo ?>', '<?php echo $hora ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -199,7 +215,8 @@ if (@$eventos == 'ocultar') {
                                             <a class="dropdown-item" href="#" onclick="convidado('<?php echo $id ?>', '<?php echo $titulo ?>',
                                             '<?php echo $convidado1 ?>', '<?php echo $convidado2 ?>', '<?php echo $convidado3 ?>', 
                                             '<?php echo $convidado4 ?>', '<?php echo $imagem1 ?>', '<?php echo $imagem2 ?>',
-                                            '<?php echo $imagem3 ?>', '<?php echo $imagem4 ?>')">
+                                            '<?php echo $imagem3 ?>', '<?php echo $imagem4 ?>', '<?php echo $descr_conv1 ?>', 
+                                            '<?php echo $descr_conv2 ?>', '<?php echo $descr_conv3 ?>', '<?php echo $descr_conv4 ?>')">
                                                 <i class="bi bi-person-add icons_actions"></i>
                                                 Convidados</a>
                                         </li>
@@ -231,7 +248,7 @@ if (@$eventos == 'ocultar') {
                 <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
             </div>
             <form id="form" method="post">
-                <div class="modal-body">
+                <div class="modal-body modal_responsive_scr">
                     <div action="#" class="form-modal">
                         <div class="form first">
                             <div class="details personal">
@@ -250,7 +267,7 @@ if (@$eventos == 'ocultar') {
                                         </div>
                                     </div>
 
-                                    <div class="input-field field_area_2">
+                                    <div class="input-field flex_int_11">
                                         <label>Vídeo (Se houver, colocar o link da url do YouTube)</label>
                                         <input type="url" name="video" id="video" placeholder="Url do vídeo">
                                     </div>
@@ -258,15 +275,44 @@ if (@$eventos == 'ocultar') {
                                     <div class="input-field flex_int_4">
                                         <label>Data do Evento</label>
                                         <input type="date" name="data_evento" id="data_evento"
-                                            value="<?php echo date('Y-m-d') ?>" required>
+                                            value="<?php echo date('Y-m-d H:i:s') ?>" required>
                                     </div>
 
                                     <div class="input-field flex_int_4">
+                                        <label>Horário</label>
+                                        <input type="time" name="hora_evento" id="hora_evento" required>
+                                    </div>
+
+                                    <div class="input-field flex_int_13">
                                         <label>Evento / Pregação</label>
                                         <select class="form-select" id="tipo" name="tipo">
                                             <option value="Evento">Evento</option>
                                             <option value="Mensagem">Mensagem</option>
                                             <option value="Evento com Inscrição">Evento com Inscrição</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field flex_int_4">
+                                        <label>Pregador</label>
+                                        <select class="select_preg" id="pregador" name="pregador">
+                                            <option value="0">Selecione um Preletor</option>
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM usuarios order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                            ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                            <?php }
+                                            } ?>
                                         </select>
                                     </div>
 
@@ -296,7 +342,7 @@ if (@$eventos == 'ocultar') {
 
                                     <div class="area_photo_1">
                                         <div class="area_photo_flex">
-                                            <label>Imagem</label>
+                                            <label>Imagem (500 x 500)</label>
                                             <input type="file" class="input_file" id="imagem" name="imagem"
                                                 onChange="carregarImg();">
                                         </div>
@@ -314,6 +360,18 @@ if (@$eventos == 'ocultar') {
                                         </div>
                                         <div class="divImgBanner">
                                             <img class="photo_file_video_image" id="targetBanner"
+                                                src="../img/eventos/sem-foto.jpg" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div class="area_photo_1">
+                                        <div class="area_photo_flex">
+                                            <label>Banner Mobile (768 x 768)</label>
+                                            <input type="file" class="input_file" id="banner_mobile" name="banner_mobile"
+                                                onChange="carregarImgBannerMobile();">
+                                        </div>
+                                        <div class="divImgBanner">
+                                            <img class="photo_file_video_image" id="targetBannerMobile"
                                                 src="../img/eventos/sem-foto.jpg" alt="">
                                         </div>
                                     </div>
@@ -417,6 +475,11 @@ if (@$eventos == 'ocultar') {
                     <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
                     <span class="user_name">Data do Evento: </span>
                     <span class="texts_son" id="evento-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/hour.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Data do Evento: </span>
+                    <span class="texts_son" id="hora-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
@@ -629,6 +692,9 @@ if (@$eventos == 'ocultar') {
                                             <label class="labels_form">Nome Convidado 1</label>
                                             <input type="text" name="convidado1" id="convidado1"
                                                 placeholder="Nome do Convidado">
+
+                                            <input type="text" name="descr_conv1" id="descr_conv1" class="input_descr"
+                                                placeholder="Descrição do Convidado">
                                         </div>
 
                                         <div class="area_photo_guest fo_field">
@@ -650,6 +716,8 @@ if (@$eventos == 'ocultar') {
                                             <label class="labels_form">Nome Convidado 2</label>
                                             <input type="text" name="convidado2" id="convidado2"
                                                 placeholder="Nome do Convidado">
+                                            <input type="text" name="descr_conv2" id="descr_conv2" class="input_descr"
+                                                placeholder="Descrição do Convidado">
                                         </div>
 
                                         <div class="area_photo_guest fo_field">
@@ -671,6 +739,8 @@ if (@$eventos == 'ocultar') {
                                             <label class="labels_form">Nome Convidado 3</label>
                                             <input type="text" name="convidado3" id="convidado3"
                                                 placeholder="Nome do Convidado">
+                                            <input type="text" name="descr_conv3" id="descr_conv3" class="input_descr"
+                                                placeholder="Descrição do Convidado">
                                         </div>
 
                                         <div class="area_photo_guest fo_field">
@@ -693,6 +763,8 @@ if (@$eventos == 'ocultar') {
                                             <label class="labels_form">Nome Convidado 4</label>
                                             <input type="text" name="convidado4" id="convidado4"
                                                 placeholder="Nome do Convidado">
+                                            <input type="text" name="descr_conv4" id="descr_conv4" class="input_descr"
+                                                placeholder="Descrição do Convidado">
                                         </div>
 
                                         <div class="area_photo_guest fo_field">
@@ -749,7 +821,7 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    function editar(id, titulo, subtitulo, descricao1, descricao2, descricao3, data_evento, imagem, video, banner, tipo) {
+    function editar(id, titulo, subtitulo, descricao1, descricao2, descricao3, data_evento, imagem, video, banner, tipo, banner_mobile, pregador, hora) {
         $('#id').val(id);
         $('#titulo').val(titulo);
         $('#subtitulo').val(subtitulo);
@@ -758,11 +830,14 @@ if (@$eventos == 'ocultar') {
         $('#descricao3').val(descricao3);
         $('#data_evento').val(data_evento);
         $('#video').val(video);
+        $('#hora_evento').val(hora);
 
         $('#tipo').val(tipo).change();
+        $('#pregador').val(pregador).change();
 
         $('#target').attr('src', '../img/eventos/' + imagem);
         $('#targetBanner').attr('src', '../img/eventos/' + banner);
+        $('#targetBannerMobile').attr('src', '../img/eventos/' + banner_mobile);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -771,7 +846,7 @@ if (@$eventos == 'ocultar') {
     }
 
 
-    function dados(titulo, subtitulo, descricao1, descricao2, descricao3, data_cad, data_evento, usuario, imagem, video, ativo, obs, tipo) {
+    function dados(titulo, subtitulo, descricao1, descricao2, descricao3, data_cad, data_evento, usuario, imagem, video, ativo, obs, tipo, pregador, hora) {
 
         $('#titulo-dados').text(titulo);
         $('#subtitulo-dados').text(subtitulo);
@@ -781,6 +856,8 @@ if (@$eventos == 'ocultar') {
         $('#ativo-dados').text(ativo);
         $('#obs-dados').text(obs);
         $('#tipo-dados').text(tipo);
+        $('#pregador-dados').text(tipo);
+        $('#hora-dados').text(hora);
 
         $('#foto-dados').attr('src', '../img/eventos/' + imagem);
         $('#video-dados').attr('src', video);
@@ -824,9 +901,13 @@ if (@$eventos == 'ocultar') {
         $('#descricao3').val('');
         $('#video').val('');
         $('#data_evento').val(data);
+        $('#tipo').val(tipo).change();
+        $('#pregador').val('').change();
+        $('#hora_evento').val(hora);
 
         $('#target').attr('src', '../img/eventos/sem-foto.jpg');
         $('#targetBanner').attr('src', '../img/eventos/sem-foto.jpg');
+        $('#targetBannerMobile').attr('src', '../img/eventos/sem-foto.jpg');
     }
 
 
@@ -848,12 +929,17 @@ if (@$eventos == 'ocultar') {
     }
 
 
-    function convidado(id, titulo, convidado1, convidado2, convidado3, convidado4, imagem1, imagem2, imagem3, imagem4) {
+    function convidado(id, titulo, convidado1, convidado2, convidado3, convidado4, imagem1, imagem2, imagem3, imagem4, descr_conv1,
+        descr_conv2, descr_conv3, descr_conv4) {
 
         $('#convidado4').val(convidado4);
         $('#convidado3').val(convidado3);
         $('#convidado2').val(convidado2);
         $('#convidado1').val(convidado1);
+        $('#descr_conv1').val(descr_conv1);
+        $('#descr_conv2').val(descr_conv2);
+        $('#descr_conv3').val(descr_conv3);
+        $('#descr_conv4').val(descr_conv4);
         $('#nome-titulo').text(titulo);
         $('#id-convidado').val(id);
 
@@ -879,7 +965,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -900,7 +986,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -920,7 +1006,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -940,7 +1026,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -960,7 +1046,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -980,7 +1066,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -1005,7 +1091,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -1026,7 +1112,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -1046,7 +1132,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -1066,7 +1152,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             target.src = reader.result;
         };
 
@@ -1077,7 +1163,6 @@ if (@$eventos == 'ocultar') {
             target.src = "";
         }
     }
-
 </script>
 
 
@@ -1086,7 +1171,7 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    $("#form-img").submit(function () {
+    $("#form-img").submit(function() {
         event.preventDefault();
         var formData = new FormData(this);
 
@@ -1095,7 +1180,7 @@ if (@$eventos == 'ocultar') {
             type: 'POST',
             data: formData,
 
-            success: function (mensagem) {
+            success: function(mensagem) {
                 $('#mensagem-img').text('');
                 $('#mensagem-img').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
@@ -1128,7 +1213,7 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    $("#form-convidado").submit(function () {
+    $("#form-convidado").submit(function() {
         event.preventDefault();
         var formData = new FormData(this);
 
@@ -1137,7 +1222,7 @@ if (@$eventos == 'ocultar') {
             type: 'POST',
             data: formData,
 
-            success: function (mensagem) {
+            success: function(mensagem) {
                 $('#mensagem-convidado').text('');
                 $('#mensagem-convidado').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
@@ -1167,35 +1252,55 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    
-function carregarImgBanner() {
-    var target = document.getElementById('targetBanner');
-    var file = document.querySelector("#banner").files[0];
-    var arquivo = file['name'];
-    resultado = arquivo.split(".", 2);
+    function carregarImgBanner() {
+        var target = document.getElementById('targetBanner');
+        var file = document.querySelector("#banner").files[0];
+        var arquivo = file['name'];
+        resultado = arquivo.split(".", 2);
 
-    var reader = new FileReader();
+        var reader = new FileReader();
 
-    reader.onloadend = function () {
-        target.src = reader.result;
-    };
+        reader.onloadend = function() {
+            target.src = reader.result;
+        };
 
-    if (file) {
-        reader.readAsDataURL(file);
+        if (file) {
+            reader.readAsDataURL(file);
 
-    } else {
-        target.src = "";
+        } else {
+            target.src = "";
+        }
     }
-}
+
+
+    function carregarImgBannerMobile() {
+        var target = document.getElementById('targetBannerMobile');
+        var file = document.querySelector("#banner_mobile").files[0];
+        var arquivo = file['name'];
+        resultado = arquivo.split(".", 2);
+
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+        } else {
+            target.src = "";
+        }
+    }
 </script>
 
 
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.sel2').select2({
-            dropdownParent: $('#modalTransferir'),
+    $(document).ready(function() {
+        $('.select_preg').select2({
+            dropdownParent: $('#modalForm'),
         });
     });
 </script>

@@ -1,136 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--=============== REMIXICONS ===============-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
-    <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <title>IBMM</title>
-    
-    <script src="assets/js/swiper-bundle.min.js"></script>
-</head>
-<body>
-    <!--==================== HEADER ====================-->
-    <header class="header" id="header">
-        <nav class="nav container">
-        <a href="#" class="nav__logo">
-            <img width="100%" src="assets/img/Logo-IBMM.png" alt="">
-        </a>
+<?php
+require_once("cabecalho.php");
 
-        <div class="nav__menu" id="nav-menu">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <a href="#" class="nav__link">Home</a>
-                </li>
+if (@$_GET['pagina'] != null) {
+    $pag = $_GET['pagina'];
+} else {
+    $pag = 0;
+}
 
-                <li class="nav__item">
-                    <a href="#" class="nav__link">Quem Somos</a>
-                </li>
+$limite = $pag * $itens_por_pagina;
+$pagina = $pag;
+$nome_pag = 'licoes-de-celula.php';
 
-                <li class="nav__item">
-                    <a href="#" class="nav__link">Células</a>
-                </li>
-
-                <li class="nav__item">
-                    <a href="#" class="nav__link">Mensagens</a>
-                </li>
-
-                <li class="nav__item">
-                    <a href="#" class="nav__link">Ministérios</a>
-                </li>
-
-                <li class="nav__item">
-                    <a href="#" class="nav__link">Eventos</a>
-                </li>
-
-                <li class="nav__item">
-                    <a href="#" class="nav__link">Contato</a>
-                </li>
-
-                <li class="nav__item">
-                    <a href="#" class="donation">Doação</a>
-                </li>
-
-                <div class="media__icons__reponsive">
-                    <a href="#" class="link__media__responsive">
-                    <i class="ri-facebook-fill"></i>
-                    </a>
-                    <a href="" class="link__media__responsive">
-                    <i class="ri-instagram-fill"></i>
-                    </a>
-                    <a href="" class="link__media__responsive">
-                    <i class="ri-twitter-x-fill"></i>
-                    </a>
-                </div>
-            </ul>
-
-            <!-- Close button -->
-            <div class="nav__close" id="nav-close">
-                <i class="ri-close-line"></i>
-            </div>
-        </div>
-
-        <div class="nav__actions">
-            <div class="nav__donation">
-                <a href="" class="link__donation" id="donation">Doação</a>
-            </div>
-            <!-- Search button -->
-            <i class="ri-search-line nav__search" id="search-btn"></i>
-
-            <!-- Login button -->
-            <i class="ri-user-line nav__login" id="login-btn"></i>
-
-            <!-- Toggle button -->
-            <div class="nav__toggle" id="nav-toggle">
-                <i class="ri-menu-line"></i>
-            </div>
-        </div>
-        </nav>
-    </header>
-
-    <!--==================== SEARCH ====================-->
-    <div class="search" id="search">
-        <form action="" class="search__form">
-        <i class="ri-search-line search__icon"></i>
-        <input type="search" placeholder="Pesquisar..." class="search__input">
-        </form>
-
-        <i class="ri-close-line search__close" id="search-close"></i>
-    </div>
-
-    <!--==================== LOGIN ====================-->
-    <div class="login" id="login">
-        <form action="" class="login__form">
-        <div class="login__image">
-            <img class="login__img" src="assets/img/logo-IBMM-preta.png">
-        </div>
-        
-        <div class="login__group">
-            <div>
-                <label for="email" class="login__label">Email</label>
-                <input type="email" placeholder="Digite seu E-mail" id="email" class="login__input">
-            </div>
-            
-            <div>
-                <label for="password" class="login__label">Senha</label>
-                <input type="password" placeholder="Sua Senha" id="password" class="login__input">
-            </div>
-        </div>
-
-        <div>
-            <a href="#" class="login__forgot">
-                Esqueceu sua senha?
-            </a>
-
-            <button type="submit" class="login__button">Entrar</button>
-        </div>
-        </form>
-
-        <i class="ri-close-line login__close" id="login-close"></i>
-    </div>
+?>
 
     <section class="container_widget_sv">
         <div class="content_widget container">
@@ -142,7 +23,7 @@
         </div>
     </section>
 
-    <section class="in_widget container">
+    <section class="in__widget__default container">
         <div class="show_txt">
             <h1 class="title">Nossas Lições</h1>
             <p class="txt__descrition__default">Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
@@ -172,41 +53,87 @@
     <section class="licoes_car">
         <div class="area_licoes_cr container">
             <div class="container__join">
-                <a href="#" class="card__options licao_hover">
-                    <img class="img__options" src="assets/img/bg-image.png" alt="">
+            <?php
+        $query = $pdo->query("SELECT * FROM licoes where igreja = '$id_igreja' order by data desc, id desc LIMIT $limite, $itens_por_pagina");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        $total_reg = count($res);
+
+        if ($total_reg > 0) {
+            for ($i = 0; $i < $total_reg; $i++) {
+                foreach ($res[$i] as $key => $value) {}
+                    $nome = $res[$i]['nome'];
+                    $imagem = $res[$i]['imagem'];
+                    $arquivo = $res[$i]['arquivo'];
+                    $categoria = $res[$i]['categoria_licao'];
+                    $data = $res[$i]['data'];
+                    
+
+                //TOTALIZANDO AS PÁGINAS
+                $query_cont = $pdo->query("SELECT * FROM licoes where igreja = '$id_igreja'");
+                $res_cont = $query_cont->fetchAll(PDO::FETCH_ASSOC);
+                $total_cont = count($res_cont);
+                $num_paginas = ceil($total_cont / $itens_por_pagina);
+
+
+                $query_preg = $pdo->query("SELECT * FROM categoria_licoes where id = '$categoria'");
+                    $res_preg = $query_preg->fetchAll(PDO::FETCH_ASSOC);
+                    $total_reg_preg = count($res_preg);
+                    if ($total_reg_preg > 0) {
+                        $categoria_licao = $res_preg[0]['nome'];
+                    } else {
+                        $categoria_licao = '';
+                    }
+
+
+        ?>
+                <a href="licoes/<?php echo $arquivo ?>" target="_blank" class="card__options licao_hover">
+                    <img class="img__options" src="licoes/<?php echo $imagem ?>" alt="">
                     <div class="box__options">
                         <div class="container_icon_li">
                             <i class="ri-download-line icon_download_li"></i>
                         </div>
-                        <h3 class="title__licao">Voe Alto</h3>
-                        <p class="category_licao">Série Fé</p>
-                        <span class="date_licao">29 de Julho de 2024</span>
+                        <h3 class="title__licao"><?php echo $nome ?></h3>
+                        <p class="category_licao"><?php echo $categoria_licao ?></p>
+                        <span class="date_licao"><?php echo $data ?></span>
                     </div>
                 </a>
-                <a href="#" class="card__options licao_hover">
-                    <img class="img__options" src="assets/img/banner-3.jpg" alt="">
-                    <div class="box__options">
-                        <div class="container_icon_li">
-                            <i class="ri-download-line icon_download_li"></i>
-                        </div>
-                        <h3 class="title__licao">Eis que venho sem demora</h3>
-                        <p class="category_licao">Série Sobrenatural</p>
-                        <span class="date_licao">29 de Julho de 2024</span>
-                    </div>
-                </a>
-                <a href="#" class="card__options licao_hover">
-                    <img class="img__options" src="assets/img/banner-4.jpg" alt="">
-                    <div class="box__options">
-                        <div class="container_icon_li">
-                            <i class="ri-download-line icon_download_li"></i>
-                        </div>
-                        <h3 class="title__licao">Obediência</h3>
-                        <p class="category_licao">Série Viva como Filho de Deus</p>
-                        <span class="date_licao">29 de Julho de 2024</span>
-                    </div>
-                </a>
+                <?php } } ?>
             </div>
         </div>
+
+        <div class="events__pagination">
+        <a href="<?php echo $nome_pag ?>?pagina=0" class="pagination__link__1">
+            <div class="pagination__items">
+                <i class="ri-arrow-left-s-line"></i>
+                <span>Anterior</span>
+            </div>
+        </a>
+
+        <?php
+        for ($i = 0; $i < @$num_paginas; $i++) {
+
+            if ($pagina == $i) {
+                $estilo = 'txt_num_pag_1';
+            } else {
+                $estilo = 'txt_num_pag_2';
+            }
+
+            if ($pagina >= ($i - 2) && $pagina <= ($i + 2)) { ?>
+                <a class="<?php echo $estilo ?>" href="<?php echo $nome_pag ?>?pagina=<?php echo $i ?>"><?php echo $i + 1 ?></a>
+
+        <?php }
+        } ?>
+
+        <a href="<?php echo $nome_pag ?>?pagina=<?php echo $num_paginas - 1 ?>" class="pagination__link__2">
+            <div class="pagination__items">
+                <span>Próximo</span>
+                <i class="ri-arrow-right-s-line"></i>
+            </div>
+        </a>
+    </div>
     </section>
+
+    <?php require_once("rodape.php") ?>
+    
 </body>
 </html>

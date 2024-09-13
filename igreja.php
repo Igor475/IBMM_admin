@@ -2,32 +2,29 @@
 require_once("cabecalho.php");
 
 
-
 ?>
-<section class="home">
-   <?php
 
-   $query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
-      and banner != 'sem-foto.jpg' order by id desc limit 4");
-   $res = $query->fetchAll(PDO::FETCH_ASSOC);
-   $total_reg = count($res);
-   if ($total_reg > 0) {
-   ?>
-      <div class="home__banner">
+<?php
+$query = $pdo->query("SELECT * FROM eventos WHERE igreja = '$id_igreja' AND ativo = 'Sim' AND banner != 'sem-foto.jpg' ORDER BY id DESC LIMIT 4");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = count($res);
+
+if ($total_reg > 0) {
+?>
+   <section class="slider-container">
+      <div class="slider">
          <?php
          for ($i = 0; $i < $total_reg; $i++) {
-            foreach ($res[$i] as $key => $value) {
-            }
             $titulo = $res[$i]['titulo'];
             $subtitulo = $res[$i]['subtitulo'];
-            $data_evento = $res[$i]['data_evento'];
             $id = $res[$i]['id'];
             $banner = $res[$i]['banner'];
+            $banner_mobile = $res[$i]['banner_mobile'];
             $url = $res[$i]['url'];
             $video = $res[$i]['video'];
             $tipo = $res[$i]['tipo'];
 
-            $activeClass = $i === 0 ? 'active' : '';
+            $activeClass = $i === 0 ? 'active_slider' : '';
 
             if ($tipo == 'Evento') {
                $name_page = 'evento-';
@@ -39,45 +36,51 @@ require_once("cabecalho.php");
                $name_page = 'evento-';
             }
 
-         ?>
-            <img class="image__banner <?php echo $activeClass ?>" src="sistema/img/eventos/<?php echo $banner ?>" alt="">
-            <div class="area__banner">
-               <div class="content <?php echo $activeClass ?>">
-                  <h1 class="title__banner"><?php echo $titulo ?></h1>
-                  <p class="descrition__banner"><?php echo $subtitulo ?></p>
-                  <div class="buttons__link">
-                     <?php if ($video != "") { ?>
-                        <a href="#" class="link__banner__icon" onclick="videoBanner('<?php echo $titulo ?>',
-                           '<?php echo $video ?>')">
-                           <i class="ri-play-fill icon__banner"></i>
-                        </a>
-                     <? } else { ?>
 
-                     <?php } ?>
-                     <a href="<?php echo $name_page ?><?php echo $url ?>" class="link__banner">
-                        Ver Mais
+
+         ?>
+         <div class="slide <?php echo $activeClass ?>" style="background-image: url('sistema/img/eventos/<?php echo $banner ?>')">
+            <div class="content">
+               <h2 class="title__banner"><?php echo $titulo ?></h2>
+               <p class="descrition__banner"><?php echo $subtitulo ?></p>
+               <div class="buttons__link">
+                  <?php if ($video != "") { ?>
+                     <a href="#" class="link__banner__icon" onclick="videoBanner('<?php echo $titulo ?>',
+                        '<?php echo $video ?>')">
+                        <i class="ri-play-fill icon__banner"></i>
                      </a>
-                  </div>
+                  <? } else { ?>
+
+                  <?php } ?>
+                  <a href="<?php echo $name_page ?><?php echo $url ?>" class="link__banner">
+                     Ver Mais
+                  </a>
                </div>
             </div>
+            <div class="overlay_on"></div>
+         </div>
          <?php } ?>
-
-         <div class="area_arrows_prev_next">
-            <i id="prev" class="ri-arrow-left-s-line icon_slider_banner_pre"></i>
-            <i id="next" class="ri-arrow-right-s-line icon_slider_banner_next"></i>
-         </div>
-
-         <div class="slider__navegation">
-            <div class="nav__slider active"></div>
-            <div class="nav__slider"></div>
-            <div class="nav__slider"></div>
-            <div class="nav__slider"></div>
-         </div>
       </div>
-   <?php } ?>
-</section>
 
-
+      <div class="navigation">
+         <span class="prev">
+            <img src="assets/img/seta-esquerda.svg" alt="">
+         </span>
+         <span class="next">
+            <img src="assets/img/seta-direita.svg" alt="">
+         </span>
+      </div>
+      <div class="indicators">
+         <?php
+         // Gerar os indicadores dinamicamente
+         for ($i = 0; $i < $total_reg; $i++) {
+            $activeClass = $i === 0 ? 'active_slider' : '';
+         ?>
+            <span class="indicator <?php echo $activeClass ?>" data-slide="0"></span>
+         <?php } // Fim do loop de indicadores ?>
+      </div>
+   </section>
+<?php } ?>
 
 
 <!-- MODAL VÍDEO -->
@@ -128,6 +131,8 @@ require_once("cabecalho.php");
                         $dia = $res[$i]['dia'];
                         $hora = $res[$i]['hora'];
                         $count = 1 + ($i * 1);
+
+                        $hora  = (new DateTime($hora))->format('H:i')
 
                      ?>
                         <div class="worship swiper-slide">
@@ -257,7 +262,7 @@ require_once("cabecalho.php");
       <section class="section__box">
          <?php
          $query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
-                  and tipo = 'Mensagem' order by id desc limit 1");
+                  and tipo = 'Mensagem' order by data_evento desc, id desc limit 1");
          $res = $query->fetchAll(PDO::FETCH_ASSOC);
          $total_reg = count($res);
          if ($total_reg > 0) {
@@ -272,6 +277,17 @@ require_once("cabecalho.php");
                $imagem = $res[$i]['imagem'];
                $url = $res[$i]['url'];
                $video = $res[$i]['video'];
+               $pregador = $res[$i]['pregador'];
+
+
+               $query = $pdo->query("SELECT * FROM usuarios WHERE id = '$pregador'");
+               $res = $query->fetchAll(PDO::FETCH_ASSOC);
+               $total_reg = count($res);
+               if($total_reg > 0) {
+                  $nome_pregador = $res[0]['nome'];
+               } else {
+                  $nome_pregador = '';
+               }
 
          ?>
                <a href="mensagem-<?php echo $url ?>" class="box__live">
@@ -290,7 +306,7 @@ require_once("cabecalho.php");
                         <div class="area__info__video">
                            <div class="name__speaker">
                               <i class="ri-user-line icon__user"></i>
-                              Pr. Osiel Gomes
+                              <?php echo $nome_pregador ?>
                            </div>
                            <div class="date__video">
                               <i class="ri-calendar-schedule-line icon__calendar"></i>
@@ -304,7 +320,7 @@ require_once("cabecalho.php");
          } ?>
       </section>
       <div class="area__link__more">
-         <a href="#" class="more__sermons">
+         <a href="mensagens.php" class="more__sermons">
             <div class="txt__more">
                Ver todos
                <i class="ri-arrow-right-line icon__arrow"></i>
@@ -347,91 +363,10 @@ require_once("cabecalho.php");
       </div>
    </section>
 
-   <footer class="footer__church">
-      <div class="box__footer">
-         <div class="footer__ch">
-
-            <div class="footer__flex">
-               <div class="container__logo__footer">
-                  <div class="logo__footer">
-                     <img src="assets/img/Logo-IBMM.png" alt="" class="img__footer">
-                  </div>
-               </div>
-               <div class="area__footer__1">
-                  <h3 class="title__footer">Contato</h3>
-                  <ul class="items__footer__1">
-                     <li>
-                        <i class="ri-mail-line icon__footer"></i>
-                        contato@ibmissaomultiplicar.com.br
-                     </li>
-                     <li>
-                        <i class="ri-phone-line icon__footer"></i>
-                        (21) 998867793
-                     </li>
-                     <li>
-                        <i class="ri-whatsapp-line icon__footer"></i>
-                        (21) 998867793
-                     </li>
-                     <li>
-                        <i class="ri-map-pin-line icon__footer"></i>
-                        Avenida Brasil, 33.815 Bangu , Rio de Janeiro, RJ, Brazil, 21852-002
-                     </li>
-                  </ul>
-               </div>
-               <div class="area__footer__2">
-                  <h3 class="title__footer">Links Úteis</h3>
-                  <ul class="items__footer__2">
-                     <li>
-                        <a href="#" class="links__footer">
-                           Início
-                        </a>
-                     </li>
-                     <li>
-                        <a href="#" class="links__footer">
-                           ECM
-                        </a>
-                     </li>
-                     <li>
-                        <a href="#" class="links__footer">
-                           Sobre
-                        </a>
-                     </li>
-                     <li>
-                        <a href="#" class="links__footer">
-                           Palavra
-                        </a>
-                     </li>
-                     <li>
-                        <a href="#" class="links__footer">
-                           Notícias
-                        </a>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-         </div>
-         <div class="links__socials">
-            <a href="#" class="socials">
-               <i class="ri-facebook-fill icons__footer__socials"></i>
-            </a>
-            <a href="#" class="socials">
-               <i class="ri-instagram-fill icons__footer__socials"></i>
-            </a>
-            <a href="#" class="socials">
-               <i class="ri-twitter-x-fill icons__footer__socials"></i>
-            </a>
-         </div>
-         <div class="copyright__footer">
-            <span class="txt__copyright">Copyright © 2024 IBMM. All rights reserved. CNPJ: 18.829.333.0001/93</span>
-         </div>
-      </div>
-   </footer>
+   <?php require_once("rodape.php") ?>
+   
 </main>
-
-<!--=============== MAIN JS ===============-->
-<script src="assets/js/main.js"></script>
 </body>
-
 </html>
 
 
