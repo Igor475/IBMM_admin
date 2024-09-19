@@ -40,25 +40,23 @@ require_once("cabecalho.php");
 
                     $nome_reg = $res[$i]['nome'];
                     $id_reg = $res[$i]['id'];
-                    ?>
+            ?>
                     <option value="<?php echo $id_reg ?>">
                         <?php echo $nome_reg ?>
                     </option>
-                <?php }
+            <?php }
             } ?>
         </select><br>
         <label for="">Descrição</label>
         <input type="text" name="descricao" id="descricao">
+
+        <input type="hidden" value="<?php echo $id_igreja ?>" name="igreja">
 
         <div id="mensagem"></div>
 
         <input type="submit">
 
     </form>
-
-    <script type="text/javascript" src="sistema/js/oracao.js"></script>
-    <script type="text/javascript" src="sistema/js/mascaras.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 </body>
 

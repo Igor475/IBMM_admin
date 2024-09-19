@@ -31,7 +31,7 @@ if ($total_reg > 0) {
             } elseif ($tipo == 'Mensagem') {
                $name_page = 'mensagem-';
             } elseif ($tipo == 'Evento com Inscrição') {
-               $name_page = 'evento-com-inscricao-';
+               $name_page = 'evento-';
             } else {
                $name_page = 'evento-';
             }
@@ -221,7 +221,7 @@ if ($total_reg > 0) {
                   <p class="descrition__options">Lorem ipsum, dolor sit </p>
                </div>
             </a>
-            <a href="#" class="card__options">
+            <a href="cadastro" class="card__options">
                <img class="img__options" src="assets/img/seja membro.jpg" alt="">
                <div class="box__options">
                   <h3 class="title__options">Seja Membro</h3>

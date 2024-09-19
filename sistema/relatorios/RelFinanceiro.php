@@ -13,7 +13,7 @@ $movimento = $_POST['movimento'];
 
 
 //ALIMENTANDO OS DADOS DO RELATÓRIO
-$html = file_get_contents($url_sistema."relatorios/relFinanceiroHtml.php?igreja=$igreja&tipo=$tipo&movimento=$movimento&dataInicial=$dataInicial&dataFinal=$dataFinal");
+$html = file_get_contents($url_sistema."relatorios/RelFinanceiroHtml.php?igreja=$igreja&tipo=$tipo&movimento=$movimento&dataInicial=$dataInicial&dataFinal=$dataFinal");
 
 if($relatorio_pdf != 'Sim') {
     echo $html;

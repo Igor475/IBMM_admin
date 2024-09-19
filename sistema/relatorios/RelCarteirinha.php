@@ -6,7 +6,7 @@ require_once("../conexao.php");
 $id = $_GET['id'];
 
 //ALIMENTANDO OS DADOS DO RELATÓRIO
-$html = file_get_contents($url_sistema."relatorios/relCarteirinhaHtml.php?id=$id");
+$html = file_get_contents($url_sistema."relatorios/RelCarteirinhaHtml.php?id=$id");
 
 if($relatorio_pdf != 'Sim') {
     echo $html;

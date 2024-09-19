@@ -9,7 +9,7 @@ $cargo = $_POST['cargo'];
 
 
 //ALIMENTANDO OS DADOS DO RELATÓRIO
-$html = file_get_contents($url_sistema."relatorios/relMembrosHtml.php?igreja=$igreja&status=$status&cargo=$cargo");
+$html = file_get_contents($url_sistema."relatorios/RelMembrosHtml.php?igreja=$igreja&status=$status&cargo=$cargo");
 
 if($relatorio_pdf != 'Sim') {
     echo $html;

@@ -1,210 +1,140 @@
+<?php
 
-<!DOCTYPE html>
-<html lang="pt-BR">
+require_once("cabecalho.php");
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--=============== REMIXICONS ===============-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <title>Mensagem</title>
+$url = @$_GET['mensagem'];
 
-    <script src="assets/js/swiper-bundle.min.js"></script>
-</head>
+if (@$_GET['pagina'] != null) {
+    $pag = $_GET['pagina'];
+} else {
+    $pag = 0;
+}
 
-<body>
-    <!--==================== HEADER ====================-->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav__logo">
-                <img width="100%" src="assets/img/Logo-IBMM.png" alt="">
-            </a>
+$limite = $pag * $itens_por_pagina;
+$pagina = $pag;
+$nome_pag = 'mensagens.php';
 
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Home</a>
-                    </li>
+$query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and url = '$url'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = count($res);
+if ($total_reg > 0) {
 
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Quem Somos</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Células</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Mensagens</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Ministérios</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Eventos</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="nav__link">Contato</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="#" class="donation">Doação</a>
-                    </li>
-
-                    <div class="media__icons__reponsive">
-                        <a href="#" class="link__media__responsive">
-                            <i class="ri-facebook-fill"></i>
-                        </a>
-                        <a href="" class="link__media__responsive">
-                            <i class="ri-instagram-fill"></i>
-                        </a>
-                        <a href="" class="link__media__responsive">
-                            <i class="ri-twitter-x-fill"></i>
-                        </a>
-                    </div>
-                </ul>
-
-                <!-- Close button -->
-                <div class="nav__close" id="nav-close">
-                    <i class="ri-close-line"></i>
-                </div>
-            </div>
-
-            <div class="nav__actions">
-                <div class="nav__donation">
-                    <a href="" class="link__donation" id="donation">Doação</a>
-                </div>
-                <!-- Search button -->
-                <i class="ri-search-line nav__search" id="search-btn"></i>
-
-                <!-- Login button -->
-                <i class="ri-user-line nav__login" id="login-btn"></i>
-
-                <!-- Toggle button -->
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class="ri-menu-line"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!--==================== SEARCH ====================-->
-    <div class="search" id="search">
-        <form action="" class="search__form">
-            <i class="ri-search-line search__icon"></i>
-            <input type="search" placeholder="Pesquisar..." class="search__input">
-        </form>
-
-        <i class="ri-close-line search__close" id="search-close"></i>
-    </div>
-
-    <!--==================== LOGIN ====================-->
-    <div class="login" id="login">
-        <form action="" class="login__form">
-            <div class="login__image">
-                <img class="login__img" src="assets/img/logo-IBMM-preta.png">
-            </div>
-
-            <div class="login__group">
-                <div>
-                    <label for="email" class="login__label">Email</label>
-                    <input type="email" placeholder="Digite seu E-mail" id="email" class="login__input">
-                </div>
-
-                <div>
-                    <label for="password" class="login__label">Senha</label>
-                    <input type="password" placeholder="Sua Senha" id="password" class="login__input">
-                </div>
-            </div>
-
-            <div>
-                <a href="#" class="login__forgot">
-                    Esqueceu sua senha?
-                </a>
-
-                <button type="submit" class="login__button">Entrar</button>
-            </div>
-        </form>
-
-        <i class="ri-close-line login__close" id="login-close"></i>
-    </div>
+    $titulo = $res[0]['titulo'];
+    $subtitulo = $res[0]['subtitulo'];
+    $data_evento = $res[0]['data_evento'];
+    $id = $res[0]['id'];
+    $banner = $res[0]['banner'];
+    $url = $res[0]['url'];
+    $video = $res[0]['video'];
+    $pregador = $res[0]['pregador'];
+    $insc_evento = $res[0]['insc_evento'];
+    $descricao1 = $res[0]['descricao1'];
+    $descricao2 = $res[0]['descricao2'];
+    $descricao3 = $res[0]['descricao3'];
+    $tipo = $res[0]['tipo'];
+    $imagem = $res[0]['imagem'];
+    $hora = $res[0]['hora_evento'];
 
 
-    <section class="video_container_pag_sermon">
-        <div class="container">
+    $data_eventoF = implode('/', array_reverse(explode('-', $data_evento)));
+    $hora  = (new DateTime($hora))->format('H:i');
+
+
+    $query = $pdo->query("SELECT * FROM usuarios where id = '$pregador'");
+    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+    $total_reg = count($res);
+    if($total_reg > 0) {
+        $nome_pregador = $res[0]['nome'];
+    } else {
+        $nome_pregador = 'Nenhum!';
+    }
+}
+
+?>
+
+
+<section class="video_container_pag_sermon">
+    <div class="container">
+        <?php if ($video != '') { ?>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                <iframe src="<?php echo $video ?>" width="100%" height="450px"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
+            <?php } else {
+            if ($imagem != "") { ?>
+                <img src="sistema/img/eventos/<?php echo $imagem ?>" class="img__replace" alt="">
+        <?php }
+        } ?>
 
-            <div class="area_sermon_inf_pag">
-                <h3>O povo sobrenatural - Pr Marcos Angelo | Missão Multiplicar</h3>
-                <span>Pr. Marcos Ângelo&nbsp; • &nbsp;08 de Setembro</span>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia dolorum atque fuga deserunt beatae quasi minima nam dolorem, 
-                consequuntur similique hic consequatur odio nobis perspiciatis eligendi harum rem dicta optio.</p>
+        <div class="area_sermon_inf_pag">
+            <h3><?php echo $titulo ?></h3>
+            <span><?php echo $nome_pregador ?>&nbsp; • &nbsp;<?php echo $data_eventoF ?></span>
+            <?php if ($descricao1 != "") { ?>
+                <p><?php echo $descricao1 ?></p>
+            <?php } ?>
+            <?php if ($descricao2 != "") { ?>
+                <p><?php echo $descricao2 ?></p>
+            <?php } ?>
+            <?php if ($descricao3 != "") { ?>
+                <p><?php echo $descricao3 ?></p>
+            <?php } ?>
+        </div>
+
+        <div class="more_sermon_pag">
+            <a href="#" class="card_more_rgh">
+                <img src="assets/img/doacao.svg" alt="" class="img__svg__more">
+                <h4>Doar Agora</h4>
+            </a>
+            <a href="#" class="card_more_rgh">
+                <img src="assets/img/youtube.svg" alt="" class="img__svg__more">
+                <h4>YouTube</h4>
+            </a>
+            <a href="#" class="card_more_rgh">
+                <img src="assets/img/compartilhar.svg" alt="" class="img__svg__more">
+                <h4>Compartilhar</h4>
+            </a>
+        </div>
+
+        <div class="area_cont_faith_f">
+            <div class="flex_ti_after">
+                <h1 class="title ti_faith">Dê o próximo passo</h1>
             </div>
 
-            <div class="more_sermon_pag">
-                <a href="#" class="card_more_rgh">
-                    <img src="assets/img/doacao.svg" alt="" class="img__svg__more">
-                    <h4>Doar Agora</h4>
-                </a>
-                <a href="#" class="card_more_rgh">
-                    <img src="assets/img/youtube.svg" alt="" class="img__svg__more">
-                    <h4>YouTube</h4>
-                </a>
-                <a href="#" class="card_more_rgh">
-                    <img src="assets/img/compartilhar.svg" alt="" class="img__svg__more">
-                    <h4>Compartilhar</h4>
-                </a>
-            </div>
-
-            <div class="area_cont_faith_f">
-                <div class="flex_ti_after">
-                    <h1 class="title ti_faith">Dê o próximo passo</h1>
+            <div class="boxes_cards_words">
+                <div class="box_card_svcbn">
+                    <a href="#" class="link__steps">
+                        <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
+                    </a>
+                    <div class="content_faith_info">
+                        <a href="#">Junte-se a uma célula</a>
+                        <span>Encontrar célula</span>
+                    </div>
                 </div>
-
-                <div class="boxes_cards_words">
-                    <div class="box_card_svcbn">
-                        <a href="#" class="link__steps">
-                            <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
-                        </a>
-                        <div class="content_faith_info">
-                            <a href="#">Junte-se a uma célula</a>
-                            <span>Encontrar célula</span>
-                        </div>
+                <div class="box_card_svcbn">
+                    <a href="#" class="link__steps">
+                        <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
+                    </a>
+                    <div class="content_faith_info">
+                        <a href="#">Peça oração</a>
+                        <span>Estamos aqui para você</span>
                     </div>
-                    <div class="box_card_svcbn">
-                            <a href="#" class="link__steps">
-                                <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
-                            </a>
-                            <div class="content_faith_info">
-                                <a href="#">Peça oração</a>
-                                <span>Estamos aqui para você</span>
-                            </div>
-                    </div>
-                    <div class="box_card_svcbn">
-                        <a href="#" class="link__steps">
-                            <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
-                        </a>
-                        <div class="content_faith_info">
-                            <a href="#">Seja Batizado</a>
-                            <span>Dê o próximo passo para Cristo</span>
-                        </div>
+                </div>
+                <div class="box_card_svcbn">
+                    <a href="#" class="link__steps">
+                        <img src="assets/img/seja membro.jpg" alt="" class="img_ca_skjh">
+                    </a>
+                    <div class="content_faith_info">
+                        <a href="#">Seja Batizado</a>
+                        <span>Dê o próximo passo para Cristo</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 </body>
+
 </html>

@@ -3,9 +3,9 @@ function RedirectionEvent(message, url) {
       icon: "warning",
       title: '<span class="redirect_title">' + message + '</span>',
       showConfirmButton: false,
-      html: `<a href='` + url + `' class="link_redirect_event">Retornar</a>`,
+      html: `<a href='evento-` + url + `' class="link_redirect_event">Retornar</a>`,
       allowOutsideClick: true,
       willClose: () => {
-        window.location.href= url;
+        window.location.href= 'evento-' + url;
       }
   })};

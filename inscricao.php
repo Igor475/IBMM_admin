@@ -26,9 +26,9 @@ if ($total_reg > 0) {
         $pregador = $res[$i]['pregador'];
 
 ?>
-            <div class="section_insc_page">
-                <h1><?php echo $titulo ?></h1>
-            </div>
+        <div class="section_insc_page">
+            <h1><?php echo $titulo ?></h1>
+        </div>
 
 <?php }
 } else {
@@ -36,12 +36,3 @@ if ($total_reg > 0) {
     echo "<script language='javascript'>$(function (){ RedirectionEvent('Este evento não possui inscrição!', '$url') });</script>";
     exit;
 } ?>
-
-
-<script type="text/javascript">
-
-</script>
-
-<!-- alert('Evento não encontrado!');*/ 
-    echo "<script>window.location.href='eventos.php';</script>";
--->

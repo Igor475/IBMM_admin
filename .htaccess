@@ -5,8 +5,16 @@ RewriteRule ^igreja(.*)$ igreja.php?nome=$1 [L]
 RewriteRule ^evento-(.*)$ evento.php?evento=$1 [L]
 RewriteRule ^inscricao-(.*)$ inscricao.php?evento=$1 [L]
 RewriteRule ^mensagem-(.*)$ mensagem.php?mensagem=$1 [L]
-#RewriteRule ^mensagens-(.*)$ mensagens.php?mensagens=$1 [L]
-RewriteRule ^contribua(.*)$ contribua.php?evento=$1 [L]
+RewriteRule ^contribua(.*)$ contribua.php [L]
+RewriteRule ^cadastro(.*)$ cadastro.php [L]
+RewriteRule ^erro404(.*)$ erro404.php [L]
+RewriteRule ^licoes-de-celula$ licoes-de-celula.php [L]
+RewriteRule ^mensagens$ mensagens.php [L]
+RewriteRule ^eventos$ eventos.php [L]
+RewriteRule ^celulas$ celulas.php [L]
+RewriteRule ^ministerios$ ministerios.php [L]
+RewriteRule ^contato$ contato.php [L]
+
 
 
 
@@ -17,4 +25,4 @@ RewriteRule ^contribua(.*)$ contribua.php?evento=$1 [L]
 
 RewriteEngine On
 RewriteCond %{HTTP_HOST} ^localhost$ [NC]
-RewriteRule ^licoes/?$ /igreja [L,R=301]
+RewriteRule ^licoes/?$ /ibmissaomultiplicar/erro404 [L,R=301]

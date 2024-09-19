@@ -10,7 +10,7 @@ if (@$_GET['pagina'] != null) {
 
 $limite = $pag * $itens_por_pagina;
 $pagina = $pag;
-$nome_pag = 'eventos.php';
+$nome_pag = 'eventos';
 
 ?>
 <section class="container_widget">
@@ -31,7 +31,7 @@ $nome_pag = 'eventos.php';
     <div class="flex_eventos">
         <?php
         $query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
-                and tipo = 'Evento' or tipo = 'Evento com Inscrição' order by data_evento desc, id desc LIMIT $limite, $itens_por_pagina");
+                and (tipo = 'Evento' OR tipo = 'Evento com Inscrição') order by data_evento desc, id desc LIMIT $limite, $itens_por_pagina");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
 
@@ -53,7 +53,7 @@ $nome_pag = 'eventos.php';
 
                 //TOTALIZANDO AS PÁGINAS
                 $query_cont = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
-                and tipo = 'Evento'");
+                and tipo = 'Evento' or tipo = 'Evento com Inscrição'");
                 $res_cont = $query_cont->fetchAll(PDO::FETCH_ASSOC);
                 $total_cont = count($res_cont);
                 $num_paginas = ceil($total_cont / $itens_por_pagina);

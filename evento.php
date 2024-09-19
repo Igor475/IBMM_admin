@@ -167,15 +167,26 @@ if ($tipo_event != 'Evento' && $tipo_event != 'Evento com Inscrição') {
                         <div class="box_gallery_cars">
                             <?php
                             $imagens_galeria = [$img_1, $img_2, $img_3, $img_4, $img_5, $img_6];
-                            $imagens_filtradas = array_filter([$img_1, $img_2, $img_3, $img_4, $img_5, $img_6]);
+                            $imagens_filtradas = array_filter($imagens_galeria);
 
                             if (!empty($imagens_filtradas)) {
-                                foreach ($imagens_filtradas as $imagem_gallery) {
+                                $tem_imagem_valida = false; // Variável para controlar se existe imagem válida
 
+                                foreach ($imagens_filtradas as $imagem_gallery) {
+                                    if ($imagem_gallery != 'sem-foto.jpg') {
+                                        $tem_imagem_valida = true; // Encontrou uma imagem válida
                             ?>
-                                    <a href="sistema/img/eventos/galeria/<?php echo $imagem_gallery ?>" class="link_cards_gall" data-fancybox="gallery">
-                                        <img src="sistema/img/eventos/galeria/<?php echo $imagem_gallery ?>" alt="" class="image_gallery_eve">
-                                    </a>
+                                        <a href="sistema/img/eventos/galeria/<?php echo $imagem_gallery ?>" class="link_cards_gall" data-fancybox="gallery">
+                                            <img src="sistema/img/eventos/galeria/<?php echo $imagem_gallery ?>" alt="" class="image_gallery_eve">
+                                        </a>
+                                    <?php
+                                    }
+                                }
+
+                                // Se não encontrou imagens válidas, mostra a mensagem
+                                if (!$tem_imagem_valida) {
+                                    ?>
+                                    <span>Nenhuma imagem disponível para este evento!</span>
                                 <?php
                                 }
                             } else { // Caso não haja imagens disponíveis 
@@ -325,6 +336,7 @@ if ($tipo_event != 'Evento' && $tipo_event != 'Evento com Inscrição') {
             line.style.left = e.target.offsetLeft + "px";
         })
     });
+    
 
 
 

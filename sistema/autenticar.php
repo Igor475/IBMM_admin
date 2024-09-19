@@ -1,5 +1,6 @@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript" src="js/alerta-tempo.js"></script>
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/login.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="js/login-time.js" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <?php
@@ -23,7 +24,11 @@ if ($total_reg > 0) {
     $_SESSION['id_igreja'] = $res[0]['igreja'];
 
     if ($res[0]['nivel'] == 'Pastor Presidente') {
-        echo "<script>window.location='painel-admin'</script>";
+        echo "<script>document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            window.location = 'painel-admin';
+        }, 2000); // 3000ms = 3 segundos
+    });</script>";
     }
 
     if ($res[0]['nivel'] == 'pastor') {
@@ -41,7 +46,6 @@ if ($total_reg > 0) {
     if ($res[0]['nivel'] == 'membro') {
         echo "<script>window.location='painel-igreja'</script>";
     }
-
 } else {
     $_SESSION['msg'] = "<div id='alert_mess_box'>
                             <span>
@@ -54,3 +58,10 @@ if ($total_reg > 0) {
 }
 
 ?>
+
+<div id="preloader">
+    <div class="loader">
+        <img src="img/Logo-IBMM-border.png" alt="">
+    </div>
+</div>
+

@@ -10,8 +10,44 @@ $telefone = $_POST['telefone'];
 $data_nasc = $_POST['data_nasc'];
 $igreja = $_POST['igreja'];
 $data_bat = $_POST['data_bat'];
-$cargo = $_POST['cargo'];
+@$cargo = $_POST['cargo'];
 $id = @$_POST['id'];
+
+if (empty($nome)) {
+    echo 'Por favor insira o seu nome!';
+    exit();
+} 
+
+if (empty($cpf)) {
+    echo 'Por favor insira o seu CPF!';
+    exit();
+}
+
+if (empty($email)) {
+    echo 'Por favor insira o seu Email!';
+    exit();
+}
+
+if (empty($telefone)) {
+    echo 'Por favor insira o seu Telefone!';
+    exit();
+}
+
+if (empty($data_nasc)) {
+    echo 'Por favor insira a sua Data de Nascimento!';
+    exit();
+}
+
+if (empty($igreja)) {
+    echo 'Por favor escolha a igreja!';
+    exit();
+}
+
+if (isset($_POST['cargo']) && $_POST['cargo'] != "") {
+    $cargo = $_POST['cargo'];
+} else {
+    $cargo = 1;
+}
 
 
 $query = $pdo->query("SELECT * FROM $pagina WHERE cpf = '$cpf'");
