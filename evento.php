@@ -50,7 +50,7 @@ if ($tipo_event != 'Evento' && $tipo_event != 'Evento com Inscrição') {
     ?>
         <div class="box_eve_inf container">
             <div class="area_see_oth">
-                <a href="eventos.php" class="see_others">
+                <a href="eventos" class="see_others">
                     <i class="ri-arrow-left-line"></i>
                     Ver todos
                 </a>
@@ -65,7 +65,6 @@ if ($tipo_event != 'Evento' && $tipo_event != 'Evento com Inscrição') {
             $url = $res[0]['url'];
             $video = $res[0]['video'];
             $pregador = $res[0]['pregador'];
-            $insc_evento = $res[0]['insc_evento'];
             $descricao1 = $res[0]['descricao1'];
             $descricao2 = $res[0]['descricao2'];
             $descricao3 = $res[0]['descricao3'];

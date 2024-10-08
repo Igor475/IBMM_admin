@@ -12,9 +12,10 @@ if (@$_GET['pagina'] != null) {
 
 $limite = $pag * $itens_por_pagina;
 $pagina = $pag;
-$nome_pag = 'mensagens.php';
+$nome_pag = 'mensagens';
 
-$query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and url = '$url'");
+$query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and url = '$url'
+    and tipo = 'Mensagem' ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 if ($total_reg > 0) {
@@ -27,7 +28,6 @@ if ($total_reg > 0) {
     $url = $res[0]['url'];
     $video = $res[0]['video'];
     $pregador = $res[0]['pregador'];
-    $insc_evento = $res[0]['insc_evento'];
     $descricao1 = $res[0]['descricao1'];
     $descricao2 = $res[0]['descricao2'];
     $descricao3 = $res[0]['descricao3'];
@@ -134,6 +134,8 @@ if ($total_reg > 0) {
         </div>
     </div>
 </section>
+
+<?php require_once("rodape.php"); ?>
 
 </body>
 

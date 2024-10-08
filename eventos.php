@@ -53,7 +53,7 @@ $nome_pag = 'eventos';
 
                 //TOTALIZANDO AS PÁGINAS
                 $query_cont = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
-                and tipo = 'Evento' or tipo = 'Evento com Inscrição'");
+                and (tipo = 'Evento' or tipo = 'Evento com Inscrição')");
                 $res_cont = $query_cont->fetchAll(PDO::FETCH_ASSOC);
                 $total_cont = count($res_cont);
                 $num_paginas = ceil($total_cont / $itens_por_pagina);

@@ -37,6 +37,7 @@ if (@$eventos == 'ocultar') {
                     <tr class="column-table">
                         <th class="th-table first_table" id="radius-foto">Foto</th>
                         <th class="th-table">Título</th>
+                        <th class="th-table">Categoria (Notícias)</th>
                         <th class="th-table">Data</th>
                         <th class="th-table">Cadastrado Por</th>
                         <th class="th-table column-hidden">Ativo</th>
@@ -66,6 +67,7 @@ if (@$eventos == 'ocultar') {
                         $banner = $res[$i]['banner'];
                         $banner_mobile = $res[$i]['banner_mobile'];
                         $tipo = $res[$i]['tipo'];
+                        $categoria = $res[$i]['categoria'];
                         $pregador = $res[$i]['pregador'];
                         $hora = $res[$i]['hora_evento'];
 
@@ -134,6 +136,14 @@ if (@$eventos == 'ocultar') {
                             $name_pregador = '';
                         }
 
+                        $query_con = $pdo->query("SELECT * FROM categoria where id = '$categoria'");
+                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_con) > 0) {
+                            $name_categoria = $res_con[0]['nome'];
+                        } else {
+                            $name_categoria = '';
+                        }
+
 
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         $data_eventoF = implode('/', array_reverse(explode('-', $data_evento)));
@@ -146,6 +156,9 @@ if (@$eventos == 'ocultar') {
                             </td>
                             <td data-label="Título" class="td-table">
                                 <?php echo $titulo ?>
+                            </td>
+                            <td data-label="Categoria" class="td-table">
+                                <?php echo $name_categoria ?>
                             </td>
                             <td data-label="Data Evento" class="td-table">
                                 <?php echo $data_eventoF ?>
@@ -170,7 +183,7 @@ if (@$eventos == 'ocultar') {
                                             '<?php echo $descricao2 ?>', '<?php echo $descricao3 ?>', '<?php echo $data_evento ?>', 
                                             '<?php echo $imagem ?>', '<?php echo $video ?>', '<?php echo $banner ?>', 
                                             '<?php echo $tipo ?>', '<?php echo $banner_mobile ?>', '<?php echo $pregador ?>', 
-                                            '<?php echo $hora ?>')">
+                                            '<?php echo $hora ?>', '<?php echo $categoria ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -186,7 +199,8 @@ if (@$eventos == 'ocultar') {
                                             '<?php echo $subtitulo ?>', '<?php echo $descricao1 ?>', '<?php echo $descricao2 ?>', 
                                             '<?php echo $descricao3 ?>', '<?php echo $data_cadF ?>', '<?php echo $data_eventoF ?>', 
                                             '<?php echo $nome_usu_cad ?>', '<?php echo $imagem ?>', '<?php echo $video ?>', 
-                                            '<?php echo $ativo ?>', '<?php echo $obs ?>', '<?php echo $tipo ?>', '<?php echo $hora ?>')">
+                                            '<?php echo $ativo ?>', '<?php echo $obs ?>', '<?php echo $tipo ?>', '<?php echo $hora ?>',
+                                            '<?php echo $categoria ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -283,21 +297,46 @@ if (@$eventos == 'ocultar') {
                                         <input type="time" name="hora_evento" id="hora_evento" required>
                                     </div>
 
-                                    <div class="input-field flex_int_13">
-                                        <label>Evento / Pregação</label>
-                                        <select class="form-select" id="tipo" name="tipo">
-                                            <option value="Evento">Evento</option>
-                                            <option value="Mensagem">Mensagem</option>
-                                            <option value="Evento com Inscrição">Evento com Inscrição</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="input-field flex_int_4">
+                                    <div class="input-field flex_int_10">
                                         <label>Pregador</label>
                                         <select class="select_preg" id="pregador" name="pregador">
                                             <option value="0">Selecione um Preletor</option>
                                             <?php
                                             $query = $pdo->query("SELECT * FROM usuarios order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                            ?>
+                                                    <option value="<?php echo $id_reg ?>">
+                                                        <?php echo $nome_reg ?>
+                                                    </option>
+                                            <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field flex_int_10">
+                                        <label>Evento / Pregação</label>
+                                        <select class="form-select" id="tipo" name="tipo">
+                                            <option value="Evento">Evento</option>
+                                            <option value="Mensagem">Mensagem</option>
+                                            <option value="Evento com Inscrição">Evento com Inscrição</option>
+                                            <option value="Notícia">Notícia</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field flex_int_4">
+                                        <label>Categoria</label>
+                                        <select class="select_cat" id="categoria" name="categoria">
+                                            <option value="0">Selecione uma Categoria</option>
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM categoria order by id asc");
                                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                             $total_reg = count($res);
                                             if ($total_reg > 0) {
@@ -490,6 +529,11 @@ if (@$eventos == 'ocultar') {
                     <img src="../img/svg/user.svg" class="img_icon_data" alt="">
                     <span class="user_name">Cadastrado Por: </span>
                     <span class="texts_son" id="usu-cad-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/user.svg" class="img_icon_data" alt="">
+                    <span class="user_name">Categoria: </span>
+                    <span class="texts_son" id="cat-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/ativo.svg" class="img_icon_data" alt="">
@@ -821,7 +865,7 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    function editar(id, titulo, subtitulo, descricao1, descricao2, descricao3, data_evento, imagem, video, banner, tipo, banner_mobile, pregador, hora) {
+    function editar(id, titulo, subtitulo, descricao1, descricao2, descricao3, data_evento, imagem, video, banner, tipo, banner_mobile, pregador, hora, categoria) {
         $('#id').val(id);
         $('#titulo').val(titulo);
         $('#subtitulo').val(subtitulo);
@@ -834,6 +878,7 @@ if (@$eventos == 'ocultar') {
 
         $('#tipo').val(tipo).change();
         $('#pregador').val(pregador).change();
+        $('#categoria').val(categoria).change();
 
         $('#target').attr('src', '../img/eventos/' + imagem);
         $('#targetBanner').attr('src', '../img/eventos/' + banner);
@@ -846,7 +891,7 @@ if (@$eventos == 'ocultar') {
     }
 
 
-    function dados(titulo, subtitulo, descricao1, descricao2, descricao3, data_cad, data_evento, usuario, imagem, video, ativo, obs, tipo, pregador, hora) {
+    function dados(titulo, subtitulo, descricao1, descricao2, descricao3, data_cad, data_evento, usuario, imagem, video, ativo, obs, tipo, pregador, hora, categoria) {
 
         $('#titulo-dados').text(titulo);
         $('#subtitulo-dados').text(subtitulo);
@@ -858,6 +903,7 @@ if (@$eventos == 'ocultar') {
         $('#tipo-dados').text(tipo);
         $('#pregador-dados').text(tipo);
         $('#hora-dados').text(hora);
+        $('#cat-dados').text(categoria);
 
         $('#foto-dados').attr('src', '../img/eventos/' + imagem);
         $('#video-dados').attr('src', video);
@@ -901,9 +947,16 @@ if (@$eventos == 'ocultar') {
         $('#descricao3').val('');
         $('#video').val('');
         $('#data_evento').val(data);
-        $('#tipo').val(tipo).change();
-        $('#pregador').val('').change();
         $('#hora_evento').val(hora);
+
+        document.getElementById("pregador").options.selectedIndex = 0;
+        $('#pregador').val($('#pregador').val()).change();
+
+        document.getElementById("categoria").options.selectedIndex = 0;
+        $('#categoria').val($('#categoria').val()).change();
+
+        document.getElementById("tipo").options.selectedIndex = 0;
+        $('#tipo').val($('#tipo').val()).change();
 
         $('#target').attr('src', '../img/eventos/sem-foto.jpg');
         $('#targetBanner').attr('src', '../img/eventos/sem-foto.jpg');
@@ -1300,6 +1353,12 @@ if (@$eventos == 'ocultar') {
 <script type="text/javascript">
     $(document).ready(function() {
         $('.select_preg').select2({
+            dropdownParent: $('#modalForm'),
+        });
+    });
+
+    $(document).ready(function() {
+        $('.select_cat').select2({
             dropdownParent: $('#modalForm'),
         });
     });

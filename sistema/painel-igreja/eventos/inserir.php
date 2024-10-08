@@ -14,15 +14,10 @@ $video = $_POST['video'];
 @$tipo = $_POST['tipo'];
 $pregador = $_POST['pregador'];
 $hora = $_POST['hora_evento'];
+$categoria = $_POST['categoria'];
 
 $id = @$_POST['id'];
 $igreja = $_POST['igreja'];
-
-if($tipo == '') {
-    echo 'Por favor, insira o tipo do Evento!';
-    exit();
-}
-
 
 if($tipo == 'Mensagem') {
     if(@$pregador == '') {
@@ -30,7 +25,6 @@ if($tipo == 'Mensagem') {
         exit();
     }
 }
-
 
 $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
         strtr(utf8_decode(trim($titulo)), utf8_decode("/|áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
@@ -115,7 +109,8 @@ if ($id == "" || $id == 0) {
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja', imagem = '$imagem', 
         tipo = '$tipo', banner = '$banner', url = '$url', pregador = '$pregador', hora_evento = '$hora', imagem1 = 'sem-foto.jpg',
         imagem2 = 'sem-foto.jpg', imagem3 = 'sem-foto.jpg', imagem4 = 'sem-foto.jpg', img_1 = 'sem-foto.jpg', 
-        img_2 = 'sem-foto.jpg', img_3 = 'sem-foto.jpg', img_4 = 'sem-foto.jpg', img_5 = 'sem-foto.jpg', img_6 = 'sem-foto.jpg'");
+        img_2 = 'sem-foto.jpg', img_3 = 'sem-foto.jpg', img_4 = 'sem-foto.jpg', img_5 = 'sem-foto.jpg', img_6 = 'sem-foto.jpg', 
+        categoria = '$categoria'");
 
     $query->bindValue(":titulo", "$titulo");
     $query->bindValue(":subtitulo", "$subtitulo");
@@ -130,7 +125,7 @@ if ($id == "" || $id == 0) {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
         descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja',
-        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora' WHERE id = '$id'");
+        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria' WHERE id = '$id'");
 
         $query->bindValue(":titulo", "$titulo");
         $query->bindValue(":subtitulo", "$subtitulo");
@@ -151,7 +146,7 @@ if ($id == "" || $id == 0) {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
         descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja', imagem = '$imagem', 
-        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora' WHERE id = '$id'");
+        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria' WHERE id = '$id'");
 
         $query->bindValue(":titulo", "$titulo");
         $query->bindValue(":subtitulo", "$subtitulo");
@@ -167,7 +162,8 @@ if ($id == "" || $id == 0) {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
         descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja',
-        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora' WHERE id = '$id'");
+        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria'
+        WHERE id = '$id'");
 
         $query->bindValue(":titulo", "$titulo");
         $query->bindValue(":subtitulo", "$subtitulo");
@@ -188,7 +184,8 @@ if ($id == "" || $id == 0) {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
         descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja', banner = '$banner', 
-        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora' WHERE id = '$id'");
+        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria'
+        WHERE id = '$id'");
 
         $query->bindValue(":titulo", "$titulo");
         $query->bindValue(":subtitulo", "$subtitulo");
@@ -205,7 +202,8 @@ if ($id == "" || $id == 0) {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
         descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja',
-        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora' WHERE id = '$id'");
+        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria'
+        WHERE id = '$id'");
 
         $query->bindValue(":titulo", "$titulo");
         $query->bindValue(":subtitulo", "$subtitulo");
@@ -226,7 +224,8 @@ if ($id == "" || $id == 0) {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
         descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja', banner_mobile = '$banner_mobile', 
-        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora' WHERE id = '$id'");
+        tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria'
+        WHERE id = '$id'");
 
         $query->bindValue(":titulo", "$titulo");
         $query->bindValue(":subtitulo", "$subtitulo");

@@ -5,6 +5,7 @@ RewriteRule ^igreja(.*)$ igreja.php?nome=$1 [L]
 RewriteRule ^evento-(.*)$ evento.php?evento=$1 [L]
 RewriteRule ^inscricao-(.*)$ inscricao.php?evento=$1 [L]
 RewriteRule ^mensagem-(.*)$ mensagem.php?mensagem=$1 [L]
+RewriteRule ^noticia-(.*)$ noticia.php?noticia=$1 [L]
 RewriteRule ^contribua(.*)$ contribua.php [L]
 RewriteRule ^cadastro(.*)$ cadastro.php [L]
 RewriteRule ^erro404(.*)$ erro404.php [L]
@@ -14,6 +15,7 @@ RewriteRule ^eventos$ eventos.php [L]
 RewriteRule ^celulas$ celulas.php [L]
 RewriteRule ^ministerios$ ministerios.php [L]
 RewriteRule ^contato$ contato.php [L]
+RewriteRule ^noticias$ noticias.php [L]
 
 
 

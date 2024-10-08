@@ -2353,6 +2353,7 @@ textarea.form-control-lg {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
+  cursor: pointer;
   color: var(--bs-body-color);
   -webkit-appearance: none;
   -moz-appearance: none;

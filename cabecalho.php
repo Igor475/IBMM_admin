@@ -44,6 +44,18 @@ if (@count($res) > 0) {
 }
 
 
+/*$paginasExistentes = ['contribua.php', 'cadastro.php', 'evento.php'];
+
+// Captura a URL requisitada
+$url = basename($_SERVER['REQUEST_URI']); // Pega a parte da URL
+
+// Verifica se a página existe
+if (!in_array($url, $paginasExistentes)) {
+    // Redireciona para a página de erro 404
+    header("Location: erro404");
+    exit(); // Encerra o script para garantir que nada mais seja executado
+}*/
+
 ?>
 
 <!DOCTYPE html>

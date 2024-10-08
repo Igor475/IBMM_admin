@@ -1,5 +1,5 @@
 /* SCRIPTS PARA AS ORAÇÕES */
-$("#form_prayer").submit(function () {
+$("#form_prayer").submit(function (event) {
     event.preventDefault();
     var formData = new FormData(this);
 
@@ -44,7 +44,6 @@ function oracaoSalvar(mensagem) {
         timer: 3500,
         timerProgressBar: true,
         didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
             toast.onmouseleave = Swal.resumeTimer;
         }
     });

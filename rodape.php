@@ -53,7 +53,7 @@
                         </a>
                      </li>
                      <li>
-                        <a href="#" class="links__footer">
+                        <a href="noticias" class="links__footer">
                            Notícias
                         </a>
                      </li>

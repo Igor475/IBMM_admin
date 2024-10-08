@@ -55,12 +55,15 @@ window.addEventListener("scroll", () => {
 
 
 // SCRIPTS DOS SLIDERS
+document.addEventListener('DOMContentLoaded', () => {
 let currentIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const indicators = document.querySelectorAll('.indicator');
 const prev = document.querySelector('.prev');
 const next = document.querySelector('.next');
 let autoplayInterval;
+
+console.log(prev);
 
 // Função para exibir o slide
 function showSlide(index) {
@@ -110,6 +113,8 @@ indicators.forEach((indicator, index) => {
 
 // Iniciar o autoplay
 autoplayInterval = setInterval(nextSlide, 5000);
+
+});
 
 
 
@@ -169,6 +174,38 @@ var swiper = new Swiper(".box__versicle", {
 
 
 
+
+
+
+var swiper = new Swiper('.card_news', {
+   slidesPerView: 3,
+   spaceBetween: 20,
+   centerSlide: 'true',
+   fade: 'true',
+   grabCursor: 'true',
+   loop: true,
+   pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+   },
+   navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+   },
+
+   breakpoints: {
+      0: {
+         slidesPerView: 1,
+      },
+      768: {
+         slidesPerView: 2,
+      },
+      1024: {
+         slidesPerView: 3,
+      },
+   },
+});
 
 
 

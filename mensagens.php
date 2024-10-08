@@ -10,7 +10,7 @@ if (@$_GET['pagina'] != null) {
 
 $limite = $pag * $itens_por_pagina_message;
 $pagina = $pag;
-$nome_pag = 'mensagens.php';
+$nome_pag = 'mensagens';
 
 ?>
 <section class="container_widget_plans">
@@ -48,7 +48,7 @@ $nome_pag = 'mensagens.php';
         <div class="message_des container">
             <?php
             $query_main = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
-                    and tipo = 'Mensagem' order by data_evento desc, id desc LIMIT 1");
+                and tipo = 'Mensagem' order by data_evento desc, id desc LIMIT 1");
             $res_main = $query_main->fetchAll(PDO::FETCH_ASSOC);
             $total_reg_main = count($res_main);
 

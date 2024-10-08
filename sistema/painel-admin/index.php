@@ -176,6 +176,7 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=grupo_acessos">Grupo Acessos</a></li>
                                 <li><a href="index.php?pag=acessos">Acessos</a></li>
                                 <li><a href="index.php?pag=categoria_oracao">Categoria de Orações</a></li>
+                                <li><a href="index.php?pag=categoria">Categoria de Notícias</a></li>
                             </ul>
                         </li>
                         <li>

@@ -148,7 +148,7 @@ if ($pag == "") {
                         </div>
                         <div class="div_content_regs">
                             <?php
-                            $query = $pdo->query("SELECT * FROM oracao where igreja = '$id_igreja' and data = CurDate() and status = 'Aguardando' order by id desc limit 6");
+                            $query = $pdo->query("SELECT * FROM oracao where igreja = '$id_igreja' and data = CurDate() and status = 'Aguardando' order by id desc limit 4");
                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                             $total_reg = @count($res);
                             for ($i = 0; $i < $total_reg; $i++) {
