@@ -114,7 +114,7 @@ if ($total_reg > 0) {
                         </div>
                         <div class="data_post">
                             <h4><?php echo $nome_usuario ?></h4>
-                            <span><?php echo $data_eventoF ?>, <?php echo $hora ?></span>
+                            <span><?php echo $data_eventoF ?>, Publicado às <?php echo $hora ?></span>
                         </div>
                     </div>
                     <div class="area_share_socials">
@@ -163,17 +163,14 @@ if ($total_reg > 0) {
                 <ul class="card_list_news swiper-wrapper">
                 <?php
                 $query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' 
-                    and tipo = 'Notícia' order by data_evento desc, id desc LIMIT 6");
+                    and tipo = 'Notícia' and ativo = 'Sim' and url != '$url'
+                    order by data_evento desc, id desc LIMIT 6");
                 $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 $total_reg = count($res);
 
                 if ($total_reg > 0) {
                     for ($i = 0; $i < $total_reg; $i++) {
                         foreach ($res[$i] as $key => $value) {}
-
-                        if ($i === 0 && $url != $url) {
-                            continue;
-                        }
 
                         $titulo = $res[$i]['titulo'];
                         $subtitulo = $res[$i]['subtitulo'];
@@ -185,17 +182,29 @@ if ($total_reg > 0) {
                         $url = $res[$i]['url'];
                         $video = $res[$i]['video'];
                         $pregador = $res[$i]['pregador'];
+
+                        $categoria_carrousel = $res[$i]['categoria'];
+
+                        $query_news = $pdo->query("SELECT * FROM categoria where id = '$categoria_carrousel'");
+                        $res_news = $query_news->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res_news) > 0) {
+                            $name_categoria = $res_news[0]['nome'];
+                        } else {
+                            $name_categoria = '';
+                        }
             
                 ?>
                     <li class="card_item_news swiper-slide">
                         <a href="noticia-<?php echo $url ?>" class="card_link_cr_new">
                             <img src="assets/img/banner-3.jpg" alt="" class="card_image_news">
-                            <p class="badge_new">Developer</p>
-                            <h2 class="card_title_new_cr"><?php echo $titulo ?></h2>
-                            <button class="card_button_new">
-                                Leia mais
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
+                            <div class="news_content_carrousel">
+                                <p class="badge_new"><?php echo $name_categoria ?></p>
+                                <h2 class="card_title_new_cr"><?php echo $titulo ?></h2>
+                                <button class="card_button_new">
+                                    Leia mais
+                                    <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
                         </a>
                     </li>
                 <?php } } ?>
