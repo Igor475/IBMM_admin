@@ -110,6 +110,10 @@ $nome_pag = 'mensagens';
             for ($i = 0; $i < $total_reg; $i++) {
                 foreach ($res[$i] as $key => $value) {}
 
+                if ($i === 0) {
+                    continue;
+                }
+
                     $titulo = $res[$i]['titulo'];
                     $subtitulo = $res[$i]['subtitulo'];
                     $descricao1 = $res[$i]['descricao1'];

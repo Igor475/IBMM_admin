@@ -13,6 +13,7 @@ if ($total_reg > 0) {
     for ($i = 0; $i < $total_reg; $i++) {
         foreach ($res[$i] as $key => $value) {
         }
+        $id = $res[$i]['id'];
         $titulo = $res[$i]['titulo'];
         $subtitulo = $res[$i]['subtitulo'];
         $descricao1 = $res[$i]['descricao1'];

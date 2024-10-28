@@ -12,7 +12,7 @@ if (@$_GET['pagina'] != null) {
 
 $limite = $pag * $itens_por_pagina;
 $pagina = $pag;
-$nome_pag = 'eventos.php';
+$nome_pag = 'eventos';
 
 $query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and url = '$url' ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -31,15 +31,7 @@ if ($tipo_event != 'Evento' && $tipo_event != 'Evento com Inscrição') {
 
 ?>
 
-<section class="container_widget_ev_in">
-    <div class="content_widget container">
-        <div class="area_title_c">
-            <div class="area_content_widget">
-                <h3 class="title_cx"><?php echo $titulo ?></h3>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <section class="section_eve_inf">
     <?php
@@ -114,7 +106,7 @@ if ($tipo_event != 'Evento' && $tipo_event != 'Evento com Inscrição') {
                 <div class="area_tabs_eve">
                     <div class="tabs_eve">
                         <div class="items_tab_eve">
-                            <button class="tab_btn active">Datelhes</button>
+                            <button class="tab_btn active">Detalhes</button>
                             <button class="tab_btn">Galeria</button>
                             <button class="tab_btn">Convidados</button>
                             <div class="line"></div>

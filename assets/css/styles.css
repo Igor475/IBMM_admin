@@ -123,7 +123,7 @@ button {
 }
 
 body {
-  background-color: var(--white);
+  background-color: var(--color-4);
 }
 
 input,
@@ -1313,6 +1313,7 @@ img {
   border-color: #42a678;
 }
 
+
 .card_list_news .card_link_cr_new .card_image_news {
   width: 100%;
   aspect-ratio: 16/9;
@@ -2442,8 +2443,16 @@ a.image-box:hover .play-icon {
   border-radius: 50%;
 }
 
+.img_ne_full {
+  max-width: 1200px;
+  height: 560px;
+}
+
 .image_new {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .title_new {
@@ -2545,7 +2554,8 @@ a.image-box:hover .play-icon {
 }
 
 .section_eve_inf {
-  position: relative;
+  padding: 12rem 0;
+  background-color: var(--font-color-4);
 }
 
 .box_eve_inf {
@@ -2899,12 +2909,18 @@ a.image-box:hover .play-icon {
 }
 
 .see_others {
-  padding: 5px 10px;
-  background: var(--color-green);
+  padding: 7px 15px;
+  background: transparent;
   margin-bottom: 30px;
   font-size: 0.85rem;
   border-radius: 3px;
-  color: var(--white);
+  color: #999;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  transition: .3s ease-in;
+}
+
+.see_others:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .img_highlight {
@@ -2936,8 +2952,8 @@ a.image-box:hover .play-icon {
   padding: 15px 30px;
   background-color: var(--white);
   border-radius: 5px 5px 0 0;
-  border: 1px solid var(--color-3);
-  background-color: var(--color-4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .items_tab_eve {
@@ -2952,18 +2968,19 @@ a.image-box:hover .play-icon {
 .tab_btn {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--font-color-3);
+  color: var(--font-color-6);
   cursor: pointer;
   background: transparent;
   position: relative;
+  transition: .3s ease-in;
 }
 
 .tab_btn:hover {
-  color: var(--color-green);
+  color: white;
 }
 
 .tab_btn.active {
-  color: var(--color-green);
+  color: white;
 }
 
 .line {
@@ -2972,8 +2989,7 @@ a.image-box:hover .play-icon {
   left: auto;
   width: 65px;
   height: 3px;
-  background: var(--color-green);
-  border-radius: 10px;
+  background: white;
   transition: all 0.3s ease-in-out;
 }
 
@@ -2996,13 +3012,13 @@ a.image-box:hover .play-icon {
 .highlight_tabs_eve.active {
   display: block;
   border-radius: 0 0 5px 5px;
-  border-right: 1px solid var(--color-3);
-  border-bottom: 1px solid var(--color-3);
-  border-left: 1px solid var(--color-3);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .highlight_tabs_eve {
-  background-color: var(--white);
+  background-color: transparent;
   padding: 30px 30px;
 }
 
@@ -3014,14 +3030,14 @@ a.image-box:hover .play-icon {
 
 .title_tab {
   font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-1);
+  font-weight: 700;
+  color: white;
   margin-bottom: 5px;
 }
 
 .txt_eve_inf {
   font-size: 0.85rem;
-  color: var(--font-color-3);
+  color: var(--font-color-6);
   font-weight: 700;
 }
 
@@ -3043,8 +3059,8 @@ a.image-box:hover .play-icon {
 
 .title_tim_e {
   font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-1);
+  font-weight: 700;
+  color: white;
   margin-bottom: 5px;
 }
 
@@ -3062,6 +3078,7 @@ a.image-box:hover .play-icon {
 .time_txt_eve {
   font-size: 0.9rem;
   color: var(--font-color-6);
+  font-weight: 600;
 }
 
 .area_inf_date_time {
@@ -3075,8 +3092,8 @@ a.image-box:hover .play-icon {
 
 .title__eve {
   font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-1);
+  font-weight: 700;
+  color: white;
   margin-bottom: 5px;
 }
 
@@ -3098,6 +3115,7 @@ a.image-box:hover .play-icon {
 .txt_inf_eve {
   font-size: 0.85rem;
   color: var(--font-color-6);
+  font-weight: 600;
   transition: 0.2s ease-in;
 }
 
@@ -3107,8 +3125,8 @@ a.image-box:hover .play-icon {
 
 .title_desc_txt {
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-1);
+  font-weight: 700;
+  color: white;
   margin-bottom: 5px;
 }
 
@@ -3119,17 +3137,17 @@ a.image-box:hover .play-icon {
 
 .sub_box {
   border-radius: 5px;
-  border: 1px solid var(--color-3);
+  border: 2px solid rgba(255, 255, 255, 0.05);
   margin-bottom: 20px;
 }
 
 .head_subscribe {
-  padding: 10px 20px;
-  border-bottom: 1px solid var(--color-3);
+  padding: 15px 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  background-color: var(--color-4);
+  background-color: transparent;
 }
 
 .icon_sub {
@@ -3138,8 +3156,8 @@ a.image-box:hover .play-icon {
 
 .title_sub {
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-1);
+  font-weight: 700;
+  color: white;
 }
 
 .area_subscribe {
@@ -3151,14 +3169,18 @@ a.image-box:hover .play-icon {
   font-weight: 600;
   font-size: 0.85rem;
   padding: 10px 15px;
-  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.05);
   border-radius: 3px;
   cursor: pointer;
   display: block;
   text-align: center;
-  color: var(--white);
-  background-color: var(--color-green);
-  box-shadow: 0 3px 0 var(--color-green-g);
+  color: white;
+  background-color: transparent;
+  transition: .3s ease-in;
+}
+
+.subscribe_button:hover {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .subscribe_button:active {

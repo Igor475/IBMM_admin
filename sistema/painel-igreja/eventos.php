@@ -288,8 +288,9 @@ if (@$eventos == 'ocultar') {
 
                                     <div class="input-field flex_int_4">
                                         <label>Data do Evento</label>
-                                        <input type="date" name="data_evento" id="data_evento"
-                                            value="<?php echo date('Y-m-d H:i:s') ?>" required>
+                                        <!-- <input type="date" name="data_evento" id="data_evento"
+                                            value="<?php echo date('Y-m-d H:i:s') ?>" required> -->
+                                        <input type="text" name="data_evento" id="data_evento">
                                     </div>
 
                                     <div class="input-field flex_int_4">

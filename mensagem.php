@@ -43,7 +43,7 @@ if ($total_reg > 0) {
     $query = $pdo->query("SELECT * FROM usuarios where id = '$pregador'");
     $res = $query->fetchAll(PDO::FETCH_ASSOC);
     $total_reg = count($res);
-    if($total_reg > 0) {
+    if ($total_reg > 0) {
         $nome_pregador = $res[0]['nome'];
     } else {
         $nome_pregador = 'Nenhum!';
@@ -91,7 +91,7 @@ if ($total_reg > 0) {
                 <img src="assets/img/youtube.svg" alt="" class="img__svg__more">
                 <h4>YouTube</h4>
             </a>
-            <a href="#" class="card_more_rgh">
+            <a class="card_more_rgh">
                 <img src="assets/img/compartilhar.svg" alt="" class="img__svg__more">
                 <h4>Compartilhar</h4>
             </a>

@@ -105,7 +105,7 @@ if ($ext == 'png' or $ext == 'jpg' or $ext == 'JPG' or $ext == 'jpeg' or $ext ==
 
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
-        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
+        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = :data_evento, 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja', imagem = '$imagem', 
         tipo = '$tipo', banner = '$banner', url = '$url', pregador = '$pregador', hora_evento = '$hora', imagem1 = 'sem-foto.jpg',
         imagem2 = 'sem-foto.jpg', imagem3 = 'sem-foto.jpg', imagem4 = 'sem-foto.jpg', img_1 = 'sem-foto.jpg', 
@@ -118,12 +118,13 @@ if ($id == "" || $id == 0) {
     $query->bindValue(":descricao2", "$descricao2");
     $query->bindValue(":descricao3", "$descricao3");
     $query->bindValue(":video", "$video");
+    $query->bindValue(":data_evento", "$data_evento");
     $query->execute();
 
 } else {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
-        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
+        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = :data_evento, 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja',
         tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria' WHERE id = '$id'");
 
@@ -133,6 +134,7 @@ if ($id == "" || $id == 0) {
         $query->bindValue(":descricao2", "$descricao2");
         $query->bindValue(":descricao3", "$descricao3");
         $query->bindValue(":video", "$video");
+        $query->bindValue(":data_evento", "$data_evento");
         $query->execute();
 
     } else {
@@ -144,7 +146,7 @@ if ($id == "" || $id == 0) {
         }
 
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
-        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
+        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = :data_evento, 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja', imagem = '$imagem', 
         tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria' WHERE id = '$id'");
 
@@ -154,13 +156,14 @@ if ($id == "" || $id == 0) {
         $query->bindValue(":descricao2", "$descricao2");
         $query->bindValue(":descricao3", "$descricao3");
         $query->bindValue(":video", "$video");
+        $query->bindValue(":data_evento", "$data_evento");
         $query->execute();
     }
 
 
     if ($banner == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
-        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
+        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = :data_evento, 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja',
         tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria'
         WHERE id = '$id'");
@@ -171,6 +174,7 @@ if ($id == "" || $id == 0) {
         $query->bindValue(":descricao2", "$descricao2");
         $query->bindValue(":descricao3", "$descricao3");
         $query->bindValue(":video", "$video");
+        $query->bindValue(":data_evento", "$data_evento");
         $query->execute();
 
     } else {
@@ -182,7 +186,7 @@ if ($id == "" || $id == 0) {
         }
 
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
-        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
+        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = :data_evento, 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja', banner = '$banner', 
         tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria'
         WHERE id = '$id'");
@@ -193,6 +197,7 @@ if ($id == "" || $id == 0) {
         $query->bindValue(":descricao2", "$descricao2");
         $query->bindValue(":descricao3", "$descricao3");
         $query->bindValue(":video", "$video");
+        $query->bindValue(":data_evento", "$data_evento");
         $query->execute();
     }
 
@@ -200,7 +205,7 @@ if ($id == "" || $id == 0) {
 
     if ($banner_mobile == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
-        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
+        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = :data_evento, 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja',
         tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria'
         WHERE id = '$id'");
@@ -211,6 +216,7 @@ if ($id == "" || $id == 0) {
         $query->bindValue(":descricao2", "$descricao2");
         $query->bindValue(":descricao3", "$descricao3");
         $query->bindValue(":video", "$video");
+        $query->bindValue(":data_evento", "$data_evento");
         $query->execute();
 
     } else {
@@ -222,7 +228,7 @@ if ($id == "" || $id == 0) {
         }
 
         $query = $pdo->prepare("UPDATE $pagina SET titulo = :titulo, subtitulo = :subtitulo, descricao1 = :descricao1, 
-        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = '$data_evento', 
+        descricao2 = :descricao2, descricao3 = :descricao3, data_cad = curDate(), data_evento = :data_evento, 
         usuario = '$id_usuario', video = :video, ativo = 'Sim', igreja = '$igreja', banner_mobile = '$banner_mobile', 
         tipo = '$tipo', url = '$url', pregador = '$pregador', hora_evento = '$hora', categoria = '$categoria'
         WHERE id = '$id'");
@@ -233,6 +239,7 @@ if ($id == "" || $id == 0) {
         $query->bindValue(":descricao2", "$descricao2");
         $query->bindValue(":descricao3", "$descricao3");
         $query->bindValue(":video", "$video");
+        $query->bindValue(":data_evento", "$data_evento");
         $query->execute();
     }
 
