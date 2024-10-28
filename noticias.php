@@ -12,6 +12,24 @@ $limite = $pag * $itens_por_pagina;
 $pagina = $pag;
 $nome_pag = 'noticias';
 
+// Recebe a busca
+$busca = isset($_POST['busca']) ? $_POST['busca'] : '';
+
+// Preparação da consulta
+$query = $pdo->prepare("SELECT * FROM eventos WHERE tipo = 'Notícia' AND titulo LIKE :busca");
+
+// Definir o valor de busca com wildcard (%)
+$buscaComLike = '%' . $busca . '%';
+$query->bindParam(':busca', $buscaComLike, type: PDO::PARAM_STR);
+
+// Executa a consulta
+$query->execute();
+
+// Busca os resultados
+$resultados = $query->fetchAll(PDO::FETCH_ASSOC);
+
+echo json_encode($resultados);
+
 
 ?>
 
@@ -35,7 +53,7 @@ $nome_pag = 'noticias';
         <form action="" method="post" class="form_search_custom_me container">
             <div class="container_licao_me">
                 <div class="field_input_me">
-                    <input type="text" class="input_me" required>
+                    <input type="text" class="input_me" required id="busca" name="busca">
                     <div class="label_search_me">Pesquisar</div>
                     <button type="submit" class="button_search_li_me">
                         <i class="ri-search-line search_icon_li"></i>
@@ -47,8 +65,10 @@ $nome_pag = 'noticias';
 </section>
 
 <section class="area_messages">
-    <div class="boxes_messages container">
+    <div class="boxes_messages container" id="resultados">
         <?php
+            $busca = isset($_POST['busca']) ? $_POST['busca'] : '';
+
             $query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
                 and tipo = 'Notícia' order by data_evento desc, id desc LIMIT $limite, $itens_por_pagina");
             $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -145,3 +165,5 @@ $nome_pag = 'noticias';
 </body>
 
 </html>
+
+<script src="assets/js/searchs.js"></script>
