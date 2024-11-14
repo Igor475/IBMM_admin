@@ -33,21 +33,21 @@ if(@$membros == 'ocultar') {
         $total_reg = count($res);
         if ($total_reg > 0) {
             ?>
-            <table class="content-table" id="example">
-                <thead class="thead-tabs">
-                    <tr class="column-table">
-                        <th class="th-table first_table" id="radius-foto">Foto</th>
-                        <th class="th-table">Nome</th>
-                        <th class="th-table">Cpf</th>
-                        <th class="th-table">Email</th>
-                        <th class="th-table column-hidden">Telefone</th>
-                        <th class="th-table column-hidden">Cargo Ministerial</th>
-                        <th class="th-table column-hidden">Ativo</th>
-                        <th class="th-table last_table" id="radius-action">Ações</th>
-                    </tr>
-                </thead>
-                <tbody class="body-table">
-                    <?php
+        <table class="content-table" id="example">
+            <thead class="thead-tabs">
+                <tr class="column-table">
+                    <th class="th-table first_table" id="radius-foto">Foto</th>
+                    <th class="th-table">Nome</th>
+                    <th class="th-table">Cpf</th>
+                    <th class="th-table">Email</th>
+                    <th class="th-table column-hidden">Telefone</th>
+                    <th class="th-table column-hidden">Cargo Ministerial</th>
+                    <th class="th-table column-hidden">Ativo</th>
+                    <th class="th-table last_table" id="radius-action">Ações</th>
+                </tr>
+            </thead>
+            <tbody class="body-table">
+                <?php
                     for ($i = 0; $i < $total_reg; $i++) {
                         foreach ($res[$i] as $key => $value) {
                         }
@@ -113,87 +113,95 @@ if(@$membros == 'ocultar') {
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         $data_batF = implode('/', array_reverse(explode('-', $data_bat)));
                         ?>
-                        <tr class="column-body <?php echo $inativa ?>">
-                            <td data-label="Foto" class="td-table" id="radius-column-foto">
-                                <img class="profile_table" src="../img/membros/<?php echo $foto ?>" alt="Perfil" title="Perfil">
-                            </td>
-                            <td data-label="Nome" class="td-table">
-                                <?php echo $nome ?>
-                            </td>
-                            <td data-label="CPF" class="td-table">
-                                <?php echo $cpf ?>
-                            </td>
-                            <td data-label="Email" class="td-table">
-                                <?php echo $email ?>
-                            </td>
-                            <td data-label="Telefone" class="td-table column-hidden">
-                                <?php echo $telefone ?>
-                            </td>
-                            <td data-label="Cadastro" class="td-table column-hidden">
-                                <?php echo $nome_cargo ?>
-                            </td>
-                            <td data-label="Ativo" class="td-table column-hidden">
-                                <?php echo $tab ?>
-                            </td>
-                            <td class="td-table" id="radius-column-action">
-                                <div class="dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Opções
-                                    </a>
+                <tr class="column-body <?php echo $inativa ?>">
+                    <td data-label="Foto" class="td-table" id="radius-column-foto">
+                        <img class="profile_table" src="../img/membros/<?php echo $foto ?>" alt="Perfil" title="Perfil">
+                    </td>
+                    <td data-label="Nome" class="td-table">
+                        <?php echo $nome ?>
+                    </td>
+                    <td data-label="CPF" class="td-table">
+                        <?php echo $cpf ?>
+                    </td>
+                    <td data-label="Email" class="td-table">
+                        <?php echo $email ?>
+                    </td>
+                    <td data-label="Telefone" class="td-table column-hidden">
+                        <?php echo $telefone ?>
+                    </td>
+                    <td data-label="Cadastro" class="td-table column-hidden">
+                        <?php echo $nome_cargo ?>
+                    </td>
+                    <td data-label="Ativo" class="td-table column-hidden">
+                        <?php echo $tab ?>
+                    </td>
+                    <td class="td-table" id="radius-column-action">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Opções
+                            </a>
 
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
                                             '<?php echo $nome ?>', '<?php echo $cpf ?>', '<?php echo $email ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
                                             '<?php echo $data_nasc ?>', '<?php echo $igreja ?>', '<?php echo $nome_ig ?>', 
                                             '<?php echo $data_bat ?>', '<?php echo $cargo ?>')">
-                                                <i class="bi bi-pencil-square icons_actions"></i>
-                                                Editar</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
-                                                <i class="bi bi-trash3 icons_actions"></i>
-                                                Excluir
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
+                                        <i class="bi bi-pencil-square icons_actions"></i>
+                                        Editar</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"
+                                        onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
+                                        <i class="bi bi-trash3 icons_actions"></i>
+                                        Excluir
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
                                             '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
                                             '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>', 
                                             '<?php echo $data_batF ?>', '<?php echo $nome_cargo ?>')">
-                                                <i class="bi bi-info-circle icons_actions"></i>
-                                                Ver Dados</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item <?php echo $classe_obs ?>" href="#" onclick="obs('<?php echo $id ?>', 
+                                        <i class="bi bi-info-circle icons_actions"></i>
+                                        Ver Dados</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item <?php echo $classe_obs ?>" href="#" onclick="obs('<?php echo $id ?>', 
                                             '<?php echo $nome ?>', '<?php echo $obs ?>')">
-                                                <i class="bi bi-chat-right-text icons_actions"></i>
-                                                Observações</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#" onclick="mudarStatus('<?php echo $id ?>', 
+                                        <i class="bi bi-chat-right-text icons_actions"></i>
+                                        Observações</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="mudarStatus('<?php echo $id ?>', 
                                             '<?php echo $ativar ?>')" title="<?php echo $ativo ?>">
-                                                <i class="bi <?php echo $icone ?> icons_actions <?php echo $classe ?>"></i>
-                                                <?php echo $ativo ?>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="../relatorios/relCarteirinha.php?id=<?php echo $id ?>" 
-                                                title="Gerar Carteirinha" target="_blank">
-                                                <i class="bi bi-person-badge icons_actions"></i>
-                                                Gerar Carteirinha
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                                        <i class="bi <?php echo $icone ?> icons_actions <?php echo $classe ?>"></i>
+                                        <?php echo $ativo ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" target="_blank"
+                                        href="http://api.whatsapp.com/send?1=pt_BR&phone=55<?php echo $telefone ?>&text=">
+                                        <i class="bi bi-whatsapp icons_actions"></i>
+                                        Enviar Mensagem
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="../relatorios/relCarteirinha.php?id=<?php echo $id ?>"
+                                        title="Gerar Carteirinha" target="_blank">
+                                        <i class="bi bi-person-badge icons_actions"></i>
+                                        Gerar Carteirinha
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
         <?php } else {
             echo 'Não existem dados cadastrados!';
         }
@@ -274,10 +282,10 @@ if(@$membros == 'ocultar') {
                                                     $nome_reg = $res[$i]['nome'];
                                                     $id_reg = $res[$i]['id'];
                                                     ?>
-                                                    <option value="<?php echo $id_reg ?>">
-                                                        <?php echo $nome_reg ?>
-                                                    </option>
-                                                <?php }
+                                            <option value="<?php echo $id_reg ?>">
+                                                <?php echo $nome_reg ?>
+                                            </option>
+                                            <?php }
                                             } ?>
                                         </select>
                                     </div>
@@ -487,7 +495,7 @@ if(@$membros == 'ocultar') {
 
 
 <script type="text/javascript">
-    var pag = "<?= $pagina ?>" 
+var pag = "<?= $pagina ?>"
 </script>
 <script src="../js/ajax.js"></script>
 
@@ -495,86 +503,85 @@ if(@$membros == 'ocultar') {
 
 
 <script type="text/javascript">
-    function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig, data_bat, cargo) {
-        $('#id').val(id);
-        $('#nome').val(nome);
-        $('#email').val(email);
-        $('#cpf').val(cpf);
-        $('#telefone').val(telefone);
-        $('#endereco').val(endereco);
-        $('#data_nasc').val(data_nasc);
-        $('#data_bat').val(data_bat);
-        $('#target').attr('src', '../img/membros/' + foto);
+function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig, data_bat, cargo) {
+    $('#id').val(id);
+    $('#nome').val(nome);
+    $('#email').val(email);
+    $('#cpf').val(cpf);
+    $('#telefone').val(telefone);
+    $('#endereco').val(endereco);
+    $('#data_nasc').val(data_nasc);
+    $('#data_bat').val(data_bat);
+    $('#target').attr('src', '../img/membros/' + foto);
 
-        $('#igreja').val(igreja).change();
-        $('#cargo').val(cargo).change();
+    $('#igreja').val(igreja).change();
+    $('#cargo').val(cargo).change();
 
-        $('#tituloModal').text('Editar Registro');
-        var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
-        myModal.show();
-        $('#mensagem').text('');
+    $('#tituloModal').text('Editar Registro');
+    var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
+    myModal.show();
+    $('#mensagem').text('');
+}
+
+
+function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja, data_bat, cargo) {
+
+    if (data_bat === '00/00/0000') {
+        data_bat = 'Não Batizado!';
     }
 
+    $('#nome-dados').text(nome);
+    $('#cpf-dados').text(cpf);
+    $('#email-dados').text(email);
+    $('#telefone-dados').text(telefone);
+    $('#endereco-dados').text(endereco);
+    $('#cadastro-dados').text(data_cad);
+    $('#nasc-dados').text(data_nasc);
+    $('#igreja-dados').text(igreja);
+    $('#batismo-dados').text(data_bat);
+    $('#membro-dados').text(cargo);
+    $('#foto-dados').attr('src', '../img/membros/' + foto);
 
-    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja, data_bat, cargo) {
 
-        if (data_bat === '00/00/0000') {
-            data_bat = 'Não Batizado!';
+    var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
+    myModal.show();
+    $('#mensagem').text('');
+}
+
+
+function obs(id, nome, obs) {
+
+    for (let letra of obs) {
+        if (letra === '+') {
+            obs = obs.replace(' +  + ', '\n');
         }
-
-        $('#nome-dados').text(nome);
-        $('#cpf-dados').text(cpf);
-        $('#email-dados').text(email);
-        $('#telefone-dados').text(telefone);
-        $('#endereco-dados').text(endereco);
-        $('#cadastro-dados').text(data_cad);
-        $('#nasc-dados').text(data_nasc);
-        $('#igreja-dados').text(igreja);
-        $('#batismo-dados').text(data_bat);
-        $('#membro-dados').text(cargo);
-        $('#foto-dados').attr('src', '../img/membros/' + foto);
-
-
-        var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
-        myModal.show();
-        $('#mensagem').text('');
     }
 
+    $('#nome-obs').text(nome);
+    $('#id-obs').val(id);
+    $('#obs').val(obs);
 
-    function obs(id, nome, obs) {
-
-        for (let letra of obs) {
-            if (letra === '+') {
-                obs = obs.replace(' +  + ', '\n');
-            }
-        }
-
-        $('#nome-obs').text(nome);
-        $('#id-obs').val(id);
-        $('#obs').val(obs);
-
-        var myModal = new bootstrap.Modal(document.getElementById('modalObs'), {});
-        myModal.show();
-        $('#mensagem-obs').text('');
-    }
+    var myModal = new bootstrap.Modal(document.getElementById('modalObs'), {});
+    myModal.show();
+    $('#mensagem-obs').text('');
+}
 
 
-    function limpar() {
-        var data = "<?= $data_atual ?>"
+function limpar() {
+    var data = "<?= $data_atual ?>"
 
-        $('#id').val('');
-        $('#nome').val('');
-        $('#email').val('');
-        $('#cpf').val('');
-        $('#telefone').val('');
-        $('#endereco').val('');
-        $('#data_nasc').val(data);
-        $('#data_bat').val('');
+    $('#id').val('');
+    $('#nome').val('');
+    $('#email').val('');
+    $('#cpf').val('');
+    $('#telefone').val('');
+    $('#endereco').val('');
+    $('#data_nasc').val(data);
+    $('#data_bat').val('');
 
-        document.getElementById("cargo").options.selectedIndex = 0;
-        $('#cargo').val($('#cargo').val()).change();
+    document.getElementById("cargo").options.selectedIndex = 0;
+    $('#cargo').val($('#cargo').val()).change();
 
-        $('#target').attr('src', '../img/membros/sem-foto.jpg');
-    }
-
+    $('#target').attr('src', '../img/membros/sem-foto.jpg');
+}
 </script>

@@ -134,12 +134,29 @@ if (@$home == 'ocultar') {
     exit();
 }
 
+
+//total de aniversariantes
+$dataMes = Date('m');
+$dataDia = Date('d');
+$query = $pdo->query("SELECT * FROM membros where igreja = '$id_igreja' and month(data_nasc) = '$dataMes' and day(data_nasc) = '$dataDia' order by data_nasc asc, id desc");
+$query_pastores = $pdo->query("SELECT * FROM pastores where igreja = '$id_igreja' and month(data_nasc) = '$dataMes' and day(data_nasc) = '$dataDia' order by data_nasc asc, id desc");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = count($res);
+$res_pastores = $query_pastores->fetchAll(PDO::FETCH_ASSOC);
+$total_reg_pastores = count($res_pastores);
+$totalAniversariantes = $total_reg + $total_reg_pastores;
+
 ?>
 
 <div class="header_church">
     <h1 class="title">
         <?php echo $nome_igreja ?>
     </h1>
+    <a href="index.php?pag=aniversariantes&filtrar=mes" class="area-niv">
+        Aniversariantes do Dia: <span class="<?php echo $classeSaldo ?>">
+            <?php echo $totalAniversariantes ?>
+        </span>
+    </a>
     <?php if (@$movimentacoes == 'ocultar') { ?>
 
     <?php } else { ?>

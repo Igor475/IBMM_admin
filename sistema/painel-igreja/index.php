@@ -167,18 +167,18 @@ if ($pag == "") {
                                     $nome_cat_oracao = 'Nenhum!';
                                 }
 
-                            ?>
-                                <li>
-                                    <b>Pedido de Oração:
-                                        <?php echo $id ?>
-                                    </b><br>
-                                    <b>Motivo:</b> <span class="names_pr">
-                                        <?php echo $nome_cat_oracao ?>
-                                    </span><br>
-                                    <b>Nome: </b> <span class="names_pr">
-                                        <?php echo $nome ?>
-                                    </span>
-                                </li>
+                                ?>
+                            <li>
+                                <b>Pedido de Oração:
+                                    <?php echo $id ?>
+                                </b><br>
+                                <b>Motivo:</b> <span class="names_pr">
+                                    <?php echo $nome_cat_oracao ?>
+                                </span><br>
+                                <b>Nome: </b> <span class="names_pr">
+                                    <?php echo $nome ?>
+                                </span>
+                            </li>
                             <?php } ?>
                         </div>
                         <li>
@@ -225,12 +225,12 @@ if ($pag == "") {
                             </a>
                         </li>
                         <?php if ($nivel_usu == 'Pastor Presidente') { ?>
-                            <li>
-                                <a href="../painel-admin">
-                                    <i class='bi bi-grid icon'></i>
-                                    Painel Administrador
-                                </a>
-                            </li>
+                        <li>
+                            <a href="../painel-admin">
+                                <i class='bi bi-grid icon'></i>
+                                Painel Administrador
+                            </a>
+                        </li>
                         <?php } ?>
                         <li>
                             <a href="../logout.php">
@@ -270,12 +270,12 @@ if ($pag == "") {
                         <?php if (@$home == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$home ?>">
-                                <a href="index.php" class="font_main_index">
-                                    <i class="bi bi-house-door icon"></i>
-                                    Home
-                                </a>
-                            </li>
+                        <li class="<?php echo @$home ?>">
+                            <a href="index.php" class="font_main_index">
+                                <i class="bi bi-house-door icon"></i>
+                                Home
+                            </a>
+                        </li>
                         <?php } ?>
                         <li class="divider">
                             <span class="text_divider">Principal</span>
@@ -287,67 +287,67 @@ if ($pag == "") {
                         <?php if (@$menu_pessoas == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$menu_pessoas ?>">
-                                <a href="#" class="font_main_index"><i class='bi bi-person-circle icon'></i> Pessoas <i
-                                        class='bx bx-chevron-right icon-right'></i></a>
+                        <li class="<?php echo @$menu_pessoas ?>">
+                            <a href="#" class="font_main_index"><i class='bi bi-person-circle icon'></i> Pessoas <i
+                                    class='bx bx-chevron-right icon-right'></i></a>
 
-                                <ul class="side-dropdown">
-                                    <?php if (@$membros == "ocultar") { ?>
+                            <ul class="side-dropdown">
+                                <?php if (@$membros == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$membros ?>">
-                                            <a href="index.php?pag=membros">Membros</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$membros ?>">
+                                    <a href="index.php?pag=membros">Membros</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$pastores == "ocultar") { ?>
+                                <?php if (@$pastores == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$pastores ?>">
-                                            <a href="index.php?pag=pastores">Pastores</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$pastores ?>">
+                                    <a href="index.php?pag=pastores">Pastores</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$tesoureiros == "ocultar") { ?>
+                                <?php if (@$tesoureiros == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$tesoureiros ?>">
-                                            <a href="index.php?pag=tesoureiros">Tesoureiros</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$tesoureiros ?>">
+                                    <a href="index.php?pag=tesoureiros">Tesoureiros</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$secretarios == "ocultar") { ?>
+                                <?php if (@$secretarios == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$secretarios ?>">
-                                            <a href="index.php?pag=secretarios">Secretários(as)</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$secretarios ?>">
+                                    <a href="index.php?pag=secretarios">Secretários(as)</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$fornecedores == "ocultar") { ?>
+                                <?php if (@$fornecedores == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$fornecedores ?>">
-                                            <a href="index.php?pag=fornecedores">Fornecedores</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$fornecedores ?>">
+                                    <a href="index.php?pag=fornecedores">Fornecedores</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$usuarios == "ocultar") { ?>
+                                <?php if (@$usuarios == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$usuarios ?>">
-                                            <a href="index.php?pag=usuarios">Usuários</a>
-                                        </li>
-                                    <?php } ?>
-                                    <?php if (@$aniversariantes == "ocultar") { ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$usuarios ?>">
+                                    <a href="index.php?pag=usuarios">Usuários</a>
+                                </li>
+                                <?php } ?>
+                                <?php if (@$aniversariantes == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$aniversariantes ?>">
-                                            <a href="index.php?pag=aniversariantes">Aniversariantes do Mês</a>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
+                                <?php } else { ?>
+                                <li class="<?php echo @$aniversariantes ?>">
+                                    <a href="index.php?pag=aniversariantes">Aniversariantes do Mês</a>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
                         <?php } ?>
 
 
@@ -358,78 +358,78 @@ if ($pag == "") {
                         <?php if (@$menu_cadastros == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$menu_cadastros ?>">
-                                <a href="#" class="font_main_index">
-                                    <i class='bi bi-pencil-square icon'></i> Cadastros <i
-                                        class='bx bx-chevron-right icon-right'></i>
-                                </a>
+                        <li class="<?php echo @$menu_cadastros ?>">
+                            <a href="#" class="font_main_index">
+                                <i class='bi bi-pencil-square icon'></i> Cadastros <i
+                                    class='bx bx-chevron-right icon-right'></i>
+                            </a>
 
-                                <ul class="side-dropdown">
-                                    <?php if (@$tarefas == "ocultar") { ?>
+                            <ul class="side-dropdown">
+                                <?php if (@$tarefas == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$tarefas ?>">
-                                            <a href="index.php?pag=tarefas">Agenda / Tarefas</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$tarefas ?>">
+                                    <a href="index.php?pag=tarefas">Agenda / Tarefas</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$dadosIgreja == "ocultar") { ?>
+                                <?php if (@$dadosIgreja == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$dadosIgreja ?>">
-                                            <a href="index.php?pag=igrejas">
-                                                Dados da Igreja
-                                            </a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$dadosIgreja ?>">
+                                    <a href="index.php?pag=igrejas">
+                                        Dados da Igreja
+                                    </a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$cultos == "ocultar") { ?>
+                                <?php if (@$cultos == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$cultos ?>">
-                                            <a href="index.php?pag=cultos">
-                                                Cultos
-                                            </a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$cultos ?>">
+                                    <a href="index.php?pag=cultos">
+                                        Cultos
+                                    </a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$alertas == "ocultar") { ?>
+                                <?php if (@$alertas == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$alertas ?>">
-                                            <a href="index.php?pag=alertas">
-                                                Alertas
-                                            </a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$alertas ?>">
+                                    <a href="index.php?pag=alertas">
+                                        Alertas
+                                    </a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$eventos == "ocultar") { ?>
+                                <?php if (@$eventos == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$eventos ?>">
-                                            <a href="index.php?pag=eventos">
-                                                Eventos
-                                            </a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$eventos ?>">
+                                    <a href="index.php?pag=eventos">
+                                        Eventos
+                                    </a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$licoes == "ocultar") { ?>
+                                <?php if (@$licoes == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$licoes ?>">
-                                            <a href="index.php?pag=licoes">Lições de Célula</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$licoes ?>">
+                                    <a href="index.php?pag=licoes">Lições de Célula</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$categoria_licoes == "ocultar") { ?>
+                                <?php if (@$categoria_licoes == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$categoria_licoes ?>">
-                                            <a href="index.php?pag=categoria_licoes">Categoria das Lições</a>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
+                                <?php } else { ?>
+                                <li class="<?php echo @$categoria_licoes ?>">
+                                    <a href="index.php?pag=categoria_licoes">Categoria das Lições</a>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
                         <?php } ?>
 
 
@@ -439,70 +439,70 @@ if ($pag == "") {
                         <?php if (@$menu_financeiro == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$menu_financeiro ?>">
-                                <a href="#" class="font_main_index"><i class='bi bi-currency-dollar icon'></i> Financeiro <i
-                                        class='bx bx-chevron-right icon-right'></i></a>
+                        <li class="<?php echo @$menu_financeiro ?>">
+                            <a href="#" class="font_main_index"><i class='bi bi-currency-dollar icon'></i> Financeiro <i
+                                    class='bx bx-chevron-right icon-right'></i></a>
 
-                                <ul class="side-dropdown">
-                                    <?php if (@$pagar == "ocultar") { ?>
+                            <ul class="side-dropdown">
+                                <?php if (@$pagar == "ocultar") { ?>
 
-                                    <?php } else { ?>
+                                <?php } else { ?>
 
-                                        <li class="<?php echo @$pagar ?>">
-                                            <a href="index.php?pag=pagar">Contas à Pagar</a>
-                                        </li>
-                                    <?php } ?>
+                                <li class="<?php echo @$pagar ?>">
+                                    <a href="index.php?pag=pagar">Contas à Pagar</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$receber == "ocultar") { ?>
+                                <?php if (@$receber == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$receber ?>">
-                                            <a href="index.php?pag=receber">Contas à Receber</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$receber ?>">
+                                    <a href="index.php?pag=receber">Contas à Receber</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$dizimos == "ocultar") { ?>
+                                <?php if (@$dizimos == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$dizimos ?>">
-                                            <a href="index.php?pag=dizimos">Dízimos</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$dizimos ?>">
+                                    <a href="index.php?pag=dizimos">Dízimos</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$ofertas == "ocultar") { ?>
+                                <?php if (@$ofertas == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$ofertas ?>">
-                                            <a href="index.php?pag=ofertas">Ofertas</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$ofertas ?>">
+                                    <a href="index.php?pag=ofertas">Ofertas</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$doacoes == "ocultar") { ?>
+                                <?php if (@$doacoes == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$doacoes ?>">
-                                            <a href="index.php?pag=doacoes">Doações</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$doacoes ?>">
+                                    <a href="index.php?pag=doacoes">Doações</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$vendas == "ocultar") { ?>
+                                <?php if (@$vendas == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$vendas ?>">
-                                            <a href="index.php?pag=vendas">Vendas</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$vendas ?>">
+                                    <a href="index.php?pag=vendas">Vendas</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$movimentacoes == "ocultar") { ?>
+                                <?php if (@$movimentacoes == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$movimentacoes ?>">
-                                            <a href="index.php?pag=movimentacoes">Movimentações</a>
-                                        </li>
+                                <?php } else { ?>
+                                <li class="<?php echo @$movimentacoes ?>">
+                                    <a href="index.php?pag=movimentacoes">Movimentações</a>
+                                </li>
 
-                                    <?php } ?>
-                                </ul>
-                            </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
                         <?php } ?>
 
 
@@ -513,52 +513,52 @@ if ($pag == "") {
                         <?php if (@$menu_secretaria == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$menu_secretaria ?>">
-                                <a href="#" class="font_main_index"><i class='bi bi-folder2-open icon'></i> Secretária <i
-                                        class='bx bx-chevron-right icon-right'></i></a>
+                        <li class="<?php echo @$menu_secretaria ?>">
+                            <a href="#" class="font_main_index"><i class='bi bi-folder2-open icon'></i> Secretária <i
+                                    class='bx bx-chevron-right icon-right'></i></a>
 
-                                <ul class="side-dropdown">
-                                    <?php if (@$documentos == "ocultar") { ?>
+                            <ul class="side-dropdown">
+                                <?php if (@$documentos == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$documentos ?>">
-                                            <a href="index.php?pag=documentos">Documentos</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$documentos ?>">
+                                    <a href="index.php?pag=documentos">Documentos</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$patrimonio == "ocultar") { ?>
+                                <?php if (@$patrimonio == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$patrimonio ?>">
-                                            <a href="index.php?pag=patrimonios">Patrimônio</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$patrimonio ?>">
+                                    <a href="index.php?pag=patrimonios">Patrimônio</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$celulas == "ocultar") { ?>
+                                <?php if (@$celulas == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$celulas ?>">
-                                            <a href="index.php?pag=celulas">Células</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$celulas ?>">
+                                    <a href="index.php?pag=celulas">Células</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$grupos == "ocultar") { ?>
+                                <?php if (@$grupos == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$grupos ?>">
-                                            <a href="index.php?pag=grupos">Grupos</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$grupos ?>">
+                                    <a href="index.php?pag=grupos">Grupos</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$oracao == "ocultar") { ?>
+                                <?php if (@$oracao == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$oracao ?>">
-                                            <a href="index.php?pag=oracao">Orações</a>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
+                                <?php } else { ?>
+                                <li class="<?php echo @$oracao ?>">
+                                    <a href="index.php?pag=oracao">Orações</a>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
                         <?php } ?>
 
 
@@ -569,72 +569,72 @@ if ($pag == "") {
                         <?php if (@$menu_relatorio == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$menu_relatorio ?>">
-                                <a href="#" class="font_main_index"><i class='bi bi-folder-symlink icon'></i> Relatórios <i
-                                        class='bx bx-chevron-right icon-right'></i></a>
+                        <li class="<?php echo @$menu_relatorio ?>">
+                            <a href="#" class="font_main_index"><i class='bi bi-folder-symlink icon'></i> Relatórios <i
+                                    class='bx bx-chevron-right icon-right'></i></a>
 
-                                <ul class="side-dropdown">
-                                    <?php if (@$RelMembros == "ocultar") { ?>
+                            <ul class="side-dropdown">
+                                <?php if (@$RelMembros == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$RelMembros ?>">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelMembros">Membros</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$RelMembros ?>">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelMembros">Membros</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$RelPatrimonio == "ocultar") { ?>
+                                <?php if (@$RelPatrimonio == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$RelPatrimonio ?>">
-                                            <a href="#" data-bs-toggle="modal"
-                                                data-bs-target="#modalRelPatrimonios">Patrimônios</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$RelPatrimonio ?>">
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalRelPatrimonios">Patrimônios</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$rel_financeiro == "ocultar") { ?>
+                                <?php if (@$rel_financeiro == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$rel_financeiro ?>">
-                                            <a href="#" data-bs-toggle="modal"
-                                                data-bs-target="#modalRelFinanceiro">Financeiro</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_financeiro ?>">
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalRelFinanceiro">Financeiro</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$rel_auditoria == "ocultar") { ?>
+                                <?php if (@$rel_auditoria == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$rel_auditoria ?>">
-                                            <a href="#">Auditoria e Logs</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_auditoria ?>">
+                                    <a href="#">Auditoria e Logs</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$rel_trans_membros == "ocultar") { ?>
+                                <?php if (@$rel_trans_membros == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$rel_trans_membros ?>">
-                                            <a href="#">Tranferência de Membros</a>
-                                        </li>
-                                    <?php } ?>
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_trans_membros ?>">
+                                    <a href="#">Tranferência de Membros</a>
+                                </li>
+                                <?php } ?>
 
-                                    <?php if (@$rel_fechamento == "ocultar") { ?>
+                                <?php if (@$rel_fechamento == "ocultar") { ?>
 
-                                    <?php } else { ?>
-                                        <li class="<?php echo @$rel_fechamento ?>">
-                                            <a href="#">Fechamentos Mensais</a>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_fechamento ?>">
+                                    <a href="#">Fechamentos Mensais</a>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
                         <?php } ?>
 
                         <?php if (@$anexos == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$anexos ?>">
-                                <a href="index.php?pag=anexos" class="font_main_index"><i
-                                        class='bi bi-archive icon'></i>Anexo
-                                    Sede</a>
-                            </li>
+                        <li class="<?php echo @$anexos ?>">
+                            <a href="index.php?pag=anexos" class="font_main_index"><i
+                                    class='bi bi-archive icon'></i>Anexo
+                                Sede</a>
+                        </li>
                         <?php } ?>
 
                         <li class="divider">
@@ -644,17 +644,17 @@ if ($pag == "") {
                         <?php if (@$notificacoes == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$notificacoes ?>">
-                                <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
-                            </li>
+                        <li class="<?php echo @$notificacoes ?>">
+                            <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
+                        </li>
                         <?php } ?>
 
                         <?php if (@$backup == "ocultar") { ?>
 
                         <?php } else { ?>
-                            <li class="<?php echo @$backup ?>">
-                                <a href="#" class="font_main_index"><i class='bi bi-database-down icon'></i>Backup Banco</a>
-                            </li>
+                        <li class="<?php echo @$backup ?>">
+                            <a href="#" class="font_main_index"><i class='bi bi-database-down icon'></i>Backup Banco</a>
+                        </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -785,10 +785,10 @@ if ($pag == "") {
 
                                                     $nome_reg = $res[$i]['nome'];
                                                     $id_reg = $res[$i]['id'];
-                                            ?>
-                                                    <option value="<?php echo $id_reg ?>">
-                                                        <?php echo $nome_reg ?>
-                                                    </option>
+                                                    ?>
+                                            <option value="<?php echo $id_reg ?>">
+                                                <?php echo $nome_reg ?>
+                                            </option>
                                             <?php }
                                             } ?>
                                         </select>
@@ -1019,6 +1019,64 @@ if ($pag == "") {
 
 
 
+
+<div class="modal fade" id="modalRelAniversariantes" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Relatório Aniversáriantes</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form method="post" action="../relatorios/relAniversariantes.php" target="_blank">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="widget_bottom_dates">
+                                <div class="input-field-in">
+                                    <label>Data Inicial (
+                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-fin', 'fin')">
+                                            <span class="txt_date_all" id="hoje-fin">Hoje</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-fin', 'fin')">
+                                            <span class="txt_date_all" id="mes-fin">Mês</span>
+                                        </a>
+                                    </label>
+                                    <input type="date" name="dataInicial" id="dtInicial-fin" value="1980-01-01">
+                                </div>
+
+                                <div class="input-field-in">
+                                    <label>Data Final</label>
+                                    <input type="date" id="dtFinal-fin" name="dataFinal"
+                                        value="<?php echo $data_atual ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="igreja" value="<?php echo $id_igreja ?>">
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 <script src="../js/mascaras.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
@@ -1029,7 +1087,7 @@ if ($pag == "") {
 
 
 <script type="text/javascript">
-    $("#form-usu").submit(function() {
+    $("#form-usu").submit(function () {
 
         event.preventDefault();
         var formData = new FormData(this);
@@ -1039,7 +1097,7 @@ if ($pag == "") {
             type: 'POST',
             data: formData,
 
-            success: function(mensagem) {
+            success: function (mensagem) {
                 $('#msg-usu').text('');
                 $('#msg-usu').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
@@ -1071,7 +1129,7 @@ if ($pag == "") {
 
 
 <script type="text/javascript">
-    $("#form-config").submit(function() {
+    $("#form-config").submit(function () {
 
         event.preventDefault();
         var formData = new FormData(this);
@@ -1081,7 +1139,7 @@ if ($pag == "") {
             type: 'POST',
             data: formData,
 
-            success: function(mensagem) {
+            success: function (mensagem) {
                 $('#msg-config').text('');
                 $('#msg-config').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
@@ -1132,8 +1190,8 @@ if ($pag == "") {
 
 
 <script type="text/javascript">
-    $(function() {
-        $("#movim").change(function() {
+    $(function () {
+        $("#movim").change(function () {
             if ($("#movim").val() != "") {
                 document.getElementById("tip").options.selectedIndex = 0;
                 $("#tip").val($("#tip").val()).change();
