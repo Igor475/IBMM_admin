@@ -1,4 +1,27 @@
 $(document).ready(function() {
+    listar();
+});
+
+function listar(){
+    $.ajax({
+        url: pag + '/listar.php',
+        /* url: 'http://localhost/ibmissaomultiplicar/sistema/painel-igreja/aniversariantes/listar.php', */
+        method: 'POST',
+        data: $('#modalForm').serialize(),
+        dataType: "html",
+
+        success:function(result){
+            $("#listar").html(result);
+            $('#mensagem-excluir').text('');
+        }
+    });
+}
+
+
+
+
+
+$(document).ready(function() {
     $('.sel2').select2({
         dropdownParent: $('#modalForm'),
     });

@@ -301,7 +301,7 @@ img {
 .title__banner {
   font-size: 3rem;
   font-weight: 700;
-  letter-spacing: 5px;
+  letter-spacing: 1px;
   line-height: 65px;
   color: var(--white);
   /*background-clip: text;
@@ -313,6 +313,7 @@ img {
 
 .descrition__banner {
   margin-bottom: 30px;
+  color: #cecece;
 }
 
 .buttons__link {
@@ -2228,6 +2229,33 @@ a.image-box:hover .play-icon {
   left: 0;
 }
 
+#preloader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  z-index: 1000; /* Certifique-se de que ele esteja acima de outros elementos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 3px solid #f3f3f3; /* Cor de fundo */
+  border-top: 3px solid #3498db; /* Cor do spinner */
+  border-radius: 50%;
+  width: 50px; /* Largura do spinner */
+  height: 50px; /* Altura do spinner */
+  animation: spin 1s linear infinite; /* Animação do spinner */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .text-container-sermon span {
   color: var(--white);
   font-size: 12px;
@@ -2247,8 +2275,13 @@ a.image-box:hover .play-icon {
 
 .boxes_messages {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  position: relative;
+}
+
+.boxes_messages > :nth-last-child(-n+3) {
+  grid-column: span 1; /* Força que o último item se ajuste em uma coluna */
 }
 
 .box_img_mesage {
@@ -2688,8 +2721,8 @@ a.image-box:hover .play-icon {
   position: absolute;
   padding: 0 0.2rem;
   font-size: 0.85rem;
-  font-weight: 600;
-  background-color: white;
+  font-weight: 400;
+  background-color: var(--color-4);
   transition: 0.2s ease;
   margin: 12px 18px;
   color: var(--bs-border-color-translucent);
@@ -2700,7 +2733,7 @@ a.image-box:hover .play-icon {
   width: 100%;
   height: 45px;
   line-height: 44px;
-  border: 2px solid var(--background-2);
+  border: 1px solid var(--background-2);
   border-radius: 5px;
   padding: 1rem 0.8rem;
   font-size: 0.85rem;
@@ -2732,13 +2765,13 @@ a.image-box:hover .play-icon {
 #igreja_ch:focus,
 #igreja_ch:valid {
   color: var(--color-green);
-  border: 2px solid var(--color-green);
+  border: 1px solid var(--color-green);
 }
 
 .input_member_signup:focus,
 .input_member_signup:valid {
   color: var(--color-green);
-  border: 2px solid var(--color-green);
+  border: 1px solid var(--color-green);
 }
 
 .input_member_signup:focus + .label_member_signup,
@@ -2777,13 +2810,14 @@ a.image-box:hover .play-icon {
 .area_button_signup {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   width: 100%;
   max-width: 730px;
 }
 
 .btn_signup {
-  padding: 8px 30px;
+  width: 200px;
+  padding: 12px 30px;
   border: none;
   background-color: var(--color-green);
   color: var(--white);
@@ -4445,6 +4479,14 @@ a.image-box:hover .play-icon {
   .link_message {
     max-width: 100%;
   }
+
+  .more__lessos {
+    padding: 0.8rem 1rem;
+  }
+
+  .all__lessos {
+    padding: 0.8rem 1rem;
+  }
 }
 
 @media screen and (max-width: 986px) {
@@ -4604,6 +4646,10 @@ a.image-box:hover .play-icon {
   .date__video {
     font-size: 0.85rem;
     padding: 0.5rem 0 0.5rem 0.7rem;
+  }
+
+  .boxes_messages {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -4880,7 +4926,7 @@ a.image-box:hover .play-icon {
   }
 
   .boxes_messages {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .items__footer__1 li {

@@ -75,7 +75,7 @@ require_once("sistema/conexao.php");
                                 <label class="label_member_signup">Data de Nascimento</label>
                             </div>
                             <div class="form-group-member col_w">
-                                <input type="text" id="endereco" name="endereco" class="input_member_signup">
+                                <input type="text" id="endereco" name="endereco" class="input_member_signup" required>
                                 <label class="label_member_signup">Endereço</label>
                             </div>
                             <div class="form-group-member col_h">
@@ -83,7 +83,7 @@ require_once("sistema/conexao.php");
                                 <label class="label_member_signup">Telefone</label>
                             </div>
                             <div class="form-group-member">
-                                <input type="date" id="data" name="data_bat" class="input_member_signup">
+                                <input type="date" id="data" name="data_bat" class="input_member_signup" required>
                                 <label class="label_member_signup">Data de Batismo</label>
                             </div>
                             <div class="form-group-member">

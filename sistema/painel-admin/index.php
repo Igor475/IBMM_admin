@@ -455,6 +455,13 @@ if ($pag == "") {
                                             value="<?php echo $itens_por_pagina_message ?>" required />
                                     </div>
 
+                                    <div class="input-field flex_int_7">
+                                        <label>Itens Por Página Admin</label>
+                                        <input type="number" name="itens_pag" id="itens_pag"
+                                            value="<?php echo $itens_pag ?>" required />
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

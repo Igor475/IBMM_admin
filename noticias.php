@@ -1,5 +1,9 @@
+
+
 <?php
 require_once("cabecalho.php");
+
+$busca = '%' . @$_POST['buscar'] . '%';
 
 
 if (@$_GET['pagina'] != null) {
@@ -11,24 +15,6 @@ if (@$_GET['pagina'] != null) {
 $limite = $pag * $itens_por_pagina;
 $pagina = $pag;
 $nome_pag = 'noticias';
-
-// Recebe a busca
-$busca = isset($_POST['busca']) ? $_POST['busca'] : '';
-
-// Preparação da consulta
-$query = $pdo->prepare("SELECT * FROM eventos WHERE tipo = 'Notícia' AND titulo LIKE :busca");
-
-// Definir o valor de busca com wildcard (%)
-$buscaComLike = '%' . $busca . '%';
-$query->bindParam(':busca', $buscaComLike, type: PDO::PARAM_STR);
-
-// Executa a consulta
-$query->execute();
-
-// Busca os resultados
-$resultados = $query->fetchAll(PDO::FETCH_ASSOC);
-
-echo json_encode($resultados);
 
 
 ?>
@@ -50,12 +36,13 @@ echo json_encode($resultados);
     </div>
 
     <div class="search_content">
-        <form action="" method="post" class="form_search_custom_me container">
+        <form method="post" class="form_search_custom_me container" id="searchForm">
             <div class="container_licao_me">
                 <div class="field_input_me">
-                    <input type="text" class="input_me" required id="busca" name="busca">
+                    <input type="text" class="input_me" name="buscar" id="buscar">
+                    <input type="hidden" id="pagina">
                     <div class="label_search_me">Pesquisar</div>
-                    <button type="submit" class="button_search_li_me">
+                    <button type="submit" class="button_search_li_me" onclick="listarNome()">
                         <i class="ri-search-line search_icon_li"></i>
                     </button>
                 </div>
@@ -65,98 +52,126 @@ echo json_encode($resultados);
 </section>
 
 <section class="area_messages">
-    <div class="boxes_messages container" id="resultados">
+    <div class="boxes_messages container">
         <?php
-            $busca = isset($_POST['busca']) ? $_POST['busca'] : '';
+        $query = $pdo->query("SELECT * FROM eventos WHERE titulo LIKE '%$busca%' 
+            AND igreja = '$id_igreja' 
+            AND ativo = 'Sim' 
+            AND tipo = 'Notícia' 
+            ORDER BY data_evento DESC, id DESC 
+            LIMIT $limite, $itens_por_pagina");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        $total_reg = count($res);
 
-            $query = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
-                and tipo = 'Notícia' order by data_evento desc, id desc LIMIT $limite, $itens_por_pagina");
-            $res = $query->fetchAll(PDO::FETCH_ASSOC);
-            $total_reg = count($res);
-
-            if ($total_reg > 0) {
-                for ($i = 0; $i < $total_reg; $i++) {
-                    foreach ($res[$i] as $key => $value) {}
-                    
-                        $titulo = $res[$i]['titulo'];
-                        $subtitulo = $res[$i]['subtitulo'];
-                        $descricao1 = $res[$i]['descricao1'];
-                        $data_evento = $res[$i]['data_evento'];
-                        $id = $res[$i]['id'];
-                        $banner = $res[$i]['banner'];
-                        $imagem = $res[$i]['imagem'];
-                        $hora = $res[$i]['hora_evento'];
-                        $url = $res[$i]['url'];
-
-                        $hora  = (new DateTime($hora))->format('H:i');
+        /* $query_search = $pdo->query("SELECT * FROM eventos where titulo LIKE '$busca' or categoria LIKE '$busca'");
+            $res_search = $query_search->fetchAll(PDO::FETCH_ASSOC);
+            $total_reg_search = count($res_search); */
 
 
-                    //TOTALIZANDO AS PÁGINAS
-                    $query_cont = $pdo->query("SELECT * FROM eventos where igreja = '$id_igreja' and ativo = 'Sim'
+        if ($total_reg > 0) {
+            for ($i = 0; $i < $total_reg; $i++) {
+                foreach ($res[$i] as $key => $value) {
+                }
+
+                $titulo = $res[$i]['titulo'];
+                $subtitulo = $res[$i]['subtitulo'];
+                $descricao1 = $res[$i]['descricao1'];
+                $data_evento = $res[$i]['data_evento'];
+                $id = $res[$i]['id'];
+                $banner = $res[$i]['banner'];
+                $imagem = $res[$i]['imagem'];
+                $hora = $res[$i]['hora_evento'];
+                $url = $res[$i]['url'];
+
+                $hora  = (new DateTime($hora))->format('H:i');
+
+
+                //TOTALIZANDO AS PÁGINAS
+                $query_cont = $pdo->query("SELECT * FROM eventos where titulo LIKE '%$busca%' and igreja = '$id_igreja' and ativo = 'Sim'
                         and tipo = 'Notícia'");
-                    $res_cont = $query_cont->fetchAll(PDO::FETCH_ASSOC);
-                    $total_cont = count($res_cont);
-                    $num_paginas = ceil($total_cont / $itens_por_pagina);
+                $res_cont = $query_cont->fetchAll(PDO::FETCH_ASSOC);
+                $total_cont = count($res_cont);
+                $num_paginas = ceil($total_cont / $itens_por_pagina);
 
         ?>
-        <div class="info_news">
-            <a href="noticia-<?php echo $url ?>" class="link_message">
-                <div class="box_img_mesage">
-                    <img src="sistema/img/eventos/<?php echo $imagem ?>" alt="" class="image_me">
+                <div id="preloader" style="display: none">
+                    <div class="spinner"></div> <!-- Este é um exemplo de spinner -->
                 </div>
-            </a>
+                <div class="info_news">
+                    <a href="noticia-<?php echo $url ?>" class="link_message">
+                        <div class="box_img_mesage">
+                            <img src="sistema/img/eventos/<?php echo $imagem ?>" alt="" class="image_me">
+                        </div>
+                    </a>
 
-            <div class="info_message">
-                <a href="#" class="link_title_news">
-                    <?php echo $titulo ?>
-                </a>
-                <div class="flx_details_news">
-                    <div class="flx_de">
-                        <i class="ri-calendar-line icon__ne"></i>
-                        <span class="date_me"><?php echo $data_evento ?></span>
-                    </div>
-                    <div class="flx_de">
-                        <i class="ri-time-line icon__ne"></i>
-                        <span class="hour_ne"><?php echo $hora ?></span>
+                    <div class="info_message">
+                        <a href="#" class="link_title_news">
+                            <?php echo $titulo ?>
+                        </a>
+                        <div class="flx_details_news">
+                            <div class="flx_de">
+                                <i class="ri-calendar-line icon__ne"></i>
+                                <span class="date_me"><?php echo $data_evento ?></span>
+                            </div>
+                            <div class="flx_de">
+                                <i class="ri-time-line icon__ne"></i>
+                                <span class="hour_ne"><?php echo $hora ?></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <?php }
+            <?php }
         } else { ?>
             <span>Não existem notícias no momento!</span>
         <?php } ?>
     </div>
 
     <div class="events__pagination">
-        <a href="<?php echo $nome_pag ?>?pagina=0" class="pagination__link__1">
-            <div class="pagination__items">
-                <i class="ri-arrow-left-s-line"></i>
-                <span>Anterior</span>
-            </div>
-        </a>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <!-- Botão Anterior -->
+                <li class="page-item">
+                    <a onclick="listarNome(<?php echo max(0, $pagina - 1); ?>)"
+                        class="paginador pagination__link__1"
+                        href="<?php echo $nome_pag ?>?pagina=<?php echo max(0, $pagina - 1); ?>"
+                        aria-label="Previous">
+                        <div class="pagination__items">
+                            <i class="ri-arrow-left-s-line"></i>
+                            <span>Anterior</span>
+                        </div>
+                    </a>
+                </li>
 
-        <?php
-        for ($i = 0; $i < @$num_paginas; $i++) {
+                <?php
+                for ($i = 0; $i < @$num_paginas; $i++) {
+                    $estilo = ($pagina == $i) ? 'active txt_num_pag_1' : 'txt_num_pag_2';
 
-            if ($pagina == $i) {
-                $estilo = 'txt_num_pag_1';
-            } else {
-                $estilo = 'txt_num_pag_2';
-            }
+                    // Exibe somente as páginas próximas
+                    if ($pagina >= ($i - 2) && $pagina <= ($i + 2)) { ?>
+                        <li class="page-item <?php echo $estilo ?>">
+                            <a onclick="listarNome(<?php echo $i ?>)"
+                                class="paginador <?php echo $estilo ?>"
+                                href="<?php echo $nome_pag ?>?pagina=<?php echo $i ?>">
+                                <?php echo $i + 1 ?>
+                            </a>
+                        </li>
+                <?php }
+                } ?>
 
-            if ($pagina >= ($i - 2) && $pagina <= ($i + 2)) { ?>
-                <a class="<?php echo $estilo ?>" href="<?php echo $nome_pag ?>?pagina=<?php echo $i ?>"><?php echo $i + 1 ?></a>
-
-        <?php }
-        } ?>
-
-        <a href="<?php echo $nome_pag ?>?pagina=<?php echo $num_paginas - 1 ?>" class="pagination__link__2">
-            <div class="pagination__items">
-                <span>Próximo</span>
-                <i class="ri-arrow-right-s-line"></i>
-            </div>
-        </a>
+                <!-- Botão Próximo -->
+                <li class="page-item">
+                    <a onclick="listarNome(<?php echo min($num_paginas - 1, $pagina + 1); ?>)"
+                        class="paginador pagination__link__2"
+                        href="<?php echo $nome_pag ?>?pagina=<?php echo min($num_paginas - 1, $pagina + 1); ?>"
+                        aria-label="Next">
+                        <div class="pagination__items">
+                            <span>Próximo</span>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </section>
 

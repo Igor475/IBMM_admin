@@ -82,6 +82,32 @@
     display: inline-block;
 }
 
+.background_aniv {
+    background-color: var(--background-obs-cels);
+    color: var(--text-obs-cels) !important;
+}
+
+.listar_items {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.text__search {
+    font-size: 20px;
+    color: var(--black-grey);
+}
+
+.ani_area {
+    margin-top: 50px;
+    display: flex;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+
+.area_search_items {
+    flex-direction: row;
+}
+
 /* OCULTANDO MENUS DAS PERMISSÕES DOS USUÁRIOS */
 .ocultar {
     display: none !important;
