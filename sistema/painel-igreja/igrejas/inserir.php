@@ -8,10 +8,24 @@ $telefone = $_POST['telefone'];
 //$pastor = @$_POST['pastor'];
 $video = @$_POST['video'];
 $email = @$_POST['email'];
+$id = @$_POST['id'];
+$url = @$_POST['url'];
 $youtube = @$_POST['youtube'];
 $instagram = @$_POST['instagram'];
 $facebook = @$_POST['facebook'];
-$id = @$_POST['id'];
+$descricao = @$_POST['descricao'];
+
+
+$nome_novo = strtolower(preg_replace(
+    "[^a-zA-Z0-9-]",
+    "-",
+    strtr(
+        utf8_decode(trim($url)),
+        utf8_decode("/áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+        "-aaaaeeiooouuncAAAAEEIOOOUUNC-"
+    )
+));
+$nome_url = preg_replace('/[ -]+/', '-', $nome_novo);
 
 
 $query = $pdo->query("SELECT * FROM $pagina WHERE nome = '$nome'");
@@ -19,6 +33,22 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $id_reg = @$res[0]['id'];
 if (@count($res) > 0 and $id_reg != $id) {
     echo 'O Nome da igreja já está cadastrado no sistema!';
+    exit();
+}
+
+$query = $pdo->query("SELECT * FROM $pagina WHERE email = '$email'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$id_reg = @$res[0]['id'];
+if (@count($res) > 0 and $id_reg != $id) {
+    echo 'O Email da igreja já está cadastrado no sistema!';
+    exit();
+}
+
+$query = $pdo->query("SELECT * FROM $pagina WHERE url = '$url'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$id_reg = @$res[0]['id'];
+if (@count($res) > 0 and $id_reg != $id) {
+    echo 'A url já está cadastrada, escolha outra!';
     exit();
 }
 
@@ -51,26 +81,27 @@ if ($id == "" || $id == 0) {
         telefone = :telefone, endereco = :endereco, imagem = '$imagem',
         data_cad = curDate(), matriz = 'Não', logo_rel = 'sem-foto.jpg',
         cab_rel = 'sem-foto.jpg', carteirinha_rel = 'sem-foto.jpg', video = :video, 
-        email = :email, youtube = :youtube, instagram = :instagram, facebook = :facebook");
+        email = :email, url = :url, youtube = :youtube, instagram = :instagram, 
+        facebook = :facebook, descricao = :descricao");
 
 } else {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
         telefone = :telefone, endereco = :endereco,
-        video = :video, email = :email, youtube = :youtube, instagram = :instagram, 
-        facebook = :facebook WHERE id = '$id'");
+        video = :video, email = :email, url = :url, youtube = :youtube, instagram = :instagram, 
+        facebook = :facebook, descricao = :descricao WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $foto = $res[0]['imagem'];
-        if($foto != "sem-foto.jpg"){
-			@unlink('../../img/igrejas/'.$foto);	
-		}
+        if ($foto != "sem-foto.jpg") {
+            @unlink('../../img/igrejas/' . $foto);
+        }
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
             telefone = :telefone, endereco = :endereco, imagem = '$imagem',
-            video = :video, email = :email, youtube = :youtube, instagram = :instagram, 
-            facebook = :facebook WHERE id = '$id'");
+            video = :video, email = :email, url = :url, youtube = :youtube, instagram = :instagram, 
+            facebook = :facebook, descricao = :descricao WHERE id = '$id'");
     }
 
 }
@@ -81,9 +112,11 @@ $query->bindValue(":telefone", "$telefone");
 $query->bindValue(":endereco", "$endereco");
 $query->bindValue(":video", "$video");
 $query->bindValue(":email", "$email");
+$query->bindValue(":url", "$url");
 $query->bindValue(":youtube", "$youtube");
 $query->bindValue(":instagram", "$instagram");
 $query->bindValue(":facebook", "$facebook");
+$query->bindValue(":descricao", "$descricao");
 $query->execute();
 
 echo 'Salvo com Sucesso';

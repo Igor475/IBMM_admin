@@ -10,7 +10,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
 if ($total_reg > 0) {
-?>
+   ?>
    <section class="slider-container">
       <div class="slider">
          <?php
@@ -38,27 +38,28 @@ if ($total_reg > 0) {
 
 
 
-         ?>
-         <div class="slide <?php echo $activeClass ?>" style="background-image: url('sistema/img/eventos/<?php echo $banner ?>')">
-            <div class="content">
-               <h2 class="title__banner"><?php echo $titulo ?></h2>
-               <p class="descrition__banner"><?php echo $subtitulo ?></p>
-               <div class="buttons__link">
-                  <?php if ($video != "") { ?>
-                     <a href="#" class="link__banner__icon" onclick="videoBanner('<?php echo $titulo ?>',
+            ?>
+            <div class="slide <?php echo $activeClass ?>"
+               style="background-image: url('sistema/img/eventos/<?php echo $banner ?>')">
+               <div class="content">
+                  <h2 class="title__banner"><?php echo $titulo ?></h2>
+                  <p class="descrition__banner"><?php echo $subtitulo ?></p>
+                  <div class="buttons__link">
+                     <?php if ($video != "") { ?>
+                        <a href="#" class="link__banner__icon" onclick="videoBanner('<?php echo $titulo ?>',
                         '<?php echo $video ?>')">
-                        <i class="ri-play-fill icon__banner"></i>
-                     </a>
-                  <? } else { ?>
+                           <i class="ri-play-fill icon__banner"></i>
+                        </a>
+                     <? } else { ?>
 
-                  <?php } ?>
-                  <a href="<?php echo $name_page ?><?php echo $url ?>" class="link__banner">
-                     Ver Mais
-                  </a>
+                     <?php } ?>
+                     <a href="<?php echo $name_page ?><?php echo $url ?>" class="link__banner">
+                        Ver Mais
+                     </a>
+                  </div>
                </div>
+               <div class="overlay_on"></div>
             </div>
-            <div class="overlay_on"></div>
-         </div>
          <?php } ?>
       </div>
 
@@ -75,7 +76,7 @@ if ($total_reg > 0) {
          // Gerar os indicadores dinamicamente
          for ($i = 0; $i < $total_reg; $i++) {
             $activeClass = $i === 0 ? 'active_slider' : '';
-         ?>
+            ?>
             <span class="indicator <?php echo $activeClass ?>" data-slide="0"></span>
          <?php } // Fim do loop de indicadores ?>
       </div>
@@ -121,7 +122,7 @@ if ($total_reg > 0) {
                   $total_reg = count($res);
                   if ($total_reg > 0) {
 
-                  ?>
+                     ?>
                      <?php
                      for ($i = 0; $i < $total_reg; $i++) {
                         foreach ($res[$i] as $key => $value) {
@@ -132,9 +133,9 @@ if ($total_reg > 0) {
                         $hora = $res[$i]['hora'];
                         $count = 1 + ($i * 1);
 
-                        $hora  = (new DateTime($hora))->format('H:i')
+                        $hora = (new DateTime($hora))->format('H:i')
 
-                     ?>
+                           ?>
                         <div class="worship swiper-slide">
                            <div class="name__worship">
 
@@ -150,7 +151,7 @@ if ($total_reg > 0) {
                               <p class="descrition__worship"><?php echo $dia ?> às <?php echo $hora ?></p>
                            </div>
                         </div>
-                  <?php }
+                     <?php }
                   } ?>
                </div>
             </div>
@@ -170,30 +171,22 @@ if ($total_reg > 0) {
          <div class="slides__versicles swiper">
             <div class="box__versicle">
                <div class="area__versicles swiper-wrapper">
-                  <div class="flex__versicles swiper-slide">
-                     <p class="txt__descrition__default margin__versicle">Lorem ipsum dolor, sit amet consectetur
-                        adipisicing elit.
-                        Tempora itaque illum inventore veritatis voluptates, voluptatem similique pariatur
-                        iure voluptate, asperiores illo quisquam placeat accusamus eius mollitia
-                        exercitationem praesentium aut nesciunt.</p>
-                     <h3 class="versicle__book">Romans 5:8</h3>
-                  </div>
-                  <div class="flex__versicles swiper-slide">
-                     <p class="txt__descrition__default margin__versicle">Lorem ipsum dolor, sit amet consectetur
-                        adipisicing elit.
-                        Tempora itaque illum inventore veritatis voluptates, voluptatem similique pariatur
-                        iure voluptate, asperiores illo quisquam placeat accusamus eius mollitia
-                        exercitationem praesentium aut nesciunt.</p>
-                     <h3 class="versicle__book"> 1 Jhon 10:5</h3>
-                  </div>
-                  <div class="flex__versicles swiper-slide">
-                     <p class="txt__descrition__default margin__versicle">Lorem ipsum dolor, sit amet consectetur
-                        adipisicing elit.
-                        Tempora itaque illum inventore veritatis voluptates, voluptatem similique pariatur
-                        iure voluptate, asperiores illo quisquam placeat accusamus eius mollitia
-                        exercitationem praesentium aut nesciunt.</p>
-                     <h3 class="versicle__book">Jhon 3:16</h3>
-                  </div>
+                  <?php
+                  $query = $pdo->query("SELECT * FROM versiculos where igreja = '$id_igreja' order by
+                  id desc limit 4");
+                  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                  $total_reg = count($res);
+                  if ($total_reg > 0) {
+                     for ($i = 0; $i < $total_reg; $i++) {
+                        foreach ($res[$i] as $key => $value) {
+                        }
+                        ?>
+                        <div class="flex__versicles swiper-slide">
+                           <p class="txt__descrition__default margin__versicle"><?php echo $res[$i]['versiculo'] ?></p>
+                           <h3 class="versicle__book"><?php echo $res[$i]['capitulo'] ?></h3>
+                        </div>
+                     <?php }
+                  } ?>
                </div>
             </div>
 
@@ -246,7 +239,8 @@ if ($total_reg > 0) {
 
          ?>
          <div class="links__lessons">
-            <a href="licoes/<?php echo $arquivo ?>" target="_blank" class="more__lessos basis">Baixar última lição</a>
+            <a href="licoes/<?php echo $arquivo ?>" target="_blank" class="more__lessos basis">Baixar última
+               lição</a>
             <a href="#" class="all__lessos basis">Mais lições</a>
          </div>
       </div>
@@ -283,13 +277,13 @@ if ($total_reg > 0) {
                $query = $pdo->query("SELECT * FROM usuarios WHERE id = '$pregador'");
                $res = $query->fetchAll(PDO::FETCH_ASSOC);
                $total_reg = count($res);
-               if($total_reg > 0) {
+               if ($total_reg > 0) {
                   $nome_pregador = $res[0]['nome'];
                } else {
                   $nome_pregador = '';
                }
 
-         ?>
+               ?>
                <a href="mensagem-<?php echo $url ?>" class="box__live">
                   <img class="image__sermon active" src="sistema/img/eventos/<?php echo $imagem ?>" alt="">
                   <div class="area__content__video">
@@ -316,7 +310,7 @@ if ($total_reg > 0) {
                      </div>
                   </div>
                </a>
-         <?php }
+            <?php }
          } ?>
       </section>
       <div class="area__link__more">
@@ -364,9 +358,10 @@ if ($total_reg > 0) {
    </section>
 
    <?php require_once("rodape.php") ?>
-   
+
 </main>
 </body>
+
 </html>
 
 

@@ -2,7 +2,7 @@
 <script type="text/javascript" src="../js/alerta-tempo.js"></script>
 
 <?php
-require_once ("../conexao.php");
+require_once("../conexao.php");
 $pagina = 'igrejas';
 
 if (@$dadosIgreja == 'ocultar') {
@@ -53,9 +53,11 @@ if (@$dadosIgreja == 'ocultar') {
                         $video = $res[$i]['video'];
                         $email = $res[$i]['email'];
                         $id = $res[$i]['id'];
+                        $url = $res[$i]['url'];
                         $youtube = $res[$i]['youtube'];
                         $instagram = $res[$i]['instagram'];
                         $facebook = $res[$i]['facebook'];
+                        $descricao = $res[$i]['descricao'];
 
                         $logo_rel = $res[$i]['logo_rel'];
                         $cab_rel = $res[$i]['cab_rel'];
@@ -75,6 +77,7 @@ if (@$dadosIgreja == 'ocultar') {
 
                         //Retira a quebra do texto das observações
                         $obs = str_replace(array("\n", "\r"), ' + ', $obs);
+                        $descricao = str_replace(array("\n", "\r"), ' + ', $descricao);
 
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         ?>
@@ -109,17 +112,17 @@ if (@$dadosIgreja == 'ocultar') {
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                            '<?php echo $pastor ?>', '<?php echo $video ?>', '<?php echo $email ?>','<?php echo $youtube ?>',
-                                            '<?php echo $instagram ?>', '<?php echo $facebook ?>')">
+                                            '<?php echo $pastor ?>', '<?php echo $video ?>', '<?php echo $email ?>', 
+                                            '<?php echo $url ?>', '<?php echo $youtube ?>', '<?php echo $instagram ?>', 
+                                            '<?php echo $facebook ?>', '<?php echo $descricao ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="dados('<?php echo $nome ?>', 
+                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>',
                                             '<?php echo $data_cadF ?>', '<?php echo $matriz ?>', '<?php echo $nome_p ?>', 
-                                            '<?php echo $email ?>')">
+                                            '<?php echo $email ?>', '<?php echo $descricao ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -157,7 +160,7 @@ if (@$dadosIgreja == 'ocultar') {
 
 
 <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="Cadastro" id="tituloModal"></h3>
@@ -221,18 +224,32 @@ if (@$dadosIgreja == 'ocultar') {
                                     </div>
 
                                     <div class="input-field">
+                                        <label>Url Site (Tudo Junto)</label>
+                                        <input type="text" name="url" id="url" placeholder="ibmissaomultiplicar">
+                                    </div>
+
+                                    <div class="input-field">
                                         <label>YouTube</label>
-                                        <input type="text" name="youtube" id="youtube" placeholder="Link do canal do YouTube">
+                                        <input type="text" name="youtube" id="youtube"
+                                            placeholder="Link do canal do YouTube">
                                     </div>
 
                                     <div class="input-field">
                                         <label>Instagram</label>
-                                        <input type="text" name="instagram" id="instagram" placeholder="Link do Instagram">
+                                        <input type="text" name="instagram" id="instagram"
+                                            placeholder="Link do Instagram">
                                     </div>
 
                                     <div class="input-field">
                                         <label>Facebook</label>
                                         <input type="text" name="facebook" id="facebook" placeholder="Link do facebook">
+                                    </div>
+
+                                    <div class="description_church">
+                                        <label>Descrição da Igreja (Texto apresentado no site)
+                                            (Máximo de 3000 Caracteres)</label>
+                                        <textarea class="txt-obs" name="descricao" id="descricao"
+                                            maxlength="3000"></textarea>
                                     </div>
 
                                     <div class="area_photo">
@@ -366,6 +383,12 @@ if (@$dadosIgreja == 'ocultar') {
                     <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Pastor Responsável: </span>
                     <span class="texts_son" id="pastor-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/network-group-svgrepo-com.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
+                    <span class="user_name">Descrição: </span>
+                    <span class="texts_son" id="descricao-dados"></span>
                 </div>
                 <div class="user_profile_area">
                     <img class="img_info_profile" src="" id="foto-dados">
@@ -515,7 +538,7 @@ if (@$dadosIgreja == 'ocultar') {
 
 
 <script type="text/javascript">
-    var pag = "<?= $pagina ?>" 
+    var pag = "<?= $pagina ?>"
 </script>
 <script src="../js/ajax.js"></script>
 
@@ -523,18 +546,29 @@ if (@$dadosIgreja == 'ocultar') {
 
 
 <script type="text/javascript">
-    function editar(id, nome, telefone, endereco, foto, pastor, video, email, youtube, instagram, facebook) {
+    function editar(id, nome, telefone, endereco, foto, pastor, video, email, url, youtube, instagram, facebook,
+        descricao) {
+
+        for (let letra of descricao) {
+            if (letra === '+') {
+                descricao = descricao.replace(' +  + ', '\n')
+            }
+        }
+
         $('#id').val(id);
         $('#nome').val(nome);
+
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
         $('#pastor').val(pastor).change();
         $('#target').attr('src', '../img/igrejas/' + foto);
         $('#video').val(video);
         $('#email').val(email);
+        $('#url').val(url);
         $('#youtube').val(youtube);
         $('#instagram').val(instagram);
         $('#facebook').val(facebook);
+        $('#descricao').val(descricao);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -543,7 +577,14 @@ if (@$dadosIgreja == 'ocultar') {
     }
 
 
-    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor, email) {
+    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor, email, descricao) {
+
+        for (let letra of descricao) {
+            if (letra === '+') {
+                descricao = descricao.replace(' +  + ', '\n');
+            }
+        }
+
         $('#nome-dados').text(nome);
         $('#telefone-dados').text(telefone);
         $('#endereco-dados').text(endereco);
@@ -552,6 +593,7 @@ if (@$dadosIgreja == 'ocultar') {
         $('#email-dados').text(email);
         $('#foto-dados').attr('src', '../img/igrejas/' + foto);
         $('#pastor-dados').text(pastor);
+        $('#descricao-dados').text(pastor);
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
@@ -582,6 +624,9 @@ if (@$dadosIgreja == 'ocultar') {
         $('#nome').val('');
         $('#telefone').val('');
         $('#endereco').val('');
+        $('#descricao').val('');
+        $('#email').val('');
+        $('#url').val('');
         $('#youtube').val('');
         $('#instagram').val('');
         $('#facebook').val('');
@@ -601,7 +646,9 @@ if (@$dadosIgreja == 'ocultar') {
         $.ajax({
             url: pag + "/listar-arquivos.php",
             method: 'POST',
-            data: { id },
+            data: {
+                id
+            },
             dataType: "text",
 
             success: function (result) {
@@ -630,15 +677,14 @@ if (@$dadosIgreja == 'ocultar') {
         myModal.show();
         $('#mensagem-imagens').text('');
     }
-
 </script>
 
 
 <script type="text/javascript">
     function carregarImglogojpg() {
-    var target = document.getElementById('targetlogojpg');
-    var file = document.querySelector("#imagemlogojpg").files[0];
-    
+        var target = document.getElementById('targetlogojpg');
+        var file = document.querySelector("#imagemlogojpg").files[0];
+
         var reader = new FileReader();
 
         reader.onloadend = function () {
@@ -657,9 +703,9 @@ if (@$dadosIgreja == 'ocultar') {
 
 
     function carregarImgcabjpg() {
-    var target = document.getElementById('targetcabjpg');
-    var file = document.querySelector("#imagemcabjpg").files[0];
-    
+        var target = document.getElementById('targetcabjpg');
+        var file = document.querySelector("#imagemcabjpg").files[0];
+
         var reader = new FileReader();
 
         reader.onloadend = function () {
@@ -677,9 +723,9 @@ if (@$dadosIgreja == 'ocultar') {
 
 
     function carregarImgcartjpg() {
-    var target = document.getElementById('targetcartjpg');
-    var file = document.querySelector("#imagemcartjpg").files[0];
-    
+        var target = document.getElementById('targetcartjpg');
+        var file = document.querySelector("#imagemcartjpg").files[0];
+
         var reader = new FileReader();
 
         reader.onloadend = function () {
@@ -712,23 +758,24 @@ if (@$dadosIgreja == 'ocultar') {
                 $('#mensagem-img').text('');
                 $('#mensagem-img').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
-                    
-                        $('#btn-fechar-img').click();
-                        window.location="index.php?pag=" + pag;
-                    } else {
 
-                        $('#mensagem-img').addClass('message_error')
-                        $('#mensagem-img').text(mensagem)
-                    }
+                    $('#btn-fechar-img').click();
+                    window.location = "index.php?pag=" + pag;
+                }
+            else {
+
+                    $('#mensagem-img').addClass('message_error')
+                    $('#mensagem-img').text(mensagem)
+                }
 
 
-                },
+            },
 
-                cache: false,
-                contentType: false,
-                processData: false,
-                
-            });
+            cache: false,
+            contentType: false,
+            processData: false,
+
+        });
 
     });
 </script>

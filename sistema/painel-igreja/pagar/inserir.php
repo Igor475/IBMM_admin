@@ -70,7 +70,23 @@ $query->bindValue(":valor", "$valor");
 $query->bindValue(":frequencia", "$frequencia");
 $query->bindValue(":vencimento", "$vencimento");
 $query->execute();
+$ult_id = $pdo->lastInsertId();
 
+
+//EXECUTAR NO LOG
+$tabela = $pagina;
+
+if ($id == "" || $id == 0) {
+    $acao = 'Inserção';
+    $id_reg = $ult_id;
+} else {
+    $acao = 'Edição';
+    $id_reg = $id;
+}
+$descricao_conta = $descricao;
+$painel = 'Painel Igreja';
+$igreja_ = $igreja;
+require_once("../../logs.php");
 
 
 echo 'Salvo com Sucesso';

@@ -36,6 +36,22 @@ if($id == ""){
 $query->bindValue(":nome", "$nome");
 $query->bindValue(":chave", "$chave");
 $query->execute();
+$ult_id = $pdo->lastInsertId();
+
+//EXECUTAR NO LOG
+$tabela = $pagina;
+
+if ($id == "" || $id == 0) {
+	$acao = 'Inserção';
+	$id_reg = $ult_id;
+} else {
+	$acao = 'Edição';
+	$id_reg = $id;
+}
+$descricao = $nome;
+$painel = 'Painel Administrativo';
+$igreja = 0;
+require_once("../../logs.php");
 
 echo 'Salvo com Sucesso';
 

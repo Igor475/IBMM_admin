@@ -23,6 +23,20 @@ if ($total_reg > 0) {
     $_SESSION['cpf_usuario'] = $res[0]['cpf'];
     $_SESSION['id_igreja'] = $res[0]['igreja'];
 
+    //EXECUTAR NO LOG
+    $tabela = 'usuarios';
+    $acao = 'Login';
+    $id_reg = 0;
+    $descricao = 'Login';
+    if ($res[0]['nivel'] == 'Pastor Presidente') {
+        $painel = 'Painel Administrativo';
+        $igreja = 0;
+    } else {
+        $painel = 'Painel Igreja';
+        $igreja = $res[0]['igreja'];
+    }
+    require_once("logs.php");
+
     if ($res[0]['nivel'] == 'Pastor Presidente') {
         echo "<script>document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {

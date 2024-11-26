@@ -83,8 +83,8 @@
 }
 
 .background_aniv {
-  background-color: var(--background-obs-cels) !important;
-  color: var(--text-obs-cels) !important;
+  background-color: var(--background-obs-cels) /* #bcbc441b */ !important;
+  color: var(--text-obs-cels) /* #bcbc44 */ !important;
 }
 
 .background_transparent {
@@ -831,9 +831,8 @@ body::-webkit-scrollbar-thumb {
 #container_painel .info-data {
   margin-top: 36px;
   margin-bottom: 20px;
-  display: flex;
-  justify-content: stretch;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   /*display: grid;
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
@@ -866,8 +865,6 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--fonte-menu-dropdown);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.07);
   position: relative;
-  flex: 1 1 300px;
-  max-width: 300px;
 }
 
 #container_painel .card .head {
@@ -911,9 +908,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 #container_painel .widget-church {
-  display: flex;
-  justify-content: start;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   /*grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     grid-gap: 20px;*/
@@ -926,8 +922,6 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--fonte-menu-dropdown);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.07);
   position: relative;
-  flex: 1 1 280px;
-  max-width: 380px;
 }
 
 .bordacardsede {
@@ -1087,7 +1081,7 @@ body::-webkit-scrollbar-thumb {
 #container_painel .card-church .head-church .info-church .text_later_task {
   color: var(--btn-remove);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 #container_painel .card-church .head-church .info-church .date_later_task {
@@ -1118,7 +1112,7 @@ body::-webkit-scrollbar-thumb {
 #container_painel .card-church .head-church .calendar_hour {
   font-size: 12px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .border_task {
@@ -1725,6 +1719,15 @@ td.td-table#radius-column-action:last-child {
 .text_bill_later {
   background-color: var(--background-table-emp) !important;
   color: var(--text-table-emp) !important;
+  padding: 5px 25px;
+  border-radius: 30px;
+}
+
+.text_bill_pay {
+  background-color: var(--hover-side-menu) !important;
+  color: var(--verde-light-border) !important;
+  padding: 5px 25px;
+  border-radius: 30px;
 }
 
 #icons_tarefas {
@@ -1741,6 +1744,16 @@ td.td-table#radius-column-action:last-child {
 /*============================== MEDIA QUERIES ===========================*/
 
 @media screen and (max-width: 1120px) {
+  #container_painel .info-data {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #container_painel .widget-church {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .content-table .thead-tabs {
     display: none;
   }
@@ -1898,28 +1911,6 @@ td.td-table#radius-column-action:last-child {
   }
 }
 
-@media screen and (max-width: 840px) {
-  /*#container_painel .widget-church {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    } */
-
-  /* #container_painel .info-data {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    } 
-
-    #container_painel .card-church {
-        flex: 1 1 380px;
-    }
-
-    #container_painel .info-data .card {
-        flex: 1 1 380px;
-    } */
-}
-
 @media screen and (max-width: 768px) {
   .header-left {
     display: none;
@@ -1983,6 +1974,11 @@ td.td-table#radius-column-action:last-child {
     align-items: center;
   }
 
+  #container_painel .widget-church {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   #container_painel .card-church .head-church {
     align-content: start;
     flex-wrap: wrap;
@@ -2025,6 +2021,11 @@ td.td-table#radius-column-action:last-child {
 @media screen and (max-width: 576px) {
   #container_painel .churchs {
     text-align: center;
+  }
+
+  #container_painel .info-data {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 

@@ -9,15 +9,16 @@ $senha = "";
 try {
     $pdo = new PDO("mysql:dbname=$banco;host=$servidor", "$usuario", "$senha");
 } catch (Exception $e) {
-    echo "Erro ao conectar com o banco de dados!<br>".$e;
+    echo "Erro ao conectar com o banco de dados!<br>" . $e;
 }
 
 
 $url_sistema = "http://$_SERVER[HTTP_HOST]/sistema/";
 $url = explode("//", $url_sistema);
-if($url[1] == 'localhost/sistema/'){
-	$url_sistema = "http://$_SERVER[HTTP_HOST]/ibmissaomultiplicar/sistema/";
+if ($url[1] == 'localhost/sistema/') {
+    $url_sistema = "http://$_SERVER[HTTP_HOST]/ibmissaomultiplicar/sistema/";
 }
+
 
 $email_super_adm = "contato@ibmissaomultiplicar.com.br"; // E-mail Principal
 $nome_igreja_sistema = "Igreja Batista Missão Multiplicar";
@@ -37,6 +38,7 @@ CADA IGREJA DEVERA SUBIR A SUA IMAGEM JPG NO CADASTRO DE IGREJAS */
 $itens_por_pagina = 6;
 $itens_por_pagina_message = 6;
 $itens_pag = 10;
+$logs = 'Sim';
 
 
 $escolher_usuario = 'Sim';
@@ -50,8 +52,8 @@ $query = $pdo->query("SELECT * FROM pastores_presidentes");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
-if($total_reg == 0)
-$pdo->query("INSERT INTO pastores_presidentes SET nome = 'Super Administrador', email = '$email_super_adm',
+if ($total_reg == 0)
+    $pdo->query("INSERT INTO pastores_presidentes SET nome = 'Super Administrador', email = '$email_super_adm',
     cpf = '000.000.000-00', telefone = '(21)998867793', foto = 'sem-foto.jpg' ");
 
 
@@ -61,8 +63,8 @@ $query = $pdo->query("SELECT * FROM pastores");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
-if($total_reg == 0)
-$pdo->query("INSERT INTO pastores SET nome = 'Super Administrador', email = '$email_super_adm',
+if ($total_reg == 0)
+    $pdo->query("INSERT INTO pastores SET nome = 'Super Administrador', email = '$email_super_adm',
     cpf = '000.000.000-00', telefone = '(21)998867793', foto = 'sem-foto.jpg', data_cad = 'curDate()',
     data_nasc = curDate(), igreja = 1 ");
 
@@ -74,8 +76,8 @@ $query = $pdo->query("SELECT * FROM usuarios");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
-if($total_reg == 0)
-$pdo->query("INSERT INTO usuarios SET nome = 'Super Administrador', email = '$email_super_adm',
+if ($total_reg == 0)
+    $pdo->query("INSERT INTO usuarios SET nome = 'Super Administrador', email = '$email_super_adm',
     cpf = '000.000.000-00', senha = '123', nivel = 'Pastor Presidente', id_pessoa = '1', foto = 'sem-foto.jpg' ");
 
 
@@ -86,8 +88,8 @@ $query = $pdo->query("SELECT * FROM igrejas");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
-if($total_reg == 0)
-$pdo->query("INSERT INTO igrejas SET nome = '$nome_igreja', telefone = '$telefone_igreja',
+if ($total_reg == 0)
+    $pdo->query("INSERT INTO igrejas SET nome = '$nome_igreja', telefone = '$telefone_igreja',
     endereco = '$endereco_igreja', matriz = 'Sim', imagem = 'sem-foto.jpg',
     data_cad = curDate(), pastor = '1', logo_rel = 'sem-foto.jpg', cab_rel = 'sem-foto.jpg',
     carteirinha_rel = 'sem-foto.jpg', email = '$email_super_adm' ");
@@ -99,8 +101,8 @@ $query = $pdo->query("SELECT * FROM cargos");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
-if($total_reg == 0)
-$pdo->query("INSERT INTO cargos SET nome = 'Membro' ");
+if ($total_reg == 0)
+    $pdo->query("INSERT INTO cargos SET nome = 'Membro' ");
 
 
 
@@ -109,8 +111,8 @@ $query = $pdo->query("SELECT * FROM frequencias");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
-if($total_reg == 0)
-$pdo->query("INSERT INTO frequencias SET frequencia = 'Uma vez', dias = 0");
+if ($total_reg == 0)
+    $pdo->query("INSERT INTO frequencias SET frequencia = 'Uma vez', dias = 0");
 
 
 
@@ -119,14 +121,14 @@ $query = $pdo->query("SELECT * FROM config");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
-if($total_reg == 0) {
+if ($total_reg == 0) {
     $pdo->query("INSERT INTO config SET nome = '$nome_igreja_sistema', email = '$email_super_adm',
         endereco = '$endereco_igreja_sistema', telefone = '$telefone_igreja_sistema', 
         qtd_tarefas = '$quantidade_tarefas', limitar_tesoureiro = '$limitar_tesoureiro',
         relatorio_pdf = '$relatorio_pdf', cabecalho_rel_img = '$cabecalho_rel_img', 
         escolher_usuario = '$escolher_usuario', usuario_celula = '$usuario_celula', 
         itens_por_pagina = '$itens_por_pagina', itens_por_pagina_message = '$itens_por_pagina_message',
-        itens_pag = '$itens_pag' ");
+        itens_pag = '$itens_pag', logs = '$logs' ");
 }
 
 
@@ -146,4 +148,5 @@ $user_cel = $res[0]['usuario_celula'];
 $itens_por_pagina = $res[0]['itens_por_pagina'];
 $itens_por_pagina_message = $res[0]['itens_por_pagina_message'];
 $itens_pag = $res[0]['itens_pag'];
+$logs = $res[0]['logs'];
 ?>

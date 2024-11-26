@@ -149,7 +149,7 @@ if (@$receber == 'ocultar') {
                             if ($pago != 'Sim') {
                                 $classe_linha = 'text_bill_later';
                             } else {
-                                $classe_linha = '';
+                                $classe_linha = 'text_bill_pay';
                             }
                         }
 
@@ -184,7 +184,7 @@ if (@$receber == 'ocultar') {
                         $data_baixaF = implode('/', array_reverse(explode('-', $data_baixa)));
                         $vencimentoF = implode('/', array_reverse(explode('-', $vencimento)));
                         ?>
-                        <tr class="column-body <?php echo $classe_linha ?>">
+                        <tr class="column-body">
                             <td data-label="Descrição" class="td-table-pd" id="radius-column-foto">
                                 <i class="bi bi-exclamation-octagon-fill <?php echo $classe ?>"></i>
                                 <?php echo $descricao ?>
@@ -203,7 +203,7 @@ if (@$receber == 'ocultar') {
                                 <?php echo $usuario_cad ?>
                             </td>
                             <td data-label="Pago" class="td-table column-hidden">
-                                <?php echo $pago ?>
+                                <span class="<?php echo $classe_linha ?>"><?php echo $pago ?></span>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">

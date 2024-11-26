@@ -1,11 +1,24 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="../js/alerta-tempo.js"></script>
+
+
 <?php
 require_once("../conexao.php");
-$pagina = 'categoria';
+$pagina = 'versiculos';
+
+if (@$versiculos == 'ocultar') {
+    echo "<script>$(function() { 
+                     alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
+                });
+          </script>";
+    /* echo "<script>window.location='index.php'</script>"; */
+    exit();
+}
 ?>
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Nova categoria
+        Novo Versículo
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>
@@ -14,7 +27,7 @@ $pagina = 'categoria';
 <div class="tabs">
     <div class="table-container">
         <?php
-        $query = $pdo->query("SELECT * FROM $pagina order by id desc");
+        $query = $pdo->query("SELECT * FROM $pagina WHERE igreja = '$id_igreja' order by id desc");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
@@ -22,7 +35,8 @@ $pagina = 'categoria';
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
-                        <th class="th-table first_table" id="radius-foto">Nome</th>
+                        <th class="th-table">Versículo</th>
+                        <th class="th-table">Capítulo</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -32,12 +46,18 @@ $pagina = 'categoria';
                         foreach ($res[$i] as $key => $value) {
                         }
 
-                        $nome = $res[$i]['nome'];
+                        $versiculo = $res[$i]['versiculo'];
+                        $capitulo = $res[$i]['capitulo'];
+                        $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
+
                         ?>
                         <tr class="column-body">
-                            <td data-label="Nome" class="td-table" id="radius-column-foto">
-                                <?php echo $nome ?>
+                            <td data-label="Nome" class="td-table">
+                                <?php echo $versiculo ?>
+                            </td>
+                            <td data-label="Dia" class="td-table">
+                                <?php echo $capitulo ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
@@ -48,13 +68,13 @@ $pagina = 'categoria';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>')">
+                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $versiculo ?>', 
+                                                '<?php echo $capitulo ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
+                                            <a class="dropdown-item" href="#" onclick="excluir('<?php echo $id ?>')">
                                                 <i class="bi bi-trash3 icons_actions"></i>
                                                 Excluir
                                             </a>
@@ -88,15 +108,23 @@ $pagina = 'categoria';
             </div>
             <form id="form" method="post">
                 <div class="modal-body">
-                    <div action="#" class="form-modal-auto">
+                    <div action="#" class="form-modal">
                         <div class="form first">
-                            <div class="fields_ctg">
-                                <div class="input-field-guest">
-                                    <label>Nome</label>
-                                    <input type="text" name="nome" id="nome" placeholder="Insira o Nome" required>
+                            <div class="fields">
+                                <div class="input-field flex_int_3">
+                                    <label class="txt_label_obs">Observações (Máximo de 1000 Caracteres)</label>
+                                    <textarea class="txt-obs" name="versiculo" id="versiculo" maxlength="1000"
+                                        required></textarea>
+                                </div>
+
+                                <div class="input-field flex_int_15">
+                                    <label>Capítulo</label>
+                                    <input type="text" name="capitulo" id="capitulo" placeholder="Ex: Salmos 119:11"
+                                        required>
                                 </div>
 
                                 <input type="hidden" name="id" id="id">
+                                <input type="hidden" name="igreja" id="igreja" value="<?php echo $id_igreja ?>">
 
                             </div>
                         </div>
@@ -169,9 +197,8 @@ $pagina = 'categoria';
 
 
 
-
 <script type="text/javascript">
-    var pag = "<?= $pagina ?>" 
+    var pag = "<?= $pagina ?>"
 </script>
 <script src="../js/ajax.js"></script>
 
@@ -179,9 +206,10 @@ $pagina = 'categoria';
 
 
 <script type="text/javascript">
-    function editar(id, nome) {
+    function editar(id, versiculo, capitulo) {
         $('#id').val(id);
-        $('#nome').val(nome);
+        $('#versiculo').val(versiculo);
+        $('#capitulo').val(capitulo);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -189,10 +217,11 @@ $pagina = 'categoria';
         $('#mensagem').text('');
     }
 
-    
-    function limpar() {
-        $('#id').val('');
-        $('#nome').val('');
-    }
 
+    function limpar() {
+
+        $('#id').val('');
+        $('#versiculo').val('');
+        $('#capitulo').val('');
+    }
 </script>

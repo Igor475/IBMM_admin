@@ -86,8 +86,15 @@ if($cabjpg != "sem-foto.jpg"){
 if($cartjpg != "sem-foto.jpg"){
 	$pdo->query("UPDATE $pagina SET carteirinha_rel = '$cartjpg' where id = '$id'");
 }
-	
 
+//EXECUTAR NO LOG
+$tabela = $pagina;
+$acao = 'Edição';
+$id_reg = $id;
+$descricao = 'Adicionou Imagens';
+$painel = 'Painel Administrativo';
+$igreja = 0;
+require_once("../../logs.php");
 
 echo 'Salvo com Sucesso';
 

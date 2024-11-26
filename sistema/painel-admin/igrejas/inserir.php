@@ -10,12 +10,22 @@ $video = @$_POST['video'];
 $email = @$_POST['email'];
 $id = @$_POST['id'];
 $url = @$_POST['url'];
+$youtube = @$_POST['youtube'];
+$instagram = @$_POST['instagram'];
+$facebook = @$_POST['facebook'];
+$descricao = @$_POST['descricao'];
 
 
-$nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
-        strtr(utf8_decode(trim($url)), utf8_decode("/áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-        "-aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-$nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
+$nome_novo = strtolower(preg_replace(
+    "[^a-zA-Z0-9-]",
+    "-",
+    strtr(
+        utf8_decode(trim($url)),
+        utf8_decode("/áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+        "-aaaaeeiooouuncAAAAEEIOOOUUNC-"
+    )
+));
+$nome_url = preg_replace('/[ -]+/', '-', $nome_novo);
 
 
 $query = $pdo->query("SELECT * FROM $pagina WHERE nome = '$nome'");
@@ -71,24 +81,27 @@ if ($id == "" || $id == 0) {
         telefone = :telefone, endereco = :endereco, imagem = '$imagem',
         data_cad = curDate(), matriz = 'Não', pastor = '$pastor', logo_rel = 'sem-foto.jpg',
         cab_rel = 'sem-foto.jpg', carteirinha_rel = 'sem-foto.jpg', video = :video, email = :email, 
-        url = :url");
+        url = :url, youtube = :youtube, instagram = :instagram, facebook = :facebook, 
+        descricao = :descricao");
 
 } else {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
         telefone = :telefone, endereco = :endereco, pastor = '$pastor',
-        video = :video, email = :email, url = :url WHERE id = '$id'");
+        video = :video, email = :email, url = :url, youtube = :youtube, instagram = :instagram, 
+        facebook = :facebook, descricao = :descricao WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $foto = $res[0]['imagem'];
-        if($foto != "sem-foto.jpg"){
-			@unlink('../../img/igrejas/'.$foto);	
-		}
+        if ($foto != "sem-foto.jpg") {
+            @unlink('../../img/igrejas/' . $foto);
+        }
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
             telefone = :telefone, endereco = :endereco, imagem = '$imagem', 
-            pastor = '$pastor', video = :video, email = :email, url = :url WHERE id = '$id'");
+            pastor = '$pastor', video = :video, email = :email, url = :url, youtube = :youtube, 
+            instagram = :instagram, facebook = :facebook, descricao = :descricao WHERE id = '$id'");
     }
 
 }
@@ -98,8 +111,29 @@ $query->bindValue(":telefone", "$telefone");
 $query->bindValue(":endereco", "$endereco");
 $query->bindValue(":video", "$video");
 $query->bindValue(":email", "$email");
-$query->bindValue(":url", "$nome_url");
+$query->bindValue(":url", "$url");
+$query->bindValue(":youtube", "$youtube");
+$query->bindValue(":instagram", "$instagram");
+$query->bindValue(":facebook", "$facebook");
+$query->bindValue(":descricao", "$descricao");
 $query->execute();
+$ult_id = $pdo->lastInsertId();
+
+
+//EXECUTAR NO LOG
+$tabela = $pagina;
+
+if ($id == "" || $id == 0) {
+    $acao = 'Inserção';
+    $id_reg = $ult_id;
+} else {
+    $acao = 'Edição';
+    $id_reg = $id;
+}
+$descricao = $nome;
+$painel = 'Painel Administrativo';
+$igreja = 0;
+require_once("../../logs.php");
 
 echo 'Salvo com Sucesso';
 

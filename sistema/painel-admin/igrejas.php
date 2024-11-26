@@ -1,5 +1,5 @@
 <?php
-require_once ("../conexao.php");
+require_once("../conexao.php");
 $pagina = 'igrejas';
 ?>
 
@@ -49,6 +49,11 @@ $pagina = 'igrejas';
                         $email = $res[$i]['email'];
                         $id = $res[$i]['id'];
                         $url = $res[$i]['url'];
+                        $youtube = $res[$i]['youtube'];
+                        $instagram = $res[$i]['instagram'];
+                        $facebook = $res[$i]['facebook'];
+                        $descricao = $res[$i]['descricao'];
+
 
                         $logo_rel = $res[$i]['logo_rel'];
                         $cab_rel = $res[$i]['cab_rel'];
@@ -68,6 +73,7 @@ $pagina = 'igrejas';
 
                         //Retira a quebra do texto das observações
                         $obs = str_replace(array("\n", "\r"), ' + ', $obs);
+                        $descricao = str_replace(array("\n", "\r"), ' + ', $descricao);
 
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         ?>
@@ -100,10 +106,11 @@ $pagina = 'igrejas';
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
-                                            '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                            '<?php echo $pastor ?>', '<?php echo $video ?>', '<?php echo $email ?>', 
-                                            '<?php echo $url ?>')">
+                                            <a class="dropdown-item" href="#"
+                                                onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
+                                            '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', '<?php echo $pastor ?>',
+                                            '<?php echo $video ?>', '<?php echo $email ?>', '<?php echo $url ?>', '<?php echo $youtube ?>',
+                                            '<?php echo $instagram ?>', '<?php echo $facebook ?>', '<?php echo $descricao ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -115,11 +122,10 @@ $pagina = 'igrejas';
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#"
-                                                onclick="dados('<?php echo $nome ?>', 
+                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>',
                                             '<?php echo $data_cadF ?>', '<?php echo $matriz ?>', '<?php echo $nome_p ?>', 
-                                            '<?php echo $email ?>')">
+                                            '<?php echo $email ?>', '<?php echo $descricao ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -163,7 +169,7 @@ $pagina = 'igrejas';
 
 
 <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="Cadastro" id="tituloModal"></h3>
@@ -221,14 +227,38 @@ $pagina = 'igrejas';
                                             placeholder="https://www.youtube.com/embed/iq0_NMs6DIU?si=o2fBWMu5eCb06oA8">
                                     </div>
 
-                                    <div class="input-field flex_int_5">
-                                        <label>Url do site</label>
-                                        <input type="text" name="url" id="url" maxlength="50" placeholder="Ex: ibmm-multiplicar">
+                                    <div class="input-field flex_int_9">
+                                        <label>E-mail da Igreja</label>
+                                        <input type="email" name="email" id="email" placeholder="Email da Igreja">
                                     </div>
 
                                     <div class="input-field">
-                                        <label>E-mail da Igreja</label>
-                                        <input type="email" name="email" id="email" placeholder="Email da Igreja">
+                                        <label>Url Site (Tudo Junto)</label>
+                                        <input type="text" name="url" id="url" placeholder="ibmissaomultiplicar">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>YouTube</label>
+                                        <input type="text" name="youtube" id="youtube"
+                                            placeholder="Link do canal do YouTube">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Instagram</label>
+                                        <input type="text" name="instagram" id="instagram"
+                                            placeholder="Link do Instagram">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Facebook</label>
+                                        <input type="text" name="facebook" id="facebook" placeholder="Link do facebook">
+                                    </div>
+
+                                    <div class="description_church">
+                                        <label>Descrição da Igreja (Texto apresentado no site)
+                                            (Máximo de 3000 Caracteres)</label>
+                                        <textarea class="txt-obs" name="descricao" id="descricao"
+                                            maxlength="3000"></textarea>
                                     </div>
 
                                     <div class="area_photo">
@@ -362,6 +392,12 @@ $pagina = 'igrejas';
                     <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Pastor Responsável: </span>
                     <span class="texts_son" id="pastor-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/network-group-svgrepo-com.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
+                    <span class="user_name">Descrição: </span>
+                    <span class="texts_son" id="descricao-dados"></span>
                 </div>
                 <div class="user_profile_area">
                     <img class="img_info_profile" src="" id="foto-dados">
@@ -511,7 +547,7 @@ $pagina = 'igrejas';
 
 
 <script type="text/javascript">
-    var pag = "<?= $pagina ?>" 
+    var pag = "<?= $pagina ?>"
 </script>
 <script src="../js/ajax.js"></script>
 
@@ -519,9 +555,18 @@ $pagina = 'igrejas';
 
 
 <script type="text/javascript">
-    function editar(id, nome, telefone, endereco, foto, pastor, video, email, url) {
+    function editar(id, nome, telefone, endereco, foto, pastor, video, email, url, youtube, instagram, facebook,
+        descricao) {
+
+        for (let letra of descricao) {
+            if (letra === '+') {
+                descricao = descricao.replace(' +  + ', '\n')
+            }
+        }
+
         $('#id').val(id);
         $('#nome').val(nome);
+
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
         $('#pastor').val(pastor).change();
@@ -529,6 +574,10 @@ $pagina = 'igrejas';
         $('#video').val(video);
         $('#email').val(email);
         $('#url').val(url);
+        $('#youtube').val(youtube);
+        $('#instagram').val(instagram);
+        $('#facebook').val(facebook);
+        $('#descricao').val(descricao);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -537,7 +586,14 @@ $pagina = 'igrejas';
     }
 
 
-    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor, email) {
+    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor, email, descricao) {
+
+         for (let letra of descricao) {
+            if (letra === '+') {
+                descricao = descricao.replace(' +  + ', '\n')
+            }
+        }
+
         $('#nome-dados').text(nome);
         $('#telefone-dados').text(telefone);
         $('#endereco-dados').text(endereco);
@@ -546,6 +602,7 @@ $pagina = 'igrejas';
         $('#email-dados').text(email);
         $('#foto-dados').attr('src', '../img/igrejas/' + foto);
         $('#pastor-dados').text(pastor);
+        $('#descricao-dados').text(descricao);
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
@@ -557,7 +614,7 @@ $pagina = 'igrejas';
 
         for (let letra of obs) {
             if (letra === '+') {
-                obs = obs.replace(' +  + ', '\n');
+                obs = obs.replace(' + + ', '\n');
             }
         }
 
@@ -576,6 +633,7 @@ $pagina = 'igrejas';
         $('#nome').val('');
         $('#telefone').val('');
         $('#endereco').val('');
+        $('#descricao').val('');
 
         document.getElementById("pastor").options.selectedIndex = 0;
         $('#pastor').val($('#pastor').val()).change();
@@ -592,7 +650,9 @@ $pagina = 'igrejas';
         $.ajax({
             url: pag + "/listar-arquivos.php",
             method: 'POST',
-            data: { id },
+            data: {
+                id
+            },
             dataType: "text",
 
             success: function (result) {
@@ -621,15 +681,14 @@ $pagina = 'igrejas';
         myModal.show();
         $('#mensagem-imagens').text('');
     }
-
 </script>
 
 
 <script type="text/javascript">
     function carregarImglogojpg() {
-    var target = document.getElementById('targetlogojpg');
-    var file = document.querySelector("#imagemlogojpg").files[0];
-    
+        var target = document.getElementById('targetlogojpg');
+        var file = document.querySelector("#imagemlogojpg").files[0];
+
         var reader = new FileReader();
 
         reader.onloadend = function () {
@@ -648,9 +707,9 @@ $pagina = 'igrejas';
 
 
     function carregarImgcabjpg() {
-    var target = document.getElementById('targetcabjpg');
-    var file = document.querySelector("#imagemcabjpg").files[0];
-    
+        var target = document.getElementById('targetcabjpg');
+        var file = document.querySelector("#imagemcabjpg").files[0];
+
         var reader = new FileReader();
 
         reader.onloadend = function () {
@@ -668,9 +727,9 @@ $pagina = 'igrejas';
 
 
     function carregarImgcartjpg() {
-    var target = document.getElementById('targetcartjpg');
-    var file = document.querySelector("#imagemcartjpg").files[0];
-    
+        var target = document.getElementById('targetcartjpg');
+        var file = document.querySelector("#imagemcartjpg").files[0];
+
         var reader = new FileReader();
 
         reader.onloadend = function () {
@@ -690,7 +749,7 @@ $pagina = 'igrejas';
 
 
 <script type="text/javascript">
-    $("#form-img").submit(function () {
+    $("# form-img").submit(function () {
         event.preventDefault();
         var formData = new FormData(this);
 
@@ -703,23 +762,23 @@ $pagina = 'igrejas';
                 $('#mensagem-img').text('');
                 $('#mensagem-img').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
-                    
-                        $('#btn-fechar-img').click();
-                        window.location="index.php?pag=" + pag;
-                    } else {
 
-                        $('#mensagem-img').addClass('message_error')
-                        $('#mensagem-img').text(mensagem)
-                    }
+                    $('#btn-fechar-img').click();
+                    window.location = "index.php?pag=" + pag;
+                } else {
+
+                    $('#mensagem-img').addClass('message_error')
+                    $('#mensagem-img').text(mensagem)
+                }
 
 
-                },
+            },
 
-                cache: false,
-                contentType: false,
-                processData: false,
-                
-            });
+            cache: false,
+            contentType: false,
+            processData: false,
+
+        });
 
     });
 </script>

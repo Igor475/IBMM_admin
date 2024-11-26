@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("../conexao.php");
 
 
@@ -6,9 +6,9 @@ require_once("../conexao.php");
 $id = $_GET['id'];
 
 //ALIMENTANDO OS DADOS DO RELATÓRIO
-$html = file_get_contents($url_sistema."relatorios/RelCarteirinhaHtml.php?id=$id");
+$html = file_get_contents($url_sistema . "relatorios/relCarteirinhaHtml.php?id=$id");
 
-if($relatorio_pdf != 'Sim') {
+if ($relatorio_pdf != 'Sim') {
     echo $html;
     exit();
 }
@@ -34,8 +34,9 @@ $pdf->load_html($html);
 $pdf->render();
 
 //NOMEAR O PDF GERADO
-$pdf->stream('carteirinha.pdf', 
-array("Attachment" => false)
+$pdf->stream(
+    'carteirinha.pdf',
+    array("Attachment" => false)
 );
 
 ?>

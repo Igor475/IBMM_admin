@@ -1,5 +1,5 @@
 <?php
-   require_once('sistema/conexao.php');
+require_once('sistema/conexao.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -15,6 +15,16 @@
 </head>
 
 <body>
+   <?php
+   $query = $pdo->query("SELECT * FROM igrejas order by matriz desc, nome asc");
+   $res = $query->fetchAll(PDO::FETCH_ASSOC);
+   $total_reg = count($res);
+   if($total_reg == 1) {
+      session_start();
+      @$_SESSION['url_igreja'] = $res[0]['url'];
+      require_once("igreja.php");
+   } else{
+   ?>
    <div class="ti_area_sel">
       <div class="img_church_sfl">
          <img src="assets/img/Logo-IBMM.png" alt="" class="des">
@@ -23,9 +33,6 @@
    </div>
    <div class="area_churchs">
       <?php
-      $query = $pdo->query("SELECT * FROM igrejas order by matriz desc, nome asc");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-      $total_reg = count($res);
 
       for ($i = 0; $i < $total_reg; $i++) {
          foreach ($res[$i] as $key => $value) {
@@ -61,7 +68,7 @@
          }
 
          ?>
-         <a href="igreja<?php echo $url?>" class="card_church">
+         <a href="igreja<?php echo $url ?>" class="card_church">
             <div class="head_church_sel">
                <div class="info_church_sel">
                   <p class="names_chruchs_sel <?php echo $classe ?>">
@@ -80,7 +87,7 @@
                </div>
             </div>
          </a>
-      <?php } ?>
+      <?php } } ?>
    </div>
 </body>
 

@@ -1,7 +1,7 @@
 <?php
 @session_start();
-require_once ("verificar.php");
-require_once ("../conexao.php");
+require_once("verificar.php");
+require_once("../conexao.php");
 
 $id_usuario = @$_SESSION['id_usuario'];
 
@@ -30,9 +30,19 @@ if ($pag == "") {
     $pag = 'home';
 }
 
+$data_atual = date('Y-m-d');
+$hora_atual = date('H:i:s');
+
+$mes_atual = Date('m');
+$ano_atual = Date('Y');
+$data_mes = $ano_atual . "-" . $mes_atual . "-01";
+$data_ano = $ano_atual . "-01-01";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -176,7 +186,7 @@ if ($pag == "") {
                                 <li><a href="index.php?pag=grupo_acessos">Grupo Acessos</a></li>
                                 <li><a href="index.php?pag=acessos">Acessos</a></li>
                                 <li><a href="index.php?pag=categoria_oracao">Categoria de Orações</a></li>
-                                <li><a href="index.php?pag=categoria">Categoria de Notícias</a></li>
+                                <li><a href="index.php?pag=categoria_noticias">Categoria de Notícias</a></li>
                             </ul>
                         </li>
                         <li>
@@ -191,10 +201,20 @@ if ($pag == "") {
                             <a href="" class="font_main_index"><i class='bi bi-folder-symlink icon'></i> Relatórios <i
                                     class='bx bx-chevron-right icon-right'></i></a>
                             <ul class="side-dropdown">
-                                <li><a href="#">Membros</a></li>
-                                <li><a href="#">Patrimônios</a></li>
-                                <li><a href="#">Financeiros</a></li>
-                                <li><a href="#">Auditoria e Logs</a></li>
+                                <li>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelMembros">Membros</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalRelPatrimonios">Patrimônios</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalRelFinanceiro">Financeiros</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelLogs">Auditoria de Logs</a>
+                                </li>
                                 <li><a href="#">Tranferência de Membros</a></li>
                                 <li><a href="#">Fechamentos Mensais</a></li>
                             </ul>
@@ -220,7 +240,7 @@ if ($pag == "") {
 
         <main id="container_painel">
             <?php
-            require_once ($pag . '.php');
+            require_once($pag . '.php');
             ?>
         </main>
     </div>
@@ -419,7 +439,9 @@ if ($pag == "") {
                                     <div class="input-field flex_int_2" id="hidden_select1">
                                         <label>Usuário</label>
                                         <select class="sel25" id="user_cel" name="user_cel">
-                                            <option value="<?php echo $user_cel ?>"><?php echo $name_user_celula ?></option>
+                                            <option value="<?php echo $user_cel ?>">
+                                                <?php echo $name_user_celula ?>
+                                            </option>
                                             <?php
                                             $query = $pdo->query("SELECT * FROM usuarios order by nome asc");
                                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -451,7 +473,8 @@ if ($pag == "") {
 
                                     <div class="input-field flex_int_7">
                                         <label>Itens Por Página (site - Mensagem)</label>
-                                        <input type="number" name="itens_por_pagina_message" id="itens_por_pagina_message"
+                                        <input type="number" name="itens_por_pagina_message"
+                                            id="itens_por_pagina_message"
                                             value="<?php echo $itens_por_pagina_message ?>" required />
                                     </div>
 
@@ -459,6 +482,20 @@ if ($pag == "") {
                                         <label>Itens Por Página Admin</label>
                                         <input type="number" name="itens_pag" id="itens_pag"
                                             value="<?php echo $itens_pag ?>" required />
+                                    </div>
+
+                                    <div class="input-field flex_int_5">
+                                        <label>Auditoria (Logs)</label>
+                                        <select class="form-select" name="logs">
+                                            <option <?php if ($logs == 'Sim') { ?> selected
+                                                <?php } ?>
+                                                value="Sim">Sim
+                                            </option>
+                                            <option <?php if ($logs == 'Não') { ?> selected
+                                                <?php } ?>
+                                                value="Não">Não
+                                            </option>
+                                        </select>
                                     </div>
 
 
@@ -483,6 +520,429 @@ if ($pag == "") {
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modalRelMembros" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Relatório de Membros</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form method="post" action="../relatorios/relMembros.php" target="_blank">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="details personal">
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>Igreja</label>
+                                        <select name="igreja" class="form-select" aria-label="Default select example">
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM igrejas order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                            <option value="<?php echo $id_reg ?>">
+                                                <?php echo $nome_reg ?>
+                                            </option>
+                                            <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Cargo / Membros</label>
+                                        <select name="cargo" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM cargos order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                            <option value="<?php echo $id_reg ?>">
+                                                <?php echo $nome_reg ?>
+                                            </option>
+                                            <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Status</label>
+                                        <select name="status" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <option value="Sim">Ativo</option>
+                                            <option value="Não">Inativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="modalRelPatrimonios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Relatório de Patrimônios</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form method="post" action="../relatorios/relPatrimonios.php" target="_blank">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="details personal">
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>Igreja</label>
+                                        <select name="igreja" class="form-select" aria-label="Default select example">
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM igrejas order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                            <option value="<?php echo $id_reg ?>">
+                                                <?php echo $nome_reg ?>
+                                            </option>
+                                            <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Itens</label>
+                                        <select name="itens" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <option value="1">Pertencentes a Igreja</option>
+                                            <option value="2">Emprestados a Outros</option>
+                                            <option value="3">Itens de Outras Igrejas</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Status</label>
+                                        <select name="status" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <option value="Sim">Ativo</option>
+                                            <option value="Não">Inativo</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Compra / Doação</label>
+                                        <select name="entrada" class="form-select" aria-label="Default select example">
+                                            <option value="">Todos</option>
+                                            <option value="Compra">Compra</option>
+                                            <option value="Doação">Doação</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget_bottom_dates">
+                                <div class="input-field-in">
+                                    <label>Data Inicial (
+                                        <a href="#" onclick="datas('1980-01-01', 'tudo-pat', 'pat')">
+                                            <span class="txt_date_all" id="tudo-pat">Tudo</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-pat', 'pat')">
+                                            <span class="txt_date_all" id="hoje-pat">Hoje</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-pat', 'pat')">
+                                            <span class="txt_date_all" id="mes-pat">Mês</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_ano ?>', 'ano-pat', 'pat')">
+                                            <span class="txt_date_all" id="ano-pat">Ano</span>
+                                        </a>)
+                                    </label>
+                                    <input type="date" name="dataInicial" id="dtInicial-pat" value="1980-01-01">
+                                </div>
+
+                                <div class="input-field-in">
+                                    <label>Data Final</label>
+                                    <input type="date" id="dtFinal-pat" name="dataFinal"
+                                        value="<?php echo $data_atual ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="modalRelFinanceiro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Relatório Financeiro</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form method="post" action="../relatorios/relFinanceiro.php" target="_blank">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="details personal">
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>Igreja</label>
+                                        <select name="igreja" class="form-select" aria-label="Default select example">
+                                            <?php
+                                            $query = $pdo->query("SELECT * FROM igrejas order by id asc");
+                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                            $total_reg = count($res);
+                                            if ($total_reg > 0) {
+                                                for ($i = 0; $i < $total_reg; $i++) {
+                                                    foreach ($res[$i] as $key => $value) {
+                                                    }
+
+                                                    $nome_reg = $res[$i]['nome'];
+                                                    $id_reg = $res[$i]['id'];
+                                                    ?>
+                                            <option value="<?php echo $id_reg ?>">
+                                                <?php echo $nome_reg ?>
+                                            </option>
+                                            <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Movimento</label>
+                                        <select name="movimento" class="form-select" aria-label="Default select example"
+                                            id="movim">
+                                            <option value="">Todos</option>
+                                            <option value="Conta">Contas à Pagar</option>
+                                            <option value="Dízimo">Dízimos</option>
+                                            <option value="Oferta">Ofertas</option>
+                                            <option value="Doação">Doações</option>
+                                            <option value="Venda">Vendas</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Entradas / Saídas</label>
+                                        <select name="tipo" class="form-select" aria-label="Default select example"
+                                            id="tip">
+                                            <option value="">Todas</option>
+                                            <option value="Entrada">Entradas</option>
+                                            <option value="Saída">Saídas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget_bottom_dates">
+                                <div class="input-field-in">
+                                    <label>Data Inicial (
+                                        <a href="#" onclick="datas('1980-01-01', 'tudo-fin', 'fin')">
+                                            <span class="txt_date_all" id="tudo-fin">Tudo</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-fin', 'fin')">
+                                            <span class="txt_date_all" id="hoje-fin">Hoje</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-fin', 'fin')">
+                                            <span class="txt_date_all" id="mes-fin">Mês</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_ano ?>', 'ano-fin', 'fin')">
+                                            <span class="txt_date_all" id="ano-fin">Ano</span>
+                                        </a>)
+                                    </label>
+                                    <input type="date" name="dataInicial" id="dtInicial-fin" value="1980-01-01">
+                                </div>
+
+                                <div class="input-field-in">
+                                    <label>Data Final</label>
+                                    <input type="date" id="dtFinal-fin" name="dataFinal"
+                                        value="<?php echo $data_atual ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="modalRelLogs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Relatório de Logs</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form method="post" action="../relatorios/relLogs.php" target="_blank">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="details personal">
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>Ações</label>
+                                        <select name="acao" class="form-select" id="acao">
+                                            <option value="">Todas</option>
+                                            <option value="Exclusão">Exclusão</option>
+                                            <option value="Inserção">Inserção</option>
+                                            <option value="Edição">Edição</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Tabelas</label>
+                                        <select name="tabelas" class="form-select" id="tabelas">
+                                            <option value="">Todas</option>
+                                            <option value="usuarios">Usuários</option>
+                                            <option value="patrimonios">Patrimônios</option>
+                                            <option value="tesoureiros">Tesoureiros</option>
+                                            <option value="secretarios">Secretários</option>
+                                            <option value="pastores">Pastores</option>
+                                            <option value="igrejas">Igrejas</option>
+                                            <option value="frequencias">Frequências</option>
+                                            <option value="cargos">Cargos</option>
+                                            <option value="pastores_presidentes">Pastores Presidentes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget_bottom_dates">
+                                <div class="input-field-in">
+                                    <label>Data Inicial (
+                                        <a href="#" onclick="datas('1980-01-01', 'tudo-log', 'log')">
+                                            <span class="txt_date_all" id="tudo-log">Tudo</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-log', 'log')">
+                                            <span class="txt_date_all" id="hoje-log">Hoje</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-log', 'log')">
+                                            <span class="txt_date_all" id="mes-log">Mês</span>
+                                        </a>
+                                        <a href="#" onclick="datas('<?php echo $data_ano ?>', 'ano-log', 'log')">
+                                            <span class="txt_date_all" id="ano-log">Ano</span>
+                                        </a>)
+                                    </label>
+                                    <input type="date" name="dataInicial" id="dtInicial-log" value="1980-01-01">
+                                </div>
+
+                                <div class="input-field-in">
+                                    <label>Data Final</label>
+                                    <input type="date" id="dtFinal-log" name="dataFinal"
+                                        value="<?php echo $data_atual ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -584,4 +1044,43 @@ if ($pag == "") {
             dropdownParent: $('#modalConfig'),
         });
     });
+</script>
+
+
+
+<script type="text/javascript">
+    function datas(data, id, campo) {
+        var data_atual = "<?= $data_atual ?>";
+        $('#dtInicial-' + campo).val(data);
+        $('#dtFinal-' + campo).val(data_atual);
+
+        document.getElementById('hoje-' + campo).style.color = "#999";
+        document.getElementById('hoje-' + campo).style.backgroundColor = "#ececec";
+        document.getElementById('mes-' + campo).style.color = "#999";
+        document.getElementById('mes-' + campo).style.backgroundColor = "#ececec";
+        document.getElementById(id).style.color = "#198754";
+        document.getElementById(id).style.backgroundColor = "rgba(0, 127, 95, 0.07)";
+
+        document.getElementById('tudo-' + campo).style.color = "#999";
+        document.getElementById('tudo-' + campo).style.backgroundColor = "#ececec";
+        document.getElementById('ano-' + campo).style.color = "#999";
+        document.getElementById('ano-' + campo).style.backgroundColor = "#ececec";
+        document.getElementById(id).style.color = "#198754";
+        document.getElementById(id).style.backgroundColor = "#007f5f12";
+    }
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#movim").change(function () {
+            if ($("#movim").val() != "") {
+                document.getElementById("tip").options.selectedIndex = 0;
+                $("#tip").val($("#tip").val()).change();
+                document.getElementById('tip').disabled = true;
+            } else {
+                document.getElementById('tip').disabled = false;
+            }
+        })
+    })
 </script>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("../conexao.php");
 
 $igreja = $_POST['igreja'];
@@ -10,9 +10,9 @@ $itens = $_POST['itens'];
 
 
 //ALIMENTANDO OS DADOS DO RELATÓRIO
-$html = file_get_contents($url_sistema."relatorios/RelPatrimonioHtml.php?igreja=$igreja&status=$status&entrada=$entrada&itens=$itens&dataInicial=$dataInicial&dataFinal=$dataFinal");
+$html = file_get_contents($url_sistema . "relatorios/relPatrimonioHtml.php?igreja=$igreja&status=$status&entrada=$entrada&itens=$itens&dataInicial=$dataInicial&dataFinal=$dataFinal");
 
-if($relatorio_pdf != 'Sim') {
+if ($relatorio_pdf != 'Sim') {
     echo $html;
     exit();
 }
@@ -37,8 +37,9 @@ $pdf->load_html($html);
 $pdf->render();
 
 //NOMEAR O PDF GERADO
-$pdf->stream('patrimonios.pdf', 
-array("Attachment" => false)
+$pdf->stream(
+    'patrimonios.pdf',
+    array("Attachment" => false)
 );
 
 ?>

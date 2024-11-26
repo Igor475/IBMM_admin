@@ -7,11 +7,11 @@ require_once("../conexao.php");
 $pagina = 'membros';
 
 
-if(@$membros == 'ocultar') {
+if (@$membros == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });
-          </script>"; 
+          </script>";
     /* echo "<script>window.location='index.php'</script>"; */
     exit();
 }
@@ -65,9 +65,10 @@ if(@$membros == 'ocultar') {
                         $cargo = $res[$i]['cargo'];
                         $data_bat = $res[$i]['data_batismo'];
                         $ativo = $res[$i]['ativo'];
+                        $estado = $res[$i]['estado_civil'];
                         $id = $res[$i]['id'];
 
-                        if($obs != "") {
+                        if ($obs != "") {
                             $classe_obs = 'obs_filled';
                         } else {
                             $classe_obs = 'obs_empty';
@@ -144,11 +145,12 @@ if(@$membros == 'ocultar') {
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li>
-                                    <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
+                                    <a class="dropdown-item" href="#"
+                                        onclick="editar('<?php echo $id ?>', 
                                             '<?php echo $nome ?>', '<?php echo $cpf ?>', '<?php echo $email ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
                                             '<?php echo $data_nasc ?>', '<?php echo $igreja ?>', '<?php echo $nome_ig ?>', 
-                                            '<?php echo $data_bat ?>', '<?php echo $cargo ?>')">
+                                            '<?php echo $data_bat ?>', '<?php echo $cargo ?>', '<?php echo $estado ?>')">
                                         <i class="bi bi-pencil-square icons_actions"></i>
                                         Editar</a>
                                 </li>
@@ -160,10 +162,11 @@ if(@$membros == 'ocultar') {
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
+                                    <a class="dropdown-item" href="#"
+                                        onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
                                             '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
                                             '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>', 
-                                            '<?php echo $data_batF ?>', '<?php echo $nome_cargo ?>')">
+                                            '<?php echo $data_batF ?>', '<?php echo $nome_cargo ?>', '<?php echo $estado ?>')">
                                         <i class="bi bi-info-circle icons_actions"></i>
                                         Ver Dados</a>
                                 </li>
@@ -193,6 +196,13 @@ if(@$membros == 'ocultar') {
                                         title="Gerar Carteirinha" target="_blank">
                                         <i class="bi bi-person-badge icons_actions"></i>
                                         Gerar Carteirinha
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="modalTransf('<?php echo $id ?>', 
+                                            '<?php echo $nome ?>')" title="Carta de Recomendação">
+                                        <i class="bi bi-clipboard-x icons_actions"></i>
+                                        Carta de Recomendação
                                     </a>
                                 </li>
                             </ul>
@@ -267,7 +277,8 @@ if(@$membros == 'ocultar') {
                                         <input type="date" name="data_bat" id="data_bat">
                                     </div>
 
-                                    <div class="input-field field_area_select">
+
+                                    <div class="input-field field_area_select flex_int_12">
                                         <label>Cargo Ministerial</label>
                                         <select class="sel2" id="cargo" name="cargo">
                                             <?php
@@ -287,6 +298,14 @@ if(@$membros == 'ocultar') {
                                             </option>
                                             <?php }
                                             } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field field_area_select flex_int_14">
+                                        <label>Estado Cívil</label>
+                                        <select class="sel2" id="estado" name="estado">
+                                            <option value="Solteiro">Solteiro</option>
+                                            <option value="Casado">Casado</option>
                                         </select>
                                     </div>
 
@@ -441,6 +460,12 @@ if(@$membros == 'ocultar') {
                     <span class="user_name">Cargo Ministerial: </span>
                     <span class="texts_son" id="membro-dados"></span>
                 </div>
+                <div class="user_area" id="span-estado">
+                    <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
+                    <span class="user_name">Estado Civil: </span>
+                    <span class="texts_son" id="estado-dados"></span>
+                </div>
                 <div class="user_profile_area">
                     <img class="img_info_profile" src="" id="foto-dados">
                 </div>
@@ -494,6 +519,58 @@ if(@$membros == 'ocultar') {
 
 
 
+
+
+<div class="modal fade" id="modalTransf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Carta de Recomendação - <span id="nome-transf"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form id="form-obs" method="post" action="../relatorios/relRecomendacao.php" target="_blank">
+                <div class="modal-body">
+                    <div class="form-modal">
+                        <div class="fields">
+                            <div class="input-field flex_int_3">
+                                <label class="txt_label_obs">Igreja</label>
+                                <input type="text" name="igreja" id="igreja-transf"
+                                    placeholder="Nome da Igreja à Recomendar">
+                            </div>
+
+                            <div class="area_obs flex_int_3">
+                                <label class="txt_label_obs">Observações (Máximo de 2000 Caracteres)</label>
+                                <textarea class="txt-obs" name="obs" id="obs-transf" maxlength="2000"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mensagem-transf"></div>
+
+                    <input type="hidden" name="id" id="id-transf">
+                </div>
+                <div id="mensagem"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-transf" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar
+                            <i class="bi bi-pencil-square icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 <script type="text/javascript">
 var pag = "<?= $pagina ?>"
 </script>
@@ -503,7 +580,8 @@ var pag = "<?= $pagina ?>"
 
 
 <script type="text/javascript">
-function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig, data_bat, cargo) {
+function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig, data_bat, cargo,
+    estado) {
     $('#id').val(id);
     $('#nome').val(nome);
     $('#email').val(email);
@@ -516,6 +594,7 @@ function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igrej
 
     $('#igreja').val(igreja).change();
     $('#cargo').val(cargo).change();
+    $('#estado').val(estado).change();
 
     $('#tituloModal').text('Editar Registro');
     var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -524,10 +603,14 @@ function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igrej
 }
 
 
-function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja, data_bat, cargo) {
+function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja, data_bat, cargo, estado) {
 
     if (data_bat === '00/00/0000') {
         data_bat = 'Não Batizado!';
+    }
+
+    if (estado == "") {
+        document.getElementById('span-estado').style.display = 'none';
     }
 
     $('#nome-dados').text(nome);
@@ -540,6 +623,7 @@ function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, 
     $('#igreja-dados').text(igreja);
     $('#batismo-dados').text(data_bat);
     $('#membro-dados').text(cargo);
+    $('#estado-dados').text(estado);
     $('#foto-dados').attr('src', '../img/membros/' + foto);
 
 
@@ -553,7 +637,7 @@ function obs(id, nome, obs) {
 
     for (let letra of obs) {
         if (letra === '+') {
-            obs = obs.replace(' +  + ', '\n');
+            obs = obs.replace(' + + ', '\n');
         }
     }
 
@@ -580,8 +664,22 @@ function limpar() {
     $('#data_bat').val('');
 
     document.getElementById("cargo").options.selectedIndex = 0;
-    $('#cargo').val($('#cargo').val()).change();
+    $('#cargo').val($('#estado').val()).change();
+
+    document.getElementById("estado").options.selectedIndex = 0;
+    $('#estado').val($('#estado').val()).change();
 
     $('#target').attr('src', '../img/membros/sem-foto.jpg');
+}
+
+
+function modalTransf(id, nome) {
+
+    $('#nome-transf').text(nome);
+    $('#id-transf').val(id);
+
+    var myModal = new bootstrap.Modal(document.getElementById('modalTransf'), {});
+    myModal.show();
+    $('#mensagem-transf').text('');
 }
 </script>

@@ -68,331 +68,348 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
 <html>
 
 <head>
-    <title>Relatório Financeiro</title>
+    <title>Relatório de Aniversáriantes</title>
     <link rel="shortcut icon" href="<?php echo $url_sistema ?>img/logo-IBMM-preta.ico" />
 
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-        * {
-            margin: 0px;
+    * {
+        margin: 0px;
+    }
+
+    <?php if ($cabecalho_rel_img !='Sim') {
+        ?>@page {
+            margin: 20px 0 0 0;
         }
 
-        <?php if ($cabecalho_rel_img != 'Sim') {
-            ?>
-            @page {
-                margin: 20px 0 0 0;
-            }
-
-            .cabecalho {
-                padding: 10px;
-                margin-bottom: 5px;
-                width: 100%;
-                font-family: "Inter", sans-serif;
-            }
-
-            <?php
-        } else {
-            ?>
-            @page {
-                margin: 0;
-                padding: 0;
-            }
-
-            .cabecalho {
-                padding: 0;
-                margin-bottom: 0;
-            }
-
-            <?php
-        }
-
-        ?>
-        body {
-            margin-top: 0px;
+        .cabecalho {
+            padding: 10px;
+            margin-bottom: 5px;
+            width: 100%;
             font-family: "Inter", sans-serif;
         }
 
+        <?php
+    }
 
-        <?php if ($relatorio_pdf == 'Sim') {
-            ?>
-            .footer {
-                margin-top: 20px;
-                width: 100%;
-                background-color: #ebebeb;
-                padding: 7px;
-                position: absolute;
-                bottom: 0;
-                line-height: 17px;
-                color: #707070;
-            }
-
-            <?php
-        } else {
-            ?>
-            .footer {
-                margin-top: 20px;
-                width: 100%;
-                background-color: #ececec;
-                padding: 5px;
-                color: #6e6d6d;
-            }
-
-            <?php
-        }
-
-        ?>
-        .coluna_name_church {
-            font-size: 14px;
-            color: #151515;
-            letter-spacing: 0.35px;
-        }
-
-        .church_area_cab {
-            display: block;
-
-        }
-
-        .titulo_cab {
-            color: #151515;
-            font-size: 16px;
-        }
-
-        .titulo {
+    else {
+        ?>@page {
             margin: 0;
-            font-size: 28px;
-            font-family: "Inter", sans-serif;
-            color: #444;
-
+            padding: 0;
         }
 
-        .subtitulo {
-            margin: 0;
-            font-size: 12px;
-            font-family: "Inter", sans-serif;
+        .cabecalho {
+            padding: 0;
+            margin-bottom: 0;
+        }
+
+        <?php
+    }
+
+    ?>body {
+        margin-top: 0px;
+        font-family: "Inter", sans-serif;
+    }
+
+
+    <?php if ($relatorio_pdf=='Sim') {
+        ?>.footer {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #ebebeb;
+            padding: 7px;
+            position: absolute;
+            bottom: 0;
+            line-height: 17px;
+            color: #707070;
+        }
+
+        <?php
+    }
+
+    else {
+        ?>.footer {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #ececec;
+            padding: 5px;
             color: #6e6d6d;
         }
 
-        .area-cab {
-            display: block;
-            width: 100%;
-            height: 10px;
-        }
+        <?php
+    }
 
-        .date_rel {
-            color: #777;
-            font-size: 12px;
-            letter-spacing: 0.35px;
-        }
+    ?>.coluna_name_church {
+        font-size: 14px;
+        color: #151515;
+        letter-spacing: 0.35px;
+    }
 
-        .end_rel {
-            color: #777;
-            font-size: 12px;
-        }
+    .church_area_cab {
+        display: block;
 
-        .coluna {
-            margin: 0px;
-            float: left;
-            height: 5px;
-        }
+    }
 
-        .table_rel_container {
-            padding: 0 15px;
-        }
+    .titulo_cab {
+        color: #151515;
+        font-size: 16px;
+    }
 
-        .container_txt_rel {
-            padding: 0 15px;
-        }
+    .titulo {
+        margin: 0;
+        font-size: 28px;
+        font-family: "Inter", sans-serif;
+        color: #444;
 
-        .area-tab {
-            display: block;
-            width: 100%;
-            height: 30px;
-            border: 1px solid #ececec;
-        }
+    }
 
-        .area-tab-2 {
-            display: block;
-            width: 100%;
-            height: 30px;
-            line-height: 0;
-        }
+    .subtitulo {
+        margin: 0;
+        font-size: 12px;
+        font-family: "Inter", sans-serif;
+        color: #6e6d6d;
+    }
 
-        .txt_rodape_rel {
-            font-size: 10px;
-        }
+    .area-cab {
+        display: block;
+        width: 100%;
+        height: 10px;
+    }
 
-        .head_table_rel {
-            font-size: 11px;
-            font-weight: bold;
-            padding: 20px 8px;
-            line-height: 0;
-            letter-spacing: 0.35px;
-            color: #3a3a3a;
-        }
+    .date_rel {
+        color: #777;
+        font-size: 12px;
+        letter-spacing: 0.35px;
+    }
 
-        /* .txt_table_rel {
+    .end_rel {
+        color: #777;
+        font-size: 12px;
+    }
+
+    .coluna {
+        margin: 0px;
+        float: left;
+        height: 5px;
+    }
+
+    .table_rel_container {
+        padding: 0 15px;
+    }
+
+    .container_txt_rel {
+        padding: 0 15px;
+    }
+
+    .area-tab {
+        display: block;
+        width: 100%;
+        height: 30px;
+        border: 1px solid #ececec;
+    }
+
+    .area-tab-2 {
+        display: block;
+        width: 100%;
+        height: 30px;
+        line-height: 0;
+    }
+
+    .txt_rodape_rel {
+        font-size: 10px;
+    }
+
+    .head_table_rel {
+        font-size: 11px;
+        font-weight: bold;
+        padding: 20px 8px;
+        line-height: 0;
+        letter-spacing: 0.35px;
+        color: #3a3a3a;
+    }
+
+    .head_table_items {
+        font-size: 11px;
+        padding: 20px 8px;
+        line-height: 0;
+        letter-spacing: 0.35px;
+        color: #3a3a3a;
+    }
+
+
+    /* .txt_table_rel {
             font-size: 11px;
             padding: 0 8px;
             line-height: 28px;
             color: #4c4c4c;
         } */
 
-        .txt_result_rel_entry {
-            font-size: 11px;
-            letter-spacing: 0.35px;
-            padding: 6px 8px;
-            color: #198754;
-            background-color: #e2f9e8 !important;
-            border-radius: 4px;
-            display: inline-block;
-            float: right;
-        }
+    .txt_result_rel_entry {
+        font-size: 11px;
+        letter-spacing: 0.35px;
+        padding: 6px 8px;
+        color: #198754;
+        background-color: #e2f9e8 !important;
+        border-radius: 4px;
+        display: inline-block;
+        float: right;
+    }
 
-        .txt_result_rel_out {
-            font-size: 11px;
-            letter-spacing: 0.35px;
-            padding: 6px 8px;
-            color: #842029;
-            background-color: #f9e2e4;
-            border-radius: 4px;
-            display: inline-block;
-            float: right;
-        }
+    .txt_result_rel_out {
+        font-size: 11px;
+        letter-spacing: 0.35px;
+        padding: 6px 8px;
+        color: #842029;
+        background-color: #f9e2e4;
+        border-radius: 4px;
+        display: inline-block;
+        float: right;
+    }
 
-        .area_total_rel {
-            padding: 20px 15px;
-        }
+    .area_total_rel {
+        padding: 20px 15px;
+    }
 
-        .txt_record {
-            font-size: 13px;
-            text-align: center;
-            color: #999;
-            padding: 10px
-        }
+    .txt_record {
+        font-size: 13px;
+        text-align: center;
+        color: #999;
+        padding: 10px
+    }
 
-        .img_rel {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 18%;
-            right: 0;
-            margin: 0 auto;
-            width: 70px;
-            height: 70px;
-        }
+    .img_rel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 18%;
+        right: 0;
+        margin: 0 auto;
+        width: 70px;
+        height: 70px;
+    }
 
-        .line_img_table {
-            margin-top: 3px;
-        }
+    .line_img_table {
+        margin-top: -17px;
+    }
 
-        .img_profile_rel {
-            border-radius: 50%;
-        }
+    .img_profile_rel {
+        border-radius: 50%;
+    }
 
-        .text_item_r {
-            background-color: #f9e2e4 !important;
-            color: #85323a !important;
-        }
+    .text_item_r {
+        background-color: #f9e2e4 !important;
+        color: #85323a !important;
+    }
 
-        .text_item_emp {
-            background-color: #00537f1f !important;
-            color: #196087 !important;
-        }
+    .text_item_emp {
+        background-color: #00537f1f !important;
+        color: #196087 !important;
+    }
 
-        .text_opacity {
-            color: #ccc !important;
-            background-color: #e7e7e7 !important;
-        }
+    .text_opacity {
+        color: #ccc !important;
+        background-color: #e7e7e7 !important;
+    }
 
-        .legend_area {
-            margin-bottom: 15px;
-            padding: 0 15px;
-            margin-right: 40px;
-        }
+    .legend_area {
+        margin-bottom: 15px;
+        padding: 0 15px;
+        margin-right: 40px;
+    }
 
-        .txt_legend_itens_out {
-            padding: 7px 8px;
-            font-size: 10px;
-            color: #842029;
-            background-color: #f9e2e4;
-            border-radius: 2px;
-            display: inline-block;
-        }
+    .txt_legend_itens_out {
+        padding: 7px 8px;
+        font-size: 10px;
+        color: #842029;
+        background-color: #f9e2e4;
+        border-radius: 2px;
+        display: inline-block;
+    }
 
-        .txt_legend_itens {
-            padding: 7px 10px;
-            font-size: 10px;
-            color: #198754;
-            background-color: #e2f9e8;
-            border-radius: 2px;
-            display: inline-block;
-        }
+    .txt_legend_itens {
+        padding: 7px 10px;
+        font-size: 10px;
+        color: #198754;
+        background-color: #e2f9e8;
+        border-radius: 2px;
+        display: inline-block;
+    }
 
-        .txt_table_itens_entry {
-            padding: 15px 10px;
-            font-size: 11px;
-            color: #198754;
-            background-color: #e2f9e8 !important;
-            line-height: 5px;
-        }
+    .txt_table_itens_entry {
+        padding: 15px 10px;
+        font-size: 11px;
+        color: #198754;
+        background-color: #e2f9e8 !important;
+        line-height: 5px;
+    }
 
-        .txt_table_itens_out {
-            padding: 15px 8px;
-            font-size: 10px;
-            color: #842029;
-            background-color: #f9e2e4 !important;
-            line-height: 5px;
-        }
+    .txt_table_itens_out {
+        padding: 15px 8px;
+        font-size: 10px;
+        color: #842029;
+        background-color: #f9e2e4 !important;
+        line-height: 5px;
+    }
 
-        .area_canvass {
-            padding: 0 15px;
-        }
+    .area_canvass {
+        padding: 0 15px;
+    }
 
-        .txt_canvass {
-            font-size: 12px;
-            color: #777;
-            letter-spacing: 0.40px;
-        }
+    .txt_canvass {
+        font-size: 12px;
+        color: #777;
+        letter-spacing: 0.40px;
+    }
 
-        .area_fin {
-            width: 98%;
-        }
+    .area_fin {
+        width: 98%;
+    }
 
-        .legend_area_out {
-            position: relative;
-            top: -41px;
-        }
+    .legend_area_out {
+        position: relative;
+        top: -41px;
+    }
 
-        .table_rel {
-            width: 100%;
-        }
+    .table_rel {
+        width: 100%;
+    }
 
-        .area_saldo_movim {
-            float: right;
-        }
+    .area_saldo_movim {
+        float: right;
+    }
 
-        .area_total_xsc {
-            width: 50%;
-            margin-top: -20px;
-        }
+    .area_total_xsc {
+        width: 50%;
+        margin-top: -20px;
+    }
 
-        .imagem {
-            width: 100%;
-        }
+    .imagem {
+        width: 100%;
+    }
 
-        .titulo_img {
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
+    .titulo_img {
+        position: absolute;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
 
-        .data_img {
-            position: absolute;
-            margin-top: 35px;
-            margin-left: 10px;
-        }
+    .data_img {
+        position: absolute;
+        margin-top: 35px;
+        margin-left: 10px;
+    }
+
+    .background_aniv {
+        background-color: #bcbc441b !important;
+        color: #bcbc44 !important;
+        height: auto;
+    }
+
+    .txt_total {
+        font-size: 13px !important;
+    }
     </style>
 
 
@@ -400,40 +417,40 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
 
 <body>
     <?php if ($cabecalho_rel_img != 'Sim') { ?>
-        <section class="area-cab">
-            <div class="cabecalho">
-                <div class="coluna titulo_cab" style="width:27.5%">
-                    <?php echo $titulo_rel ?>
-                </div>
-                <div align="right" class="coluna" style="width:70%">
-                    <img class="img_rel" src="<?php echo $url_sistema ?>img/igrejas/<?php echo $imagem_igreja ?>">
-                    <span class="coluna_name_church"><?php echo $nome_igreja ?></span>
-                </div>
+    <section class="area-cab">
+        <div class="cabecalho">
+            <div class="coluna titulo_cab" style="width:27.5%">
+                RELATÓRIO DE ANIVESÁRIANTES
             </div>
-        </section>
-
-        <br>
-
-        <section class="area-cab">
-            <div class="cabecalho">
-                <div class="coluna" style="width:60%">
-                    <span class="date_rel">
-                        <?php echo ucwords($data_hoje) ?>
-                    </span>
-                </div>
-                <div align="right" class="coluna" style="width:37%">
-                    <span class="end_rel"><?php echo $end_igreja ?></span>
-                </div>
+            <div align="right" class="coluna" style="width:70%">
+                <img class="img_rel" src="<?php echo $url_sistema ?>img/igrejas/<?php echo $imagem_igreja ?>">
+                <span class="coluna_name_church"><?php echo $nome_igreja ?></span>
             </div>
-        </section>
+        </div>
+    </section>
+
+    <br>
+
+    <section class="area-cab">
+        <div class="cabecalho">
+            <div class="coluna" style="width:60%">
+                <span class="date_rel">
+                    <?php echo ucwords($data_hoje) ?>
+                </span>
+            </div>
+            <div align="right" class="coluna" style="width:37%">
+                <span class="end_rel"><?php echo $end_igreja ?></span>
+            </div>
+        </div>
+    </section>
     <?php } else { ?>
-        <div class="titulo_cab titulo_img">
-            RELATÓRIO DE ANIVESÁRIANTES
-        </div>
-        <div class="data_img">
-            <span class="date_rel"><?php echo ucwords($data_hoje) ?></span>
-        </div>
-        <img class="imagem" src="<?php echo $url_sistema ?>img/igrejas/<?php echo $cabecalho_rel ?>">
+    <div class="titulo_cab titulo_img">
+        RELATÓRIO DE ANIVESÁRIANTES
+    </div>
+    <div class="data_img">
+        <span class="date_rel"><?php echo ucwords($data_hoje) ?></span>
+    </div>
+    <img class="imagem" src="<?php echo $url_sistema ?>img/igrejas/<?php echo $cabecalho_rel ?>">
     <?php } ?>
 
     <br>
@@ -459,19 +476,19 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
         ?>
 
 
-        <div class="table_rel_container">
-            <section class="area-tab" style="background-color: #f5f5f5;">
-                <div class="linha-cab head_table_rel">
-                    <div class="coluna" style="width:30%">NOME</div>
-                    <div class="coluna" style="width:15%">NASCIMENTO</div>
-                    <div class="coluna" style="width:20%">TELEFONE</div>
-                    <div class="coluna" style="width:20%">CARGO</div>
-                    <div class="coluna" style="width:15%">FOTO</div>
-                </div>
-            </section>
-        </div>
+    <div class="table_rel_container">
+        <section class="area-tab" style="background-color: #f5f5f5;">
+            <div class="linha-cab head_table_rel">
+                <div class="coluna" style="width:30%">NOME</div>
+                <div class="coluna" style="width:15%">NASCIMENTO</div>
+                <div class="coluna" style="width:20%">TELEFONE</div>
+                <div class="coluna" style="width:20%">CARGO</div>
+                <div class="coluna" style="width:15%">FOTO</div>
+            </div>
+        </section>
+    </div>
 
-        <?php
+    <?php
 
         for ($i = 0; $i < $total_reg; $i++) {
             foreach ($res[$i] as $key => $value) {
@@ -530,7 +547,7 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
             $dia = $partes[2];
 
             if ($dia == $dia_mes) {
-                $classe_aniv = 'text-primary';
+                $classe_aniv = 'background_aniv';
                 $classe_whats = '';
             } else {
                 $classe_aniv = '';
@@ -539,83 +556,144 @@ $data_hoje = utf8_encode(strftime('%A, %d de %B de %Y', strtotime('today')));
 
             ?>
 
-            <div class="container_txt_rel">
-                <section class="area-tab">
-                    <div class="linha-cab <?php echo $classe_item ?>">
-                        <div class="coluna" style="width:15%">
-                            <?php echo $res[$i]['movimento'] ?>
-                        </div>
+    <div class="container_txt_rel">
+        <section class="area-tab">
+            <div class="linha-cab <?php echo $classe_aniv ?> head_table_items">
+                <div class="coluna" style="width:30%">
+                    <?php echo $nome ?>
+                </div>
 
-                        <div class="coluna" style="width:45%"><?php echo $res[$i]['descricao'] ?></div>
+                <div class="coluna <?php echo $classe_valor ?>" style="width:15%">
+                    <?php echo $data_nascF ?>
+                </div>
 
-                        <div class="coluna <?php echo $classe_valor ?>" style="width:10%">R$
-                            <?php echo number_format($res[$i]['valor'], 2, ',', '.'); ?>
-                        </div>
+                <div class="coluna" style="width:20%">
+                    <?php echo $telefone ?>
+                </div>
 
-                        <div class="coluna" style="width:10%">
-                            <?php echo implode('/', array_reverse(explode('-', $res[$i]['data']))) ?>
-                        </div>
+                <div class="coluna" style="width:20%">
+                    <?php echo $nome_cargo ?>
+                </div>
 
-                        <div class="coluna" style="width:20%"><?php echo $nome_usuario ?></div>
-
-
-                    </div>
-                </section>
+                <div class="coluna line_img_table" style="width:7%">
+                    <img class="img_profile_rel" src="<?php echo $url_sistema ?>img/membros/<?php echo $foto ?>"
+                        width="25px">
+                </div>
             </div>
+        </section>
+    </div>
+    </div>
+    </div>
+
+    <?php } ?>
+
+    <?php
+
+        for ($i = 0; $i < $total_reg_pastores; $i++) {
+            foreach ($res_pastores[$i] as $key => $value) {
+            }
+
+            $nome = $res_pastores[$i]['nome'];
+            $cpf = $res_pastores[$i]['cpf'];
+            $email = $res_pastores[$i]['email'];
+            $telefone = $res_pastores[$i]['telefone'];
+            $endereco = $res_pastores[$i]['endereco'];
+            $foto = $res_pastores[$i]['foto'];
+            $data_nasc = $res_pastores[$i]['data_nasc'];
+            $data_cad = $res_pastores[$i]['data_cad'];
+            $obs = $res_pastores[$i]['obs'];
+            $igreja = $res_pastores[$i]['igreja'];
+            $id = $res_pastores[$i]['id'];
+
+            if ($obs != "") {
+                $classe_obs = 'text-warning';
+            } else {
+                $classe_obs = 'text-secondary';
+            }
+
+
+            $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
+            $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+            if (count($res_con) > 0) {
+                $nome_ig = $res_con[0]['nome'];
+            } else {
+                $nome_ig = $nome_igreja_sistema;
+            }
+
+            $query_con = $pdo->query("SELECT * FROM cargos where id = '$cargo'");
+            $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
+            if (count($res_con) > 0) {
+                $nome_cargo = $res_con[0]['nome'];
+            } else {
+                $nome_cargo = '';
+            }
+
+
+            //retirar quebra de texto do obs
+            $obs = str_replace(array("\n", "\r"), ' + ', $obs);
+
+            $data_nascF = implode('/', array_reverse(explode('-', $data_nasc)));
+            $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
+            $data_batF = implode('/', array_reverse(explode('-', $data_bat)));
+
+
+            $dia_mes = Date('d');
+            $partes = explode('-', $data_nasc);
+            $dia = $partes[2];
+
+            if ($dia == $dia_mes) {
+                $classe_aniv = 'background_aniv';
+                $classe_whats = '';
+            } else {
+                $classe_aniv = '';
+                $classe_whats = 'd-none';
+            }
+
+            ?>
+
+    <div class="container_txt_rel">
+        <section class="area-tab">
+            <div class="linha-cab <?php echo $classe_aniv ?> head_table_items">
+                <div class="coluna" style="width:30%">
+                    <?php echo $nome ?>
+                </div>
+
+                <div class="coluna <?php echo $classe_valor ?>" style="width:15%">
+                    <?php echo $data_nascF ?>
+                </div>
+
+                <div class="coluna" style="width:20%">
+                    <?php echo $telefone ?>
+                </div>
+
+                <div class="coluna" style="width:20%">
+                    Pastor
+                </div>
+
+                <div class="coluna line_img_table" style="width:7%">
+                    <img class="img_profile_rel" src="<?php echo $url_sistema ?>img/membros/<?php echo $foto ?>"
+                        width="25px">
+                </div>
             </div>
-            </div>
+        </section>
+    </div>
 
-        <?php } ?>
+    </div>
 
-
-        </div>
-
-    <?php } else {
+    <?php }
+    } else {
         echo '<span class="txt_record">Nenhum Registro encontrado!</span>';
     } ?>
 
 
-    <?php if ($movimento != "%%") { ?>
-
-        <div class="col-md-12 p-2">
-            <div class="area_total_rel" align="right">
-                <span class="<?php echo $classe_total ?>" style="font-weight: bold">TOTAL: R$
-                    <?php echo number_format($total, 2, ',', '.'); ?></span>
-            </div>
+    <div class="col-md-12 p-2">
+        <div class="area_total_rel" align="right">
+            <span class="txt_total" style="font-weight: bold">
+                TOTAL DE ANIVESÁRIANTES: <?php echo $totalAniv ?>
+            </span>
         </div>
-        </div>
-
-    <?php } else { ?>
-
-        <div class="area_saldo_movim">
-            <div class="col-md-12 p-2">
-                <div class="area_total_rel" align="right">
-                    <span class="txt_result_rel_entry" style="font-weight: bold">ENTRADAS
-                        R$<?php echo number_format(@$entradas, 2, ',', '.'); ?>
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12 p-2">
-            <div class="area_total_rel" align="right">
-                <span class="txt_result_rel_out" style="font-weight: bold">SAÍDAS
-                    R$<?php echo number_format(@$saidas, 2, ',', '.'); ?>
-                </span>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-12 p-2">
-            <div class="area_total_xsc" align="right">
-                <span class="<?php echo $classe_saldo ?>" style="font-weight: bold">SALDO:
-                    R$ <?php echo number_format(@$saldo, 2, ',', '.'); ?>
-                </span>
-            </div>
-        </div>
-        </div>
-        </div>
-
-    <?php } ?>
+    </div>
+    </div>
 
 
 

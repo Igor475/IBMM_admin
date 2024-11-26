@@ -1,1092 +1,1103 @@
 /* ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
 .container-form {
-    position: relative;
-    max-width: 800px;
-    width: 100%;
-    border-radius: 5px;
-    padding: 10px 0;
-    margin: 0 15px;
-    background-color: var(--fonte-menu-dropdown);
-    box-sizing: 0 5px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px 0;
+  margin: 0 15px;
+  background-color: var(--fonte-menu-dropdown);
+  box-sizing: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .container-form .header-add {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 1px solid var(--fundo-ea);
-    padding: 0 20px 10px 20px;
-    font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 1px solid var(--fundo-ea);
+  padding: 0 20px 10px 20px;
+  font-size: 20px;
 }
 
 .modal-content .modal-header .mod_close {
-    font-size: 30px;
-    cursor: pointer;
-    color: var(--fonte-menu-dropdown);
-    transition: all .3s ease;
-    transition: all .3s ease;
+  font-size: 30px;
+  cursor: pointer;
+  color: var(--fonte-menu-dropdown);
+  transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .modal-content .modal-header .mod_close:hover {
-    color: var(--fundo-ea);
+  color: var(--fundo-ea);
 }
 
 .form-modal {
-    position: relative;
-    min-height: auto;
-    background-color: var(--fonte-menu-dropdown);
+  position: relative;
+  min-height: auto;
+  background-color: var(--fonte-menu-dropdown);
 }
 
 .list_documents {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    border-bottom: 2px dashed var(--border-bottom);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px dashed var(--border-bottom);
 }
 
 .list_documents .profile_archives {
-    margin-right: 10px;
-    width: 25px;
+  margin-right: 10px;
+  width: 25px;
 }
 
 .list_documents .text_documents {
-    color: var(--preto-light);
-    font-size: 14px;
-    transition: all .3s ease;
-    display: flex;
-    align-items: center;
+  color: var(--preto-light);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .list_documents .text_documents:hover {
-    color: var(--verde);
+  color: var(--verde);
 }
 
 .text_doc {
-    color: var(--verde);
+  color: var(--verde);
 }
 
 .members_cel {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .members_cel li {
-    padding: 8px 0;
-    border-bottom: 2px dashed var(--border-bottom);
-    font-size: 13px;
-    color: var(--preto);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding: 8px 0;
+  border-bottom: 2px dashed var(--border-bottom);
+  font-size: 13px;
+  color: var(--preto);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .members_cel li a {
-    line-height: 0;
+  line-height: 0;
 }
 
 #listar-membros-add {
-    flex: 1 1 320px;
-    height: 180px;
-    overflow: auto;
+  flex: 1 1 320px;
+  height: 180px;
+  overflow: auto;
 }
 
 #entrada {
-    background-color: transparent;
-    color: var(--black-grey);
+  background-color: transparent;
+  color: var(--black-grey);
 }
 
 .details.ID {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .scroll-modal {
-    height: 600px;
-    overflow-y: auto;
+  height: 600px;
+  overflow-y: auto;
 }
 
 .title-modal {
-    font-size: 16px;
-    font-weight: 500;
-    margin: 6px 0;  
-    color: var(--preto);
-    margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 6px 0;
+  color: var(--preto);
+  margin-bottom: 8px;
 }
 
 .Cadastro {
-    color: var(--fonte-menu-dropdown);
+  color: var(--fonte-menu-dropdown);
 }
 
 .text_excluir {
-    color: var(--black-hover);
+  color: var(--black-hover);
 }
 
 #nome-excluido {
-    color: var(--preto-light);
-    font-weight: 600;
+  color: var(--preto-light);
+  font-weight: 600;
 }
 
 .form-modal .title-modal {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    margin: 6px 0;
-    color: var(--preto);
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 6px 0;
+  color: var(--preto);
 }
 
 .form-modal .fields {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .flex_guest {
-    display: flex;
-    align-items: stretch;
-    flex-wrap: wrap;
-    gap: 0 20px;
-    margin-bottom: 40px;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  margin-bottom: 40px;
 }
 
 .con_field {
-    flex-grow: 1;
-    flex-basis: 300px;
+  flex-grow: 1;
+  flex-basis: 300px;
 }
 
 .fo_field {
-    flex-grow: 1;
-    flex-basis: 250px;
+  flex-grow: 1;
+  flex-basis: 250px;
 }
 
 .fields_freq {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
 }
 
 .fields .input-field {
-    display: flex;
-    width: calc(100% / 3 - 15px);
-    flex-direction: column;
-    margin: 4px 5px;
-    flex: 1 1 200px;
+  display: flex;
+  width: calc(100% / 3 - 15px);
+  flex-direction: column;
+  margin: 4px 5px;
+  flex: 1 1 200px;
 }
 
 .area_photo {
-    flex: 1 1 380px;
-    margin: 20px 0;
-    display: flex;
-    flex-wrap: wrap;
+  flex: 1 1 380px;
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .area_photo_flex {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .area_photo_preg {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1 1 160px;
-    margin: 20px 0;
-    gap: 20px;
-    flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 160px;
+  margin: 20px 0;
+  gap: 20px;
+  flex-direction: column;
 }
 
 .divImg {
-    display: flex;
-    justify-content: center;
-    width: 50%;
+  display: flex;
+  justify-content: center;
+  width: 50%;
 }
 
 .divImgVideoForm {
-    display: flex;
-    justify-content: center;
-    max-width: 380px;
-    height: 220px;
+  display: flex;
+  justify-content: center;
+  max-width: 380px;
+  height: 220px;
 }
 
 .divImgPreg {
-    display: flex;
-    justify-content: center;
-    max-width: 180px;
-    height: 180px;
-  }
+  display: flex;
+  justify-content: center;
+  max-width: 180px;
+  height: 180px;
+}
 
 .divImgBanner {
-    display: flex;
-    justify-content: center;
-    max-width: 280px;
-    height: 280px;
+  display: flex;
+  justify-content: center;
+  max-width: 280px;
+  height: 280px;
 }
 
 .fields_guest {
-    height: 500px;
-    overflow-y: scroll;
+  height: 500px;
+  overflow-y: scroll;
 }
 
 .fields_guest::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .height_images_scroll {
-    height: 500px;
-    overflow-y: scroll;
+  height: 500px;
+  overflow-y: scroll;
 }
 
 .height_images_scroll::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .divImgGuestForm {
-    display: flex;
-    justify-content: center;
-    max-width: 230px;
-    height: 180px;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  max-width: 230px;
+  height: 180px;
+  margin-top: 10px;
 }
 
 .labels_form {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--preto-light);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--preto-light);
 }
 
 .photo_file_video_image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
 }
 
 .user_dados_video {
-    max-width: 100%;
-    position: relative;
+  max-width: 100%;
+  position: relative;
 }
 
 .video_image_area {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  text-align: center;
 }
 
 .area_dados_image {
-    max-width: 260px;
-    position: relative;
-    flex: 1 1 330px;
+  max-width: 260px;
+  position: relative;
+  flex: 1 1 330px;
 }
 
 .img_inf_dados {
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 5px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 5px;
 }
 
 .area_video_modal {
-    max-width: 260px;
-    position: relative;
-    flex: 1 1 300px;
+  max-width: 260px;
+  position: relative;
+  flex: 1 1 300px;
 }
 
 .txt_video {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--preto-text);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--preto-text);
 }
 
 .txt_image {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--preto-text);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--preto-text);
 }
 
 #video-dados {
-    width: 310px;
-    height: auto;
-    border-radius: 10px;
-    margin-top: 5px;
+  width: 310px;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 5px;
 }
 
 .divImgAlert {
-    display: flex;
-    justify-content: center;
-    max-width: 100%;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
 }
 
 .photo_file {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 .photo_file_alert {
-    width: 100%;
-    height: 200px;
+  width: 100%;
+  height: 200px;
 }
 
 .photo_file_archives {
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
 }
 
 .area_photo_flex label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--preto-light);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--preto-light);
 }
 
 .area_photo_flex .input_file {
-    font-size: 13px;
-    color: var(--preto-light);
+  font-size: 13px;
+  color: var(--preto-light);
 }
 
 .area_licao {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .img_flex {
-    flex-grow: 1;
-    flex-basis: 150px;
+  flex-grow: 1;
+  flex-basis: 150px;
 }
 
 .img_flex_l {
-    flex-grow: 1;
-    flex-basis: 150px;
+  flex-grow: 1;
+  flex-basis: 150px;
 }
 
-.input-field label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--preto-light);
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--preto-light);
+}
+
+.description_church {
+  flex: 1 1 390px;
+  margin: 4px 5px;
 }
 
 .input-field-in label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--preto-light);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--preto-light);
 }
 
 .input-field-guest label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--preto-light);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--preto-light);
 }
 
 .txt_date_all {
-    color: var(--close);
-    padding: 3px 7px;
-    background-color: var(--border-color);
-    border-radius: 4px;
-    font-size: 13px;
-    margin-right: 3px;
-    font-weight: 500;
+  color: var(--close);
+  padding: 3px 7px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  font-size: 11px;
+  margin-right: 3px;
+  font-weight: 500;
 }
 
 .flex_int {
-    flex: none !important;
+  flex: none !important;
 }
 
 .input-field input {
-    height: 40px;
-    margin: 8px 0;
+  height: 40px;
+  margin: 8px 0;
 }
 
 .input-field-in input {
-    height: 40px;
-    margin: 8px 0;
+  height: 40px;
+  margin: 8px 0;
 }
 
 .input-field-guest input {
-    height: 40px;
-    margin: 8px 0;
+  height: 40px;
+  margin: 8px 0;
 }
 
 .field_area_1 {
-    flex: .8 !important;
+  flex: 0.8 !important;
 }
 
 .field_cpf_1 {
-    flex: .5 !important;
+  flex: 0.5 !important;
 }
 
 .field_area_2 {
-    width: 100% !important;
-    flex: 1 1 430px !important;
+  width: 100% !important;
+  flex: 1 1 430px !important;
 }
 
 .field_area_select {
-    flex: .93 !important;
+  flex: 0.93 !important;
 }
 
 .area_photo_1 {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1 1 450px;
-    margin: 20px 0;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 450px;
+  margin: 20px 0;
+  gap: 20px;
 }
 
 .flex_int_1 {
-    flex: .5 380px !important;
+  flex: 0.5 380px !important;
 }
 
 .flex_int_2 {
-    flex: .5 !important;
+  flex: 0.5 !important;
 }
 
 .flex_int_3 {
-    flex: 1 380px !important;
+  flex: 1 380px !important;
 }
 
 .flex_int_4 {
-    flex: 4 !important;
+  flex: 4 !important;
 }
 
 .flex_int_5 {
-    flex: .5 !important;
+  flex: 0.5 !important;
 }
 
 .flex_int_6 {
-    flex: .5 1 270px !important;
+  flex: 0.5 1 270px !important;
 }
 
 .flex_int_7 {
-    flex: 1 !important;
+  flex: 1 !important;
 }
 
 .flex_int_8 {
-    flex: .25 !important;
+  flex: 0.25 !important;
 }
 
 .flex_int_9 {
-    flex: 1 1 400px !important;
+  flex: 1 1 400px !important;
 }
 
 .flex_int_10 {
-    flex: 1 1 300px !important;
+  flex: 1 1 300px !important;
 }
 
 .flex_int_11 {
-    flex: 1 1 650px !important;
+  flex: 1 1 650px !important;
 }
 
 .flex_int_12 {
-    flex: 1 160px !important;
+  flex: 1 160px !important;
 }
 
 .flex_int_13 {
-    flex: 1 1 185px !important;
+  flex: 1 1 185px !important;
+}
+
+.flex_int_14 {
+  flex: 0 182px !important;
+}
+
+.flex_int_15 {
+  flex: 1 !important;
 }
 
 .flex_select {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .list_members_group {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .area_permissions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 8px;
-    margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  margin-bottom: 6px;
 }
 
 .titulo-grupo {
-    color: var(--preto-light);
-    font-weight: 400;
+  color: var(--preto-light);
+  font-weight: 400;
 }
 
 .labelcheck {
-    font-size: 14px;
-    color: var(--preto);
+  font-size: 14px;
+  color: var(--preto);
 }
 
 .link_remo {
-    display: flex;
-    align-items: center;
-    background-color: var(--background-message-error);
-    padding: 2px 2px;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
+  display: flex;
+  align-items: center;
+  background-color: var(--background-message-error);
+  padding: 2px 2px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
 }
 
 .ex_member_cell {
-    font-size: 17px;
-    color: var(--text-error-color);
+  font-size: 17px;
+  color: var(--text-error-color);
 }
 
 #listar-membros {
-    display: flex;
-    flex-direction: column;
-    width: 270px;
+  display: flex;
+  flex-direction: column;
+  width: 270px;
 }
 
 .txt_n_m {
-    font-size: 13px;
-    color: var(--fonte-menu-dropdown);
+  font-size: 13px;
+  color: var(--fonte-menu-dropdown);
 }
 
 #membros-dados {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 /*========================== ESTILIZAÇÕES DO SELECT2 ===========================*/
 .select2 .select2-container .select2-container--default,
 .select2-container--default .select2-selection--single {
-    background-color: transparent !important;
-    border: 2px solid var(--border-bottom) !important;
-    margin: 8px 0 !important;
+  background-color: transparent !important;
+  border: 2px solid var(--border-bottom) !important;
+  margin: 8px 0 !important;
 }
 
 .select2 .select2-container .select2-container--default,
 .select2-container--default .select2-selection--single:focus {
-    border: 2px solid var(--verde) !important;
+  border: 2px solid var(--verde) !important;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-    top: 10px !important;
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  top: 10px !important;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: var(--black-sans) !important;
-    line-height: 35px !important;
-    font-size: 14px !important;
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__rendered {
+  color: var(--black-sans) !important;
+  line-height: 35px !important;
+  font-size: 14px !important;
 }
 
 .select2-container .select2-selection--single {
-    height: 40px !important;
+  height: 40px !important;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 35px !important;
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  height: 35px !important;
 }
 
 .select2-container--open .select2-dropdown--below {
-    border-left: 2px solid var(--border-bottom);
-    border-right: 2px solid var(--border-bottom);
-    border-bottom: 2px solid var(--border-bottom);
-    color: var(--text-select_2);
+  border-left: 2px solid var(--border-bottom);
+  border-right: 2px solid var(--border-bottom);
+  border-bottom: 2px solid var(--border-bottom);
+  color: var(--text-select_2);
 }
 
 .select2-container--default .select2-results__option--selected {
-    background-color: var(--hover-side-menu) !important;
-    color: var(--verde) !important;
-    font-size: 14px !important;
+  background-color: var(--hover-side-menu) !important;
+  color: var(--verde) !important;
+  font-size: 14px !important;
 }
 
-.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
-    background-color: var(--hover-side-menu) !important;
-    color: var(--verde) !important;
+.select2-container--default
+  .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: var(--hover-side-menu) !important;
+  color: var(--verde) !important;
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field {
-    height: 33px !important;
-    border-radius: 3px !important;
+  height: 33px !important;
+  border-radius: 3px !important;
 }
 
 .select2-container--open .select2-dropdown {
-    top: -8px !important;
+  top: -8px !important;
 }
 
 .select2-container--open .select2-dropdown--below {
-    font-size: 14px !important;
+  font-size: 14px !important;
 }
 
 .input-field input {
-    outline: none;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--preto);
-    border-radius: 5px;
-    border: 1px solid var(--fundo-ea);
-    padding: 0 10px;
-    margin: 8px 0;
-    transition: all .3s ease;
+  outline: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--preto);
+  border-radius: 5px;
+  border: 1px solid var(--fundo-ea);
+  padding: 0 10px;
+  margin: 8px 0;
+  transition: all 0.3s ease;
 }
 
 .input-field-guest input {
-    outline: none;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--preto);
-    border-radius: 5px;
-    border: 1px solid var(--fundo-ea);
-    padding: 0 10px;
-    margin: 8px 0 20px 0;
-    transition: all .3s ease;
-    width: 100%;
+  outline: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--preto);
+  border-radius: 5px;
+  border: 1px solid var(--fundo-ea);
+  padding: 0 10px;
+  margin: 8px 0 20px 0;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
 .input-field-guest .input_descr {
-    margin: 0;
+  margin: 0;
 }
 
 .input-field input:focus {
-    border-color: var(--verde-light-border);
-    box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
+  border-color: var(--verde-light-border);
+  box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
 }
 
 .input-field-guest input:focus {
-    border-color: var(--verde-light-border);
-    box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
+  border-color: var(--verde-light-border);
+  box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
 }
 
 .input-field input[type="date"] {
-    color: var(--black-grey);
+  color: var(--black-grey);
 }
 
 .widget_bottom_dates {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .input-field-in input {
-    outline: none;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--preto);
-    border-radius: 5px;
-    border: 1px solid var(--fundo-ea);
-    padding: 0 10px;
-    margin: 8px 0;
-    transition: all .3s ease;
+  outline: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--preto);
+  border-radius: 5px;
+  border: 1px solid var(--fundo-ea);
+  padding: 0 10px;
+  margin: 8px 0;
+  transition: all 0.3s ease;
 }
 
 .input-field-in {
-    display: flex;
-    width: calc(100% / 3 - 15px);
-    flex-direction: column;
-    margin: 4px 5px;
-    flex: 1 1 200px;
+  display: flex;
+  width: calc(100% / 3 - 15px);
+  flex-direction: column;
+  margin: 4px 5px;
+  flex: 1 1 200px;
 }
 
 .input-field input[type="date"]:valid {
-    color: var(--preto);
+  color: var(--preto);
 }
 
 .input-field-in input[type="date"]:valid {
-    color: var(--preto);
+  color: var(--preto);
 }
 
 .area-buttons {
-    display: flex;
-    justify-content: end;
-    align-items: stretch;
-    grid-gap: 15px;
+  display: flex;
+  justify-content: end;
+  align-items: stretch;
+  grid-gap: 15px;
 }
 
 .btn-add {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 15px;
-    border-radius: 3px;
-    font-size: 13px;
-    border: none;
-    outline: none;
-    color: var(--fonte-menu-dropdown);
-    background-color: var(--verde);
-    transition: all .3s linear;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-size: 13px;
+  border: none;
+  outline: none;
+  color: var(--fonte-menu-dropdown);
+  background-color: var(--verde);
+  transition: all 0.3s linear;
+  cursor: pointer;
 }
 
 .btn-remove {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px 10px 7px 15px;
-    border-radius: 3px;
-    border: none;
-    outline: none;
-    color: var(--fonte-menu-dropdown);
-    background-color: var(--btn-remove);
-    transition: all .3s linear;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 10px 7px 15px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  color: var(--fonte-menu-dropdown);
+  background-color: var(--btn-remove);
+  transition: all 0.3s linear;
+  cursor: pointer;
 }
 
 .btn-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 15px;
-    border-radius: 3px;
-    border: none;
-    outline: none;
-    color: var(--fonte-menu-dropdown);
-    background-color: var(--black-sans);
-    transition: all .3s linear;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  color: var(--fonte-menu-dropdown);
+  background-color: var(--black-sans);
+  transition: all 0.3s linear;
+  cursor: pointer;
 }
 
 .btn-add:hover {
-    background-color: var(--btn-hover);
+  background-color: var(--btn-hover);
 }
 
 .btn-close:hover {
-    background-color: var(--preto-hover);
+  background-color: var(--preto-hover);
 }
 
 .icon-btn-form {
-    margin-left: 8px;
-    font-size: 13px;
+  margin-left: 8px;
+  font-size: 13px;
 }
 
 .message_error {
-    text-align: center;
-    margin: 15px auto;
-    color: var(--text-error-color);
-    background-color: var(--background-message-error);
-    border-radius: 4px;
-    border: 1px solid var(--text-error-color);
-    padding: 10px;
-    width: 91.8%;
-    font-size: 14px;
+  text-align: center;
+  margin: 15px auto;
+  color: var(--text-error-color);
+  background-color: var(--background-message-error);
+  border-radius: 4px;
+  border: 1px solid var(--text-error-color);
+  padding: 10px;
+  width: 91.8%;
+  font-size: 14px;
 }
 
 .area_logos_rel_church {
-    display: flex;
-    align-items: start;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: start;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .area_images_gallery {
-    display: flex;
-    align-items: start;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 0 20px;
+  display: flex;
+  align-items: start;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 0 20px;
 }
 
 .photo_file_rel {
-    width: 100%;
+  width: 100%;
 }
 
 .photo_file_gal {
-    width: 100%;
+  width: 100%;
 }
 
 .area_photo_rel {
-    flex: 1 1 220px;
-    margin: 20px 0;
-    display: flex;
-    flex-wrap: wrap;
+  flex: 1 1 220px;
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .divImgRel {
-    display: flex;
-    justify-content: center;
-    max-width: 200px;
-    margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  max-width: 200px;
+  margin-top: 12px;
 }
 
 .divImgGal {
-    display: flex;
-    justify-content: center;
-    max-width: 280px;
-    margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  max-width: 280px;
+  margin-top: 12px;
 }
 
 .txt_notice {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--preto-text);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--preto-text);
 }
 
 .con_preg {
-    display: flex;
-    align-items: stretch;
-    gap: 15px;
-    flex-wrap: wrap;
-    width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 /*======================= CAMPO DE OBSERVAÇÕES DOS PASTORES =========================*/
 .txt-obs {
-    height: 200px;
-    border-radius: 5px;
-    width: 100%;
-    border: 1px solid var(--fundo-ea);
-    transition: all .3s ease;
-    padding: 5px 10px;
-    outline: none;
-    font-size: 14px;
+  height: 200px;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid var(--fundo-ea);
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  outline: none;
+  font-size: 14px;
 }
 
 .txt-obs-alert {
-    font-size: 13px;
-    height: 100px;
-    border-radius: 5px;
-    width: 100%;
-    border: 1px solid var(--fundo-ea);
-    transition: all .3s ease;
-    padding: 10px 10px;
-    outline: none;
-    font-size: 14px;
-    color: var(--preto);
+  font-size: 13px;
+  height: 100px;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid var(--fundo-ea);
+  transition: all 0.3s ease;
+  padding: 10px 10px;
+  outline: none;
+  font-size: 14px;
+  color: var(--preto);
 }
 
 #link-dados {
-    color: var(--verde);
+  color: var(--verde);
 }
 
 .txt-obs:focus {
-    border-color: var(--verde-light-border);
-    box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
+  border-color: var(--verde-light-border);
+  box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
 }
 
 .txt-obs-alert:focus {
-    border-color: var(--verde-light-border);
-    box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
+  border-color: var(--verde-light-border);
+  box-shadow: 0 0 0 0.2rem rgba(12, 175, 96, 0.25);
 }
 
-
 .area_obs {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .txt_label_obs {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--preto-light);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--preto-light);
 }
 /*======================= FIM CAMPO DE OBSERVAÇÕES DOS PASTORES =========================*/
 
 /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
 
-
-
-
-
-
-
-
-
-
 /* ESTILIZAÇÃO DA MODAL DE "VER DADOS" */
 .user_area {
-    margin: 10px 0;
-    display: block;
-    border-bottom: 1px solid var(--border-bottom);
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
-    grid-gap: 5px;
-    flex-wrap: wrap;
+  margin: 10px 0;
+  display: block;
+  border-bottom: 1px solid var(--border-bottom);
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  grid-gap: 5px;
+  flex-wrap: wrap;
 }
 
 .user_area .user_name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--preto-text);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--preto-text);
 }
 
 .container_flex_emp {
-    display: flex;
+  display: flex;
 }
 
 .user_area .texts_son {
-    font-size: 13px;
-    color: var(--preto-cinza);
-    margin: 5px 0;
+  font-size: 13px;
+  color: var(--preto-cinza);
+  margin: 5px 0;
 }
 
 .user_area .icon_user {
-    color: var(--verde-lima);
-    font-size: 18px;
-    width: 20px;
+  color: var(--verde-lima);
+  font-size: 18px;
+  width: 20px;
 }
 
 .user_area .img_icon_data {
-    width: 22px;
-    margin-right: 3px;
+  width: 22px;
+  margin-right: 3px;
 }
 
 .user_profile_area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
 
 .user_profile_area .img_info_profile {
-    display: block;
-    width: 175px;
-    height: auto;
-    border-radius: 8%;
-    object-fit: cover;
+  display: block;
+  width: 175px;
+  height: auto;
+  border-radius: 8%;
+  object-fit: cover;
 }
 /* FIM ESTILIZAÇÃO DA MODAL DE "VER DADOS" */
 
 .form-modal::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 750px) {
+  .form-modal {
+    overflow-y: scroll;
+    height: 400px;
+  }
 
-    .form-modal {
-        overflow-y: scroll;
-        height: 400px;
-    }
-    
-    .area_dados_image {
-        max-width: 58%;
-        margin: 0 auto;
-    }
+  .area_dados_image {
+    max-width: 58%;
+    margin: 0 auto;
+  }
 
-    #video-dados {
-        height: 200px;
-    }
-    
-    .area_video_modal {
-        max-width: 100%;
-        margin: 0 auto;
-        flex: 0;
-    }
+  #video-dados {
+    height: 200px;
+  }
 
-    .scroll-modal {
-        overflow-y: scroll;
-        height: 400px;
-    }
+  .area_video_modal {
+    max-width: 100%;
+    margin: 0 auto;
+    flex: 0;
+  }
 
-    .form-modal-auto {
-        height: auto;
-    }
+  .scroll-modal {
+    overflow-y: scroll;
+    height: 400px;
+  }
 
-    .form-modal::-webkit-scrollbar {
-        display: none;
-    }
+  .form-modal-auto {
+    height: auto;
+  }
 
-    .fields .input-field {
-        width: calc(100% / 2 - 15px);
-    }
+  .form-modal::-webkit-scrollbar {
+    display: none;
+  }
 
-    .field_area_1 {
-        flex: 1 !important;
-    }
-    
-    .field_cpf_1 {
-        flex: 1 !important;
-    }
+  .fields .input-field {
+    width: calc(100% / 2 - 15px);
+  }
 
-    .flex_int_2 {
-        flex: 1 !important;
-    }
+  .field_area_1 {
+    flex: 1 !important;
+  }
 
-    .flex_int_6 {
-        flex: 1 1 330px!important;
-    }
+  .field_cpf_1 {
+    flex: 1 !important;
+  }
 
-    .input-field input {
-        height: 50px;
-        font-size: 14px;
-    }
+  .flex_int_2 {
+    flex: 1 !important;
+  }
 
-    #listar-membros {
-        width: 100%;
-    }
+  .flex_int_6 {
+    flex: 1 1 330px !important;
+  }
 
-    .select2-container .select2-selection--single {
-        height: 50px !important;
-    }
+  .input-field input {
+    height: 50px;
+    font-size: 14px;
+  }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 47px !important;
-    }
+  #listar-membros {
+    width: 100%;
+  }
 
-    .select2-container--default .select2-selection--single .select2-selection__arrow{
-        top: 15px !important;
-    }
+  .select2-container .select2-selection--single {
+    height: 50px !important;
+  }
 
-    .flex_int {
-        flex: 1 1 380px !important;
-    }
+  .select2-container--default
+    .select2-selection--single
+    .select2-selection__rendered {
+    line-height: 47px !important;
+  }
 
-    .field_area_select {
-        flex: 1 !important;
-    }
+  .select2-container--default
+    .select2-selection--single
+    .select2-selection__arrow {
+    top: 15px !important;
+  }
 
-    /*============================================= FOTOS DAS MODAIS =========================================*/
-    .area_photo { 
-        justify-content: center;
-        gap: 30px;
-    }
+  .flex_int {
+    flex: 1 1 380px !important;
+  }
 
-    .area_photo_1 { 
-        justify-content: center;
-        gap: 30px;
-    }
-    /*============================================= FIM FOTOS DAS MODAIS =========================================*/
+  .field_area_select {
+    flex: 1 !important;
+  }
 
-    .user_profile_area .img_info_profile {
-        width: 100px;
-        height: 100px;
-    }
+  /*============================================= FOTOS DAS MODAIS =========================================*/
+  .area_photo {
+    justify-content: center;
+    gap: 30px;
+  }
 
-    /*============================================= BOTÕES DAS MODAIS =========================================*/
-    .btn-close {
-        padding: 10px 18px !important;
-    }
+  .area_photo_1 {
+    justify-content: center;
+    gap: 30px;
+  }
+  /*============================================= FIM FOTOS DAS MODAIS =========================================*/
 
-    .btn-add {
-        padding: 10px 18px !important;
-    }
-    /*============================================= FIM BOTÕES DAS MODAIS =========================================*/
+  .user_profile_area .img_info_profile {
+    width: 100px;
+    height: 100px;
+  }
 
-    .modal_responsive_scr {
-        height: auto !important;
-        overflow-y: auto !important;
-    }
+  /*============================================= BOTÕES DAS MODAIS =========================================*/
+  .btn-close {
+    padding: 10px 18px !important;
+  }
+
+  .btn-add {
+    padding: 10px 18px !important;
+  }
+  /*============================================= FIM BOTÕES DAS MODAIS =========================================*/
+
+  .modal_responsive_scr {
+    height: auto !important;
+    overflow-y: auto !important;
+  }
 }
 
 @media screen and (max-width: 550px) {
-    .fields .input-field {
-        width: 100%
-    }
+  .fields .input-field {
+    width: 100%;
+  }
 
-    .area_dados_image {
-        max-width: 100%;
-        margin: 0 auto;
-    }
+  .area_dados_image {
+    max-width: 100%;
+    margin: 0 auto;
+  }
 
-    .area_video_modal {
-        flex: 1 1 330px;
-    }
+  .area_video_modal {
+    flex: 1 1 330px;
+  }
 
-    #video-dados {
-        height: 150px;
-        width: 100%;
-    }
+  #video-dados {
+    height: 150px;
+    width: 100%;
+  }
 
-    /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
-    .fields .input-field {
-        flex: 1 1 280px;
-    }
-    /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
-
+  /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
+  .fields .input-field {
+    flex: 1 1 280px;
+  }
+  /* FIM ESTILIZAÇÃO DA MODAL DE "EDITAR DADOS" */
 }
-

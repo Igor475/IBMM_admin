@@ -20,6 +20,7 @@ $fornecedor = $res[0]['fornecedor'];
 $arquivo = $res[0]['arquivo'];
 $igreja = $res[0]['igreja'];
 $frequencia = $res[0]['frequencia'];
+$pago = $res[0]['pago'];
 
 //INSERINDO NAS MOVIMENTAÇÕES
 $pdo->query("INSERT INTO movimentacoes SET tipo = 'Saída', movimento = 'Conta à Pagar', 
@@ -58,6 +59,15 @@ if($frequencia > 0) {
 
 
 }
+
+//EXECUTAR NO LOG
+$tabela = $pagina;
+$acao = 'Edição';
+$id_reg = $id;
+$descricao = 'Pago = ' . $pago;
+$painel = 'Painel Igreja';
+$igreja_ = $igreja;
+require_once("../../logs.php");
 
 echo "Alterado com Sucesso";
 

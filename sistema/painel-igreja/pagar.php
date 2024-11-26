@@ -175,7 +175,7 @@ if (@$pagar == 'ocultar') {
                             if ($pago != 'Sim') {
                                 $classe_linha = 'text_bill_later';
                             } else {
-                                $classe_linha = '';
+                                $classe_linha = 'text_bill_pay';
                             }
                         }
 
@@ -218,7 +218,7 @@ if (@$pagar == 'ocultar') {
                         $data_baixaF = implode('/', array_reverse(explode('-', $data_baixa)));
                         $vencimentoF = implode('/', array_reverse(explode('-', $vencimento)));
                         ?>
-                        <tr class="column-body <?php echo $classe_linha ?>">
+                        <tr class="column-body">
                             <td data-label="Descrição" class="td-table" id="radius-column-foto">
                                 <i class="bi bi-exclamation-octagon-fill <?php echo $classe ?>"></i>
                                 <?php echo $descricao ?>
@@ -237,7 +237,7 @@ if (@$pagar == 'ocultar') {
                                 <?php echo $nome_fre ?>
                             </td>
                             <td data-label="Pago" class="td-table column-hidden">
-                                <?php echo $pago ?>
+                                <span class="<?php echo $classe_linha ?>"><?php echo $pago ?></span>
                             </td>
                             <td data-label="Foto" class="td-table">
                                 <a href="../img/contas/<?php echo $arquivo ?>" target="_blank">

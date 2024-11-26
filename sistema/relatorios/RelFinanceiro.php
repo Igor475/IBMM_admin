@@ -1,8 +1,8 @@
-<?php 
+<?php
 require_once("../conexao.php");
 
 $igreja = $_POST['igreja'];
-if(isset($_POST['tipo'])) {
+if (isset($_POST['tipo'])) {
     $tipo = @$_POST['tipo'];
 } else {
     $tipo = "";
@@ -13,9 +13,9 @@ $movimento = $_POST['movimento'];
 
 
 //ALIMENTANDO OS DADOS DO RELATÓRIO
-$html = file_get_contents($url_sistema."relatorios/RelFinanceiroHtml.php?igreja=$igreja&tipo=$tipo&movimento=$movimento&dataInicial=$dataInicial&dataFinal=$dataFinal");
+$html = file_get_contents($url_sistema . "relatorios/relFinanceiroHtml.php?igreja=$igreja&tipo=$tipo&movimento=$movimento&dataInicial=$dataInicial&dataFinal=$dataFinal");
 
-if($relatorio_pdf != 'Sim') {
+if ($relatorio_pdf != 'Sim') {
     echo $html;
     exit();
 }
@@ -40,8 +40,9 @@ $pdf->load_html($html);
 $pdf->render();
 
 //NOMEAR O PDF GERADO
-$pdf->stream('financeiro.pdf', 
-array("Attachment" => false)
+$pdf->stream(
+    'financeiro.pdf',
+    array("Attachment" => false)
 );
 
 ?>

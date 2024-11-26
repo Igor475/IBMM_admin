@@ -61,7 +61,6 @@ if (@$membros == 'ocultar') {
                         <th class="th-table">Email</th>
                         <th class="th-table column-hidden">Telefone</th>
                         <th class="th-table column-hidden">Cargo Ministerial</th>
-                        <th class="th-table column-hidden">Ativo</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -85,6 +84,7 @@ if (@$membros == 'ocultar') {
                         $data_bat = $res[$i]['data_batismo'];
                         $ativo = $res[$i]['ativo'];
                         $id = $res[$i]['id'];
+                        $estado = $res[$i]['estado_civil'];
 
                         if ($obs != "") {
                             $classe_obs = 'obs_filled';
@@ -145,9 +145,6 @@ if (@$membros == 'ocultar') {
                             <td data-label="Cadastro" class="td-table column-hidden">
                                 <?php echo $nome_cargo ?>
                             </td>
-                            <td data-label="Ativo" class="td-table column-hidden">
-                                <?php echo $tab ?>
-                            </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -157,10 +154,11 @@ if (@$membros == 'ocultar') {
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
+                                            <a class="dropdown-item" href="#"
+                                                onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
                                             '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
                                             '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>', 
-                                            '<?php echo $data_batF ?>', '<?php echo $nome_cargo ?>')">
+                                            '<?php echo $data_batF ?>', '<?php echo $nome_cargo ?>', '<?php echo $estado ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -252,9 +250,6 @@ if (@$membros == 'ocultar') {
                             </td>
                             <td data-label="Cadastro" class="td-table column-hidden">
                                 Pastor
-                            </td>
-                            <td data-label="Ativo" class="td-table column-hidden">
-                                <?php echo $tab ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
@@ -366,6 +361,12 @@ if (@$membros == 'ocultar') {
                     <span class="user_name">Cargo Ministerial: </span>
                     <span class="texts_son" id="membro-dados"></span>
                 </div>
+                <div class="user_area" id="span-estado">
+                    <img src="../img/svg/indicador.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
+                    <span class="user_name">Estado Cívil: </span>
+                    <span class="texts_son" id="estado-dados"></span>
+                </div>
                 <div class="user_profile_area">
                     <img class="img_info_profile" src="" id="foto-dados">
                 </div>
@@ -386,10 +387,14 @@ if (@$membros == 'ocultar') {
 
 
 <script type="text/javascript">
-    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja, data_bat, cargo) {
+    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja, data_bat, cargo, estado) {
 
         if (data_bat === '00/00/0000') {
             data_bat = 'Não Batizado!';
+        }
+
+        if (estado == "") {
+            document.getElementById('span-estado').style.display = 'none';
         }
 
         $('#nome-dados').text(nome);
@@ -402,6 +407,7 @@ if (@$membros == 'ocultar') {
         $('#igreja-dados').text(igreja);
         $('#batismo-dados').text(data_bat);
         $('#membro-dados').text(cargo);
+        $('#estado-dados').text(estado);
         $('#foto-dados').attr('src', '../img/membros/' + foto);
 
 

@@ -11,12 +11,13 @@ $data_nasc = $_POST['data_nasc'];
 $igreja = $_POST['igreja'];
 $data_bat = $_POST['data_bat'];
 @$cargo = $_POST['cargo'];
+$estado = $_POST['estado'];
 $id = @$_POST['id'];
 
 if (empty($nome)) {
     echo 'Por favor insira o seu nome!';
     exit();
-} 
+}
 
 if (empty($cpf)) {
     echo 'Por favor insira o seu CPF!';
@@ -97,7 +98,7 @@ if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem', 
         data_nasc = '$data_nasc', data_cad = curDate(), igreja = '$igreja', 
-        data_batismo = '$data_bat', cargo = '$cargo', ativo = 'Sim'");
+        data_batismo = '$data_bat', cargo = '$cargo', ativo = 'Sim', estado_civil = '$estado'");
 
     $query->bindValue(":nome", "$nome");
     $query->bindValue(":email", "$email");
@@ -121,7 +122,8 @@ if ($id == "" || $id == 0) {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, data_nasc = '$data_nasc',
-        igreja = '$igreja', data_batismo = '$data_bat', cargo = '$cargo' WHERE id = '$id'");
+        igreja = '$igreja', data_batismo = '$data_bat', cargo = '$cargo', estado_civil = '$estado'
+        WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -133,7 +135,7 @@ if ($id == "" || $id == 0) {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem', 
         data_nasc = '$data_nasc', igreja = '$igreja', data_batismo = '$data_bat',
-        cargo = '$cargo' WHERE id = '$id'");
+        cargo = '$cargo', estado_civil = '$estado' WHERE id = '$id'");
     }
 
 

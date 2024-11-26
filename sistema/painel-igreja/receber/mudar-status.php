@@ -17,11 +17,22 @@ $descricao = $res[0]['descricao'];
 $vencimento = $res[0]['vencimento'];
 $membro = $res[0]['membro'];
 $igreja = $res[0]['igreja'];
+$pago = $res[0]['pago'];
 
 //INSERINDO NAS MOVIMENTAÇÕES
 $pdo->query("INSERT INTO movimentacoes SET tipo = 'Entrada', movimento = 'Venda', 
     descricao = '$descricao', valor = '$valor', data = curDate(), usuario = '$id_usuario',
     id_mov = '0', igreja = '$igreja'");
+
+
+//EXECUTAR NO LOG
+$tabela = $pagina;
+$acao = 'Edição';
+$id_reg = $id;
+$descricao = 'Pago = ' . $pago;
+$painel = 'Painel Igreja';
+$igreja_ = $igreja;
+require_once("../../logs.php");
     
 
 echo "Alterado com Sucesso";

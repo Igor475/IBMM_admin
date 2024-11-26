@@ -1,5 +1,20 @@
 <?php
 @session_start();
+
+//EXECUTAR NO LOG
+$tabela = 'usuarios';
+$acao = 'Logout';
+$id_reg = 0;
+$descricao = 'Logout';
+if ($_SESSION['nivel_usuario'] == 'Pastor Presidente') {
+    $painel = 'Painel Administrativo';
+    $igreja = 0;
+} else {
+    $painel = 'Painel Igreja';
+    $igreja = $_SESSION['id_igreja'];
+}
+require_once("logs.php");
+
 unset($_SESSION['id'], $_SESSION['cpf'], $_SESSION['email']);
 $_SESSION['msg'] = "<div id='alert_mess_box'>
                         <span>

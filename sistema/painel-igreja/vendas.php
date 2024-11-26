@@ -140,7 +140,7 @@ if(@$vendas == 'ocultar') {
                             <div class="fields">
                                 <div class="input-field">
                                     <label>Valor</label>
-                                    <input type="text" name="valor" id="valor" placeholder="Valor da Doação" required>
+                                    <input type="text" name="valor" id="valor" placeholder="Valor" required>
                                 </div>
 
                                 <div class="input-field">

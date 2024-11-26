@@ -2,13 +2,12 @@
 require_once("../conexao.php");
 
 $igreja = $_POST['igreja'];
-
 $dataInicial = $_POST['dataInicial'];
 $dataFinal = $_POST['dataFinal'];
 
 
 //ALIMENTAR OS DADOS NO RELATÓRIO
-$html = file_get_contents($url_sistema . "rel/relAniversariantesHtml.php?igreja=$igreja&dataInicial=$dataInicial&dataFinal=$dataFinal");
+$html = file_get_contents($url_sistema . "relatorios/relAniversariantesHtml.php?igreja=$igreja&dataInicial=$dataInicial&dataFinal=$dataFinal");
 
 if ($relatorio_pdf != 'Sim') {
     echo $html;

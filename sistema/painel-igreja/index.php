@@ -428,6 +428,14 @@ if ($pag == "") {
                                     <a href="index.php?pag=categoria_licoes">Categoria das Lições</a>
                                 </li>
                                 <?php } ?>
+
+                                <?php if (@$versiculos == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$categoria_licoes ?>">
+                                    <a href="index.php?pag=versiculos">Versículos</a>
+                                </li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <?php } ?>
@@ -587,7 +595,7 @@ if ($pag == "") {
                                 <?php } else { ?>
                                 <li class="<?php echo @$RelPatrimonio ?>">
                                     <a href="#" data-bs-toggle="modal"
-                                        data-bs-target="#modalRelPatrimonios">Patrimônios</a>
+                                        data-bs-target="#modalRelPatrimonios">Patrimônio</a>
                                 </li>
                                 <?php } ?>
 
@@ -596,7 +604,16 @@ if ($pag == "") {
                                 <?php } else { ?>
                                 <li class="<?php echo @$rel_financeiro ?>">
                                     <a href="#" data-bs-toggle="modal"
-                                        data-bs-target="#modalRelFinanceiro">Financeiro</a>
+                                        data-bs-target="#modalRelFinanceiro">Financeiros</a>
+                                </li>
+                                <?php } ?>
+
+                                <?php if (@$rel_aniversario == "ocultar") { ?>
+
+                                <?php } else { ?>
+                                <li class="<?php echo @$rel_aniversario ?>">
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalRelAniversariantes">Aniversáriantes</a>
                                 </li>
                                 <?php } ?>
 
@@ -1035,19 +1052,21 @@ if ($pag == "") {
                             <div class="widget_bottom_dates">
                                 <div class="input-field-in">
                                     <label>Data Inicial (
-                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-fin', 'fin')">
-                                            <span class="txt_date_all" id="hoje-fin">Hoje</span>
+                                        <a href="#" onclick="datas('<?php echo $data_atual ?>', 'hoje-ani', 'ani')">
+                                            <span class="txt_date_all" id="hoje-ani">Hoje</span>
                                         </a>
-                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-fin', 'fin')">
-                                            <span class="txt_date_all" id="mes-fin">Mês</span>
+                                        <a href="#" onclick="datas('<?php echo $data_mes ?>', 'mes-ani', 'ani')">
+                                            <span class="txt_date_all" id="mes-ani">Mês</span>
                                         </a>
+                                        )
                                     </label>
-                                    <input type="date" name="dataInicial" id="dtInicial-fin" value="1980-01-01">
+                                    <input type="date" name="dataInicial" id="dtInicial-ani"
+                                        value="<?php echo $data_atual ?>">
                                 </div>
 
                                 <div class="input-field-in">
                                     <label>Data Final</label>
-                                    <input type="date" id="dtFinal-fin" name="dataFinal"
+                                    <input type="date" id="dtFinal-ani" name="dataFinal"
                                         value="<?php echo $data_atual ?>">
                                 </div>
                             </div>
@@ -1175,12 +1194,16 @@ if ($pag == "") {
         var data_atual = "<?= $data_atual ?>";
         $('#dtInicial-' + campo).val(data);
         $('#dtFinal-' + campo).val(data_atual);
-        document.getElementById('tudo-' + campo).style.color = "#999";
-        document.getElementById('tudo-' + campo).style.backgroundColor = "#ececec";
+
         document.getElementById('hoje-' + campo).style.color = "#999";
         document.getElementById('hoje-' + campo).style.backgroundColor = "#ececec";
         document.getElementById('mes-' + campo).style.color = "#999";
         document.getElementById('mes-' + campo).style.backgroundColor = "#ececec";
+        document.getElementById(id).style.color = "#198754";
+        document.getElementById(id).style.backgroundColor = "rgba(0, 127, 95, 0.07)";
+
+        document.getElementById('tudo-' + campo).style.color = "#999";
+        document.getElementById('tudo-' + campo).style.backgroundColor = "#ececec";
         document.getElementById('ano-' + campo).style.color = "#999";
         document.getElementById('ano-' + campo).style.backgroundColor = "#ececec";
         document.getElementById(id).style.color = "#198754";

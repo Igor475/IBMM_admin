@@ -20,6 +20,7 @@ if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome ");
     $query->bindValue(":nome", "$nome");
     $query->execute();
+    $ult_id = $pdo->lastInsertId();
 
 } else {
     $query = $pdo->prepare("UPDATE $pagina SET nome = :nome WHERE id = '$id'");
@@ -27,6 +28,21 @@ if ($id == "" || $id == 0) {
     $query->execute();
 
 }
+
+//EXECUTAR NO LOG
+$tabela = $pagina;
+
+if ($id == "" || $id == 0) {
+    $acao = 'Inserção';
+    $id_reg = $ult_id;
+} else {
+    $acao = 'Edição';
+    $id_reg = $id;
+}
+$descricao = $nome;
+$painel = 'Painel Administrativo';
+$igreja = 0;
+require_once("../../logs.php");
 
 echo 'Salvo com Sucesso';
 
