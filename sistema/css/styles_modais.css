@@ -383,6 +383,41 @@ label {
   color: var(--preto-light);
 }
 
+.area_nice_editor {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.flx_images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.img_apre {
+  width: 100%;
+}
+
+.label_plus {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--preto-light);
+  margin-bottom: 8px;
+}
+
+.textarea{
+    width:760px !important;
+    height:150px !important;
+  }
+
+  @media only screen and (max-width: 700px) {
+  .textarea{
+     width:300px !important; 
+  }
+}
+
 .input-field-guest label {
   font-size: 13px;
   font-weight: 600;

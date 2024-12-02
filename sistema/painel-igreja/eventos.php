@@ -31,7 +31,7 @@ if (@$eventos == 'ocultar') {
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         $total_reg = count($res);
         if ($total_reg > 0) {
-        ?>
+            ?>
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
@@ -101,6 +101,15 @@ if (@$eventos == 'ocultar') {
                             $classe_obs = 'obs_empty';
                         }
 
+                        //retirar aspas do texto do desc
+                        $descricao1 = str_replace('"', "**", $descricao1);
+                        //retirar aspas do texto do desc
+                        $descricao2 = str_replace('"', "**", $descricao2);
+                        //retirar aspas do texto do desc
+                        $descricao3 = str_replace('"', "**", $descricao3);
+                        //retirar aspas do texto do desc
+                        $subtitulo = str_replace('"', "**", $subtitulo);
+
 
                         if ($ativo == 'Sim') {
                             $classe = 'text_active';
@@ -136,7 +145,7 @@ if (@$eventos == 'ocultar') {
                             $name_pregador = '';
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM categoria where id = '$categoria'");
+                        $query_con = $pdo->query("SELECT * FROM categoria_noticias where id = '$categoria'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
                             $name_categoria = $res_con[0]['nome'];
@@ -148,7 +157,7 @@ if (@$eventos == 'ocultar') {
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         $data_eventoF = implode('/', array_reverse(explode('-', $data_evento)));
 
-                    ?>
+                        ?>
                         <tr class="column-body <?php echo $inativa ?> <?php echo $classe_item ?>">
                             <td data-label="Foto" class="td-table" id="radius-column-foto">
                                 <img class="profile_table" src="../img/eventos/<?php echo $imagem ?>" alt="Perfil"
@@ -226,7 +235,8 @@ if (@$eventos == 'ocultar') {
                                                 Imagens da Galeria</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="convidado('<?php echo $id ?>', '<?php echo $titulo ?>',
+                                            <a class="dropdown-item" href="#"
+                                                onclick="convidado('<?php echo $id ?>', '<?php echo $titulo ?>',
                                             '<?php echo $convidado1 ?>', '<?php echo $convidado2 ?>', '<?php echo $convidado3 ?>', 
                                             '<?php echo $convidado4 ?>', '<?php echo $imagem1 ?>', '<?php echo $imagem2 ?>',
                                             '<?php echo $imagem3 ?>', '<?php echo $imagem4 ?>', '<?php echo $descr_conv1 ?>', 
@@ -261,7 +271,7 @@ if (@$eventos == 'ocultar') {
                 <h3 class="Cadastro" id="tituloModal"></h3>
                 <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
             </div>
-            <form id="form" method="post">
+            <form id="form-ev" method="post">
                 <div class="modal-body modal_responsive_scr">
                     <div action="#" class="form-modal">
                         <div class="form first">
@@ -274,10 +284,10 @@ if (@$eventos == 'ocultar') {
                                     </div>
 
                                     <div class="input-field field_area_2">
-                                        <div class="area_obs">
+                                        <div class="area_nice_editor">
                                             <label>Subtitulo</label>
-                                            <textarea class="txt-obs-alert" type="text" name="subtitulo" id="subtitulo"
-                                                placeholder="Subtitulo do Evento" required></textarea>
+                                            <textarea class="txt-obs-alert textarea" name="areasub" id="areasub"
+                                                placeholder="Subtitulo do Evento"></textarea>
                                         </div>
                                     </div>
 
@@ -313,11 +323,11 @@ if (@$eventos == 'ocultar') {
 
                                                     $nome_reg = $res[$i]['nome'];
                                                     $id_reg = $res[$i]['id'];
-                                            ?>
+                                                    ?>
                                                     <option value="<?php echo $id_reg ?>">
                                                         <?php echo $nome_reg ?>
                                                     </option>
-                                            <?php }
+                                                <?php }
                                             } ?>
                                         </select>
                                     </div>
@@ -337,7 +347,7 @@ if (@$eventos == 'ocultar') {
                                         <select class="select_cat" id="categoria" name="categoria">
                                             <option value="0">Selecione uma Categoria</option>
                                             <?php
-                                            $query = $pdo->query("SELECT * FROM categoria order by id asc");
+                                            $query = $pdo->query("SELECT * FROM categoria_noticias order by id asc");
                                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                             $total_reg = count($res);
                                             if ($total_reg > 0) {
@@ -347,38 +357,38 @@ if (@$eventos == 'ocultar') {
 
                                                     $nome_reg = $res[$i]['nome'];
                                                     $id_reg = $res[$i]['id'];
-                                            ?>
+                                                    ?>
                                                     <option value="<?php echo $id_reg ?>">
                                                         <?php echo $nome_reg ?>
                                                     </option>
-                                            <?php }
+                                                <?php }
                                             } ?>
                                         </select>
                                     </div>
 
                                     <div class="input-field field_area_2">
-                                        <div class="area_obs">
-                                            <label>Primeira Descrição (Se houver)</label>
-                                            <textarea class="txt-obs-alert" type="text" name="descricao1"
-                                                id="descricao1" placeholder="Descrição do Item"></textarea>
+                                        <div class="area_nice_editor">
+                                            <label class="label_plus">Primeira Descrição (Se houver)</label>
+                                            <textarea class="txt-obs-alert textarea" name="area1" id="area1"
+                                                placeholder="Descrição do Item"></textarea>
                                         </div>
                                     </div>
 
                                     <div class="input-field field_area_2">
-                                        <div class="area_obs">
-                                            <label>Segunda Descrição (Se houver)</label>
-                                            <textarea class="txt-obs-alert" type="text" name="descricao2"
-                                                id="descricao2" placeholder="Descrição do Item"></textarea>
+                                        <div class="area_nice_editor">
+                                            <label class="label_plus">Segunda Descrição (Se houver)</label>
+                                            <textarea class="txt-obs-alert textarea" name="area2" id="area2"
+                                                placeholder="Descrição do Item"></textarea>
                                         </div>
                                     </div>
 
-                                    <div class="input-field field_area_2">
-                                        <div class="area_obs">
-                                            <label>Terceira Descrição (Se houver)</label>
-                                            <textarea class="txt-obs-alert" type="text" name="descricao3"
-                                                id="descricao3" placeholder="Descrição do Item"></textarea>
+
+                                        <div class="area_nice_editor">
+                                            <label class="label_plus">Terceira Descrição (Se houver)</label>
+                                            <textarea class="txt-obs-alert textarea" name="area3" id="area3"
+                                                placeholder="Descrição do Item"></textarea>
                                         </div>
-                                    </div>
+
 
                                     <div class="area_photo_1">
                                         <div class="area_photo_flex">
@@ -407,8 +417,8 @@ if (@$eventos == 'ocultar') {
                                     <div class="area_photo_1">
                                         <div class="area_photo_flex">
                                             <label>Banner Mobile (768 x 768)</label>
-                                            <input type="file" class="input_file" id="banner_mobile" name="banner_mobile"
-                                                onChange="carregarImgBannerMobile();">
+                                            <input type="file" class="input_file" id="banner_mobile"
+                                                name="banner_mobile" onChange="carregarImgBannerMobile();">
                                         </div>
                                         <div class="divImgBanner">
                                             <img class="photo_file_video_image" id="targetBannerMobile"
@@ -838,7 +848,8 @@ if (@$eventos == 'ocultar') {
                 <div id="mensagem"></div>
                 <div class="modal-footer">
                     <div class="area-buttons">
-                        <button type="button" id="btn-fechar-convidado" class="btn-close" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" id="btn-fechar-convidado" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
 
                         <button type="submit" class="btn-add">
                             Salvar
@@ -865,14 +876,92 @@ if (@$eventos == 'ocultar') {
 
 
 
+
+<script type="text/javascript">
+    $("#form-ev").submit(function () {
+        event.preventDefault();
+        nicEditors.findEditor('area1').saveContent();
+        nicEditors.findEditor('area2').saveContent();
+        nicEditors.findEditor('area3').saveContent();
+        nicEditors.findEditor('areasub').saveContent();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: pag + "/inserir.php",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+                $('#mensagem').text('');
+                $('#mensagem').removeClass()
+                if (mensagem.trim() == "Salvo com Sucesso") {
+                    //$('#nome').val('');
+                    //$('#cpf').val('');
+                    $('#btn-fechar').click();
+                    mensagemSalvar();
+
+                    setTimeout(function () {
+                        window.location = "index.php?pag=" + pag;
+                    }, 500)
+
+
+
+                } else {
+
+                    $('#mensagem').addClass('text-danger')
+                    $('#mensagem').text(mensagem)
+                }
+
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+        });
+
+    });
+</script>
+
+
+
+
 <script type="text/javascript">
     function editar(id, titulo, subtitulo, descricao1, descricao2, descricao3, data_evento, imagem, video, banner, tipo, banner_mobile, pregador, hora, categoria) {
+
+        for (let letra of descricao1) {
+            if (letra === '*') {
+                descricao1 = descricao1.replace('**', '"');
+            }
+        }
+
+
+        for (let letra of descricao2) {
+            if (letra === '*') {
+                descricao2 = descricao2.replace('**', '"');
+            }
+        }
+
+
+        for (let letra of descricao3) {
+            if (letra === '*') {
+                descricao3 = descricao3.replace('**', '"');
+            }
+        }
+
+        for (let letra of subtitulo) {
+            if (letra === '*') {
+                subtitulo = subtitulo.replace('**', '"');
+            }
+        }
+
         $('#id').val(id);
         $('#titulo').val(titulo);
-        $('#subtitulo').val(subtitulo);
-        $('#descricao1').val(descricao1);
-        $('#descricao2').val(descricao2);
-        $('#descricao3').val(descricao3);
+        nicEditors.findEditor("areasub").setContent(subtitulo);
+        nicEditors.findEditor("area1").setContent(descricao1);
+        nicEditors.findEditor("area2").setContent(descricao2);
+        nicEditors.findEditor("area3").setContent(descricao3);
         $('#data_evento').val(data_evento);
         $('#video').val(video);
         $('#hora_evento').val(hora);
@@ -942,10 +1031,10 @@ if (@$eventos == 'ocultar') {
 
         $('#id').val('');
         $('#titulo').val('');
-        $('#subtitulo').val('');
-        $('#descricao1').val('');
-        $('#descricao2').val('');
-        $('#descricao3').val('');
+        nicEditors.findEditor("areasub").setContent('');
+        nicEditors.findEditor("area1").setContent('');
+        nicEditors.findEditor("area2").setContent('');
+        nicEditors.findEditor("area3").setContent('');
         $('#video').val('');
         $('#data_evento').val(data);
         $('#hora_evento').val(hora);
@@ -1019,7 +1108,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1040,7 +1129,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1060,7 +1149,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1080,7 +1169,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1100,7 +1189,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1120,7 +1209,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1145,7 +1234,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1166,7 +1255,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1186,7 +1275,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1206,7 +1295,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1225,7 +1314,7 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    $("#form-img").submit(function() {
+    $("#form-img").submit(function () {
         event.preventDefault();
         var formData = new FormData(this);
 
@@ -1234,7 +1323,7 @@ if (@$eventos == 'ocultar') {
             type: 'POST',
             data: formData,
 
-            success: function(mensagem) {
+            success: function (mensagem) {
                 $('#mensagem-img').text('');
                 $('#mensagem-img').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
@@ -1267,7 +1356,7 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    $("#form-convidado").submit(function() {
+    $("#form-convidado").submit(function () {
         event.preventDefault();
         var formData = new FormData(this);
 
@@ -1276,7 +1365,7 @@ if (@$eventos == 'ocultar') {
             type: 'POST',
             data: formData,
 
-            success: function(mensagem) {
+            success: function (mensagem) {
                 $('#mensagem-convidado').text('');
                 $('#mensagem-convidado').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
@@ -1314,7 +1403,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1335,7 +1424,7 @@ if (@$eventos == 'ocultar') {
 
         var reader = new FileReader();
 
-        reader.onloadend = function() {
+        reader.onloadend = function () {
             target.src = reader.result;
         };
 
@@ -1352,15 +1441,19 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.select_preg').select2({
             dropdownParent: $('#modalForm'),
         });
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.select_cat').select2({
             dropdownParent: $('#modalForm'),
         });
     });
 </script>
+
+
+<script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>

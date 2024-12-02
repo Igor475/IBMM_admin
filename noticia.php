@@ -77,7 +77,7 @@ if ($total_reg > 0) {
                             $foto_usuario = '';
                         }
 
-                        $query_con = $pdo->query("SELECT * FROM categoria where id = '$categoria'");
+                        $query_con = $pdo->query("SELECT * FROM categoria_noticias where id = '$categoria'");
                         $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
                         if (count($res_con) > 0) {
                             $name_cat = $res_con[0]['nome'];
@@ -202,7 +202,7 @@ if ($total_reg > 0) {
 
                                     $categoria_carrousel = $res[$i]['categoria'];
 
-                                    $query_news = $pdo->query("SELECT * FROM categoria where id = '$categoria_carrousel'");
+                                    $query_news = $pdo->query("SELECT * FROM categoria_noticias where id = '$categoria_carrousel'");
                                     $res_news = $query_news->fetchAll(PDO::FETCH_ASSOC);
                                     if (count($res_news) > 0) {
                                         $name_categoria = $res_news[0]['nome'];

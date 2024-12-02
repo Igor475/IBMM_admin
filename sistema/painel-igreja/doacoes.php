@@ -160,7 +160,8 @@ if(@$doacoes == 'ocultar') {
                                         <select class="sel2" id="membro" name="membro">
                                             <option value="0">Selecionar Membro</option>
                                             <?php
-                                            $query = $pdo->query("SELECT * FROM membros order by id asc");
+                                            $query = $pdo->query("SELECT * FROM membros where igreja = 
+                                                '$id_igreja' order by id asc");
                                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                             $total_reg = count($res);
                                             if ($total_reg > 0) {

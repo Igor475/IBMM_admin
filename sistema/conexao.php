@@ -39,6 +39,7 @@ $itens_por_pagina = 6;
 $itens_por_pagina_message = 6;
 $itens_pag = 10;
 $logs = 'Sim';
+$dias_excluir_logs = 40;
 
 
 $escolher_usuario = 'Sim';
@@ -128,7 +129,7 @@ if ($total_reg == 0) {
         relatorio_pdf = '$relatorio_pdf', cabecalho_rel_img = '$cabecalho_rel_img', 
         escolher_usuario = '$escolher_usuario', usuario_celula = '$usuario_celula', 
         itens_por_pagina = '$itens_por_pagina', itens_por_pagina_message = '$itens_por_pagina_message',
-        itens_pag = '$itens_pag', logs = '$logs' ");
+        itens_pag = '$itens_pag', logs = '$logs', dias_excluir_logs = '$dias_excluir_logs' ");
 }
 
 
@@ -149,4 +150,5 @@ $itens_por_pagina = $res[0]['itens_por_pagina'];
 $itens_por_pagina_message = $res[0]['itens_por_pagina_message'];
 $itens_pag = $res[0]['itens_pag'];
 $logs = $res[0]['logs'];
+$dias_excluir_logs = $res[0]['dias_excluir_logs'];
 ?>

@@ -38,8 +38,8 @@ if(@$tarefas == 'ocultar') {
                     <tr class="column-table">
                         <th class="th-table">Título</th>
                         <th class="th-table column-hidden">Descrição</th>
-                        <th class="th-table">Hora</th>
                         <th class="th-table">Data</th>
+                        <th class="th-table">Hora</th>
                         <th class="th-table column-hidden">Status</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>

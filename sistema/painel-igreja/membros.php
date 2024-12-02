@@ -205,6 +205,21 @@ if (@$membros == 'ocultar') {
                                         Carta de Recomendação
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" target="_blank" href="../relatorios/relBatismo.php?id=<?php echo $id ?>" 
+                                        title="Certificado de Batismo">
+                                        <i class="bi bi-award icons_actions"></i>
+                                        Certificado de Batismo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item" onclick="modalApresentacao('<?php echo $id ?>', 
+                                        '<?php echo $nome ?>')"
+                                        title="Certificado de Apresentação">
+                                        <i class="bi bi-bookmark-star icons_actions"></i>
+                                        Certificado de Apresentação
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </td>
@@ -519,8 +534,6 @@ if (@$membros == 'ocultar') {
 
 
 
-
-
 <div class="modal fade" id="modalTransf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -566,6 +579,42 @@ if (@$membros == 'ocultar') {
     </div>
 </div>
 
+
+
+
+
+<div class="modal fade" id="modalApresentacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Certificado de Apresentação - <span id="nome-apre"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <div class="modal-body">
+                <div class="form-modal">
+                    <div class="flx_images">
+                        <div class="area_img_apre">
+                            <a class="image_apre" href="#" onclick="certApresentacao('menino')" title="Certificado de Menino">
+                                <img class="img_apre" src="../img/apresentacao.jpg" title="Certificado de menino">
+                            </a>
+                        </div>
+
+                        <div class="area_img_apre">
+                            <a class="image_apre" href="#" onclick="certApresentacao('menina')" title="Certificado de Menina">
+                                <img class="img_apre" src="../img/apresentacao2.jpg" title="Certificado de menina">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mensagem-apres"></div>
+
+                <input type="hidden" name="id" id="id-apres">
+            </div>
+            <div id="mensagem"></div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -681,5 +730,26 @@ function modalTransf(id, nome) {
     var myModal = new bootstrap.Modal(document.getElementById('modalTransf'), {});
     myModal.show();
     $('#mensagem-transf').text('');
+}
+
+function modalApresentacao(id, nome) {
+
+    $('#nome-apre').text(nome);
+    $('#id-apres').val(id);
+
+    var myModal = new bootstrap.Modal(document.getElementById('modalApresentacao'), {});
+    myModal.show();
+    $('#mensagem-apres').text('');
+}
+
+function certApresentacao(sexo){
+    console.log(obs)
+
+    var id = $('#id-apres').val();						
+    
+    let a= document.createElement('a');
+    a.target= '_blank';
+    a.href= '../relatorios/relApresentacao.php?id='+id+'&sexo='+sexo;
+    a.click();
 }
 </script>

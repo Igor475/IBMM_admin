@@ -13,7 +13,7 @@ $url = @$_POST['url'];
 $youtube = @$_POST['youtube'];
 $instagram = @$_POST['instagram'];
 $facebook = @$_POST['facebook'];
-$descricao = @$_POST['descricao'];
+$descricao = @$_POST['area'];
 
 
 $nome_novo = strtolower(preg_replace(

@@ -59,7 +59,7 @@ if ($id == "" || $id == 0) {
 }
 $descricao = $nome_membro;
 $painel = 'Painel Igreja';
-$igreja = $res[0]['igreja'];
+$igreja_ = $igreja;
 require_once("../../logs.php");
 
 

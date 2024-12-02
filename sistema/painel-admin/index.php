@@ -213,7 +213,8 @@ $data_ano = $ano_atual . "-01-01";
                                         data-bs-target="#modalRelFinanceiro">Financeiros</a>
                                 </li>
                                 <li>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelLogs">Auditoria de Logs</a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelLogs">Auditoria de
+                                        Logs</a>
                                 </li>
                                 <li><a href="#">Tranferência de Membros</a></li>
                                 <li><a href="#">Fechamentos Mensais</a></li>
@@ -230,7 +231,8 @@ $data_ano = $ano_atual . "-01-01";
                                 <i class='bi bi-gear icon'></i>Configuração Geral</a>
                         </li>
                         <li>
-                            <a href="#" class="font_main_index"><i class='bi bi-database-down icon'></i>Backup Banco</a>
+                            <a href="backup/backup.php" target="_blank" class="font_main_index">
+                                <i class='bi bi-database-down icon'></i>Backup Banco</a>
                         </li>
                     </ul>
                 </div>
@@ -498,7 +500,12 @@ $data_ano = $ano_atual . "-01-01";
                                         </select>
                                     </div>
 
-
+                                    <div class="input-field flex_int_5">
+                                        <label>Dias Excluir Logs</label>
+                                        <input type="number" name="dias_excluir_logs"
+                                            id="dias_excluir_logs"
+                                            value="<?php echo $dias_excluir_logs ?>" />
+                                    </div>
                                 </div>
                             </div>
                         </div>

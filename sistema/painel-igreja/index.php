@@ -300,6 +300,14 @@ if ($pag == "") {
                                 </li>
                                 <?php } ?>
 
+                                <?php if (@$visitantes == "ocultar") { ?>
+                                
+                                <?php } else { ?>
+                                    <li class="<?php echo @$membros ?>">
+                                        <a href="index.php?pag=visitantes">Visitantes</a>
+                                    </li>
+                                <?php } ?>
+
                                 <?php if (@$pastores == "ocultar") { ?>
 
                                 <?php } else { ?>
@@ -558,6 +566,14 @@ if ($pag == "") {
                                 </li>
                                 <?php } ?>
 
+                                <?php if (@$ministerios == "ocultar") { ?>
+                                
+                                <?php } else { ?>
+                                    <li class="<?php echo @$ministerios ?>">
+                                        <a href="index.php?pag=ministerios">Ministérios</a>
+                                    </li>
+                                <?php } ?>
+
                                 <?php if (@$oracao == "ocultar") { ?>
 
                                 <?php } else { ?>
@@ -617,6 +633,14 @@ if ($pag == "") {
                                 </li>
                                 <?php } ?>
 
+                                <?php if (@$ficha_visitante == "ocultar") { ?>
+                                
+                                <?php } else { ?>
+                                    <li class="<?php echo @$ficha_visitante ?>">
+                                        <a href="../relatorios/fichaVisitante.php" target="_blank">Ficha de Visitantes</a>
+                                    </li>
+                                <?php } ?>
+
                                 <?php if (@$rel_auditoria == "ocultar") { ?>
 
                                 <?php } else { ?>
@@ -663,14 +687,6 @@ if ($pag == "") {
                         <?php } else { ?>
                         <li class="<?php echo @$notificacoes ?>">
                             <a href="#" class="font_main_index"><i class='bi bi-bell icon'></i>Notificações</a>
-                        </li>
-                        <?php } ?>
-
-                        <?php if (@$backup == "ocultar") { ?>
-
-                        <?php } else { ?>
-                        <li class="<?php echo @$backup ?>">
-                            <a href="#" class="font_main_index"><i class='bi bi-database-down icon'></i>Backup Banco</a>
                         </li>
                         <?php } ?>
                     </ul>

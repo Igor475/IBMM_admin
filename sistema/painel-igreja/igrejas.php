@@ -77,7 +77,9 @@ if (@$dadosIgreja == 'ocultar') {
 
                         //Retira a quebra do texto das observações
                         $obs = str_replace(array("\n", "\r"), ' + ', $obs);
-                        $descricao = str_replace(array("\n", "\r"), ' + ', $descricao);
+
+                        //retirar aspas do texto do desc
+                        $descricao = str_replace('"', "**", $descricao);
 
                         $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
                         ?>
@@ -166,7 +168,7 @@ if (@$dadosIgreja == 'ocultar') {
                 <h3 class="Cadastro" id="tituloModal"></h3>
                 <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
             </div>
-            <form id="form" method="post">
+            <form id="form-ig" method="post">
                 <div class="modal-body">
                     <div action="#" class="form-modal">
                         <div class="form first">
@@ -248,7 +250,7 @@ if (@$dadosIgreja == 'ocultar') {
                                     <div class="description_church">
                                         <label>Descrição da Igreja (Texto apresentado no site)
                                             (Máximo de 3000 Caracteres)</label>
-                                        <textarea class="txt-obs" name="descricao" id="descricao"
+                                        <textarea class="txt-obs textarea" name="area" id="area"
                                             maxlength="3000"></textarea>
                                     </div>
 
@@ -545,15 +547,69 @@ if (@$dadosIgreja == 'ocultar') {
 
 
 
+
+<script type="text/javascript">
+	$("#form-ig").submit(function () {
+	event.preventDefault();
+	nicEditors.findEditor('area').saveContent();
+	var formData = new FormData(this);
+
+	$.ajax({
+		url: pag + "/inserir.php",
+		type: 'POST',
+		data: formData,
+
+		success: function (mensagem) {
+			$('#mensagem').text('');
+			$('#mensagem').removeClass()
+			if (mensagem.trim() == "Salvo com Sucesso") {
+                    //$('#nome').val('');
+                    //$('#cpf').val('');
+                     $('#btn-fechar').click();
+                     mensagemSalvar();
+                     
+                     setTimeout(function(){
+                        window.location="index.php?pag=" + pag;
+                    }, 500)
+                     
+                    
+                     
+                } else {
+
+                	$('#mensagem').addClass('text-danger')
+                	$('#mensagem').text(mensagem)
+                }
+
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            
+        });
+
+});
+</script>
+
+
+
+
 <script type="text/javascript">
     function editar(id, nome, telefone, endereco, foto, pastor, video, email, url, youtube, instagram, facebook,
         descricao) {
 
-        for (let letra of descricao) {
+        for (let letra of descricao){  				
+			if (letra === '*'){
+				descricao = descricao.replace('**', '"');
+			}			
+		} 
+
+        /*for (let letra of descricao) {
             if (letra === '+') {
-                descricao = descricao.replace(' +  + ', '\n')
+                descricao = descricao.replace(' +  + ', '\n');
             }
-        }
+        } */
 
         $('#id').val(id);
         $('#nome').val(nome);
@@ -568,7 +624,7 @@ if (@$dadosIgreja == 'ocultar') {
         $('#youtube').val(youtube);
         $('#instagram').val(instagram);
         $('#facebook').val(facebook);
-        $('#descricao').val(descricao);
+		nicEditors.findEditor("area").setContent(descricao);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -579,11 +635,11 @@ if (@$dadosIgreja == 'ocultar') {
 
     function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor, email, descricao) {
 
-        for (let letra of descricao) {
-            if (letra === '+') {
-                descricao = descricao.replace(' +  + ', '\n');
-            }
-        }
+        for (let letra of descricao){  				
+			if (letra === '*'){
+				descricao = descricao.replace('**', '"');
+			}			
+		} 
 
         $('#nome-dados').text(nome);
         $('#telefone-dados').text(telefone);
@@ -593,7 +649,7 @@ if (@$dadosIgreja == 'ocultar') {
         $('#email-dados').text(email);
         $('#foto-dados').attr('src', '../img/igrejas/' + foto);
         $('#pastor-dados').text(pastor);
-        $('#descricao-dados').text(pastor);
+        $('#descricao-dados').html(descricao);
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
@@ -624,7 +680,7 @@ if (@$dadosIgreja == 'ocultar') {
         $('#nome').val('');
         $('#telefone').val('');
         $('#endereco').val('');
-        $('#descricao').val('');
+        nicEditors.findEditor("area").setContent('');
         $('#email').val('');
         $('#url').val('');
         $('#youtube').val('');
@@ -779,3 +835,7 @@ if (@$dadosIgreja == 'ocultar') {
 
     });
 </script>
+
+
+<script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>

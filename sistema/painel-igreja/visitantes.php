@@ -4,13 +4,13 @@
 
 <?php
 require_once("../conexao.php");
-$pagina = 'ofertas';
+$pagina = 'visitantes';
 
-if(@$ofertas == 'ocultar') {
+if (@$cultos == 'ocultar') {
     echo "<script>$(function() { 
                      alertaTempo('Você não tem permissão para estar nesta página! Verifique com o seu Pastor.');
                 });
-          </script>"; 
+          </script>";
     /* echo "<script>window.location='index.php'</script>"; */
     exit();
 }
@@ -18,7 +18,7 @@ if(@$ofertas == 'ocultar') {
 
 <div class="buttons_register">
     <a href="#" onclick="inserir()" class="button_tables_register">
-        Nova Oferta
+        Novo Visitante
         <i class="bi bi-plus-lg icon_tables_registers"></i>
     </a>
 </div>
@@ -35,10 +35,10 @@ if(@$ofertas == 'ocultar') {
             <table class="content-table" id="example">
                 <thead class="thead-tabs">
                     <tr class="column-table">
-                        <th class="th-table">Valor</th>
-                        <th class="th-table">Membro</th>
-                        <th class="th-table">Data</th>
-                        <th class="th-table column-hidden">Tesoureiro / Pastor</th>
+                        <th class="th-table">Nome</th>
+                        <th class="th-table">Telefone</th>
+                        <th class="th-table">Email</th>
+                        <th class="th-table column-hidden">Desejo</th>
                         <th class="th-table last_table" id="radius-action">Ações</th>
                     </tr>
                 </thead>
@@ -48,47 +48,27 @@ if(@$ofertas == 'ocultar') {
                         foreach ($res[$i] as $key => $value) {
                         }
 
-                        $valor = $res[$i]['valor'];
-                        $data = $res[$i]['data'];
-                        $membro = $res[$i]['membro'];
-                        $usuario = $res[$i]['usuario'];
-
+                        $nome = $res[$i]['nome'];
+                        $telefone = $res[$i]['telefone'];
+                        $email = $res[$i]['email'];
+                        $endereco = $res[$i]['endereco'];
+                        $desejo = $res[$i]['desejo'];
+                        $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
-
-                        $dataF = implode('/', array_reverse(explode('-', $data)));
-                        $valorF = number_format($valor, 2, ',', '.');
-
-                        $query_con = $pdo->query("SELECT * FROM membros where id = '$membro'");
-                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-                        if (count($res_con) > 0) {
-                            $nome_membro = $res_con[0]['nome'];
-                        } else {
-                            $nome_membro = 'Não Informado!';
-                        }
-
-                        $query_con = $pdo->query("SELECT * FROM usuarios where id = '$usuario'");
-                        $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-                        if (count($res_con) > 0) {
-                            $usuario_cad = $res_con[0]['nome'];
-                            $nivel_usuario = $res_con[0]['nivel'];
-                        } else {
-                            $usuario_cad = '';
-                            $nivel_usuario = '';
-                        }
 
                         ?>
                         <tr class="column-body">
-                            <td data-label="Valor" class="td-table">
-                                R$ <?php echo $valorF ?></span>
+                            <td data-label="Nome" class="td-table">
+                                <?php echo $nome ?>
                             </td>
-                            <td data-label="Membro" class="td-table">
-                                <?php echo $nome_membro ?>
+                            <td data-label="Telefone" class="td-table">
+                                <?php echo $telefone ?>
                             </td>
-                            <td data-label="Data" class="td-table">
-                                <?php echo $dataF ?>
+                            <td data-label="Email" class="td-table">
+                                <?php echo $email ?>
                             </td>
-                            <td data-label="usuario" class="td-table column-hidden">
-                                <?php echo $usuario_cad.' ('.$nivel_usuario.') ' ?>
+                            <td data-label="Desejo" class="td-table column-hidden">
+                                <?php echo $desejo ?>
                             </td>
                             <td class="td-table" id="radius-column-action">
                                 <div class="dropdown">
@@ -99,17 +79,25 @@ if(@$ofertas == 'ocultar') {
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', '<?php echo $membro ?>',
-                                            '<?php echo $valor ?>', '<?php echo $data ?>', '<?php echo $usuario ?>')">
+                                            <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
+                                            '<?php echo $nome ?>', '<?php echo $telefone ?>', '<?php echo $email ?>',
+                                            '<?php echo $endereco ?>', '<?php echo $desejo ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="#"
-                                                onclick="excluir('<?php echo $id ?>', '<?php echo $valor ?>')">
+                                                onclick="excluir('<?php echo $id ?>', '<?php echo $nome ?>')">
                                                 <i class="bi bi-trash3 icons_actions"></i>
                                                 Excluir
                                             </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', 
+                                                '<?php echo $telefone ?>', '<?php echo $email ?>', '<?php echo $endereco ?>', 
+                                                '<?php echo $desejo ?>')">
+                                                <i class="bi bi-info-circle icons_actions"></i>
+                                                Ver Dados</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -144,46 +132,31 @@ if(@$ofertas == 'ocultar') {
                         <div class="form first">
                             <div class="fields">
                                 <div class="input-field">
-                                    <label>Valor</label>
-                                    <input type="text" name="valor" id="valor"
-                                        placeholder="Valor da Oferta" required>
+                                    <label>Nome</label>
+                                    <input type="text" name="nome" id="nome" placeholder="Ex: Culto de Celebração"
+                                        required>
                                 </div>
 
                                 <div class="input-field">
-                                    <label>Data</label>
-                                    <input type="date" name="data" id="data" required>
+                                    <label>Telefone</label>
+                                    <input type="text" name="telefone" id="telefone" placeholder="Telefone" required>
                                 </div>
 
                                 <div class="input-field">
-                                        <label>Membro</label>
-                                        <select class="sel2" id="membro" name="membro">
-                                            <option value="0">Selecionar Membro</option>
-                                            <?php
-                                            $query = $pdo->query("SELECT * FROM membros where igreja = 
-                                                '$id_igreja' order by id asc");
-                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                                            $total_reg = count($res);
-                                            if ($total_reg > 0) {
-                                                for ($i = 0; $i < $total_reg; $i++) {
-                                                    foreach ($res[$i] as $key => $value) {
-                                                    }
+                                    <label>Email</label>
+                                    <input type="email" name="email" id="email">
+                                </div>
 
-                                                    $nome_reg = $res[$i]['nome'];
-                                                    $cargo = $res[$i]['cargo'];
-                                                    $id_reg = $res[$i]['id'];
+                                <div class="input-field">
+                                    <label>Endereço</label>
+                                    <input type="text" name="endereco" id="endereco" placeholder="Rua x Número y">
+                                </div>
 
-                                                    $query_con = $pdo->query("SELECT * FROM cargos where id = '$cargo'");
-                                                    $res_con = $query_con->fetchAll(PDO::FETCH_ASSOC);
-                                                    $nome_cargo = $res_con[0]['nome'];
-
-                                                    ?>
-                                                    <option value="<?php echo $id_reg ?>">
-                                                        <?php echo $nome_reg. ' ('.$nome_cargo.') ' ?>
-                                                    </option>
-                                                <?php }
-                                            } ?>
-                                        </select>
-                                    </div>
+                                <div class="input-field flex_int_7">
+                                    <label>Desejo</label>
+                                    <input type="text" name="desejo" id="desejo"
+                                        placeholder="Receber visita, Oração, etc...">
+                                </div>
 
                                 <input type="hidden" name="id" id="id">
                                 <input type="hidden" name="igreja" id="igreja" value="<?php echo $id_igreja ?>">
@@ -228,7 +201,7 @@ if(@$ofertas == 'ocultar') {
                             <div class="details personal">
 
                                 <span class="text_excluir">Deseja mesmo excluir este Registro
-                                    R$ <span id="nome-excluido"></span>?
+                                    <span id="nome-excluido"></span>?
 
                                     <div id="mensagem-excluir"></div>
 
@@ -259,6 +232,46 @@ if(@$ofertas == 'ocultar') {
 
 
 
+<div class="modal fade" id="modalDados" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Nome: <span id="nome-dados"></span></h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <div class="modal-body scroll-modal">
+                <div class="user_area">
+                    <img src="../img/svg/email.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-envelope-at icon_user"></i> -->
+                    <span class="user_name">Email:</span>
+                    <span class="texts_son" id="email-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/telefone.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-phone icon_user"></i> -->
+                    <span class="user_name">Telefone: </span>
+                    <span class="texts_son" id="telefone-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-geo-alt icon_user"></i> -->
+                    <span class="user_name">Endereço: </span>
+                    <span class="texts_son" id="endereco-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/calendario.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
+                    <span class="user_name">Desejo: </span>
+                    <span class="texts_son" id="desejo-dados"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <script type="text/javascript">
     var pag = "<?= $pagina ?>" 
@@ -269,11 +282,13 @@ if(@$ofertas == 'ocultar') {
 
 
 <script type="text/javascript">
-    function editar(id, membro, valor, data) {
+    function editar(id, nome, telefone, email, endereco, desejo) {
         $('#id').val(id);
-        $('#membro').val(membro).change();
-        $('#valor').val(valor);
-        $('#data').val(data);
+        $('#nome').val(nome);
+        $('#telefone').val(telefone);
+        $('#email').val(email);
+        $('#endereco').val(endereco);
+        $('#desejo').val(desejo);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -283,16 +298,27 @@ if(@$ofertas == 'ocultar') {
 
 
     function limpar() {
-        var data = "<?= $data_atual ?>"
-
         $('#id').val('');
-        $('#data').val(data);
-        $('#valor').val('');
-
-        document.getElementById("membro").options.selectedIndex = 0;
-        $('#membro').val($('#membro').val()).change();
-
-
+        $('#nome').val('');
+        $('#telefone').val('');
+        $('#endereco').val('');
+        $('#email').val('');
+        $('#desejo').val('');
     }
+
+
+    function dados(nome, telefone, email, endereco, desejo){
+
+		$('#nome-dados').text(nome);		
+		$('#email-dados').text(email);
+		$('#telefone-dados').text(telefone);
+		$('#endereco-dados').text(endereco);
+		$('#desejo-dados').text(desejo);
+		
+		
+		var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {		});
+		myModal.show();
+		$('#mensagem').text('');
+	}
 
 </script>

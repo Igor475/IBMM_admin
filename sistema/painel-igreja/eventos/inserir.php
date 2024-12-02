@@ -5,10 +5,10 @@ $pagina = 'eventos';
 $id_usuario = $_SESSION['id_usuario'];
 
 $titulo = $_POST['titulo'];
-$subtitulo = $_POST['subtitulo'];
-$descricao1 = $_POST['descricao1'];
-$descricao2 = $_POST['descricao2'];
-$descricao3 = $_POST['descricao3'];
+$subtitulo = $_POST['areasub'];
+$descricao1 = $_POST['area1'];
+$descricao2 = $_POST['area2'];
+$descricao3 = $_POST['area3'];
 $data_evento = $_POST['data_evento'];
 $video = $_POST['video'];
 @$tipo = $_POST['tipo'];

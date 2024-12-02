@@ -20,6 +20,11 @@ $query_m = $pdo->query("SELECT *FROM membros WHERE ativo = 'Sim'");
 $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
 $membrosCadastrados = @count($res_m);
 
+//VERIFICAR DATA PARA EXCLUSÃO DE LOGS
+$data_atual = date('Y-m-d');
+$data_limpeza = date('Y-m-d', strtotime("-$dias_excluir_logs days", strtotime($data_atual)));
+$pdo->query("DELETE FROM logs where data < '$data_limpeza'");
+
 ?>
 
 <h1 class="title">Estatística do sistema</h1>
