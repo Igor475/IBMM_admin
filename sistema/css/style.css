@@ -272,6 +272,15 @@
   display: block;
 }
 
+.txt_preb {
+  background-color: var(--background-table-emp) !important;
+  color: var(--btn-remove) !important;
+  padding: 3px 7px !important;
+  font-size: 11px;
+  border-radius: 30px;
+  margin-left: 10px;
+}
+
 #sidebar {
   grid-area: sidebar;
   position: fixed;

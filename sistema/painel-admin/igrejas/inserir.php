@@ -14,6 +14,7 @@ $youtube = @$_POST['youtube'];
 $instagram = @$_POST['instagram'];
 $facebook = @$_POST['facebook'];
 $descricao = @$_POST['area'];
+$prebenda = @$_POST['prebenda'];
 
 
 $nome_novo = strtolower(preg_replace(
@@ -82,14 +83,14 @@ if ($id == "" || $id == 0) {
         data_cad = curDate(), matriz = 'Não', pastor = '$pastor', logo_rel = 'sem-foto.jpg',
         cab_rel = 'sem-foto.jpg', carteirinha_rel = 'sem-foto.jpg', video = :video, email = :email, 
         url = :url, youtube = :youtube, instagram = :instagram, facebook = :facebook, 
-        descricao = :descricao");
+        descricao = :descricao, prebenda = '$prebenda'");
 
 } else {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
         telefone = :telefone, endereco = :endereco, pastor = '$pastor',
         video = :video, email = :email, url = :url, youtube = :youtube, instagram = :instagram, 
-        facebook = :facebook, descricao = :descricao WHERE id = '$id'");
+        facebook = :facebook, descricao = :descricao, prebenda = '$prebenda' WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -101,7 +102,8 @@ if ($id == "" || $id == 0) {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome,
             telefone = :telefone, endereco = :endereco, imagem = '$imagem', 
             pastor = '$pastor', video = :video, email = :email, url = :url, youtube = :youtube, 
-            instagram = :instagram, facebook = :facebook, descricao = :descricao WHERE id = '$id'");
+            instagram = :instagram, facebook = :facebook, descricao = :descricao, prebenda = '$prebenda'
+            WHERE id = '$id'");
     }
 
 }

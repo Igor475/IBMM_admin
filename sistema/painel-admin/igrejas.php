@@ -53,6 +53,7 @@ $pagina = 'igrejas';
                         $instagram = $res[$i]['instagram'];
                         $facebook = $res[$i]['facebook'];
                         $descricao = $res[$i]['descricao'];
+                        $prebenda = $res[$i]['prebenda'];
 
 
                         $logo_rel = $res[$i]['logo_rel'];
@@ -87,6 +88,9 @@ $pagina = 'igrejas';
                             </td>
                             <td data-label="Nome" class="td-table">
                                 <?php echo $nome ?>
+                                <?php if ($prebenda > 0) {
+                                    echo '<span class="txt_preb">(' . $prebenda . '%)</span>';
+                                } ?>
                             </td>
                             <td data-label="Telefone" class="td-table">
                                 <?php echo $telefone ?>
@@ -113,7 +117,8 @@ $pagina = 'igrejas';
                                                 onclick="editar('<?php echo $id ?>', '<?php echo $nome ?>',
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', '<?php echo $pastor ?>',
                                             '<?php echo $video ?>', '<?php echo $email ?>', '<?php echo $url ?>', '<?php echo $youtube ?>',
-                                            '<?php echo $instagram ?>', '<?php echo $facebook ?>', '<?php echo $descricao ?>')">
+                                            '<?php echo $instagram ?>', '<?php echo $facebook ?>', '<?php echo $descricao ?>', 
+                                            '<?php echo $prebenda ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -128,7 +133,7 @@ $pagina = 'igrejas';
                                             <a class="dropdown-item" href="#" onclick="dados('<?php echo $nome ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>',
                                             '<?php echo $data_cadF ?>', '<?php echo $matriz ?>', '<?php echo $nome_p ?>', 
-                                            '<?php echo $email ?>', '<?php echo $descricao ?>')">
+                                            '<?php echo $email ?>', '<?php echo $descricao ?>', '<?php echo $prebenda ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -257,6 +262,11 @@ $pagina = 'igrejas';
                                         <input type="text" name="facebook" id="facebook" placeholder="Link do facebook">
                                     </div>
 
+                                    <div class="input-field flex_int_8">
+                                        <label>Prebenda %</label>
+                                        <input type="number" name="prebenda" id="prebenda" placeholder="Valor em %">
+                                    </div>
+
                                     <div class="description_church">
                                         <label>Descrição da Igreja (Texto apresentado no site)
                                             (Máximo de 3000 Caracteres)</label>
@@ -371,6 +381,12 @@ $pagina = 'igrejas';
                     <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
                     <span class="user_name">Email da Igreja: </span>
                     <span class="texts_son" id="email-dados"></span>
+                </div>
+                <div class="user_area">
+                    <img src="../img/svg/email.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
+                    <span class="user_name">Prebenda %: </span>
+                    <span class="texts_son" id="prebenda-dados"></span>
                 </div>
                 <div class="user_area">
                     <img src="../img/svg/map_endereco.svg" class="img_icon_data" alt="">
@@ -559,35 +575,35 @@ $pagina = 'igrejas';
 
 
 <script type="text/javascript">
-	$("#form-ig").submit(function () {
-	event.preventDefault();
-	nicEditors.findEditor('area').saveContent();
-	var formData = new FormData(this);
+    $("#form-ig").submit(function () {
+        event.preventDefault();
+        nicEditors.findEditor('area').saveContent();
+        var formData = new FormData(this);
 
-	$.ajax({
-		url: pag + "/inserir.php",
-		type: 'POST',
-		data: formData,
+        $.ajax({
+            url: pag + "/inserir.php",
+            type: 'POST',
+            data: formData,
 
-		success: function (mensagem) {
-			$('#mensagem').text('');
-			$('#mensagem').removeClass()
-			if (mensagem.trim() == "Salvo com Sucesso") {
+            success: function (mensagem) {
+                $('#mensagem').text('');
+                $('#mensagem').removeClass()
+                if (mensagem.trim() == "Salvo com Sucesso") {
                     //$('#nome').val('');
                     //$('#cpf').val('');
-                     $('#btn-fechar').click();
-                     mensagemSalvar();
-                     
-                     setTimeout(function(){
-                        window.location="index.php?pag=" + pag;
+                    $('#btn-fechar').click();
+                    mensagemSalvar();
+
+                    setTimeout(function () {
+                        window.location = "index.php?pag=" + pag;
                     }, 500)
-                     
-                    
-                     
+
+
+
                 } else {
 
-                	$('#mensagem').addClass('text-danger')
-                	$('#mensagem').text(mensagem)
+                    $('#mensagem').addClass('text-danger')
+                    $('#mensagem').text(mensagem)
                 }
 
 
@@ -596,10 +612,10 @@ $pagina = 'igrejas';
             cache: false,
             contentType: false,
             processData: false,
-            
+
         });
 
-});
+    });
 </script>
 
 
@@ -607,13 +623,13 @@ $pagina = 'igrejas';
 
 <script type="text/javascript">
     function editar(id, nome, telefone, endereco, foto, pastor, video, email, url, youtube, instagram, facebook,
-        descricao) {
+        descricao, prebenda) {
 
-        for (let letra of descricao){  				
-			if (letra === '*'){
-				descricao = descricao.replace('**', '"');
-			}			
-		}
+        for (let letra of descricao) {
+            if (letra === '*') {
+                descricao = descricao.replace('**', '"');
+            }
+        }
 
 
         $('#id').val(id);
@@ -630,7 +646,8 @@ $pagina = 'igrejas';
         $('#instagram').val(instagram);
         $('#facebook').val(facebook);
         $('#descricao').val(descricao);
-		nicEditors.findEditor("area").setContent(descricao);
+        $('#prebenda').val(prebenda);
+        nicEditors.findEditor("area").setContent(descricao);
 
         $('#tituloModal').text('Editar Registro');
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
@@ -639,13 +656,13 @@ $pagina = 'igrejas';
     }
 
 
-    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor, email, descricao) {
+    function dados(nome, telefone, endereco, foto, data_cad, matriz, pastor, email, descricao, prebenda) {
 
-        for (let letra of descricao){  				
-			if (letra === '*'){
-				descricao = descricao.replace('**', '"');
-			}			
-		}
+        for (let letra of descricao) {
+            if (letra === '*') {
+                descricao = descricao.replace('**', '"');
+            }
+        }
 
         $('#nome-dados').text(nome);
         $('#telefone-dados').text(telefone);
@@ -656,6 +673,7 @@ $pagina = 'igrejas';
         $('#foto-dados').attr('src', '../img/igrejas/' + foto);
         $('#pastor-dados').text(pastor);
         $('#descricao-dados').html(descricao);
+        $('#prebenda-dados').html(prebenda);
 
         var myModal = new bootstrap.Modal(document.getElementById('modalDados'), {});
         myModal.show();
@@ -692,6 +710,7 @@ $pagina = 'igrejas';
         $('#youtube').val('');
         $('#instagram').val('');
         $('#facebook').val('');
+        $('#prebenda').val('');
 
         document.getElementById("pastor").options.selectedIndex = 0;
         $('#pastor').val($('#pastor').val()).change();

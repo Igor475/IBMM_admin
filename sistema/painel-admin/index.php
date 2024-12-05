@@ -216,8 +216,10 @@ $data_ano = $ano_atual . "-01-01";
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelLogs">Auditoria de
                                         Logs</a>
                                 </li>
-                                <li><a href="#">Tranferência de Membros</a></li>
-                                <li><a href="#">Fechamentos Mensais</a></li>
+                                <li>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalRelFechamentos">Fechamentos
+                                        Mensais</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="divider">
@@ -502,8 +504,7 @@ $data_ano = $ano_atual . "-01-01";
 
                                     <div class="input-field flex_int_5">
                                         <label>Dias Excluir Logs</label>
-                                        <input type="number" name="dias_excluir_logs"
-                                            id="dias_excluir_logs"
+                                        <input type="number" name="dias_excluir_logs" id="dias_excluir_logs"
                                             value="<?php echo $dias_excluir_logs ?>" />
                                     </div>
                                 </div>
@@ -928,6 +929,49 @@ $data_ano = $ano_atual . "-01-01";
                                     <label>Data Final</label>
                                     <input type="date" id="dtFinal-log" name="dataFinal"
                                         value="<?php echo $data_atual ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="msg-config"></div>
+                <div class="modal-footer">
+                    <div class="area-buttons">
+                        <button type="button" id="btn-fechar-config" class="btn-close"
+                            data-bs-dismiss="modal">Fechar</button>
+
+                        <button type="submit" class="btn-add">
+                            Gerar Relatório
+                            <i class="bi bi-arrow-right icon-btn-form"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="modalRelFechamentos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Cadastro">Relatório de Fechamentos</h3>
+                <span class="bi bi-x mod_close" data-bs-dismiss="modal" aria-label="Close"></span>
+            </div>
+            <form method="post" action="../relatorios/relFechamentos.php" target="_blank">
+                <div class="modal-body">
+                    <div action="#" class="form-modal">
+                        <div class="form first">
+                            <div class="widget_bottom_dates">
+                                <div class="input-field-in">
+                                    <label>Data do Mês Fechamento</label>
+                                    <input type="date" name="dataInicial" value="<?php echo date('Y-m-d') ?>">
                                 </div>
                             </div>
                         </div>

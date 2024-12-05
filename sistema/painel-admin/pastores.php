@@ -48,6 +48,7 @@ $pagina = 'pastores';
                         $obs = $res[$i]['obs'];
                         $igreja = $res[$i]['igreja'];
                         $id = $res[$i]['id'];
+                        $prebenda = $res[$i]['prebenda'];
 
 
                         $query_con = $pdo->query("SELECT * FROM igrejas where id = '$igreja'");
@@ -70,6 +71,9 @@ $pagina = 'pastores';
                             </td>
                             <td data-label="Nome" class="td-table">
                                 <?php echo $nome ?>
+                                    <?php if ($prebenda > 0) {
+                                        echo '<span class="txt_preb">(' . $prebenda . '%)</span>';
+                                } ?> 
                             </td>
                             <td data-label="CPF" class="td-table">
                                 <?php echo $cpf ?>
@@ -95,7 +99,8 @@ $pagina = 'pastores';
                                             <a class="dropdown-item" href="#" onclick="editar('<?php echo $id ?>', 
                                             '<?php echo $nome ?>', '<?php echo $cpf ?>', '<?php echo $email ?>', 
                                             '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                            '<?php echo $data_nasc ?>', '<?php echo $igreja ?>', '<?php echo $nome_ig ?>')">
+                                            '<?php echo $data_nasc ?>', '<?php echo $igreja ?>', '<?php echo $nome_ig ?>', 
+                                            '<?php echo $prebenda ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -110,7 +115,8 @@ $pagina = 'pastores';
                                             <a class="dropdown-item" href="#"
                                                 onclick="dados('<?php echo $nome ?>', '<?php echo $cpf ?>',
                                             '<?php echo $email ?>', '<?php echo $telefone ?>', '<?php echo $endereco ?>', '<?php echo $foto ?>', 
-                                            '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>')">
+                                            '<?php echo $data_nascF ?>', '<?php echo $data_cadF ?>', '<?php echo $nome_ig ?>', 
+                                            '<?php echo $prebenda ?>')">
                                                 <i class="bi bi-info-circle icons_actions"></i>
                                                 Ver Dados</a>
                                         </li>
@@ -209,6 +215,11 @@ $pagina = 'pastores';
                                                 <?php }
                                             } ?>
                                         </select>
+                                    </div>
+
+                                    <div class="input-field flex_int_5">
+                                        <label>Prebenda</label>
+                                        <input type="text" name="prebenda" id="prebenda" placeholder="Valor em %">
                                     </div>
 
                                     <div class="area_photo">
@@ -349,6 +360,12 @@ $pagina = 'pastores';
                     <span class="user_name">Igreja: </span>
                     <span class="texts_son" id="igreja-dados"></span>
                 </div>
+                <div class="user_area">
+                    <img src="../img/svg/igreja.svg" class="img_icon_data" alt="">
+                    <!-- <i class="bi bi-calendar4-event icon_user"></i> -->
+                    <span class="user_name">Prebenda %: </span>
+                    <span class="texts_son" id="prebenda-dados"></span>
+                </div>
                 <div class="user_profile_area">
                     <img class="img_info_profile" src="" id="foto-dados">
                 </div>
@@ -411,7 +428,7 @@ $pagina = 'pastores';
 
 
 <script type="text/javascript">
-    function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig) {
+    function editar(id, nome, cpf, email, telefone, endereco, foto, data_nasc, igreja, nome_ig, prebenda) {
         $('#id').val(id);
         $('#nome').val(nome);
         $('#email').val(email);
@@ -419,6 +436,7 @@ $pagina = 'pastores';
         $('#telefone').val(telefone);
         $('#endereco').val(endereco);
         $('#data_nasc').val(data_nasc);
+        $('#prebenda').val(prebenda);
         $('#target').attr('src', '../img/membros/' + foto);
 
         $('#igreja').val(igreja).change();
@@ -430,7 +448,7 @@ $pagina = 'pastores';
     }
 
 
-    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja) {
+    function dados(nome, cpf, email, telefone, endereco, foto, data_nasc, data_cad, igreja, prebenda) {
 
         $('#nome-dados').text(nome);
         $('#cpf-dados').text(cpf);
@@ -440,6 +458,7 @@ $pagina = 'pastores';
         $('#cadastro-dados').text(data_cad);
         $('#nasc-dados').text(data_nasc);
         $('#igreja-dados').text(igreja);
+        $('#prebenda-dados').text(prebenda);
         $('#foto-dados').attr('src', '../img/membros/' + foto);
 
 
@@ -475,6 +494,7 @@ $pagina = 'pastores';
         $('#telefone').val('');
         $('#endereco').val('');
         $('#data_nasc').val('');
+        $('#prebenda').val('');
         
         document.getElementById("igreja").options.selectedIndex = 0;
         $('#igreja').val($('#igreja').val()).change(); 

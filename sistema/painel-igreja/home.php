@@ -36,6 +36,8 @@ $totalVendas = 0;
 $totalDoacoes = 0;
 $saldoMes = 0;
 $patCadastrados = 0;
+$totalSaldoInicio = 0;
+
 
 $pagarVencidas = 0;
 $pagarHoje = 0;
@@ -107,10 +109,14 @@ if ($total_reg > 0) {
             $totalDoacoes += $res[$i]['valor'];
         }
 
+        if ($movimento == 'Saldo') {
+            $totalSaldoInicio += $res[$i]['valor'];
+        }
+
     }
 }
 
-$saldoMes = $totalDizimos + $totalOfertas + $totalVendas + $totalDoacoes - $totalGastos;
+$saldoMes = $totalDizimos + $totalOfertas + $totalVendas + $totalDoacoes + $totalSaldoInicio - $totalGastos;
 if ($saldoMes < 0) {
     $classeSaldo = 'money-church-danger';
 } else {

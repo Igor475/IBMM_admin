@@ -70,6 +70,11 @@ if (@$eventos == 'ocultar') {
                         $categoria = $res[$i]['categoria'];
                         $pregador = $res[$i]['pregador'];
                         $hora = $res[$i]['hora_evento'];
+                        $data_banner = $res[$i]['data_banner'];
+                        $titulo_banner = $res[$i]['titulo_banner'];
+                        $link_banner = $res[$i]['link_banner'];
+                        $video_banner = $res[$i]['video_banner'];
+                        $subtitulo_banner = $res[$i]['subtitulo_banner'];
 
                         $img1 = $res[$i]['img_1'];
                         $img2 = $res[$i]['img_2'];
@@ -192,7 +197,9 @@ if (@$eventos == 'ocultar') {
                                             '<?php echo $descricao2 ?>', '<?php echo $descricao3 ?>', '<?php echo $data_evento ?>', 
                                             '<?php echo $imagem ?>', '<?php echo $video ?>', '<?php echo $banner ?>', 
                                             '<?php echo $tipo ?>', '<?php echo $banner_mobile ?>', '<?php echo $pregador ?>', 
-                                            '<?php echo $hora ?>', '<?php echo $categoria ?>')">
+                                            '<?php echo $hora ?>', '<?php echo $categoria ?>', '<?php echo $data_banner ?>', 
+                                             '<?php echo $link_banner ?>', '<?php echo $video_banner ?>', '<?php echo $titulo_banner ?>', 
+                                            '<?php echo $subtitulo_banner ?>')">
                                                 <i class="bi bi-pencil-square icons_actions"></i>
                                                 Editar</a>
                                         </li>
@@ -283,6 +290,13 @@ if (@$eventos == 'ocultar') {
                                             required>
                                     </div>
 
+                                    <div class="input-field flex_int_4">
+                                        <label>Data do Evento</label>
+                                        <!-- <input type="date" name="data_evento" id="data_evento"
+                                            value="<?php echo date('Y-m-d H:i:s') ?>" required> -->
+                                        <input type="text" name="data_evento" id="data_evento" required>
+                                    </div>
+
                                     <div class="input-field field_area_2">
                                         <div class="area_nice_editor">
                                             <label>Subtitulo</label>
@@ -291,16 +305,9 @@ if (@$eventos == 'ocultar') {
                                         </div>
                                     </div>
 
-                                    <div class="input-field flex_int_11">
+                                    <div class="input-field flex_int_9">
                                         <label>Vídeo (Se houver, colocar o link da url do YouTube)</label>
                                         <input type="url" name="video" id="video" placeholder="Url do vídeo">
-                                    </div>
-
-                                    <div class="input-field flex_int_4">
-                                        <label>Data do Evento</label>
-                                        <!-- <input type="date" name="data_evento" id="data_evento"
-                                            value="<?php echo date('Y-m-d H:i:s') ?>" required> -->
-                                        <input type="text" name="data_evento" id="data_evento">
                                     </div>
 
                                     <div class="input-field flex_int_4">
@@ -308,7 +315,7 @@ if (@$eventos == 'ocultar') {
                                         <input type="time" name="hora_evento" id="hora_evento" required>
                                     </div>
 
-                                    <div class="input-field flex_int_10">
+                                    <div class="input-field flex_int_6">
                                         <label>Pregador</label>
                                         <select class="select_preg" id="pregador" name="pregador">
                                             <option value="0">Selecione um Preletor</option>
@@ -332,7 +339,7 @@ if (@$eventos == 'ocultar') {
                                         </select>
                                     </div>
 
-                                    <div class="input-field flex_int_10">
+                                    <div class="input-field flex_int_">
                                         <label>Evento / Pregação</label>
                                         <select class="form-select" id="tipo" name="tipo">
                                             <option value="Evento">Evento</option>
@@ -364,6 +371,47 @@ if (@$eventos == 'ocultar') {
                                                 <?php }
                                             } ?>
                                         </select>
+                                    </div>
+
+                                    <div class="area_checkbox flex_int_1">
+                                        <label>Ocultar recursos do Banner</label>
+
+                                        <div class="items-checkbox">
+                                            <div class="input-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="Não" name="titulo_banner" id="titulo_banner" >
+								                <label for="flexCheckDefault">
+                                                    Título Banner
+                                                </label>
+                                            </div>
+
+                                            <div class="input-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="Não" name="subtitulo_banner" id="subtitulo_banner" >
+								                <label for="flexCheckDefault">
+                                                    Subtítulo Banner
+                                                </label>
+                                            </div>
+
+                                            <div class="input-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="Não" name="data_banner" id="data_banner" >
+								                <label for="flexCheckDefault">
+                                                    Data Banner
+                                                </label>
+                                            </div>
+
+                                            <div class="input-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="Não" name="video_banner" id="video_banner" >
+								                <label for="flexCheckDefault">
+                                                    Vídeo Banner
+                                                </label>
+                                            </div>
+
+                                            <div class="input-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="Não" name="link_banner" id="link_banner" >
+								                <label for="flexCheckDefault">
+                                                    Veja mais
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="input-field field_area_2">
@@ -928,7 +976,8 @@ if (@$eventos == 'ocultar') {
 
 
 <script type="text/javascript">
-    function editar(id, titulo, subtitulo, descricao1, descricao2, descricao3, data_evento, imagem, video, banner, tipo, banner_mobile, pregador, hora, categoria) {
+    function editar(id, titulo, subtitulo, descricao1, descricao2, descricao3, data_evento, imagem, video, banner, 
+        tipo, banner_mobile, pregador, hora, categoria, data_banner, link_banner, video_banner, titulo_banner, subtitulo_banner) {
 
         for (let letra of descricao1) {
             if (letra === '*') {
@@ -978,10 +1027,32 @@ if (@$eventos == 'ocultar') {
         var myModal = new bootstrap.Modal(document.getElementById('modalForm'), {});
         myModal.show();
         $('#mensagem').text('');
+
+        if(data_banner != ""){
+            $('#data_banner').prop('checked', true);
+        }
+
+        if(link_banner != ""){
+            $('#link_banner').prop('checked', true);
+        }
+
+        if(video_banner != ""){
+            $('#video_banner').prop('checked', true);
+        }
+
+        if(titulo_banner != ""){
+            $('#titulo_banner').prop('checked', true);
+        }
+
+        if(subtitulo_banner != ""){
+            $('#subtitulo_banner').prop('checked', true);
+        }
+
     }
 
 
-    function dados(titulo, subtitulo, descricao1, descricao2, descricao3, data_cad, data_evento, usuario, imagem, video, ativo, obs, tipo, pregador, hora, categoria) {
+    function dados(titulo, subtitulo, descricao1, descricao2, descricao3, data_cad, data_evento, 
+        usuario, imagem, video, ativo, obs, tipo, pregador, hora, categoria) {
 
         $('#titulo-dados').text(titulo);
         $('#subtitulo-dados').text(subtitulo);

@@ -400,6 +400,18 @@ label {
   width: 100%;
 }
 
+.area_checkbox {
+  margin: 15px 0;
+}
+
+.items-checkbox {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
 .label_plus {
   font-size: 13px;
   font-weight: 600;
@@ -408,13 +420,13 @@ label {
 }
 
 .textarea{
-    width:760px !important;
+    width:747px !important;
     height:150px !important;
   }
 
-  @media only screen and (max-width: 700px) {
+  @media screen and (max-width: 700px) {
   .textarea{
-     width:300px !important; 
+    width:292px !important; 
   }
 }
 

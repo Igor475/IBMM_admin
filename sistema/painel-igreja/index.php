@@ -444,6 +444,14 @@ if ($pag == "") {
                                     <a href="index.php?pag=versiculos">Versículos</a>
                                 </li>
                                 <?php } ?>
+
+                                <?php if (@$informativo == "ocultar") { ?>
+                                
+                                <?php } else { ?>
+                                    <li class="<?php echo @$informativo ?>">
+                                        <a href="index.php?pag=informativos">Informativo de Cultos</a>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <?php } ?>
@@ -516,6 +524,15 @@ if ($pag == "") {
                                     <a href="index.php?pag=movimentacoes">Movimentações</a>
                                 </li>
 
+                                <?php } ?>
+
+                                <?php if (@$fechamentos == "ocultar") { ?>
+                                
+                                <?php } else { ?>
+                                    <li class="<?php echo @$fechamentos ?>">
+                                        <a href="index.php?pag=fechamentos">Fechamentos</a>
+                                    </li>
+                                
                                 <?php } ?>
                             </ul>
                         </li>

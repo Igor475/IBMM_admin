@@ -23,6 +23,11 @@ if ($total_reg > 0) {
             $url = $res[$i]['url'];
             $video = $res[$i]['video'];
             $tipo = $res[$i]['tipo'];
+            $data_banner = $res[$i]['data_banner'];
+            $titulo_banner = $res[$i]['titulo_banner'];
+            $link_banner = $res[$i]['link_banner'];
+            $video_banner = $res[$i]['video_banner'];
+            $subtitulo_banner = $res[$i]['subtitulo_banner'];
 
             $activeClass = $i === 0 ? 'active_slider' : '';
 
@@ -42,20 +47,39 @@ if ($total_reg > 0) {
             <div class="slide <?php echo $activeClass ?>"
                style="background-image: url('sistema/img/eventos/<?php echo $banner ?>')">
                <div class="content">
-                  <h2 class="title__banner"><?php echo $titulo ?></h2>
-                  <p class="descrition__banner"><?php echo $subtitulo ?></p>
+                  <?php if ($titulo_banner != "") { ?>
+
+                  <?php } else { ?>
+                     <h2 class="title__banner">
+                        <?php echo $titulo ?>
+                     </h2>
+                  <?php } ?>
+
+                  <?php if ($subtitulo_banner != "") { ?>
+
+                  <?php } else { ?>
+                     <p class="descrition__banner">
+                        <?php echo $subtitulo ?>
+                     </p>
+                  <?php } ?>
+
                   <div class="buttons__link">
-                     <?php if ($video != "") { ?>
+                     <?php if ($video_banner != "") { ?>
+
+                     <?php } else { ?>
                         <a href="#" class="link__banner__icon" onclick="videoBanner('<?php echo $titulo ?>',
-                        '<?php echo $video ?>')">
+                                                '<?php echo $video ?>')">
                            <i class="ri-play-fill icon__banner"></i>
                         </a>
-                     <? } else { ?>
-
                      <?php } ?>
-                     <a href="<?php echo $name_page ?><?php echo $url ?>" class="link__banner">
-                        Ver Mais
-                     </a>
+
+                     <?php if ($link_banner != "") { ?>
+
+                     <?php } else { ?>
+                        <a href="<?php echo $name_page ?><?php echo $url ?>" class="link__banner">
+                           Veja Mais
+                        </a>
+                     <?php } ?>
                   </div>
                </div>
                <div class="overlay_on"></div>

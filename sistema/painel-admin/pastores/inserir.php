@@ -10,6 +10,11 @@ $telefone = $_POST['telefone'];
 $data_nasc = $_POST['data_nasc'];
 $igreja = $_POST['igreja'];
 $id = @$_POST['id'];
+$prebenda = @$_POST['prebenda'];
+
+if ($prebenda == "") {
+    $prebenda = 0;
+}
 
 
 $query = $pdo->query("SELECT * FROM $pagina WHERE cpf = '$cpf'");
@@ -58,7 +63,7 @@ if ($ext == 'png' or $ext == 'jpg' or $ext == 'JPG' or $ext == 'jpeg' or $ext ==
 if ($id == "" || $id == 0) {
     $query = $pdo->prepare("INSERT INTO $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem', 
-        data_nasc = '$data_nasc', data_cad = curDate(), igreja = '$igreja'");
+        data_nasc = '$data_nasc', data_cad = curDate(), igreja = '$igreja', prebenda = '$prebenda'");
 
     $query->bindValue(":nome", "$nome");
     $query->bindValue(":email", "$email");
@@ -82,7 +87,7 @@ if ($id == "" || $id == 0) {
     if ($imagem == "sem-foto.jpg") {
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, data_nasc = '$data_nasc',
-        igreja = '$igreja' WHERE id = '$id'");
+        igreja = '$igreja', prebenda = '$prebenda' WHERE id = '$id'");
     } else {
         $query = $pdo->query("SELECT * FROM $pagina where id = '$id'");
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -93,7 +98,7 @@ if ($id == "" || $id == 0) {
 
         $query = $pdo->prepare("UPDATE $pagina SET nome = :nome, email = :email, 
         cpf = :cpf, telefone = :telefone, endereco = :endereco, foto = '$imagem', 
-        data_nasc = '$data_nasc', igreja = '$igreja' WHERE id = '$id'");
+        data_nasc = '$data_nasc', igreja = '$igreja', prebenda = '$prebenda' WHERE id = '$id'");
     }
 
 
